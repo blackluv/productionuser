@@ -1,0 +1,113 @@
+//import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import QRCode from "react-qr-code";
+import './App.css';
+import useSWR from 'swr';
+import { useParams } from 'react-router-dom';
+
+
+export default function SimplePaper() {
+
+    const [data1, setData1] = useState();
+    const { id } = useParams();
+    const fetcher = (...args) => fetch(...args).then((res) => res.json());
+    const paymentaddress = "0x1917938340F919F12D84046E7c78dd9C1057A15E"
+    console.log('id', id)
+    /*const {
+        data: user1,
+        error,
+        isValidating,
+      } = useSWR('http://localhost:4000/get/oneinvoice?paymenthash=' + id, fetcher, { refreshInterval: 360000 });
+      console.log(user1?.data, 'countries')*/
+
+      const check = async () => {
+        const response = await fetch('http://139.59.26.127:4000/get/oneinvoice?paymenthash=' + id);
+        const data = await response.json();
+        console.log(data.data._id, 'data');
+        setData1(data.data)
+        console.log(data1?.amount, 'data1')
+    }
+
+    const { data3, error3 } = useSWR('check', check, { refreshInterval: 3600000 })
+
+    //const code = data1.paymentaddress
+
+
+      //const fulldata = data1.data
+
+      /*async function awaitinvoice() {
+        const shopname1 = "bp75h3eskimqb0gtum5g4fmmkg3ckz"
+        const urlencoded = new URLSearchParams()
+        const di = shopname1
+        console.log('awaiting')
+        urlencoded.append("payment", id)
+        //urlencoded.append("api", shopname1)
+          return fetch('http://localhost:4000/awaittx', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              "Authorization":{
+                                "x-api-key": `${shopname1}`
+                            },
+                "x-api-key": `${di}`
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+         }*/
+
+         //const { data3, error3 } = useSWR('awaitinvoice', awaitinvoice, { refreshInterval: 3600 })
+         useEffect(() => {
+            check();
+        }, [data1]);
+  return (
+    <Box className='flex'>
+    <div className='vertical-center1'>
+            <Card >
+                <CardContent>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    Logo Text
+                    </Typography>
+                    <Divider />
+                    <div className='flex spacebetween'>
+                        <Typography className=''>Token:</Typography>
+                        <Typography className=''>USDT</Typography>
+                    </div>
+                    <div className='flex spacebetween'>
+                        <Typography className=''>Amount</Typography>
+                        <Typography className=''>{data1?.amount}</Typography>
+                    </div>
+                    <Divider />
+                    <Typography>Payment can be sent to recieving address below</Typography>
+                    <Divider />
+                    <Typography>Payment Address</Typography>
+                    <Typography className='mb5'>{data1?.paymentaddress}</Typography>
+                    <div>
+                        <QRCode 
+                        value={data1?.paymentaddress? data1?.paymentaddress : paymentaddress}
+                        className='mb5'
+                         />
+                    </div>
+                    <Divider />
+                    <div className='flex spacebetween'>
+                        <Typography className=''>Payment Confirmed</Typography>
+                        <Typography className=''>{data1?.isconfirmed? data1?.isconfirmed : <Typography>false</Typography>}</Typography>
+                    </div>
+                </CardContent>
+                {/*<CardActions>
+                    <Button size="small">Learn More</Button>
+                </CardActions>*/}
+            </Card>
+    </div>
+    </Box>
+  );
+}
