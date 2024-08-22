@@ -27,7 +27,9 @@ import './App.css';
 import { CardHeader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
-import { usePrivy } from "@privy-io/react-auth";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { ethers } from "ethers";
+import QRCode from "react-qr-code";
 
 const drawerWidth = 240;
 
@@ -64,16 +66,88 @@ function a11yProps(index) {
 export default function PermanentDrawerLeft() {
   const [currentAccount, setCurrentAccount] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
   const [hasaccount, setHasaccount] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleOpen2 = () => setOpen2(true);
+  const handleClose2 = () => setOpen2(false);
+  const handleOpen3 = () => setOpen3(true);
+  const handleClose3 = () => setOpen3(false);
   const [value, setValue] = React.useState(0);
   const [shopname, setShopname] = useState('');
+  const [shopname2, setShopname2] = useState('');
   const [shopname1, setShopname1] = useState('');
   const [email, setEmail] = useState('');
+  const [email2, setEmail2] = useState('');
+  const [bal, setBal] = useState(0);
+  const [resp, setResp] = useState(null);
+  const [resp1, setResp1] = useState([]);
   const [connectedaddress, setConnectedaddress] = useState();
 
   const { ready, authenticated, user, login, logout } = usePrivy();
+
+  //const {wallets} = useWallets();
+  const {wallets, ready: walletsReady} = useWallets();
+
+  const getbalance = async () => {
+    const wallet = wallets[0];
+    await wallet.switchChain(11155111);
+    const provider = await wallet.getEthersProvider();
+    const signer = provider.getSigner();
+    const balance = await signer.getBalance();
+    //const balance1 = await provider.getBalance(wallet)
+    const res = Math.round(ethers.utils.formatEther(balance) * 1e2) / 1e2;
+    setBal(res)
+    console.log('bal', ethers.utils.formatEther(res))
+  }
+
+  const { data5, error5 } = useSWR('getbalance', getbalance, { refreshInterval: 36000 })
+  const sendeth = async (_amout, _address) => {
+    const wallet = wallets[0];
+    await wallet.switchChain(11155111);
+    const provider = await wallet.getEthersProvider();
+    const signer = provider.getSigner();
+    const tx = await signer.sendTransaction({
+        to: _address,
+        value: ethers.utils.parseUnits(_amout, 'ether'),
+      });
+      tx.wait(3)
+  }
+ /* const gettransactions = async () => {
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          'X-API-Key': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImRjMWU5Y2E1LWMwMWMtNDAzNC1hMGExLTBmNmJmZmJmNWJiYiIsIm9yZ0lkIjoiNDA1NjAzIiwidXNlcklkIjoiNDE2NzgyIiwidHlwZUlkIjoiYTJiYzc5OGItMTYzNi00YzVkLTkzZjAtMWRlMDI1ZDYwYTU2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MjQzNjAzMTksImV4cCI6NDg4MDEyMDMxOX0.2HuzWCFdG2ZTa780lQCcnzDKEYwsrFfY4PWESmnrLTQ'
+        },
+       };
+
+       fetch(
+        'https://deep-index.moralis.io/api/v2.2/wallets/'+ user?.wallet?.address + '/history?chain=eth&order=DESC',
+        options
+       )
+       .then(response => response.json())
+       .then(data => {
+         setResp1(data.result);
+      });
+        /*.then((response) => response.json())
+        .then((response) => console.log('rel',response?.result))
+        .then((response) => setResp(response))
+        .catch((err) => console.error(err));*/
+        //console.log('resp', resp1)
+
+  //}
+
+  /*const { data6, error6 } = useSWR('gettransactions', gettransactions, {
+    revalidateOnFocus: false,
+    revalidateOnMount:false,
+    revalidateOnReconnect: false,
+    refreshWhenOffline: false,
+    refreshWhenHidden: false,
+    refreshInterval: 0
+  })*/
 
   const style = {
     position: 'absolute',
@@ -106,6 +180,17 @@ export default function PermanentDrawerLeft() {
 
     console.log(user5?.data?.shop, 'hasaccount')
   }
+
+  const {
+    data: user7,
+    error7,
+    isValidating7,
+  } = useSWR('https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=' + user?.wallet?.address + '&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=5MB1DN839Y3E8YUQGE5WAB7R522FKYUD7Y', fetcher, { refreshInterval: 3600000 });
+  console.log(user5?.data, 'countries')
+
+  console.log(user7?.result, 'usertx')
+
+  const rest = user7?.result
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
 
@@ -173,6 +258,13 @@ export default function PermanentDrawerLeft() {
       console.log(user, 'user')
       //props.history.push("/");
     }
+
+    const handleSubmit2 = async e => {
+        e.preventDefault();
+        let user = sendeth(shopname2, email2)
+        console.log(user, 'user')
+        //props.history.push("/");
+      }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -255,18 +347,6 @@ export default function PermanentDrawerLeft() {
             </ListItem>
         </List>
         <List>
-            <ListItem key="Invoicelist" disablePadding>
-              <Link to= "/invoicelist" className='ti'>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon /> 
-                </ListItemIcon>
-                <ListItemText primary="InvoiceList" />
-              </ListItemButton>
-              </Link>
-            </ListItem>
-        </List>
-        <List>
             <ListItem key="Wallet" disablePadding>
               <Link to= "/wallet" className='ti'>
               <ListItemButton>
@@ -305,69 +385,122 @@ export default function PermanentDrawerLeft() {
             <div className='flex spacebetween width mb2'>
               <Card className='lit1 justcenter flex'>
                 <CardContent className='flex aligncenter column'>
-                <Typography>Orders</Typography>
-                <Typography>{user2?.data}</Typography>
+                <Typography>Eth Balance</Typography>
+                <Typography>{bal} ETH</Typography>
                 </CardContent>
               </Card>
-              <Card className='lit1 justcenter aligncenter flex'>
-                <CardContent className='flex aligncenter column'>
-                <Typography>Balance</Typography>
-                <Typography>{user1?.data}</Typography>
-                </CardContent>
-              </Card>
-              <Button className='lit1 justcenter flex' variant="contained" disabled="true">Request Withdraw</Button> 
+              <Button className='lit1 justcenter flex' variant="contained" onClick={handleOpen2}>Send</Button>
+              <Modal
+              open={open2}
+              onClose={handleClose2}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              {/*<Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Complete registration
+                </Typography>
+              </Box>*/}
+              <Box className='flex aligncenter justcenter topping'
+              >
+                <Typography>Test2</Typography>
+                <Card className='halfwidth'>
+                  <CardContent>
+                  <Typography variant='h4'>Transfer Ether</Typography>
+                    <form onSubmit={handleSubmit2}>
+                        <TextField
+                            label="amount"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setShopname2(e.target.value)}
+                        />
+                        <TextField
+                            label="enter address to"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setEmail2(e.target.value)}
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className='width'
+                        >
+                            Submit
+                        </Button>
+                    </form>
+                  </CardContent>
+                  </Card>
+              </Box>
+            </Modal>
+              <Button className='lit1 justcenter flex' variant="contained" onClick={handleOpen3}>Recieve</Button> 
+              <Modal
+              open={open3}
+              onClose={handleClose3}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              {/*<Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Complete registration
+                </Typography>
+              </Box>*/}
+              <Box className='flex aligncenter justcenter topping'
+              >
+                <Typography>Test3</Typography>
+                <Card className=''>
+                  <CardContent className='width'>
+                    <div className='flex column justcenter aligncenter'>
+                    <Typography variant='h6' className='mb2'> You can deposit Ether to the below address</Typography>
+                    <Typography className=''>{user?.wallet?.address}</Typography>
+                    <Divider />
+                    Scan qrCode below
+
+                    <QRCode 
+                        value={user?.wallet?.address ? user?.wallet?.address : "loading" }
+                        className='mb5'
+                         />
+                         </div>
+                  </CardContent>
+                  </Card>
+              </Box>
+            </Modal>
             </div>
             <div className='flex width aligncenter justcenter mb2'>        
-              <Card className='mr2'>
-                <CardContent className="flex width aligncenter justcenter column">
-                  <Typography>Merchant Key</Typography>
-                  <Typography>{user5?.data?.apikey}</Typography>
-                </CardContent>
-              </Card>
-              <Card className=''>
-                <CardContent className="flex width aligncenter justcenter column">
-                  <Typography>Wallet Address</Typography>
-                  <Typography>{user?.wallet?.address}</Typography>
-                </CardContent>
-              </Card>
             </div>
             <Box sx={{ width: '100%' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                  <Tab label="Invoice (Deposits)" {...a11yProps(0)} />
-                  <Tab label="Withdrawals" {...a11yProps(1)} />
+                  <Tab label="Transactions" {...a11yProps(0)} />
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
-              {invoicemap ? invoicemap?.map((invoice) => (
-                <Card className='width'>
+              {rest ? rest?.map((resp) => (
+                <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Id</Typography>
-                      <Typography>{invoice.transactionhash}</Typography>
+                      <Typography>Transaction Hash</Typography>
+                      <Typography> {resp?.hash.slice(0, 6)}...{resp?.hash.slice(-4)}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Confirmation</Typography>
+                      <Typography>{resp?.confirmations}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Amount</Typography>
-                      <Typography>{invoice.amount}</Typography>
+                      <Typography>{Math.round(ethers.utils.formatEther(resp?.value) * 1e2) / 1e2}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>Payment address</Typography>
-                      <Typography>{invoice.paymentaddress}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Status</Typography>
-                      <Typography>{invoice.isconfirmed}</Typography>
+                      <Typography>To Address</Typography>
+                      <Typography>{resp?.to.slice(0, 6)}...{resp?.to.slice(-4)}</Typography>
                     </div>
                   </CardContent>
                 </Card>
-                )) : <Typography>No invoice</Typography>}
-              </CustomTabPanel>
-              <CustomTabPanel value={value} index={1}>
-                <Card className='width'>
-                    <CardContent className='spacebetween flex'>
-                      <Typography>Coming Soon</Typography>
-                    </CardContent>
-                  </Card>
+                )) : <Typography>No transactions on wallet</Typography>}
               </CustomTabPanel>
             </Box>
           </div> :

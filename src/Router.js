@@ -10,6 +10,7 @@ import InvoiceList from './InvoiceList'
 import Settings from './Settings'
 import InvoiceCreate from './InvoiceCreate'
 import App from './App';
+import Wallet from './wallet';
 
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
             <Route exact path="/" element={ <App/> } />
             <Route path="/invoicelist" element={ <InvoiceList/> } />
             <Route path="/settings" element={ <Settings />} />
+            <Route path="/wallet" element={ <Wallet />} />
             <Route path="/invoicecreate" element={ <InvoiceCreate />} />
             <Route path='/invoice/:id' element={<Demo />} />
         </Routes>
