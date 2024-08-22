@@ -98,7 +98,7 @@ export default function PermanentDrawerLeft() {
   } = useSWR('https://novapay.live/api/get/address?address=' + user?.wallet?.address, fetcher, { refreshInterval: 360000 });
   console.log(user5?.data, 'countries')
   const hasaccount1 = async () => {
-    if(user?.data == undefined){
+    if(user5?.data == undefined){
       setHasaccount(false)
     }else {
       setHasaccount(true)
