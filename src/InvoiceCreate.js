@@ -27,6 +27,9 @@ import './App.css';
 import { CardHeader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
+import { usePrivy } from "@privy-io/react-auth";
 
 const drawerWidth = 240;
 
@@ -69,6 +72,10 @@ export default function PermanentDrawerLeft() {
   const [hasaccount, setHasaccount] = React.useState(false);
   const [shopname1, setShopname1] = useState();
   const [invoice, setInvoice] = useState('');
+  const [alert, setAlert] = useState(false);
+  const [alertContent, setAlertContent] = useState('');
+  const { ready, authenticated, user, login, logout } = usePrivy();
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -85,20 +92,20 @@ export default function PermanentDrawerLeft() {
   //const hasaccount = true;
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const {
-    data: user,
+    data: user5,
     error,
     isValidating,
-  } = useSWR('https://novapay.live/api/get/address?address=' + currentAccount, fetcher, { refreshInterval: 360000 });
-  console.log(user?.data, 'countries')
+  } = useSWR('https://novapay.live/api/get/address?address=' + user?.wallet?.address, fetcher, { refreshInterval: 360000 });
+  console.log(user5?.data, 'countries')
   const hasaccount1 = async () => {
     if(user?.data == undefined){
       setHasaccount(false)
     }else {
       setHasaccount(true)
-      setShopname1(user?.data?.apikey)
+      setShopname1(user5?.data?.apikey)
     }
 
-    console.log(user?.data?.shop, 'hasaccount')
+    console.log(user5?.data?.shop, 'hasaccount')
   }
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
@@ -131,8 +138,19 @@ export default function PermanentDrawerLeft() {
         },
         body: urlencoded
       })
-        .then(data => data.json()
-      )
+        .then(data => /*data.json()*/{
+          if(data.data.success === true)
+            {
+              console.log(data,'data33')
+              setAlertContent("invoice created");
+              setAlert(true);
+            }
+          else
+            {
+              setAlertContent("failed");
+              setAlert(false);
+            }
+  })
      }
 
   const connectWallet = async () => {
@@ -242,7 +260,7 @@ export default function PermanentDrawerLeft() {
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
       >
         <Toolbar />
-        {currentAccount ? 
+        {ready && authenticated  ? 
         /* Check if hasaccount load wallet or if not load register*/
         <div>
             {hasaccount ? 
@@ -264,6 +282,9 @@ export default function PermanentDrawerLeft() {
                     >
                         Submit
                     </Button>
+                    <div className='mb2'>
+                    {/*alert ? <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">{alertContent}</Alert> : <Alert severity='error'>{alertContent}</Alert> */}
+                    </div>
                   </form>
           </div> :
           <div class="vertical-center">
@@ -315,7 +336,7 @@ export default function PermanentDrawerLeft() {
           <Typography>
             Create a wallet to get started
           </Typography>
-           <Button variant="contained" onClick={connectWallet}>Signin with metamask</Button> 
+           <Button variant="contained" onClick={login}>Signin with metamask</Button> 
         </div> }
         </Box>
     </Box>

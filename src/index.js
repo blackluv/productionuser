@@ -9,13 +9,33 @@ import Settings from './Settings'
 import InvoiceCreate from './InvoiceCreate'
 import Router from './Router'
 import { BrowserRouter } from 'react-router-dom';
+import {PrivyProvider} from '@privy-io/react-auth';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <PrivyProvider
+      appId="cm055dwwb04dyxvv8ptttlosv"
+      onSuccess={(user) => console.log(`User ${user.wallet} logged in!`)}
+      config={{
+        // Display email and wallet as login methods
+        loginMethods: ['email', 'wallet'],
+        // Customize Privy's appearance in your app
+        appearance: {
+          theme: 'dark',
+          accentColor: '#676FFF',
+          logo: 'https://your-logo-url',
+        },
+        // Create embedded wallets for users who don't have a wallet
+        embeddedWallets: {
+          createOnLogin: 'users-without-wallets',
+        },
+      }}
+    >
     <BrowserRouter>
       <Router />
     </BrowserRouter>
+    </PrivyProvider>
   </React.StrictMode>
 );
 

@@ -27,6 +27,7 @@ import './App.css';
 import { CardHeader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
+import { usePrivy } from "@privy-io/react-auth";
 
 const drawerWidth = 240;
 
@@ -71,6 +72,9 @@ export default function PermanentDrawerLeft() {
   const [shopname1, setShopname1] = useState('');
   const [email, setEmail] = useState('');
   const [connectedaddress, setConnectedaddress] = useState();
+
+  const { ready, authenticated, user, login, logout } = usePrivy();
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -87,20 +91,20 @@ export default function PermanentDrawerLeft() {
   //const hasaccount = true;
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const {
-    data: user,
+    data: user5,
     error,
     isValidating,
-  } = useSWR('https://novapay.live/api/get/address?address=' + currentAccount, fetcher, { refreshInterval: 360000 });
-  console.log(user?.data, 'countries')
+  } = useSWR('https://novapay.live/api/get/address?address=' + user?.wallet?.address, fetcher, { refreshInterval: 360000 });
+  console.log(user5?.data, 'countries')
   const hasaccount1 = async () => {
-    if(user?.data == undefined){
+    if(user5?.data == undefined){
       setHasaccount(false)
     }else {
       setHasaccount(true)
-      setShopname1(user?.data?.shop)
+      setShopname1(user5?.data?.shop)
     }
 
-    console.log(user?.data?.shop, 'hasaccount')
+    console.log(user5?.data?.shop, 'hasaccount')
   }
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
@@ -148,10 +152,10 @@ export default function PermanentDrawerLeft() {
   //registeruser
   async function registeruser(shop, email) {
     const urlencoded = new URLSearchParams()
-    console.log(email, 'email')
+    console.log(user?.wallet?.address, 'user')
     urlencoded.append("shop", shop)
     urlencoded.append("email", email)
-    urlencoded.append("connectedaddress", currentAccount)
+    urlencoded.append("connectedaddress", user?.wallet?.address)
       return fetch('https://novapay.live/api/create/user', {
         method: 'POST',
         headers: {
@@ -281,7 +285,7 @@ export default function PermanentDrawerLeft() {
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
       >
         <Toolbar />
-        {currentAccount ? 
+        {ready && authenticated ? 
         /* Check if hasaccount load wallet or if not load register*/
         <div>
             {hasaccount ? 
@@ -401,13 +405,14 @@ export default function PermanentDrawerLeft() {
           </div>
         }
         </div> 
-        :
+        : 
         <div class="vertical-center">
           <Typography>
             Create a wallet to get started
           </Typography>
-           <Button variant="contained" onClick={connectWallet}>Signin with metamask</Button> 
-        </div> }
+           <Button variant="contained" onClick={login}>Signin to novapay</Button>
+        </div> 
+        }
         </Box>
     </Box>
   );
