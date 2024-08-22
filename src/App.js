@@ -114,14 +114,14 @@ export default function PermanentDrawerLeft() {
     data: user1,
     error1,
     isValidating1,
-  } = useSWR('https://novapay.live/api/get/balance?shop=' + user?.data?.shop, fetcher, { refreshInterval: 36000000 });
+  } = useSWR('https://novapay.live/api/get/balance?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
   console.log(user1?.data, 'countries1')
   //getorders
     const {
       data: user2,
       error2,
       isValidating2,
-    } = useSWR('https://novapay.live/api/get/orders?shop=' + user?.data?.shop, fetcher, { refreshInterval: 36000000 });
+    } = useSWR('https://novapay.live/api/get/orders?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
     console.log(user2?.data, 'countries2')
     //requestwithdrawal
   async function requestwithdrawal(shop, amount) {
@@ -139,12 +139,12 @@ export default function PermanentDrawerLeft() {
         .then(data => data.json()
       )
      }
-  //getallinvoice
+  //getallinvoi
     const {
       data: user4,
       error4,
       isValidating4,
-    } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user?.data?.shop, fetcher, { refreshInterval: 36000000 });
+    } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
     console.log(user4?.data, 'countries4')
 
     const invoicemap = user4?.data
@@ -191,7 +191,7 @@ export default function PermanentDrawerLeft() {
 			const accounts = await ethereum.request({ method: "eth_requestAccounts" });
 		
 			// Boom! This should print out public address once we authorize Metamask.
-			console.log("Connected", accounts[0]);
+			//console.log("Connected", accounts[0]);
 			setCurrentAccount(accounts[0]);
 		} catch (error) {
 			console.log(error)
@@ -309,7 +309,7 @@ export default function PermanentDrawerLeft() {
               <Card className=''>
                 <CardContent className="flex width aligncenter justcenter">
                   <Typography>Merchant Key</Typography>
-                  <Typography>{user?.data?.apikey}</Typography>
+                  <Typography>{user5?.data?.apikey}</Typography>
                 </CardContent>
               </Card>
             </div>
