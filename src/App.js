@@ -306,10 +306,16 @@ export default function PermanentDrawerLeft() {
               <Button className='lit1 justcenter flex' variant="contained" disabled="true">Request Withdraw</Button> 
             </div>
             <div className='flex width aligncenter justcenter mb2'>        
-              <Card className=''>
-                <CardContent className="flex width aligncenter justcenter">
+              <Card className='mr2'>
+                <CardContent className="flex width aligncenter justcenter column">
                   <Typography>Merchant Key</Typography>
                   <Typography>{user5?.data?.apikey}</Typography>
+                </CardContent>
+              </Card>
+              <Card className=''>
+                <CardContent className="flex width aligncenter justcenter column">
+                  <Typography>Wallet Address</Typography>
+                  <Typography>{user?.wallet?.address}</Typography>
                 </CardContent>
               </Card>
             </div>
