@@ -29,7 +29,7 @@ export default function SimplePaper() {
       console.log(user1?.data, 'countries')*/
 
       const check = async () => {
-        const response = await fetch('http://139.59.26.127:4000/get/oneinvoice?paymenthash=' + id);
+        const response = await fetch('https://novapay.live/api/get/oneinvoice?paymenthash=' + id);
         const data = await response.json();
         console.log(data.data._id, 'data');
         setData1(data.data)

@@ -88,7 +88,7 @@ export default function PermanentDrawerLeft() {
     data: user,
     error,
     isValidating,
-  } = useSWR('http://139.59.26.127:4000/get/address?address=' + currentAccount, fetcher, { refreshInterval: 360000 });
+  } = useSWR('https://novapay.live/api/get/address?address=' + currentAccount, fetcher, { refreshInterval: 360000 });
   console.log(user?.data, 'countries')
   const hasaccount1 = async () => {
     if(user?.data == undefined){
@@ -120,7 +120,7 @@ export default function PermanentDrawerLeft() {
     const di = shopname1
     urlencoded.append("amount", invoice)
     urlencoded.append("api", shopname1)
-      return fetch('http://139.59.26.127:4000/createinvoice', {
+      return fetch('https://novapay.live/api/createinvoice', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
