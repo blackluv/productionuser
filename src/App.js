@@ -27,7 +27,8 @@ import './App.css';
 import { CardHeader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
-import { usePrivy } from "@privy-io/react-auth";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { ethers } from "ethers";
 
 const drawerWidth = 240;
 
@@ -71,9 +72,26 @@ export default function PermanentDrawerLeft() {
   const [shopname, setShopname] = useState('');
   const [shopname1, setShopname1] = useState('');
   const [email, setEmail] = useState('');
+  const [bal, setBal] = useState(0);
   const [connectedaddress, setConnectedaddress] = useState();
 
   const { ready, authenticated, user, login, logout } = usePrivy();
+
+  const {wallets, ready: walletsReady} = useWallets();
+
+  const getbalance = async () => {
+    const wallet = wallets[0];
+    await wallet.switchChain(11155111);
+    const provider = await wallet.getEthersProvider();
+    const signer = provider.getSigner();
+    const balance = await signer.getBalance();
+    //const balance1 = await provider.getBalance(wallet)
+    const res = Math.round(ethers.utils.formatEther(balance) * 1e2) / 1e2;
+    setBal(res)
+    console.log('bal', ethers.utils.formatEther(res))
+  }
+
+  const { data5, error5 } = useSWR('getbalance', getbalance, { refreshInterval: 36000 })
 
   const style = {
     position: 'absolute',
@@ -312,7 +330,7 @@ export default function PermanentDrawerLeft() {
               <Card className='lit1 justcenter aligncenter flex'>
                 <CardContent className='flex aligncenter column'>
                 <Typography>Balance</Typography>
-                <Typography>{user1?.data}</Typography>
+                <Typography>{bal} ETH</Typography>
                 </CardContent>
               </Card>
               <Button className='lit1 justcenter flex' variant="contained" disabled="true">Request Withdraw</Button> 
