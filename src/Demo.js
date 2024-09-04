@@ -115,7 +115,7 @@ export default function SimplePaper() {
                     </div>
                     <div className='flex spacebetween'>
                         <Typography className=''>Amount</Typography>
-                        <Typography className=''>{data1?.(age) + amount}</Typography>
+                        <Typography className=''>{`data1?.${age} + amount`}</Typography>
                     </div>
                     <Divider />
                     <Typography>Payment can be sent to recieving address below</Typography>
