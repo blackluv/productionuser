@@ -118,23 +118,23 @@ export default function SimplePaper() {
                     </div>
                     <div className='flex spacebetween'>
                         <Typography className=''>Amount</Typography>
-                        <Typography className=''>{data1[age].amount}</Typography>
+                        <Typography className=''>{}</Typography>
                     </div>
                     <Divider />
                     <Typography>Payment can be sent to recieving address below</Typography>
                     <Divider />
                     <Typography>Payment Address</Typography>
-                    <Typography className='mb5'>{data1[age].paymentaddress}</Typography>
+                    <Typography className='mb5'>{}</Typography>
                     <div>
-                        <QRCode 
+                        {/*<QRCode 
                         value={data1[age].paymentaddress? data1[age]?.paymentaddress : paymentaddress}
                         className='mb5'
-                         />
+                         />*/}
                     </div>
                     <Divider />
                     <div className='flex spacebetween'>
                         <Typography className=''>Payment Confirmed</Typography>
-                        <Typography className=''>{data1[age]?.isconfirmed? data1[age]?.isconfirmed : <Typography>false</Typography>}</Typography>
+                        {/*<Typography className=''>{data1[age]?.isconfirmed? data1[age]?.isconfirmed : <Typography>false</Typography>}</Typography>*/}
                     </div>
                 </CardContent>
                 {/*<CardActions>
