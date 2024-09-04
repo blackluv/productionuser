@@ -99,11 +99,11 @@ export default function SimplePaper() {
                               label="Payment Token"
                               onChange={handleChange}
                             >
-                              <MenuItem value={usdt}>USDT</MenuItem>
-                              <MenuItem value={btc}>BITCOIN</MenuItem>
-                              <MenuItem value={eth}>ETHEREUM</MenuItem>
-                              <MenuItem value={trx}>TRON</MenuItem>
-                              <MenuItem value={sol}>SOLANA</MenuItem>
+                              <MenuItem value={"usdt"}>USDT</MenuItem>
+                              <MenuItem value={"btc"}>BITCOIN</MenuItem>
+                              <MenuItem value={"eth"}>ETHEREUM</MenuItem>
+                              <MenuItem value={"trx"}>TRON</MenuItem>
+                              <MenuItem value={"sol"}>SOLANA</MenuItem>
                             </Select>
                           </FormControl>
                         </Box>
@@ -111,11 +111,11 @@ export default function SimplePaper() {
                     <Divider />
                     <div className='flex spacebetween'>
                         <Typography className=''>Token:</Typography>
-                        <Typography className=''>USDT</Typography>
+                        <Typography className=''>{age}</Typography>
                     </div>
                     <div className='flex spacebetween'>
                         <Typography className=''>Amount</Typography>
-                        <Typography className=''>{data1?.amount}</Typography>
+                        <Typography className=''>{data1?.(age) + amount}</Typography>
                     </div>
                     <Divider />
                     <Typography>Payment can be sent to recieving address below</Typography>
