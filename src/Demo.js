@@ -25,7 +25,7 @@ export default function SimplePaper() {
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
     const paymentaddress = "0x1917938340F919F12D84046E7c78dd9C1057A15E"
     console.log('id', id)
-    const [age, setAge] = React.useState('');
+    const [age, setAge] = React.useState('usdt');
 
     const handleChange = (event) => {
       setAge(event.target.value);
