@@ -12,6 +12,10 @@ import QRCode from "react-qr-code";
 import './App.css';
 import useSWR from 'swr';
 import { useParams } from 'react-router-dom';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 export default function SimplePaper() {
@@ -21,6 +25,11 @@ export default function SimplePaper() {
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
     const paymentaddress = "0x1917938340F919F12D84046E7c78dd9C1057A15E"
     console.log('id', id)
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event) => {
+      setAge(event.target.value);
+    };
     /*const {
         data: user1,
         error,
@@ -77,6 +86,28 @@ export default function SimplePaper() {
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Logo Text
                     </Typography>
+                    <Divider />
+                    <div className='flex spacebetween'>
+                        <Typography className=''>Select token </Typography>
+                        <Box sx={{ minWidth: 120 }}>
+                          <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              value={age}
+                              label="Payment Token"
+                              onChange={handleChange}
+                            >
+                              <MenuItem value={usdt}>USDT</MenuItem>
+                              <MenuItem value={btc}>BITCOIN</MenuItem>
+                              <MenuItem value={eth}>ETHEREUM</MenuItem>
+                              <MenuItem value={trx}>TRON</MenuItem>
+                              <MenuItem value={sol}>SOLANA</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </Box>
+                    </div>
                     <Divider />
                     <div className='flex spacebetween'>
                         <Typography className=''>Token:</Typography>

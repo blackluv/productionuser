@@ -71,6 +71,10 @@ export default function PermanentDrawerLeft() {
   const [shopname1, setShopname1] = useState('');
   const [shopname, setShopname] = useState();
   const [email, setEmail] = useState('');
+  const [BTC, setBTC] = useState('');
+  const [ETH, setETH] = useState('');
+  const [TRX, setTRX] = useState('');
+  const [SOL, setSOL] = useState('');
   const { ready, authenticated, user, login, logout } = usePrivy();
 
   const style = {
@@ -113,6 +117,10 @@ export default function PermanentDrawerLeft() {
     console.log(email, 'email')
     urlencoded.append("shop", shop)
     urlencoded.append("email", email)
+    urlencoded.append("btcaddress", BTC)
+    urlencoded.append("soladdress", SOL)
+    urlencoded.append("trxaddress", TRX)
+    urlencoded.append("ethaddress", ETH)
     urlencoded.append("api", shopname1)
       return fetch('https://novapay.live/api/settings/update', {
         method: 'POST',
@@ -299,10 +307,32 @@ export default function PermanentDrawerLeft() {
                         onChange={e => setEmail(e.target.value)}
                     />
                     <TextField
-                        label="LogoUrl"
+                        label="UpdateBTCaddress"
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        onChange={e => setBTC(e.target.value)}
+                    />
+                    <TextField
+                        label="UpdateETHaddress"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        onChange={e => setETH(e.target.value)}
+                    />
+                    <TextField
+                        label="UpdateSOLaddress"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        onChange={e => setSOL(e.target.value)}
+                    />
+                    <TextField
+                        label="UpdateTRXaddress"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        onChange={e => setTRX(e.target.value)}
                     />
                     <Button
                         variant="contained"
