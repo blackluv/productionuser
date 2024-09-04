@@ -167,6 +167,14 @@ export default function PermanentDrawerLeft() {
 
     const invoicemap = user4?.data
     //getallwithdrawals
+    const {
+      data: user10,
+      error10,
+      isValidating10,
+    } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
+    console.log(user10?.data, 'countries4')
+
+    const requestmap = user10?.data
   //registeruser
   async function registeruser(shop, email) {
     const urlencoded = new URLSearchParams()
@@ -333,15 +341,15 @@ export default function PermanentDrawerLeft() {
                 <Typography>{bal} ETH</Typography>
                 </CardContent>
               </Card>
-              <Button className='lit1 justcenter flex' variant="contained" disabled="true">Request Withdraw</Button> 
-            </div>
-            <div className='flex width aligncenter justcenter mb2'>        
               <Card className='mr2'>
                 <CardContent className="flex width aligncenter justcenter column">
                   <Typography>Merchant Key</Typography>
                   <Typography>{user5?.data?.apikey}</Typography>
                 </CardContent>
               </Card>
+              {/*<Button className='lit1 justcenter flex' variant="contained" disabled="true">Request Withdraw</Button> */}
+            </div>
+            <div className='flex width aligncenter justcenter mb2'>        
               <Card className=''>
                 <CardContent className="flex width aligncenter justcenter column">
                   <Typography>Wallet Address</Typography>
@@ -369,10 +377,6 @@ export default function PermanentDrawerLeft() {
                       <Typography>{invoice.amount}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>Payment address</Typography>
-                      <Typography>{invoice.paymentaddress}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
                       <Typography>Status</Typography>
                       <Typography>{invoice.isconfirmed}</Typography>
                     </div>
@@ -381,11 +385,37 @@ export default function PermanentDrawerLeft() {
                 )) : <Typography>No invoice</Typography>}
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
+              {requestmap ? requestmap?.map((request) => (
                 <Card className='width'>
-                    <CardContent className='spacebetween flex'>
-                      <Typography>Coming Soon</Typography>
-                    </CardContent>
-                  </Card>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Transaction Id</Typography>
+                      <Typography>{request.transactionhash}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Shop</Typography>
+                      <Typography>{request.shop}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Wallet</Typography>
+                      <Typography>{request.wallet}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Amount</Typography>
+                      <Typography>{request.amount}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Token</Typography>
+                      <Typography>{request.token}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Status</Typography>
+                      <Typography>{request.status}</Typography>
+                    </div>
+                    <Button className='lit1 justcenter flex' variant="contained" disabled="true">Request</Button>
+                  </CardContent>
+                </Card>
+                )) : <Typography>No request</Typography>}
               </CustomTabPanel>
             </Box>
           </div> :

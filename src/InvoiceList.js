@@ -255,10 +255,6 @@ export default function PermanentDrawerLeft() {
                       <Typography>{invoice.amount}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>Payment address</Typography>
-                      <Typography>{invoice.paymentaddress}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
                       <Typography>Status</Typography>
                       <Typography>{invoice.isconfirmed}</Typography>
                     </div>
