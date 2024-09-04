@@ -127,7 +127,7 @@ export default function PermanentDrawerLeft() {
     const di = shopname1
     urlencoded.append("amount", invoice)
     urlencoded.append("api", shopname1)
-    urlencoded.append("token", usdt) 
+    urlencoded.append("token", "usdt") 
       return fetch('https://novapay.live/api/createinvoice1', {
         method: 'POST',
         headers: {
