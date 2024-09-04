@@ -131,11 +131,7 @@ export default function PermanentDrawerLeft() {
       return fetch('https://novapay.live/api/createinvoice1', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          "Authorization":{
-                            "x-api-key": `${shopname1}`
-                        },
-            "x-api-key": `${di}`
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: urlencoded
       })
