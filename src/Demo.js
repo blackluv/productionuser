@@ -48,6 +48,15 @@ export default function SimplePaper() {
         console.log(data1?.amount, 'data1')
     }
 
+    const {
+      data: user4,
+      error4,
+      isValidating4,
+    } = useSWR('https://novapay.live/api/get/oneinvoice?paymenthash=' + id, fetcher, { refreshInterval: 36000000 });
+    console.log(user4?.data, 'countries4')
+  
+    const invoicemap = user4?.data
+
     const { data3, error3 } = useSWR('check', check, { refreshInterval: 3600000 })
 
     //const code = data1.paymentaddress
@@ -118,13 +127,13 @@ export default function SimplePaper() {
                     </div>
                     <div className='flex spacebetween'>
                         <Typography className=''>Amount</Typography>
-                        <Typography className=''>{}</Typography>
+                        <Typography className=''>{user4?.data?.[age].amount}</Typography>
                     </div>
                     <Divider />
                     <Typography>Payment can be sent to recieving address below</Typography>
                     <Divider />
                     <Typography>Payment Address</Typography>
-                    <Typography className='mb5'>{}</Typography>
+                    <Typography className='mb5'>{user4?.data?.[age].paymentaddress}</Typography>
                     <div>
                         {/*<QRCode 
                         value={data1[age].paymentaddress? data1[age]?.paymentaddress : paymentaddress}
