@@ -57,7 +57,7 @@ export default function SimplePaper() {
   
     const invoicemap = user4?.data
 
-    const { data3, error3 } = useSWR('check', check, { refreshInterval: 3600000 })
+    //const { data3, error3 } = useSWR('check', check, { refreshInterval: 3600000 })
 
     //const code = data1.paymentaddress
 
@@ -133,17 +133,17 @@ export default function SimplePaper() {
                     <Typography>Payment can be sent to recieving address below</Typography>
                     <Divider />
                     <Typography>Payment Address</Typography>
-                    <Typography className='mb5'>{user4?.data?.[age].paymentaddress}</Typography>
+                    <Typography className='mb5'>{user4?.data?.[age].address}</Typography>
                     <div>
-                        {/*<QRCode 
-                        value={data1[age].paymentaddress? data1[age]?.paymentaddress : paymentaddress}
+                        {<QRCode 
+                        value={user4?.data?.[age].address? user4?.data?.[age].address : paymentaddress}
                         className='mb5'
-                         />*/}
+                         />}
                     </div>
                     <Divider />
                     <div className='flex spacebetween'>
                         <Typography className=''>Payment Confirmed</Typography>
-                        {/*<Typography className=''>{data1[age]?.isconfirmed? data1[age]?.isconfirmed : <Typography>false</Typography>}</Typography>*/}
+                        {<Typography className=''>{user4?.data?.[age].isconfirmed? data1[age]?.isconfirmed : <Typography>false</Typography>}</Typography>*/}
                     </div>
                 </CardContent>
                 {/*<CardActions>
