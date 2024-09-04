@@ -40,7 +40,7 @@ export default function SimplePaper() {
       const check = async () => {
         const response = await fetch('https://novapay.live/api/get/oneinvoice?paymenthash=' + id);
         const data = await response.json();
-        console.log(data.data._id, 'data');
+        console.log(data, 'data');
         setData1(data.data)
         console.log(data1?.amount, 'data1')
     }
@@ -91,7 +91,7 @@ export default function SimplePaper() {
                         <Typography className=''>Select token </Typography>
                         <Box sx={{ minWidth: 120 }}>
                           <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Select Token</InputLabel>
                             <Select
                               labelId="demo-simple-select-label"
                               id="demo-simple-select"
@@ -115,7 +115,7 @@ export default function SimplePaper() {
                     </div>
                     <div className='flex spacebetween'>
                         <Typography className=''>Amount</Typography>
-                        <Typography className=''>{`data1?.${age} + amount`}</Typography>
+                        <Typography className=''>{`data1?.age + "amount"`}</Typography>
                     </div>
                     <Divider />
                     <Typography>Payment can be sent to recieving address below</Typography>
