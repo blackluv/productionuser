@@ -193,6 +193,22 @@ export default function PermanentDrawerLeft() {
       )
      }
 
+     async function request(hash, amount, shop) {
+      const urlencoded = new URLSearchParams()
+      urlencoded.append("invoice", hash)
+      urlencoded.append("amount", amount)
+      urlencoded.append("shop", shop)
+        return fetch('https://novapay.live/api/createwithdrawal', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: urlencoded
+        })
+          .then(data => data.json()
+        )
+       }
+
      const handleSubmit = async e => {
       e.preventDefault();
       let user = registeruser(shopname, email)
@@ -380,6 +396,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Status</Typography>
                       <Typography>{invoice.isconfirmed}</Typography>
                     </div>
+                    <Button className='lit1 justcenter flex' variant="contained" onClick={() => request(invoice?.transactionhash, invoice?.amount, invoice?.shop)}>Request</Button>
                   </CardContent>
                 </Card>
                 )) : <Typography>No invoice</Typography>}
@@ -412,7 +429,6 @@ export default function PermanentDrawerLeft() {
                       <Typography>Status</Typography>
                       <Typography>{request.status}</Typography>
                     </div>
-                    <Button className='lit1 justcenter flex' variant="contained" disabled="true">Request</Button>
                   </CardContent>
                 </Card>
                 )) : <Typography>No request</Typography>}
