@@ -163,7 +163,7 @@ export default function PermanentDrawerLeft() {
       error4,
       isValidating4,
     } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-    console.log(user4?.data, 'countries4')
+    console.log(user4, 'countries4')
 
     const invoicemap = user4?.data
     //getallwithdrawals
