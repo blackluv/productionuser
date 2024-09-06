@@ -623,7 +623,7 @@ export default function PermanentDrawerLeft() {
                             onChange={e => setShopname22(e.target.value)}
                         />
                         <TextField
-                            label="amount"
+                            label="address"
                             variant="outlined"
                             fullWidth
                             margin="normal"
