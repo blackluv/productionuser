@@ -396,7 +396,7 @@ export default function PermanentDrawerLeft() {
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Status</Typography>
-                      <Typography>{invoice.isconfirmed}</Typography>
+                      <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
                     </div>
                     <Button className='lit4 justcenter flex' variant="contained" onClick={() => request(invoice?.transactionhash, invoice?.amount, invoice?.shop)}>Request</Button>
                     <Button className='lit4 justcenter flex' variant="contained" onClick={() => awaittx(invoice?.transactionhash)}>Check tx</Button>
