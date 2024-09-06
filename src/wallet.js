@@ -538,7 +538,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Bitcoin</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data?.btcbalance}</Typography>
+                      <Typography>{0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
