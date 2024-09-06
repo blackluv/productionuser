@@ -19,7 +19,7 @@ root.render(
       onSuccess={(user) => console.log(`User ${user.wallet} logged in!`)}
       config={{
         // Display email and wallet as login methods
-        loginMethods: ['email', 'wallet'],
+        loginMethods: ['email'],
         // Customize Privy's appearance in your app
         appearance: {
           theme: 'dark',
