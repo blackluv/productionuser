@@ -313,7 +313,7 @@ export default function PermanentDrawerLeft() {
     setValue(newValue);
   };
 
-  const connectWallet = async () => {
+  /*const connectWallet = async () => {
 		try {
 			const { ethereum } = window;
 
@@ -336,7 +336,7 @@ export default function PermanentDrawerLeft() {
   const checkaccount = async () => {} 
   useEffect(() => {
     connectWallet();
-}, [currentAccount]);
+}, [currentAccount]);*/
 
   return (
     <Box sx={{ display: 'flex' }}>
