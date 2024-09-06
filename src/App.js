@@ -209,6 +209,20 @@ export default function PermanentDrawerLeft() {
         )
        }
 
+       async function awaittx(hash) {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("payment", hash)
+          return fetch('https://novapay.live/api/awaittx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+         }
+
      const handleSubmit = async e => {
       e.preventDefault();
       let user = registeruser(shopname, email)
@@ -220,30 +234,11 @@ export default function PermanentDrawerLeft() {
     setValue(newValue);
   };
 
-  const connectWallet = async () => {
-		try {
-			const { ethereum } = window;
 
-			if (!ethereum) {
-				alert("Get MetaMask -> https://metamask.io/");
-				return;
-			}
-
-			// Fancy method to request access to account.
-			const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-		
-			// Boom! This should print out public address once we authorize Metamask.
-			//console.log("Connected", accounts[0]);
-			setCurrentAccount(accounts[0]);
-		} catch (error) {
-			console.log(error)
-		}
-	};
-
-  const checkaccount = async () => {} 
+  /*const checkaccount = async () => {} 
   useEffect(() => {
     connectWallet();
-}, [currentAccount]);
+}, [currentAccount]);*/
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -397,6 +392,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>{invoice.isconfirmed}</Typography>
                     </div>
                     <Button className='lit1 justcenter flex' variant="contained" onClick={() => request(invoice?.transactionhash, invoice?.amount, invoice?.shop)}>Request</Button>
+                    <Button className='lit1 justcenter flex' variant="contained" onClick={() => awaittx(invoice?.transactionhash)}>Check tx</Button>
                   </CardContent>
                 </Card>
                 )) : <Typography>No invoice</Typography>}
