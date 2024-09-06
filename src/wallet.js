@@ -556,6 +556,9 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
                     </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{used?.soladdress ? used?.soladdress : 'none'}</Typography>
+                    </div>
                   </CardContent>
                 </Card>
                 <Card className='width mb2'>
@@ -565,6 +568,9 @@ export default function PermanentDrawerLeft() {
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{used?.trxaddress ? used?.trxaddress : 'none'}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -576,6 +582,9 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
                     </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{used?.btcaddress ? used?.btcaddress : 'none'}</Typography>
+                    </div>
                   </CardContent>
                 </Card>
                 <Card className='width mb2'>
@@ -585,6 +594,9 @@ export default function PermanentDrawerLeft() {
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{used?.usdtaddress ? used?.usdtaddress : 'none'}</Typography>
                     </div>
                   </CardContent>
                 </Card>
