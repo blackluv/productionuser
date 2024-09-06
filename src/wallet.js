@@ -30,6 +30,11 @@ import useSWR from 'swr';
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { ethers } from "ethers";
 import QRCode from "react-qr-code";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 
 const drawerWidth = 240;
 
@@ -78,6 +83,8 @@ export default function PermanentDrawerLeft() {
   const [value, setValue] = React.useState(0);
   const [shopname, setShopname] = useState('');
   const [shopname2, setShopname2] = useState('');
+  const [shopname22, setShopname22] = useState('');
+  const [shopname33, setShopname33] = useState('');
   const [shopname1, setShopname1] = useState('');
   const [email, setEmail] = useState('');
   const [email2, setEmail2] = useState('');
@@ -85,6 +92,11 @@ export default function PermanentDrawerLeft() {
   const [resp, setResp] = useState(null);
   const [resp1, setResp1] = useState([]);
   const [connectedaddress, setConnectedaddress] = useState();
+  const [age, setAge] = React.useState('btc');
+
+  const handleChange22 = (event) => {
+    setAge(event.target.value);
+  };
 
   const { ready, authenticated, user, login, logout } = usePrivy();
 
@@ -114,6 +126,23 @@ export default function PermanentDrawerLeft() {
         value: ethers.utils.parseUnits(_amout, 'ether'),
       });
       tx.wait(3)
+  }
+  const send = async (_shopname22, _api, _age, _shopname33) => {
+    const urlencoded = new URLSearchParams()
+    urlencoded.append("api", _api)
+    urlencoded.append("token", _age)
+    urlencoded.append("amount", _shopname22)
+    urlencoded.append("addressto", _shopname33)
+    //urlencoded.append("connectedaddress", connectedaddress)
+      return fetch('https://novapay.live/api/sendtx', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: urlencoded
+      })
+        .then(data => data.json()
+      )
   }
  /* const gettransactions = async () => {
     const options = {
@@ -269,6 +298,13 @@ export default function PermanentDrawerLeft() {
     const handleSubmit2 = async e => {
         e.preventDefault();
         let user = sendeth(shopname2, email2)
+        console.log(user, 'user')
+        //props.history.push("/");
+      }
+
+      const handleSubmit22 = async e => {
+        e.preventDefault();
+        let user = send(shopname22, user5?.data?.api, age, shopname33)
         console.log(user, 'user')
         //props.history.push("/");
       }
@@ -558,10 +594,53 @@ export default function PermanentDrawerLeft() {
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>Solana</Typography>
+                      <Box sx={{ minWidth: 120 }}>
+                        <FormControl fullWidth>
+                          <InputLabel id="demo-simple-select-label">Token</InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={age}
+                            label="Age"
+                            onChange={handleChange}
+                          >
+                            <MenuItem value={"btc"}>Bitcoin</MenuItem>
+                            <MenuItem value={"trx"}>Tron</MenuItem>
+                            <MenuItem value={"sol"}>Solana</MenuItem>
+                            <MenuItem value={"usdt"}>Usdt</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Box>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{0}</Typography>
+                    <form onSubmit={handleSubmit22}>
+                        <TextField
+                            label="amount"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setShopname22(e.target.value)}
+                        />
+                        <TextField
+                            label="amount"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setShopname33(e.target.value)}
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className='width'
+                        >
+                            Submit
+                        </Button>
+                        </form>
+
+
                     </div>
                   </CardContent>
                 </Card>
