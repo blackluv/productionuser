@@ -518,7 +518,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Solana</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data?.solbalance}</Typography>
+                      <Typography>{0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -528,7 +528,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Tron</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data?.trxbalance}</Typography>
+                      <Typography>{0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -548,7 +548,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>USDT</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data?.usdtbalance}</Typography>
+                      <Typography>{0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -561,7 +561,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Solana</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data?.solbalance}</Typography>
+                      <Typography>{0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
