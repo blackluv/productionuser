@@ -143,7 +143,7 @@ export default function SimplePaper() {
                     <Divider />
                     <div className='flex spacebetween'>
                         <Typography className=''>Payment Confirmed</Typography>
-                        <Typography className=''>{user4?.data?.isconfirmed = true ? 'true' : <Typography>false</Typography>}</Typography>
+                        {user4?.data?.isconfirmed = true ?<Typography className=''> true </Typography> : <Typography>false</Typography>}
                     </div>
                 </CardContent>
                 {/*<CardActions>
