@@ -458,7 +458,7 @@ export default function PermanentDrawerLeft() {
                   <CardContent>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            label="username"
+                            label="shopname"
                             variant="outlined"
                             fullWidth
                             margin="normal"
