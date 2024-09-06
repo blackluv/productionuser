@@ -518,7 +518,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Solana</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data.solbalance}</Typography>
+                      <Typography>{user22.data?.solbalance}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -528,7 +528,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Tron</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data.trxbalance}</Typography>
+                      <Typography>{user22.data?.trxbalance}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -538,7 +538,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Bitcoin</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data.btcbalance}</Typography>
+                      <Typography>{user22.data?.btcbalance}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -548,13 +548,23 @@ export default function PermanentDrawerLeft() {
                       <Typography>USDT</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user22.data.usdtbalance}</Typography>
+                      <Typography>{user22.data?.usdtbalance}</Typography>
                     </div>
                   </CardContent>
                 </Card>
               </CustomTabPanel>
               <CustomTabPanel value={value} index={2}>
                 <Typography>Send Tokens</Typography>
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Solana</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{user22.data?.solbalance}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
               </CustomTabPanel>
             </Box>
           </div> :
