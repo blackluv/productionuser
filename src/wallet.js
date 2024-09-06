@@ -206,7 +206,7 @@ export default function PermanentDrawerLeft() {
     error22,
     isValidating22,
   } = useSWR('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-  console.log(user22?.data, 'countries2')
+  console.log(user22?.data, 'countries22')
   //getorders
     const {
       data: user2,
