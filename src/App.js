@@ -439,8 +439,8 @@ export default function PermanentDrawerLeft() {
             </Box>
           </div> :
           <div class="vertical-center">
-            <Typography>You do not have an account. Register to continue</Typography>
-            <Button variant="contained" onClick={handleOpen}>Complete Registration</Button>
+            <Typography>Create your shop to continue</Typography>
+            <Button variant="contained" onClick={handleOpen}>Create Shop</Button>
             <Modal
               open={open}
               onClose={handleClose}
