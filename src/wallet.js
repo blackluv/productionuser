@@ -201,6 +201,12 @@ export default function PermanentDrawerLeft() {
     isValidating1,
   } = useSWR('https://novapay.live/api/get/balance?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
   console.log(user1?.data, 'countries1')
+  const {
+    data: user22,
+    error22,
+    isValidating22,
+  } = useSWR('https://novapay.live/api/wallets' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+  console.log(user22?.data, 'countries2')
   //getorders
     const {
       data: user2,
@@ -512,7 +518,37 @@ export default function PermanentDrawerLeft() {
                       <Typography>Solana</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>0</Typography>
+                      <Typography>{user22.data.solbalance}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Tron</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{user22.data.trxbalance}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Bitcoin</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{user22.data.btcbalance}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>USDT</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{user22.data.usdtbalance}</Typography>
                     </div>
                   </CardContent>
                 </Card>

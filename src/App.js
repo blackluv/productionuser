@@ -141,6 +141,13 @@ export default function PermanentDrawerLeft() {
       isValidating2,
     } = useSWR('https://novapay.live/api/get/orders?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
     console.log(user2?.data, 'countries2')
+    //getbalance
+    const {
+      data: user22,
+      error22,
+      isValidating22,
+    } = useSWR('https://novapay.live/api/wallets' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+    console.log(user22?.data, 'countries2')
     //requestwithdrawal
   async function requestwithdrawal(shop, amount) {
     const urlencoded = new URLSearchParams()
