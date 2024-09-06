@@ -207,6 +207,7 @@ export default function PermanentDrawerLeft() {
     isValidating22,
   } = useSWR('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
   console.log(user22?.data, 'countries22')
+  const used = user22?.data
   //getorders
     const {
       data: user2,
@@ -511,14 +512,13 @@ export default function PermanentDrawerLeft() {
                 )) : <Typography>No transactions on wallet</Typography>}
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
-                <Typography>All wallets</Typography>
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Solana</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{0}</Typography>
+                      <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -528,7 +528,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Tron</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{0}</Typography>
+                      <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -538,7 +538,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Bitcoin</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{0}</Typography>
+                      <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -548,7 +548,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>USDT</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{0}</Typography>
+                      <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
