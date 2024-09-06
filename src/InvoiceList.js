@@ -256,7 +256,7 @@ export default function PermanentDrawerLeft() {
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Status</Typography>
-                      <Typography>{invoice.isconfirmed}</Typography>
+                      <Typography>{invoice.isconfirmed = true ? 'true' : 'false'}</Typography>
                     </div>
                       <Link variant="contained" to={'/invoice/' +  invoice.transactionhash}>View</Link>
                     </CardContent>
