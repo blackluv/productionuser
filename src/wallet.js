@@ -597,7 +597,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.usdtaddress ? used?.usdtaddress : 'none'}</Typography>
+                      <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
                     </div>
                   </CardContent>
                 </Card>
