@@ -44,6 +44,9 @@
 .lit1{
   width: 30%;
 }
+.lit4{
+  width: 10%;
+}
 
 .flex{
   display: flex;

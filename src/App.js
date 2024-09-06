@@ -391,8 +391,8 @@ export default function PermanentDrawerLeft() {
                       <Typography>Status</Typography>
                       <Typography>{invoice.isconfirmed}</Typography>
                     </div>
-                    <Button className='lit1 justcenter flex' variant="contained" onClick={() => request(invoice?.transactionhash, invoice?.amount, invoice?.shop)}>Request</Button>
-                    <Button className='lit1 justcenter flex' variant="contained" onClick={() => awaittx(invoice?.transactionhash)}>Check tx</Button>
+                    <Button className='lit4 justcenter flex' variant="contained" onClick={() => request(invoice?.transactionhash, invoice?.amount, invoice?.shop)}>Request</Button>
+                    <Button className='lit4 justcenter flex' variant="contained" onClick={() => awaittx(invoice?.transactionhash)}>Check tx</Button>
                   </CardContent>
                 </Card>
                 )) : <Typography>No invoice</Typography>}
