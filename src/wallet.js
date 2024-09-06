@@ -476,6 +476,8 @@ export default function PermanentDrawerLeft() {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                   <Tab label="Transactions" {...a11yProps(0)} />
+                  <Tab label="All Wallets Balance" {...a11yProps(1)} />
+                  <Tab label="Send Tokens" {...a11yProps(2)} />
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
@@ -501,6 +503,22 @@ export default function PermanentDrawerLeft() {
                   </CardContent>
                 </Card>
                 )) : <Typography>No transactions on wallet</Typography>}
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={1}>
+                <Typography>All wallets</Typography>
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Solana</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>0</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={2}>
+                <Typography>Send Tokens</Typography>
               </CustomTabPanel>
             </Box>
           </div> :
