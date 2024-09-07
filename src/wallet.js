@@ -92,7 +92,7 @@ export default function PermanentDrawerLeft() {
   const [resp, setResp] = useState(null);
   const [resp1, setResp1] = useState([]);
   const [connectedaddress, setConnectedaddress] = useState();
-  const [age, setAge] = React.useState('btc');
+  const [age, setAge] = React.useState('');
 
   const handleChange22 = (event) => {
     setAge(event.target.value);
