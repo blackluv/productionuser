@@ -243,18 +243,6 @@ export default function PermanentDrawerLeft() {
             </ListItem>
         </List>
         <List>
-            <ListItem key="Invoicelist" disablePadding>
-              <Link to= "/invoicelist" className='ti'>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon /> 
-                </ListItemIcon>
-                <ListItemText primary="InvoiceList" />
-              </ListItemButton>
-              </Link>
-            </ListItem>
-        </List>
-        <List>
             <ListItem key="Wallet" disablePadding>
               <Link to= "/wallet" className='ti'>
               <ListItemButton>

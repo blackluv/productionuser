@@ -110,6 +110,17 @@ export default function PermanentDrawerLeft() {
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
 
+  const {
+    data: user4,
+    error4,
+    isValidating4,
+  } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
+  console.log(user4?.data, 'countries4')
+
+  const invoicemap = user4?.data
+
+  //const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -227,18 +238,6 @@ export default function PermanentDrawerLeft() {
             </ListItem>
         </List>
         <List>
-            <ListItem key="Invoicelist" disablePadding>
-              <Link to= "/invoicelist" className='ti'>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon /> 
-                </ListItemIcon>
-                <ListItemText primary="InvoiceList" />
-              </ListItemButton>
-              </Link>
-            </ListItem>
-        </List>
-        <List>
             <ListItem key="Wallet" disablePadding>
               <Link to= "/wallet" className='ti'>
               <ListItemButton>
@@ -295,6 +294,30 @@ export default function PermanentDrawerLeft() {
                     {/*alert ? <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">{alertContent}</Alert> : <Alert severity='error'>{alertContent}</Alert> */}
                     </div>
                   </form>
+
+                  {invoicemap ? invoicemap?.map((invoice) => (
+                  <Card className='width'>
+                    <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Transaction Id</Typography>
+                      <Typography>{invoice.transactionhash}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Amount</Typography>
+                      <Typography>{invoice.amount}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Status</Typography>
+                      <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
+                    </div>
+                      <Link variant="contained" to={'/invoice/' +  invoice.transactionhash}>View</Link>
+                    </CardContent>
+                  </Card>
+                  )) : 
+                  <Card>
+                  <Typography>No invoice</Typography>
+                  </Card>
+                  }
           </div> :
           <div class="vertical-center">
             <Typography>You do not have an account. Register to continue</Typography>

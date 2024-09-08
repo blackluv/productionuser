@@ -299,18 +299,6 @@ export default function PermanentDrawerLeft() {
             </ListItem>
         </List>
         <List>
-            <ListItem key="Invoicelist" disablePadding>
-              <Link to= "/invoicelist" className='ti'>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon /> 
-                </ListItemIcon>
-                <ListItemText primary="InvoiceList" />
-              </ListItemButton>
-              </Link>
-            </ListItem>
-        </List>
-        <List>
             <ListItem key="Wallet" disablePadding>
               <Link to= "/wallet" className='ti'>
               <ListItemButton>
@@ -379,7 +367,7 @@ export default function PermanentDrawerLeft() {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                   <Tab label="Invoice (Deposits)" {...a11yProps(0)} />
-                  <Tab label="Withdrawals" {...a11yProps(1)} />
+                  {/*<Tab label="Withdrawals" {...a11yProps(1)} />*/}
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
@@ -404,7 +392,7 @@ export default function PermanentDrawerLeft() {
                 </Card>
                 )) : <Typography>No invoice</Typography>}
               </CustomTabPanel>
-              <CustomTabPanel value={value} index={1}>
+              {/*<CustomTabPanel value={value} index={1}>
               {requestmap ? requestmap?.map((request) => (
                 <Card className='width'>
                   <CardContent className='spacebetween flex'>
@@ -435,7 +423,7 @@ export default function PermanentDrawerLeft() {
                   </CardContent>
                 </Card>
                 )) : <Typography>No request</Typography>}
-              </CustomTabPanel>
+              </CustomTabPanel>*/}
             </Box>
           </div> :
           <div class="vertical-center">
