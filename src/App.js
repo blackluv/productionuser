@@ -220,6 +220,7 @@ export default function PermanentDrawerLeft() {
         const urlencoded = new URLSearchParams()
         urlencoded.append("payment", hash)
         urlencoded.append("api", user5?.data?.apikey)
+        console.log("api", user5?.data?.apikey)
           return fetch('https://novapay.live/api/awaittx', {
             method: 'POST',
             headers: {
@@ -387,7 +388,6 @@ export default function PermanentDrawerLeft() {
                       <Typography>Status</Typography>
                       <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
                     </div>
-                    <Button className='lit4 justcenter flex' variant="contained" onClick={() => request(invoice?.transactionhash, invoice?.amount, invoice?.shop)}>Request</Button>
                     <Button className='lit4 justcenter flex' variant="contained" onClick={() => awaittx(invoice?.transactionhash)}>Check tx</Button>
                   </CardContent>
                 </Card>
