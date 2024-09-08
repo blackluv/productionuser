@@ -556,7 +556,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Ethereum</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.ethbalance ? used?.ethbalance : 0}</Typography>
+                      <Typography>{used?.ethbalance ? used?.ethbalance / 1000000000000000000 : 0}</Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -566,7 +566,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Solana</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
+                      <Typography>{used?.solbalance ? used?.solbalance / 1000000000 : 0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button> 
                     <div className='justcenter flex aligncenter column'>
@@ -580,7 +580,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>Tron</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
+                      <Typography>{used?.trxbalance ? used?.trxbalance / 1000000 : 0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
                     <div className='justcenter flex aligncenter column'>
@@ -598,7 +598,7 @@ export default function PermanentDrawerLeft() {
                     </div>
                     <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.btcaddress ? used?.btcaddress : 'none'}</Typography>
+                      <Typography>{used?.btcaddress ? used?.btcaddress / 100000000 : 'none'}</Typography>
                     </div>
                   </CardContent>
                 </Card>
