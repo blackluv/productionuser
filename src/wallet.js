@@ -626,7 +626,6 @@ export default function PermanentDrawerLeft() {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                   <Tab label="Transactions" {...a11yProps(0)} />
                   <Tab label="All Wallets Balance" {...a11yProps(1)} />
-                  <Tab label="Send Tokens" {...a11yProps(2)} />
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
@@ -895,62 +894,6 @@ export default function PermanentDrawerLeft() {
                     <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-              </CustomTabPanel>
-              <CustomTabPanel value={value} index={2}>
-                <Typography>Send Tokens</Typography>
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth>
-                          <InputLabel id="demo-simple-select-label">Token</InputLabel>
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={age}
-                            label="Age"
-                            onChange={handleChange}
-                          >
-                            <MenuItem value={"btc"}>Bitcoin</MenuItem>
-                            <MenuItem value={"trx"}>Tron</MenuItem>
-                            <MenuItem value={"sol"}>Solana</MenuItem>
-                            <MenuItem value={"usdt"}>Usdt</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Box>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                    <form onSubmit={handleSubmit22}>
-                        <TextField
-                            label="amount"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='text'
-                            onChange={e => setShopname22(e.target.value)}
-                        />
-                        <TextField
-                            label="address"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='text'
-                            onChange={e => setShopname33(e.target.value)}
-                        />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            className='width'
-                        >
-                            Submit
-                        </Button>
-                        </form>
-
-
                     </div>
                   </CardContent>
                 </Card>
