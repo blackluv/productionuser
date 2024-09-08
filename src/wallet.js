@@ -223,6 +223,7 @@ export default function PermanentDrawerLeft() {
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
 
+
   //getbalance
   const {
     data: user1,
@@ -238,6 +239,26 @@ export default function PermanentDrawerLeft() {
   console.log(user22, 'countries22')
   const used = user22?.data
   console.log('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, 'theme')
+
+  const {
+    data: user100,
+    error100,
+    isValidating100,
+  } = useSWR('https://api.trongrid.io/v1/accounts/' + used?.trxaddress + 'transactions', fetcher, { refreshInterval: 3600000 });
+
+  console.log(user100?.data, 'trx')
+
+  const rest1 = user100?.data
+
+  const {
+    data: user200,
+    error200,
+    isValidating200,
+  } = useSWR('https://api.blockcypher.com/v1/btc/test3/addrs/' + used?.btcaddress, fetcher, { refreshInterval: 3600000 });
+
+  console.log(user200, 'btc')
+
+  const rest2 = user200?.txrefs
 
   //getorders
     const {
@@ -547,7 +568,47 @@ export default function PermanentDrawerLeft() {
                     </div>
                   </CardContent>
                 </Card>
-                )) : <Typography>No transactions on wallet</Typography>}
+                )) : <Typography></Typography>}
+              {rest1 ? rest1?.map((resp) => (
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Transaction Hash</Typography>
+                      <Typography> {resp?.txID.slice(0, 6)}...{resp?.txID.slice(-4)}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Confirmation</Typography>
+                      <Typography>{resp?.ret[0].contractret}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Amount</Typography>
+                      <Typography>{resp?.raw_data.contract[0].parameter.value.amount}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>To Address</Typography>
+                      <Typography>{resp?.raw_data.contract[0].parameter.value.to_address.slice(0, 6)}...{resp?.raw_data.contract[0].parameter.value.to_address.slice(-4)}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                )) : <Typography></Typography>}
+              {rest2 ? rest2?.map((resp) => (
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Transaction Hash</Typography>
+                      <Typography> {resp?.tx_hash.slice(0, 6)}...{resp?.tx_hash.slice(-4)}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Confirmation</Typography>
+                      <Typography>{resp?.confirmations}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Amount</Typography>
+                      <Typography>{resp?.value / 100000000}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                )) : <Typography></Typography>}
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
               <Card className='width mb2'>
