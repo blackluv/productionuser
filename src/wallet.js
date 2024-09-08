@@ -594,11 +594,11 @@ export default function PermanentDrawerLeft() {
                       <Typography>Bitcoin</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
+                      <Typography>{used?.btcbalance ? used?.btcbalance / 100000000 : 0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.btcaddress ? used?.btcaddress / 100000000 : 'none'}</Typography>
+                      <Typography>{used?.btcaddress ? used?.btcaddress  : 'none'}</Typography>
                     </div>
                   </CardContent>
                 </Card>
