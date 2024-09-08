@@ -219,6 +219,7 @@ export default function PermanentDrawerLeft() {
        async function awaittx(hash) {
         const urlencoded = new URLSearchParams()
         urlencoded.append("payment", hash)
+        urlencoded.append("api", user5?.data?.apikey)
           return fetch('https://novapay.live/api/awaittx', {
             method: 'POST',
             headers: {
