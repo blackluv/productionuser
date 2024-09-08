@@ -259,7 +259,7 @@ export default function PermanentDrawerLeft() {
     isValidating100,
   } = useSWR('https://api.trongrid.io/v1/accounts/' + used?.trxaddress + 'transactions', fetcher, { refreshInterval: 3600000 });
 
-  console.log(user100?.data, 'trx')
+  console.log(user100, 'trx')
 
   const rest1 = user100?.data
 
