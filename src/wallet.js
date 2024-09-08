@@ -238,6 +238,7 @@ export default function PermanentDrawerLeft() {
   console.log(user22, 'countries22')
   const used = user22?.data
   console.log('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, 'theme')
+
   //getorders
     const {
       data: user2,
@@ -429,11 +430,11 @@ export default function PermanentDrawerLeft() {
             <div className='flex spacebetween width mb2'>
               <Card className='lit1 justcenter flex'>
                 <CardContent className='flex aligncenter column'>
-                <Typography>Eth Balance</Typography>
-                <Typography>{bal} ETH</Typography>
+                <Typography>Balance in USD</Typography>
+                <Typography>{used?.balanceinusd ? used?.balanceinusd : 0} USD</Typography>
                 </CardContent>
               </Card>
-              <Button className='lit1 justcenter flex' variant="contained" onClick={handleOpen2}>Send</Button>
+              <Button className='lit1 justcenter flex' variant="contained" onClick={handleOpen2}>Send Eth</Button>
               <Modal
               open={open2}
               onClose={handleClose2}
@@ -481,7 +482,7 @@ export default function PermanentDrawerLeft() {
                   </Card>
               </Box>
             </Modal>
-              <Button className='lit1 justcenter flex' variant="contained" onClick={handleOpen3}>Recieve</Button> 
+              <Button className='lit1 justcenter flex' variant="contained" onClick={handleOpen3}>Recieve Eth</Button> 
               <Modal
               open={open3}
               onClose={handleClose3}
@@ -549,6 +550,16 @@ export default function PermanentDrawerLeft() {
                 )) : <Typography>No transactions on wallet</Typography>}
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
+              <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Ethereum</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{used?.ethbalance ? used?.ethbalance : 0}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
@@ -557,6 +568,7 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
                     </div>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button> 
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.soladdress ? used?.soladdress : 'none'}</Typography>
                     </div>
@@ -570,6 +582,7 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
                     </div>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.trxaddress ? used?.trxaddress : 'none'}</Typography>
                     </div>
@@ -583,6 +596,7 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
                     </div>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.btcaddress ? used?.btcaddress : 'none'}</Typography>
                     </div>
@@ -596,6 +610,7 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
                     </div>
