@@ -73,6 +73,9 @@ export default function PermanentDrawerLeft() {
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
+  const [open44, setOpen44] = React.useState(false);
+  const [open55, setOpen55] = React.useState(false);
+  const [open66, setOpen66] = React.useState(false);
   const [hasaccount, setHasaccount] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -80,14 +83,24 @@ export default function PermanentDrawerLeft() {
   const handleClose2 = () => setOpen2(false);
   const handleOpen3 = () => setOpen3(true);
   const handleClose3 = () => setOpen3(false);
+  const handleOpen44 = () => setOpen44(true);
+  const handleClose44 = () => setOpen44(false);
+  const handleOpen55 = () => setOpen55(true);
+  const handleClose55 = () => setOpen55(false);
+  const handleOpen66 = () => setOpen66(true);
+  const handleClose66 = () => setOpen66(false);
   const [value, setValue] = React.useState(0);
   const [shopname, setShopname] = useState('');
   const [shopname2, setShopname2] = useState('');
-  const [shopname22, setShopname22] = useState('');
-  const [shopname33, setShopname33] = useState('');
   const [shopname1, setShopname1] = useState('');
+  const [shopname44, setShopname44] = useState('');
+  const [shopname55, setShopname55] = useState('');
+  const [shopname66, setShopname66] = useState('');
   const [email, setEmail] = useState('');
   const [email2, setEmail2] = useState('');
+  const [email44, setEmail44] = useState('');
+  const [email55, setEmail55] = useState('');
+  const [email66, setEmail66] = useState('');
   const [bal, setBal] = useState(0);
   const [resp, setResp] = useState(null);
   const [resp1, setResp1] = useState([]);
@@ -323,11 +336,81 @@ export default function PermanentDrawerLeft() {
         let user = sendeth(shopname2, email2)
         console.log(user, 'user')
         //props.history.push("/");
+      } 
+      //sol,trx,btc
+
+      const send66 = async (_shopname66, _email66) => {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("token", 'btc')
+        urlencoded.append("amount", _shopname66)
+        urlencoded.append("addressto", _email66)
+        //urlencoded.append("connectedaddress", connectedaddress)
+          return fetch('https://novapay.live/api/sendtx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
       }
 
-      const handleSubmit22 = async e => {
+      const send55 = async (_shopname55, _email55) => {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("token", 'trx')
+        urlencoded.append("amount", _shopname55)
+        urlencoded.append("addressto", _email55)
+        //urlencoded.append("connectedaddress", connectedaddress)
+          return fetch('https://novapay.live/api/sendtx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+      }
+
+      const send44 = async (_shopname44, _email44) => {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("token", 'sol')
+        urlencoded.append("amount", _shopname44)
+        urlencoded.append("addressto", _email44)
+        //urlencoded.append("connectedaddress", connectedaddress)
+          return fetch('https://novapay.live/api/sendtx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+      }
+
+
+      const handleSubmit44 = async e => {
         e.preventDefault();
-        let user = send(shopname22, user5?.data?.apikey, age, shopname33)
+        let user = send44(shopname44, email44)
+        console.log(user, 'user')
+        //props.history.push("/");
+      }
+
+      const handleSubmit55 = async e => {
+        e.preventDefault();
+        let user = send55(shopname55, email55)
+        console.log(user, 'user')
+        //props.history.push("/");
+      }
+
+      const handleSubmit66 = async e => {
+        e.preventDefault();
+        let user = send66(shopname66, email66)
         console.log(user, 'user')
         //props.history.push("/");
       }
@@ -629,7 +712,53 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.solbalance ? used?.solbalance / 1000000000 : 0}</Typography>
                     </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button> 
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen44}>Send</Button>
+                    <Modal
+              open={open44}
+              onClose={handleClose44}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              {/*<Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Complete registration
+                </Typography>
+              </Box>*/}
+              <Box className='flex aligncenter justcenter topping'
+              >
+                <Card className='halfwidth'>
+                  <CardContent>
+                  <Typography variant='h4'>Transfer Solana</Typography>
+                    <form onSubmit={handleSubmit44}>
+                        <TextField
+                            label="amount"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setShopname44(e.target.value)}
+                        />
+                        <TextField
+                            label="enter address to"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setEmail44(e.target.value)}
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className='width'
+                        >
+                            Submit
+                        </Button>
+                    </form>
+                  </CardContent>
+                  </Card>
+              </Box>
+            </Modal>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.soladdress ? used?.soladdress : 'none'}</Typography>
                     </div>
@@ -643,7 +772,53 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.trxbalance ? used?.trxbalance / 1000000 : 0}</Typography>
                     </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen55}>Send</Button>
+                    <Modal
+              open={open55}
+              onClose={handleClose55}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              {/*<Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Complete registration
+                </Typography>
+              </Box>*/}
+              <Box className='flex aligncenter justcenter topping'
+              >
+                <Card className='halfwidth'>
+                  <CardContent>
+                  <Typography variant='h4'>Transfer Tron</Typography>
+                    <form onSubmit={handleSubmit55}>
+                        <TextField
+                            label="amount"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setShopname55(e.target.value)}
+                        />
+                        <TextField
+                            label="enter address to"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setEmail55(e.target.value)}
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className='width'
+                        >
+                            Submit
+                        </Button>
+                    </form>
+                  </CardContent>
+                  </Card>
+              </Box>
+            </Modal>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.trxaddress ? used?.trxaddress : 'none'}</Typography>
                     </div>
@@ -657,7 +832,53 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.btcbalance ? used?.btcbalance / 100000000 : 0}</Typography>
                     </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen66}>Send</Button>
+                    <Modal
+              open={open66}
+              onClose={handleClose66}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              {/*<Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Complete registration
+                </Typography>
+              </Box>*/}
+              <Box className='flex aligncenter justcenter topping'
+              >
+                <Card className='halfwidth'>
+                  <CardContent>
+                  <Typography variant='h4'>Transfer Bitcoin</Typography>
+                    <form onSubmit={handleSubmit66}>
+                        <TextField
+                            label="amount"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setShopname66(e.target.value)}
+                        />
+                        <TextField
+                            label="enter address to"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='text'
+                            onChange={e => setEmail66(e.target.value)}
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className='width'
+                        >
+                            Submit
+                        </Button>
+                    </form>
+                  </CardContent>
+                  </Card>
+              </Box>
+            </Modal>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.btcaddress ? used?.btcaddress  : 'none'}</Typography>
                     </div>
@@ -671,7 +892,7 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen3}>Send</Button>
+                    <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
                     </div>
