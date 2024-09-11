@@ -414,6 +414,7 @@ export default function PermanentDrawerLeft() {
         console.log(user, 'user')
         success = user.data
         token  = "sol"
+        console.log(success, 'success')
         //props.history.push("/");
       }
 
