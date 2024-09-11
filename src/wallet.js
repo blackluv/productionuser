@@ -790,10 +790,8 @@ export default function PermanentDrawerLeft() {
                       <Box className='flex aligncenter justcenter topping'
                       >
                         <Card className='width'>
-                          <CardContent>
                           <Typography variant='h4 mb2'>Solana Privatekey</Typography>
                           <Typography>{used?.solpriv ? used?.solpriv : 'none'}</Typography>
-                          </CardContent>
                           </Card>
                       </Box>
                     </Modal>
