@@ -106,6 +106,7 @@ export default function PermanentDrawerLeft() {
   const [shopname55, setShopname55] = useState('');
   const [shopname66, setShopname66] = useState('');
   const [email, setEmail] = useState('');
+  const [success1, setSuccess1] = useState(false);
   const [email2, setEmail2] = useState('');
   const [email44, setEmail44] = useState('');
   const [email55, setEmail55] = useState('');
@@ -412,7 +413,7 @@ export default function PermanentDrawerLeft() {
         e.preventDefault();
         let user = await send44(shopname44, email44)
         console.log(user, 'user')
-        success = user.data
+        setSuccess1(user.data)
         token  = "sol"
         console.log(success, 'success')
         //props.history.push("/");
@@ -754,7 +755,7 @@ export default function PermanentDrawerLeft() {
               </Box>*/}
               <Box className='flex aligncenter justcenter topping'
               >
-                {success ? 
+                {success1 == true ? 
                 <Card className='width p20'>
                   <Typography>Transfer of {shopname44} {token} is successful</Typography>
                 </Card>
