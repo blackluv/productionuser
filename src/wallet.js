@@ -394,7 +394,6 @@ export default function PermanentDrawerLeft() {
         urlencoded.append("token", 'sol')
         urlencoded.append("amount", _shopname44)
         urlencoded.append("addressto", _email44)
-        //urlencoded.append("connectedaddress", connectedaddress)
           return fetch('https://novapay.live/api/sendtx', {
             method: 'POST',
             headers: {
@@ -974,7 +973,7 @@ export default function PermanentDrawerLeft() {
                     </div>
                   </CardContent>
                 </Card>
-                <Typography>{gone}</Typography>
+                {gone.data = true ? <Typography> true</Typography> : <Typography>false</Typography>}
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
