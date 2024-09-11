@@ -113,6 +113,7 @@ export default function PermanentDrawerLeft() {
   const [email55, setEmail55] = useState('');
   const [email66, setEmail66] = useState('');
   const [gone, setGone] = useState('');
+  const [solhi, setSolhi] = useState();
   const [bal, setBal] = useState(0);
   const [resp, setResp] = useState(null);
   const [resp1, setResp1] = useState([]);
