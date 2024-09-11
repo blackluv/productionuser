@@ -755,7 +755,7 @@ export default function PermanentDrawerLeft() {
                 {success1 == true ? 
                 <Card className='width p20'>
                   <Typography>Transfer of {shopname44} {token1} is successful</Typography>
-                  <svg data-testid="CheckCircleIcon"></svg>
+                  <CheckCircleIcon />
                 </Card>
                 :<Card className='halfwidth'>
                   <CardContent>
