@@ -787,7 +787,7 @@ export default function PermanentDrawerLeft() {
                         </Button>
                     </form>
                   </CardContent>
-                  </Card>
+                  </Card>}
               </Box>
             </Modal>
                     <Button className='justcenter flex' variant="contained" onClick={handleOpen100}>Export</Button>
