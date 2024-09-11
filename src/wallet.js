@@ -404,11 +404,16 @@ export default function PermanentDrawerLeft() {
           .then(data => data.json())
       }
 
+      let success
+      let token
+
 
       const handleSubmit44 = async e => {
         e.preventDefault();
         let user = await send44(shopname44, email44)
         console.log(user, 'user')
+        success = user.data
+        token  = "sol"
         //props.history.push("/");
       }
 
@@ -416,6 +421,8 @@ export default function PermanentDrawerLeft() {
         e.preventDefault();
         let user = send55(shopname55, email55)
         console.log(user, 'user')
+        success = user.data
+        token  = "trx"
         //props.history.push("/");
       }
 
@@ -423,6 +430,8 @@ export default function PermanentDrawerLeft() {
         e.preventDefault();
         let user = send66(shopname66, email66)
         console.log(user, 'user')
+        success = user.data
+        token  = "btc"
         //props.history.push("/");
       }
 
@@ -744,7 +753,11 @@ export default function PermanentDrawerLeft() {
               </Box>*/}
               <Box className='flex aligncenter justcenter topping'
               >
-                <Card className='halfwidth'>
+                {success ? 
+                <Card className='width p20'>
+                  <Typography>Transfer of {shopname44} {token} is successful</Typography>
+                </Card>
+                :<Card className='halfwidth'>
                   <CardContent>
                   <Typography variant='h4'>Transfer Solana</Typography>
                     <form onSubmit={handleSubmit44}>
