@@ -346,10 +346,11 @@ export default function PermanentDrawerLeft() {
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
       >
         <Toolbar />
+        <Suspense fallback={<p>Loading Novapay</p>}>
         {ready && authenticated ? 
         /* Check if hasaccount load wallet or if not load register*/
         <div>
-          <Suspense fallback={<p>Loading Novapay</p>}>
+          
             {hasaccount ? 
           <div class="">
             <div className='flex spacebetween width mb2'>
@@ -458,7 +459,6 @@ export default function PermanentDrawerLeft() {
             
           </div>
         }
-        </Suspense>
         </div> 
         : 
         <div class="vertical-center">
@@ -468,6 +468,7 @@ export default function PermanentDrawerLeft() {
            <Button variant="contained" onClick={login}>Signin to novapay</Button>
         </div> 
         }
+        </Suspense>
         </Box>
     </Box>
   );
