@@ -789,7 +789,7 @@ export default function PermanentDrawerLeft() {
                       </Box>*/}
                       <Box className='flex aligncenter justcenter topping'
                       >
-                        <Card className='halfwidth'>
+                        <Card className='width'>
                           <CardContent>
                           <Typography variant='h4 mb2'>Solana Privatekey</Typography>
                           <Typography>{used?.solpriv ? used?.solpriv : 'none'}</Typography>
@@ -866,7 +866,7 @@ export default function PermanentDrawerLeft() {
                     >
                       <Box className='flex aligncenter justcenter topping'
                       >
-                        <Card className='halfwidth'>
+                        <Card className='width'>
                           <CardContent>
                           <Typography variant='h4 mb2'>Tron Privatekey</Typography>
                           <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
@@ -948,7 +948,7 @@ export default function PermanentDrawerLeft() {
                       </Box>*/}
                       <Box className='flex aligncenter justcenter topping'
                       >
-                        <Card className='halfwidth'>
+                        <Card className='width'>
                           <CardContent>
                           <Typography variant='h4 mb2'>Bitcoin Privatekey</Typography>
                           <Typography>{used?.btcpriv ? used?.btcpriv : 'none'}</Typography>
