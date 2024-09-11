@@ -150,13 +150,15 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch(
+let solhi = fetch(
   'https://api.shyft.to/sol/v1/transaction/history?network=mainnet-beta&tx_num=2&account='+ used?.soladdress +'&enable_raw=true',
   requestOptions
 )
   .then(response => response.text())
-  .then(result => console.log(result, 'solhistory'))
+  .then(result => console.log(result.result, 'solhistory'))
   .catch(error => console.log('error', error));
+
+  setSolhi(solhi.result)
 }
 
 const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
@@ -711,7 +713,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Amount</Typography>
-                      <Typography>{resp?.raw_data.contract[0].parameter.value.amount}</Typography>
+                      <Typography>{resp?.raw_data.contract[0].parameter.value.amount / 1000000}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>To Address</Typography>
