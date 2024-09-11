@@ -974,6 +974,7 @@ export default function PermanentDrawerLeft() {
                     </div>
                   </CardContent>
                 </Card>
+                <Typography>{gone}</Typography>
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
