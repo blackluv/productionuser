@@ -76,6 +76,9 @@ export default function PermanentDrawerLeft() {
   const [open44, setOpen44] = React.useState(false);
   const [open55, setOpen55] = React.useState(false);
   const [open66, setOpen66] = React.useState(false);
+  const [open100, setOpen100] = React.useState(false);
+  const [open200, setOpen200] = React.useState(false);
+  const [open300, setOpen300] = React.useState(false);
   const [hasaccount, setHasaccount] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -89,6 +92,12 @@ export default function PermanentDrawerLeft() {
   const handleClose55 = () => setOpen55(false);
   const handleOpen66 = () => setOpen66(true);
   const handleClose66 = () => setOpen66(false);
+  const handleOpen100 = () => setOpen100(true);
+  const handleClose100 = () => setOpen100(false);
+  const handleOpen200 = () => setOpen200(true);
+  const handleClose200 = () => setOpen200(false);
+  const handleOpen300 = () => setOpen300(true);
+  const handleClose300 = () => setOpen300(false);
   const [value, setValue] = React.useState(0);
   const [shopname, setShopname] = useState('');
   const [shopname2, setShopname2] = useState('');
@@ -705,7 +714,7 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Ethereum</Typography>
                     </div>
-                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Send</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export Privatekey</Button>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.ethbalance ? used?.ethbalance / 1000000000000000000 : 0}</Typography>
                     </div>
@@ -766,6 +775,28 @@ export default function PermanentDrawerLeft() {
                   </Card>
               </Box>
             </Modal>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen100}>Export Privatekey</Button>
+                    <Modal
+                      open={open100}
+                      onClose={handleClose100}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      {/*<Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                          Complete registration
+                        </Typography>
+                      </Box>*/}
+                      <Box className='flex aligncenter justcenter topping'
+                      >
+                        <Card className='halfwidth'>
+                          <CardContent>
+                          <Typography variant='h4 mb2'>Solana Privatekey</Typography>
+                          <Typography>{used?.solpriv ? used?.solpriv : 'none'}</Typography>
+                          </CardContent>
+                          </Card>
+                      </Box>
+                    </Modal>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.soladdress ? used?.soladdress : 'none'}</Typography>
                     </div>
@@ -825,7 +856,24 @@ export default function PermanentDrawerLeft() {
                   </CardContent>
                   </Card>
               </Box>
-            </Modal>
+            </Modal> 
+            <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export Privatekey</Button>
+                    <Modal
+                      open={open200}
+                      onClose={handleClose200}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box className='flex aligncenter justcenter topping'
+                      >
+                        <Card className='halfwidth'>
+                          <CardContent>
+                          <Typography variant='h4 mb2'>Tron Privatekey</Typography>
+                          <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
+                          </CardContent>
+                          </Card>
+                      </Box>
+                    </Modal>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.trxaddress ? used?.trxaddress : 'none'}</Typography>
                     </div>
@@ -886,6 +934,28 @@ export default function PermanentDrawerLeft() {
                   </Card>
               </Box>
             </Modal>
+            <Button className='justcenter flex' variant="contained" onClick={handleOpen300}>Export Privatekey</Button>
+                    <Modal
+                      open={open300}
+                      onClose={handleClose300}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      {/*<Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                          Complete registration
+                        </Typography>
+                      </Box>*/}
+                      <Box className='flex aligncenter justcenter topping'
+                      >
+                        <Card className='halfwidth'>
+                          <CardContent>
+                          <Typography variant='h4 mb2'>Bitcoin Privatekey</Typography>
+                          <Typography>{used?.btcpriv ? used?.btcpriv : 'none'}</Typography>
+                          </CardContent>
+                          </Card>
+                      </Box>
+                    </Modal>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.btcaddress ? used?.btcaddress  : 'none'}</Typography>
                     </div>
@@ -894,14 +964,30 @@ export default function PermanentDrawerLeft() {
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>USDT</Typography>
+                      <Typography>USDT-ERC20</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export Privatekey</Button>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
+                    <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>USDT-TRC20</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>{0}</Typography>
+                    </div>
+                    <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
+                    <Button className='justcenter flex' variant="contained" disabled="true">Export Privatekey</Button>
+                    <div className='justcenter flex aligncenter column'>
+                    <Typography>{used?.trxaddress ? used?.trxaddress : 'none'}</Typography>
                     </div>
                   </CardContent>
                 </Card>
