@@ -418,7 +418,7 @@ export default function PermanentDrawerLeft() {
 
       const handleSubmit55 = async e => {
         e.preventDefault();
-        let user = send55(shopname55, email55)
+        let user = await send55(shopname55, email55)
         console.log(user, 'user')
         setSuccess1(user.data)
         setToken1("trx")
@@ -427,7 +427,7 @@ export default function PermanentDrawerLeft() {
 
       const handleSubmit66 = async e => {
         e.preventDefault();
-        let user = send66(shopname66, email66)
+        let user = await send66(shopname66, email66)
         console.log(user, 'user')
         setSuccess1(user.data)
         setToken1("btc")
