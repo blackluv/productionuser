@@ -964,7 +964,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
-                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export Privatekey</Button>
+                    <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
                     <div className='justcenter flex aligncenter column'>
                     <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
                     </div>
@@ -979,7 +979,21 @@ export default function PermanentDrawerLeft() {
                       <Typography>{0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
-                    <Button className='justcenter flex' variant="contained" disabled="true">Export Privatekey</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export Privatekey</Button>
+                    <Modal
+                      open={open200}
+                      onClose={handleClose200}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box className='flex aligncenter justcenter topping'
+                      >
+                        <Card className='width p20'>
+                          <Typography variant='h4 mb2'>USDT-TRC20 Privatekey</Typography>
+                          <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
+                          </Card>
+                      </Box>
+                    </Modal>
                     <div className='justcenter flex aligncenter column'>
                     <Typography>{used?.trxaddress ? used?.trxaddress : 'none'}</Typography>
                     </div>
