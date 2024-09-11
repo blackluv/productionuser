@@ -964,7 +964,6 @@ export default function PermanentDrawerLeft() {
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
-                    <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
                     <div className='justcenter flex aligncenter column'>
                     <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
                     </div>
