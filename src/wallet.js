@@ -775,7 +775,7 @@ export default function PermanentDrawerLeft() {
                   </Card>
               </Box>
             </Modal>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen100}>Export Privatekey</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen100}>Export</Button>
                     <Modal
                       open={open100}
                       onClose={handleClose100}
@@ -855,7 +855,7 @@ export default function PermanentDrawerLeft() {
                   </Card>
               </Box>
             </Modal> 
-            <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export Privatekey</Button>
+            <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export</Button>
                     <Modal
                       open={open200}
                       onClose={handleClose200}
@@ -930,7 +930,7 @@ export default function PermanentDrawerLeft() {
                   </Card>
               </Box>
             </Modal>
-            <Button className='justcenter flex' variant="contained" onClick={handleOpen300}>Export Privatekey</Button>
+            <Button className='justcenter flex' variant="contained" onClick={handleOpen300}>Export</Button>
                     <Modal
                       open={open300}
                       onClose={handleClose300}
@@ -964,7 +964,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
-                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export Privatekey</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export</Button>
                     <div className='justcenter flex aligncenter column'>
                     <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
                     </div>
@@ -979,7 +979,7 @@ export default function PermanentDrawerLeft() {
                       <Typography>{0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export Privatekey</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export</Button>
                     <Modal
                       open={open200}
                       onClose={handleClose200}
