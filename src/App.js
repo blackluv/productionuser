@@ -1,5 +1,5 @@
 //import * as React from 'react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , lazy, Suspense} from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -349,6 +349,7 @@ export default function PermanentDrawerLeft() {
         {ready && authenticated ? 
         /* Check if hasaccount load wallet or if not load register*/
         <div>
+          <Suspense fallback={<p>Loading Novapay</p>}>
             {hasaccount ? 
           <div class="">
             <div className='flex spacebetween width mb2'>
@@ -409,7 +410,8 @@ export default function PermanentDrawerLeft() {
                 )) : <Typography>No invoice</Typography>}
               </CustomTabPanel>
             </Box>
-          </div> :
+          </div>
+           :
           <div class="vertical-center">
             <Typography>Create your shop to continue</Typography>
             <Button variant="contained" onClick={handleOpen}>Create Shop</Button>
@@ -456,6 +458,7 @@ export default function PermanentDrawerLeft() {
             
           </div>
         }
+        </Suspense>
         </div> 
         : 
         <div class="vertical-center">
