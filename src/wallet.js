@@ -110,6 +110,7 @@ export default function PermanentDrawerLeft() {
   const [email44, setEmail44] = useState('');
   const [email55, setEmail55] = useState('');
   const [email66, setEmail66] = useState('');
+  const [gone, setGone] = useState('');
   const [bal, setBal] = useState(0);
   const [resp, setResp] = useState(null);
   const [resp1, setResp1] = useState([]);
@@ -401,8 +402,8 @@ export default function PermanentDrawerLeft() {
             },
             body: urlencoded
           })
-            .then(data => console.log(data.json(), 'con')
-          )
+          .then(response => response.json())
+          .then(data => setGone(data))
       }
 
 
