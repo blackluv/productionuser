@@ -34,7 +34,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const drawerWidth = 240;
 
@@ -107,6 +107,7 @@ export default function PermanentDrawerLeft() {
   const [shopname66, setShopname66] = useState('');
   const [email, setEmail] = useState('');
   const [success1, setSuccess1] = useState(false);
+  const [token1, setToken1] = useState('');
   const [email2, setEmail2] = useState('');
   const [email44, setEmail44] = useState('');
   const [email55, setEmail55] = useState('');
@@ -405,17 +406,13 @@ export default function PermanentDrawerLeft() {
           .then(data => data.json())
       }
 
-      let success
-      let token
-
 
       const handleSubmit44 = async e => {
         e.preventDefault();
         let user = await send44(shopname44, email44)
         console.log(user, 'user')
         setSuccess1(user.data)
-        token  = "sol"
-        console.log(success1, 'success')
+        setToken1("sol")
         //props.history.push("/");
       }
 
@@ -423,8 +420,8 @@ export default function PermanentDrawerLeft() {
         e.preventDefault();
         let user = send55(shopname55, email55)
         console.log(user, 'user')
-        success = user.data
-        token  = "trx"
+        setSuccess1(user.data)
+        setToken1("trx")
         //props.history.push("/");
       }
 
@@ -432,8 +429,8 @@ export default function PermanentDrawerLeft() {
         e.preventDefault();
         let user = send66(shopname66, email66)
         console.log(user, 'user')
-        success = user.data
-        token  = "btc"
+        setSuccess1(user.data)
+        setToken1("btc")
         //props.history.push("/");
       }
 
