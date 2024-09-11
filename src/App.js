@@ -258,6 +258,10 @@ export default function PermanentDrawerLeft() {
     setValue(newValue);
   };
 
+  if (!ready) {
+    return null;
+  }
+
 
   /*const checkaccount = async () => {} */
   useEffect(() => {
