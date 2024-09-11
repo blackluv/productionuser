@@ -365,7 +365,7 @@ export default function PermanentDrawerLeft() {
             },
             body: urlencoded
           })
-            .then(data => console.log(data.json(), 'con')
+            .then(data => data.json()
           )
 
       }
@@ -384,7 +384,7 @@ export default function PermanentDrawerLeft() {
             },
             body: urlencoded
           })
-            .then(data => console.log(data.json(), 'con')
+            .then(data => data.json()
           )
       }
 
@@ -401,14 +401,13 @@ export default function PermanentDrawerLeft() {
             },
             body: urlencoded
           })
-          .then(response => response.json())
-          .then(data => setGone(data))
+          .then(data => data.json())
       }
 
 
       const handleSubmit44 = async e => {
         e.preventDefault();
-        let user = send44(shopname44, email44)
+        let user = await send44(shopname44, email44)
         console.log(user, 'user')
         //props.history.push("/");
       }
