@@ -353,9 +353,6 @@ export default function PermanentDrawerLeft() {
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
       >
         <Toolbar />
-        {ready == null ?
-        <Typography>Loading Novapay</Typography> :
-        <div>
         {ready && authenticated ? 
         /* Check if hasaccount load wallet or if not load register*/
         <div>
@@ -477,8 +474,6 @@ export default function PermanentDrawerLeft() {
            <Button variant="contained" onClick={login}>Signin to novapay</Button>
         </div> 
         }
-        </div>
-      }
         </Box>
     </Box>
   );
