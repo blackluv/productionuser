@@ -111,7 +111,7 @@ export default function PermanentDrawerLeft() {
     setAge(event.target.value);
   };
 
-  const { ready, authenticated, user, login, logout } = usePrivy();
+  const { ready, authenticated, user, login, logout , exportWallet } = usePrivy();
 
   //const {wallets} = useWallets();
   const {wallets, ready: walletsReady} = useWallets();
@@ -705,6 +705,7 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Ethereum</Typography>
                     </div>
+                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Send</Button>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.ethbalance ? used?.ethbalance / 1000000000000000000 : 0}</Typography>
                     </div>
