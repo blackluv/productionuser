@@ -183,6 +183,21 @@ export default function PermanentDrawerLeft() {
 
     const requestmap = user10?.data
   //registeruser
+
+  async function Getuser(){
+    let btcbal = await fetch('https://novapay.live/api/get/address?address=' + user?.wallet?.address).then((response) => response.json())
+    const hasaccount2 = async () => {
+      if(btcbal?.data == undefined){
+        setHasaccount(false)
+      }else {
+        setHasaccount(true)
+        setShopname1(btcbal?.data?.shop)
+      }
+  
+      console.log(btcbal?.data?.shop, 'hasaccount2')
+    }
+    hasaccount2()
+  }
   async function registeruser(shop, email) {
     const urlencoded = new URLSearchParams()
     console.log(user?.wallet?.address, 'user')
@@ -244,10 +259,10 @@ export default function PermanentDrawerLeft() {
   };
 
 
-  /*const checkaccount = async () => {} 
+  /*const checkaccount = async () => {} */
   useEffect(() => {
-    connectWallet();
-}, [currentAccount]);*/
+    Getuser()
+}, [hasaccount]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -393,38 +408,6 @@ export default function PermanentDrawerLeft() {
                 </Card>
                 )) : <Typography>No invoice</Typography>}
               </CustomTabPanel>
-              {/*<CustomTabPanel value={value} index={1}>
-              {requestmap ? requestmap?.map((request) => (
-                <Card className='width'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Id</Typography>
-                      <Typography>{request.transactionhash}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Shop</Typography>
-                      <Typography>{request.shop}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Wallet</Typography>
-                      <Typography>{request.wallet}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Amount</Typography>
-                      <Typography>{request.amount}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Token</Typography>
-                      <Typography>{request.token}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Status</Typography>
-                      <Typography>{request.status}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                )) : <Typography>No request</Typography>}
-              </CustomTabPanel>*/}
             </Box>
           </div> :
           <div class="vertical-center">
@@ -436,11 +419,6 @@ export default function PermanentDrawerLeft() {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              {/*<Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Complete registration
-                </Typography>
-              </Box>*/}
               <Box className='flex aligncenter justcenter topping'
               >
                 <Card className='halfwidth'>
