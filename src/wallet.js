@@ -714,7 +714,7 @@ export default function PermanentDrawerLeft() {
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Ethereum</Typography>
                     </div>
-                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export Privatekey</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export</Button>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.ethbalance ? used?.ethbalance / 1000000000000000000 : 0}</Typography>
                     </div>
