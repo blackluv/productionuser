@@ -837,6 +837,12 @@ export default function PermanentDrawerLeft() {
               </Box>*/}
               <Box className='flex aligncenter justcenter topping'
               >
+              {success1 == true ? 
+                <Card className='width p20'>
+                  <Typography>Transfer of {shopname44} {token1} is successful</Typography>
+                  <CheckCircleIcon />
+                </Card>
+                :
                 <Card className='halfwidth'>
                   <CardContent>
                   <Typography variant='h4'>Transfer Tron</Typography>
@@ -867,7 +873,7 @@ export default function PermanentDrawerLeft() {
                         </Button>
                     </form>
                   </CardContent>
-                  </Card>
+                  </Card>}
               </Box>
             </Modal> 
             <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export</Button>
@@ -912,6 +918,11 @@ export default function PermanentDrawerLeft() {
               </Box>*/}
               <Box className='flex aligncenter justcenter topping'
               >
+              {success1 == true ? 
+                <Card className='width p20'>
+                  <Typography>Transfer of {shopname44} {token1} is successful</Typography>
+                  <CheckCircleIcon />
+                </Card> :
                 <Card className='halfwidth'>
                   <CardContent>
                   <Typography variant='h4'>Transfer Bitcoin</Typography>
@@ -942,7 +953,7 @@ export default function PermanentDrawerLeft() {
                         </Button>
                     </form>
                   </CardContent>
-                  </Card>
+                  </Card>}
               </Box>
             </Modal>
             <Button className='justcenter flex' variant="contained" onClick={handleOpen300}>Export</Button>
