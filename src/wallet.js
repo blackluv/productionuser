@@ -135,7 +135,7 @@ export default function PermanentDrawerLeft() {
     //const balance1 = await provider.getBalance(wallet)
     const res = Math.round(ethers.utils.formatEther(balance) * 1e2) / 1e2;
     setBal(res)
-    console.log('bal', ethers.utils.formatEther(res))
+    //console.log('bal', ethers.utils.formatEther(res))
   }
 
   const { data5, error5 } = useSWR('getbalance', getbalance, { refreshInterval: 36000 })
@@ -221,7 +221,7 @@ export default function PermanentDrawerLeft() {
     error,
     isValidating,
   } = useSWR('https://novapay.live/api/get/address?address=' + user?.wallet?.address, fetcher, { refreshInterval: 100 });
-  console.log(user5?.data, 'countries')
+  //console.log(user5?.data, 'countries')
   const hasaccount1 = async () => {
     if(user5?.data == undefined){
       setHasaccount(false)
@@ -238,9 +238,9 @@ export default function PermanentDrawerLeft() {
     error7,
     isValidating7,
   } = useSWR('https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=' + user?.wallet?.address + '&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=5MB1DN839Y3E8YUQGE5WAB7R522FKYUD7Y', fetcher, { refreshInterval: 3600000 });
-  console.log(user5?.data, 'countries')
+  //console.log(user5?.data, 'countries')
 
-  console.log(user7?.result, 'usertx')
+  //console.log(user7?.result, 'usertx')
 
   const rest = user7?.result
 
@@ -253,15 +253,15 @@ export default function PermanentDrawerLeft() {
     error1,
     isValidating1,
   } = useSWR('https://novapay.live/api/get/balance?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-  console.log(user1?.data, 'countries1')
+  //console.log(user1?.data, 'countries1')
   const {
     data: user22,
     error22,
     isValidating22,
   } = useSWR('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-  console.log(user22, 'countries22')
+  //console.log(user22, 'countries22')
   const used = user22?.data
-  console.log('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, 'theme')
+  //console.log('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, 'theme')
 
   const {
     data: user100,
@@ -269,7 +269,7 @@ export default function PermanentDrawerLeft() {
     isValidating100,
   } = useSWR('https://api.trongrid.io/v1/accounts/' + used?.trxaddress + 'transactions', fetcher, { refreshInterval: 3600000 });
 
-  console.log(user100, 'trx')
+  //console.log(user100, 'trx')
 
   const rest1 = user100?.data
 
@@ -279,7 +279,7 @@ export default function PermanentDrawerLeft() {
     isValidating200,
   } = useSWR('https://api.blockcypher.com/v1/btc/test3/addrs/' + used?.btcaddress, fetcher, { refreshInterval: 3600000 });
 
-  console.log(user200, 'btc')
+  //console.log(user200, 'btc')
 
   const rest2 = user200?.txrefs
 
@@ -289,7 +289,7 @@ export default function PermanentDrawerLeft() {
       error2,
       isValidating2,
     } = useSWR('https://novapay.live/api/get/orders?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-    console.log(user2?.data, 'countries2')
+    //console.log(user2?.data, 'countries2')
     //requestwithdrawal
   async function requestwithdrawal(shop, amount) {
     const urlencoded = new URLSearchParams()
@@ -312,7 +312,7 @@ export default function PermanentDrawerLeft() {
       error4,
       isValidating4,
     } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-    console.log(user4?.data, 'countries4')
+    //console.log(user4?.data, 'countries4')
 
     const invoicemap = user4?.data
     //getallwithdrawals
