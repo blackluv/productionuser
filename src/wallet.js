@@ -159,7 +159,7 @@ let solhi = fetch(
   .then(result => console.log(result.result, 'solhistory'))
   .catch(error => console.log('error', error));
 
-  setSolhi(solhi.result)
+  setSolhi(solhi.result ? solhi.result : [])
 }
 
 const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
@@ -737,6 +737,28 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Amount</Typography>
                       <Typography>{resp?.value / 100000000}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                )) : <Typography></Typography>}
+                {solhi ? solhi?.map((resp) => (
+                <Card className='width mb2'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Sender</Typography>
+                      <Typography> {resp?.info.sender.slice(0, 6)}...{resp?.info.sender.slice(-4)}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Amount</Typography>
+                      <Typography>{resp?.info.amount}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Type</Typography>
+                      <Typography>Solana</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Reciever</Typography>
+                      <Typography>{resp?.info.reciever.slice(0, 6)}...{resp?.info.reciever.slice(-4)}</Typography>
                     </div>
                   </CardContent>
                 </Card>
