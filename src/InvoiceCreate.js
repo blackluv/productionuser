@@ -95,7 +95,7 @@ export default function PermanentDrawerLeft() {
     data: user5,
     error,
     isValidating,
-  } = useSWR('https://novapay.live/api/get/address?address=' + user?.wallet?.address, fetcher, { refreshInterval: 1000 });
+  } = useSWR('https://novapay.live/api/get/address?address=' + user?.wallet?.address, fetcher, { refreshInterval: 100 });
   console.log(user5?.data, 'countries')
   const hasaccount1 = async () => {
     if(user5?.data == undefined){
@@ -179,9 +179,15 @@ export default function PermanentDrawerLeft() {
 		} catch (error) {
 			console.log(error)
 		}
-	};
+	};*/
+    if (!ready) {
+    return null;
+  }
+  if (!hasaccount) {
+    return null;
+  }
 
-  const checkaccount = async () => {} 
+  /*const checkaccount = async () => {} 
 
   useEffect(() => {
     connectWallet();
