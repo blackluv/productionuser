@@ -348,6 +348,8 @@ export default function PermanentDrawerLeft() {
       } 
       //sol,trx,btc
 
+      let con 
+
       const send66 = async (_shopname66, _email66) => {
         const urlencoded = new URLSearchParams()
         urlencoded.append("api", user5?.data?.apikey)
@@ -362,8 +364,9 @@ export default function PermanentDrawerLeft() {
             },
             body: urlencoded
           })
-            .then(data => data.json()
+            .then(data => console.log(data.json(), 'con')
           )
+
       }
 
       const send55 = async (_shopname55, _email55) => {
@@ -380,7 +383,7 @@ export default function PermanentDrawerLeft() {
             },
             body: urlencoded
           })
-            .then(data => data.json()
+            .then(data => console.log(data.json(), 'con')
           )
       }
 
@@ -398,7 +401,7 @@ export default function PermanentDrawerLeft() {
             },
             body: urlencoded
           })
-            .then(data => data.json()
+            .then(data => console.log(data.json(), 'con')
           )
       }
 
