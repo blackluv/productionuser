@@ -140,6 +140,27 @@ export default function PermanentDrawerLeft() {
     //console.log('bal', ethers.utils.formatEther(res))
   }
 
+  const getsol = async () => {
+  var myHeaders = new Headers();
+myHeaders.append("x-api-key", "vXLwVmfF1Ipdu4aR");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch(
+  'https://api.shyft.to/sol/v1/transaction/history?network=mainnet-beta&tx_num=2&account='+ used?.soladdress +'&enable_raw=true',
+  requestOptions
+)
+  .then(response => response.text())
+  .then(result => console.log(result, 'solhistory'))
+  .catch(error => console.log('error', error));
+}
+
+const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
+
   const { data5, error5 } = useSWR('getbalance', getbalance, { refreshInterval: 36000 })
   const sendeth = async (_amout, _address) => {
     const wallet = wallets[0];
