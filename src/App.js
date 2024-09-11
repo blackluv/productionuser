@@ -263,10 +263,10 @@ export default function PermanentDrawerLeft() {
   }
 
 
-  /*const checkaccount = async () => {} */
+  /*const checkaccount = async () => {} 
   useEffect(() => {
     Getuser()
-}, [hasaccount]);
+}, [hasaccount]);*/
 
   return (
     <Box sx={{ display: 'flex' }}>
