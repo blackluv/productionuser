@@ -261,6 +261,9 @@ export default function PermanentDrawerLeft() {
   if (!ready) {
     return null;
   }
+  if (!hasaccount) {
+    return null;
+  }
 
 
   /*const checkaccount = async () => {} 
