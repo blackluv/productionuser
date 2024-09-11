@@ -52,6 +52,10 @@
   display: flex;
 }
 
+.p20{
+  padding: 20px !important;
+}
+
 .width{
   width: 100%;
 }
