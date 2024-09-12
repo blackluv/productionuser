@@ -215,7 +215,8 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
     const USDT2 = new ethers.Contract(usdtaddress, usdtabi,signer);
     const tx = await USDT2.transfer(
         _address,
-        ethers.utils.parseUnits(_amout, 6),
+        _amout
+        //ethers.utils.parseUnits(_amout, 6),
   );
       tx.wait(3)
   }
