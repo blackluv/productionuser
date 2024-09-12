@@ -213,10 +213,10 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
     ];
     const signer = provider.getSigner();
     const USDT2 = new ethers.Contract(usdtaddress, usdtabi,signer);
-    const tx = await USDT2.transfer({
-        to: _address,
-        value: ethers.utils.parseUnits(_amout, 6),
-  });
+    const tx = await USDT2.transfer(
+        _address,
+        ethers.utils.parseUnits(_amout, 6),
+  );
       tx.wait(3)
   }
   const send = async (_shopname22, _api, _age, _shopname33) => {
