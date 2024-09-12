@@ -81,7 +81,7 @@ export default function PermanentDrawerLeft() {
 
   const getbalance = async () => {
     const wallet = wallets[0];
-    await wallet.switchChain(11155111);
+    await wallet.switchChain(1);
     const provider = await wallet.getEthersProvider();
     const signer = provider.getSigner();
     const balance = await signer.getBalance();
