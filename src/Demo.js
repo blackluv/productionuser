@@ -112,6 +112,7 @@ export default function SimplePaper() {
                               onChange={handleChange}
                             >
                               <MenuItem value={"usdt"}>USDT</MenuItem>
+                              <MenuItem value={"usdttrx"}>USDT-TRC20</MenuItem>
                               <MenuItem value={"btc"}>BITCOIN</MenuItem>
                               <MenuItem value={"eth"}>ETHEREUM</MenuItem>
                               <MenuItem value={"trx"}>TRON</MenuItem>
