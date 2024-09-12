@@ -76,6 +76,8 @@ export default function PermanentDrawerLeft() {
   const [open44, setOpen44] = React.useState(false);
   const [open55, setOpen55] = React.useState(false);
   const [open66, setOpen66] = React.useState(false);
+  const [open77, setOpen77] = React.useState(false);
+  const [open88, setOpen88] = React.useState(false);
   const [open100, setOpen100] = React.useState(false);
   const [open200, setOpen200] = React.useState(false);
   const [open300, setOpen300] = React.useState(false);
@@ -92,6 +94,10 @@ export default function PermanentDrawerLeft() {
   const handleClose55 = () => setOpen55(false);
   const handleOpen66 = () => setOpen66(true);
   const handleClose66 = () => setOpen66(false);
+  const handleOpen77 = () => setOpen77(true);
+  const handleClose77 = () => setOpen77(false);
+  const handleOpen88 = () => setOpen88(true);
+  const handleClose88 = () => setOpen88(false);
   const handleOpen100 = () => setOpen100(true);
   const handleClose100 = () => setOpen100(false);
   const handleOpen200 = () => setOpen200(true);
@@ -105,6 +111,8 @@ export default function PermanentDrawerLeft() {
   const [shopname44, setShopname44] = useState('');
   const [shopname55, setShopname55] = useState('');
   const [shopname66, setShopname66] = useState('');
+  const [shopname77, setShopname77] = useState('');
+  const [shopname88, setShopname88] = useState('');
   const [email, setEmail] = useState('');
   const [success1, setSuccess1] = useState(false);
   const [token1, setToken1] = useState('');
@@ -112,6 +120,8 @@ export default function PermanentDrawerLeft() {
   const [email44, setEmail44] = useState('');
   const [email55, setEmail55] = useState('');
   const [email66, setEmail66] = useState('');
+  const [email77, setEmail77] = useState('');
+  const [email88, setEmail88] = useState('');
   const [gone, setGone] = useState('');
   const [solhi, setSolhi] = useState();
   const [bal, setBal] = useState(0);
@@ -174,6 +184,39 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
         to: _address,
         value: ethers.utils.parseUnits(_amout, 'ether'),
       });
+      tx.wait(3)
+  }
+
+  const sendusdt = async (_amout, _address) => {
+    const wallet = wallets[0];
+    await wallet.switchChain(11155111);
+    const provider = await wallet.getEthersProvider();
+    const usdtaddress = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    const usdtabi = [
+      {
+        name: "transfer",
+        type: "function",
+        inputs: [
+          {
+            name: "_to",
+            type: "address",
+          },
+          {
+            type: "uint256",
+            name: "_tokens",
+          },
+        ],
+        constant: false,
+        outputs: [],
+        payable: false,
+      },
+    ];
+    const signer = provider.getSigner();
+    const USDT2 = new ethers.Contract(usdtaddress, usdtabi,signer);
+    const tx = await USDT2.transfer({
+        to: _address,
+        value: ethers.utils.parseUnits(_amout, 6),
+  });
       tx.wait(3)
   }
   const send = async (_shopname22, _api, _age, _shopname33) => {
@@ -374,6 +417,31 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
         //props.history.push("/");
       } 
       //sol,trx,btc
+      const handleSubmit77 = async e => {
+        e.preventDefault();
+        let user = sendusdt(shopname77, email77)
+        console.log(user, 'user')
+        //props.history.push("/");
+      } 
+
+      const send88 = async (_shopname88, _email88) => {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("token", 'usdt-trc20')
+        urlencoded.append("amount", _shopname88)
+        urlencoded.append("addressto", _email88)
+        //urlencoded.append("connectedaddress", connectedaddress)
+          return fetch('https://novapay.live/api/sendtx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+
+      }
 
       let con 
 
@@ -455,6 +523,15 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
         console.log(user, 'user')
         setSuccess1(user.data)
         setToken1("btc")
+        //props.history.push("/");
+      }
+
+      const handleSubmit88 = async e => {
+        e.preventDefault();
+        let user = await send88(shopname88, email88)
+        console.log(user, 'user')
+        setSuccess1(user.data)
+        setToken1("usdt-trc20")
         //props.history.push("/");
       }
 
@@ -885,7 +962,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
               >
               {success1 == true ? 
                 <Card className='width p20'>
-                  <Typography>Transfer of {shopname44} {token1} is successful</Typography>
+                  <Typography>Transfer of {shopname55} {token1} is successful</Typography>
                   <CheckCircleIcon />
                 </Card>
                 :
@@ -966,7 +1043,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
               >
               {success1 == true ? 
                 <Card className='width p20'>
-                  <Typography>Transfer of {shopname44} {token1} is successful</Typography>
+                  <Typography>Transfer of {shopname66} {token1} is successful</Typography>
                   <CheckCircleIcon />
                 </Card> :
                 <Card className='halfwidth'>
@@ -1035,7 +1112,53 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                     </div>
-                    <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen77}>Send</Button>
+                      <Modal
+                      open={open77}
+                      onClose={handleClose77}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      {/*<Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                          Complete registration
+                        </Typography>
+                      </Box>*/}
+                      <Box className='flex aligncenter justcenter topping'
+                      >
+                        <Card className='halfwidth'>
+                          <CardContent>
+                          <Typography variant='h4'>Transfer USDT-ERC20</Typography>
+                            <form onSubmit={handleSubmit77}>
+                                <TextField
+                                    label="amount"
+                                    variant="outlined"
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    onChange={e => setShopname77(e.target.value)}
+                                />
+                                <TextField
+                                    label="enter address to"
+                                    variant="outlined"
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    onChange={e => setEmail77(e.target.value)}
+                                />
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    className='width'
+                                >
+                                    Submit
+                                </Button>
+                            </form>
+                          </CardContent>
+                          </Card>
+                      </Box>
+                    </Modal>
                     <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export</Button>
                     <div className='justcenter flex aligncenter column'>
                     <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
@@ -1050,7 +1173,58 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
                     <div className='justcenter flex aligncenter column'>
                       <Typography>{0}</Typography>
                     </div>
-                    <Button className='justcenter flex' variant="contained" disabled="true">Send</Button>
+                    <Button className='justcenter flex' variant="contained" onClick={handleOpen88}>Send</Button>
+                    <Modal
+                      open={open88}
+                      onClose={handleClose88}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      {/*<Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                          Complete registration
+                        </Typography>
+                      </Box>*/}
+                      <Box className='flex aligncenter justcenter topping'
+                      >
+                      {success1 == true ? 
+                        <Card className='width p20'>
+                          <Typography>Transfer of {shopname88} {token1} is successful</Typography>
+                          <CheckCircleIcon />
+                        </Card> :
+                        <Card className='halfwidth'>
+                          <CardContent>
+                          <Typography variant='h4'>Transfer Bitcoin</Typography>
+                            <form onSubmit={handleSubmit88}>
+                                <TextField
+                                    label="amount"
+                                    variant="outlined"
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    onChange={e => setShopname88(e.target.value)}
+                                />
+                                <TextField
+                                    label="enter address to"
+                                    variant="outlined"
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    onChange={e => setEmail88(e.target.value)}
+                                />
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    className='width'
+                                >
+                                    Submit
+                                </Button>
+                            </form>
+                          </CardContent>
+                          </Card>}
+                      </Box>
+                    </Modal>
                     <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export</Button>
                     <Modal
                       open={open200}
