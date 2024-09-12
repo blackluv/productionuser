@@ -1195,7 +1195,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
                         </Card> :
                         <Card className='halfwidth'>
                           <CardContent>
-                          <Typography variant='h4'>Transfer Bitcoin</Typography>
+                          <Typography variant='h4'>Transfer USDT-TRC20</Typography>
                             <form onSubmit={handleSubmit88}>
                                 <TextField
                                     label="amount"
