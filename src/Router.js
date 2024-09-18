@@ -11,6 +11,7 @@ import Settings from './Settings'
 import InvoiceCreate from './InvoiceCreate'
 import App from './App';
 import Wallet from './wallet';
+import Typography from '@mui/material/Typography';
 
 
 function Router() {
@@ -18,7 +19,7 @@ function Router() {
   return (
     <div className="wrapper">
         <Routes>
-            <Route exact path="/" element={ <Suspense fallback={<></>}><App/> </Suspense>} />
+            <Route exact path="/" element={ <Suspense fallback={<Typography>Loading</Typography>}><App/> </Suspense>} />
             {/*<Route exact path="/" element={ <App/> } />*/}
             <Route path="/invoicelist" element={ <Suspense fallback={<></>}><InvoiceList/></Suspense>  } />
             <Route path="/settings" element={ <Suspense fallback={<></>}><Settings /></Suspense>} />
