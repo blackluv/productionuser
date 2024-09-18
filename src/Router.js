@@ -1,5 +1,5 @@
 //import React from 'react';
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import './App.css';
 //import { BrowserRouter, Route, Routes, Switch } from 'react-router-dom';
 import { Routes, Route } from "react-router-dom"
@@ -18,12 +18,13 @@ function Router() {
   return (
     <div className="wrapper">
         <Routes>
-            <Route exact path="/" element={ <App/> } />
-            <Route path="/invoicelist" element={ <InvoiceList/> } />
-            <Route path="/settings" element={ <Settings />} />
-            <Route path="/wallet" element={ <Wallet />} />
-            <Route path="/invoicecreate" element={ <InvoiceCreate />} />
-            <Route path='/invoice/:id' element={<Demo />} />
+            <Route exact path="/" element={ <Suspense fallback={<></>}><App/> </Suspense>} />
+            {/*<Route exact path="/" element={ <App/> } />*/}
+            <Route path="/invoicelist" element={ <Suspense fallback={<></>}><InvoiceList/></Suspense>  } />
+            <Route path="/settings" element={ <Suspense fallback={<></>}><Settings /></Suspense>} />
+            <Route path="/wallet" element={ <Suspense fallback={<></>}><Wallet /></Suspense>} />
+            <Route path="/invoicecreate" element={ <Suspense fallback={<></>}><InvoiceCreate /></Suspense>} />
+            <Route path='/invoice/:id' element={<Suspense fallback={<></>}><Demo /></Suspense>} />
         </Routes>
     </div>
   );
