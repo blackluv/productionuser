@@ -159,6 +159,7 @@ export default function PermanentDrawerLeft() {
         e.preventDefault();
         let user = await edituser(shopname, email, age)
         console.log(user, 'user')
+        console.log(shopname1, 'apikey')
         //props.history.push("/");
       }
 
