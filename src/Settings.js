@@ -128,9 +128,6 @@ export default function PermanentDrawerLeft() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          "Authorization":{
-                            "x-api-key": {shopname1}
-                        }
         },
         body: urlencoded
       })
