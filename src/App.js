@@ -29,6 +29,10 @@ import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { ethers } from "ethers";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const drawerWidth = 240;
 
@@ -75,6 +79,7 @@ export default function PermanentDrawerLeft() {
   const [key, setKey] = useState('');
   const [bal, setBal] = useState(0);
   const [connectedaddress, setConnectedaddress] = useState();
+  const [age, setAge] = React.useState('');
 
   const { ready, authenticated, user, login, logout } = usePrivy();
 
@@ -128,6 +133,9 @@ export default function PermanentDrawerLeft() {
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
 
+  const handleChange300 = (event) => {
+    setAge(event.target.value);
+  };
   //getbalance
   const {
     data: user1,
@@ -206,6 +214,7 @@ export default function PermanentDrawerLeft() {
     urlencoded.append("email", email)
     urlencoded.append("connectedaddress", user?.wallet?.address)
     urlencoded.append("key", key)
+    urlencoded.append("currency", age)
       return fetch('https://novapay.live/api/create/user', {
         method: 'POST',
         headers: {
@@ -476,6 +485,24 @@ export default function PermanentDrawerLeft() {
                             type='email'
                             onChange={e => setKey(e.target.value)}
                         />
+                            <Box sx={{ minWidth: 120 }}>
+                              <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Select Currency</InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={age}
+                                  label="Age"
+                                  onChange={handleChange300}
+                                >
+                              <MenuItem value={'USD'}>USD</MenuItem>
+                              <MenuItem value={'AED'}>AED</MenuItem>
+                              <MenuItem value={'GBP'}>GBP</MenuItem>
+                              <MenuItem value={'EUR'}>EUR</MenuItem>
+                              <MenuItem value={'INR'}>INR</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Box>
                         <Button
                             variant="contained"
                             color="primary"

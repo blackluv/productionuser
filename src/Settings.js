@@ -28,6 +28,10 @@ import { CardHeader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { usePrivy } from "@privy-io/react-auth";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const drawerWidth = 240;
 
@@ -75,6 +79,7 @@ export default function PermanentDrawerLeft() {
   const [ETH, setETH] = useState('');
   const [TRX, setTRX] = useState('');
   const [SOL, setSOL] = useState('');
+  const [age, setAge] = React.useState('');
   const { ready, authenticated, user, login, logout } = usePrivy();
 
   const style = {
@@ -112,16 +117,13 @@ export default function PermanentDrawerLeft() {
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
 
-  async function edituser(shop, email) {
+  async function edituser(shop, email, age) {
     const urlencoded = new URLSearchParams()
     console.log(email, 'email')
     urlencoded.append("shop", shop)
     urlencoded.append("email", email)
-    urlencoded.append("btcaddress", BTC)
-    urlencoded.append("soladdress", SOL)
-    urlencoded.append("trxaddress", TRX)
-    urlencoded.append("ethaddress", ETH)
     urlencoded.append("api", shopname1)
+    urlencoded.append("currency", age)
       return fetch('https://novapay.live/api/settings/update', {
         method: 'POST',
         headers: {
@@ -155,7 +157,7 @@ export default function PermanentDrawerLeft() {
 
        const handleSubmit = async e => {
         e.preventDefault();
-        let user = edituser(shopname, email)
+        let user = edituser(shopname, email, age)
         console.log(user, 'user')
         //props.history.push("/");
       }
@@ -163,6 +165,10 @@ export default function PermanentDrawerLeft() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleChange100 = (event) => {
+    setAge(event.target.value);
   };
 
   async function Getuser(){
@@ -332,34 +338,24 @@ useEffect(() => {
                         margin="normal"
                         onChange={e => setEmail(e.target.value)}
                     />
-                    <TextField
-                        label="UpdateBTCaddress"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        onChange={e => setBTC(e.target.value)}
-                    />
-                    <TextField
-                        label="UpdateETHaddress"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        onChange={e => setETH(e.target.value)}
-                    />
-                    <TextField
-                        label="UpdateSOLaddress"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        onChange={e => setSOL(e.target.value)}
-                    />
-                    <TextField
-                        label="UpdateTRXaddress"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        onChange={e => setTRX(e.target.value)}
-                    />
+                        <Box sx={{ minWidth: 120 }}>
+                            <FormControl fullWidth>
+                              <InputLabel id="demo-simple-select-label">Set Currency</InputLabel>
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={age}
+                                label="Age"
+                                onChange={handleChange100}
+                              >
+                              <MenuItem value={'USD'}>USD</MenuItem>
+                              <MenuItem value={'AED'}>AED</MenuItem>
+                              <MenuItem value={'GBP'}>GBP</MenuItem>
+                              <MenuItem value={'EUR'}>EUR</MenuItem>
+                              <MenuItem value={'INR'}>INR</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Box>
                     <Button
                         variant="contained"
                         color="primary"

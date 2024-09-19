@@ -129,6 +129,8 @@ export default function PermanentDrawerLeft() {
   const [resp1, setResp1] = useState([]);
   const [connectedaddress, setConnectedaddress] = useState();
   const [age, setAge] = React.useState('');
+  const [age1, setAge1] = React.useState('');
+  const [currency1, setCurrency1] = React.useState('');
 
   const handleChange22 = (event) => {
     setAge(event.target.value);
@@ -302,6 +304,33 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
 
     console.log(user5?.data?.shop, 'hasaccount')
   }
+
+  const cur = async () => {
+    if(user5?.data?.currency == undefined){
+      setCurrency1('USD ')
+    } else{
+      setCurrency1(user5?.data?.currency)
+    }
+  }
+
+  const cur2 = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge1(used?.balanceinusd ? used?.balanceinusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge1(used?.balanceineur ? used?.balanceineur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge1(used?.balanceinaed ? used?.balanceinaed : 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge1(used?.balanceinusd ? used?.balanceinusd : 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge1(used?.balanceingbp ? used?.balanceingbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge1(used?.balanceininr ? used?.balanceininr : 0)
+    }
+  }
+
+  const { data24, error24 } = useSWR('curr', cur, { refreshInterval: 36000 })
+  const { data25, error25 } = useSWR('cur2', cur2, { refreshInterval: 36000 })
 
   const {
     data: user7,
@@ -694,8 +723,8 @@ useEffect(() => {
             <div className='flex spacebetween width mb2'>
               <Card className='lit1 justcenter flex'>
                 <CardContent className='flex aligncenter column'>
-                <Typography>Balance in USD</Typography>
-                <Typography>{used?.balanceinusd ? used?.balanceinusd : 0} USD</Typography>
+                <Typography>Balance in {currency1}</Typography>
+                <Typography>{age1 ? age1 : 0} {currency1}</Typography>
                 </CardContent>
               </Card>
               <Button className='lit1 justcenter flex' variant="contained" onClick={handleOpen2}>Send Eth</Button>

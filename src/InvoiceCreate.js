@@ -30,6 +30,10 @@ import useSWR from 'swr';
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import { usePrivy } from "@privy-io/react-auth";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const drawerWidth = 240;
 
@@ -178,6 +182,10 @@ export default function PermanentDrawerLeft() {
     hasaccount2()
   }
 
+  const handleChange100 = (event) => {
+    setCurency(event.target.value);
+  };
+
     /*if (!ready) {
     return null;
   }
@@ -302,13 +310,24 @@ useEffect(() => {
                         margin="normal"
                         onChange={e => setInvoice(e.target.value)}
                     />
-                    <TextField
-                        label="Currency"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        onChange={e => setCurency(e.target.value)}
-                    />
+                        <Box sx={{ minWidth: 120 }}>
+                          <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Select Currency</InputLabel>
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              value={currency}
+                              label="Age"
+                              onChange={handleChange100}
+                            >
+                              <MenuItem value={'USD'}>USD</MenuItem>
+                              <MenuItem value={'AED'}>AED</MenuItem>
+                              <MenuItem value={'GBP'}>GBP</MenuItem>
+                              <MenuItem value={'EUR'}>EUR</MenuItem>
+                              <MenuItem value={'INR'}>INR</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </Box>
                     <Button
                         variant="contained"
                         color="primary"
