@@ -588,10 +588,8 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
 }, [currentAccount]);*/
 
 useEffect(() => {
-  ready(),
-  authenticated(),
   Getuser()
-}, [hasaccount]);
+}, [hasaccount, ready, authenticated]);
 
   return (
     <Box sx={{ display: 'flex' }}>

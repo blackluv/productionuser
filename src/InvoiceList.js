@@ -192,10 +192,8 @@ export default function PermanentDrawerLeft() {
     connectWallet();
 }, [currentAccount]);*/
 useEffect(() => {
-  ready(),
-  authenticated(),
   Getuser()
-}, [hasaccount]);
+}, [hasaccount, ready, authenticated]);
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
