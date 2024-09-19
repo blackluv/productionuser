@@ -312,7 +312,7 @@ useEffect(() => {
                     <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>User Wallet Address</Typography>
-                      <Typography>{invoice?.useraddress}</Typography>
+                      <Typography>{invoice?.useradress}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Amount</Typography>
@@ -323,8 +323,12 @@ useEffect(() => {
                       <Typography>{invoice?.token}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>Status</Typography>
+                      <Typography>Paid status</Typography>
                       <Typography>{invoice?.isapproved == true ? "true" : "false"}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Denied status</Typography>
+                      <Typography>{invoice?.isdenied == true ? "true" : "false"}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Pay</Typography>
