@@ -72,6 +72,7 @@ export default function PermanentDrawerLeft() {
   const [hasaccount, setHasaccount] = React.useState(false);
   const [shopname1, setShopname1] = useState();
   const [invoice, setInvoice] = useState('');
+  const [currency, setCurency] = useState('');
   const [alert, setAlert] = useState(false);
   const [alertContent, setAlertContent] = useState('');
   const { ready, authenticated, user, login, logout } = usePrivy();
@@ -127,18 +128,19 @@ export default function PermanentDrawerLeft() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let user = edituser(invoice)
+    let user = edituser(invoice, currency)
     console.log(user, 'user')
     //props.history.push("/");
   }
 
-  async function edituser(invoice) {
+  async function edituser(invoice, currency) {
     const urlencoded = new URLSearchParams()
     console.log(shopname1, 'invoice')
     const di = shopname1
     urlencoded.append("amount", invoice)
     urlencoded.append("api", shopname1)
     urlencoded.append("token", "usdt") 
+    urlencoded.append("currency", currency)
       return fetch('https://novapay.live/api/createinvoice1', {
         method: 'POST',
         headers: {
@@ -159,39 +161,40 @@ export default function PermanentDrawerLeft() {
               setAlert(false);
             }
   })
-     }
+	};
 
- /* const connectWallet = async () => {
-		try {
-			const { ethereum } = window;
+  async function Getuser(){
+    let btcbal = await fetch('https://novapay.live/api/get/address?address=' + user?.wallet?.address).then((response) => response.json())
+    const hasaccount2 = async () => {
+      if(btcbal?.data == undefined){
+        setHasaccount(false)
+      }else {
+        setHasaccount(true)
+        setShopname1(btcbal?.data?.shop)
+      }
+  
+      console.log(btcbal?.data?.shop, 'hasaccount2')
+    }
+    hasaccount2()
+  }
 
-			if (!ethereum) {
-				alert("Get MetaMask -> https://metamask.io/");
-				return;
-			}
-
-			// Fancy method to request access to account.
-			const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-		
-			// Boom! This should print out public address once we authorize Metamask.
-			console.log("Connected", accounts[0]);
-			setCurrentAccount(accounts[0]);
-		} catch (error) {
-			console.log(error)
-		}
-	};*/
-    if (!ready) {
+    /*if (!ready) {
     return null;
   }
   if (!hasaccount) {
     return null;
-  }
+  }*/
 
   /*const checkaccount = async () => {} 
 
   useEffect(() => {
     connectWallet();
 }, [currentAccount]);*/
+useEffect(() => {
+  ready(),
+  authenticated(),
+  Getuser()
+}, [hasaccount]);
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -255,6 +258,18 @@ export default function PermanentDrawerLeft() {
               </Link>
             </ListItem>
         </List>
+        <List>
+            <ListItem key="Request" disablePadding>
+              <Link to= "/request" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <InboxIcon /> 
+                </ListItemIcon>
+                <ListItemText primary="Request" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>
@@ -268,6 +283,7 @@ export default function PermanentDrawerLeft() {
               </Link>
             </ListItem>
         </List>
+        <Button className='lit4 justcenter flex' variant="contained" onClick={logout}>Logout</Button>
       </Drawer>
       <Box
         component="main"
@@ -287,6 +303,13 @@ export default function PermanentDrawerLeft() {
                         fullWidth
                         margin="normal"
                         onChange={e => setInvoice(e.target.value)}
+                    />
+                    <TextField
+                        label="Currency"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        onChange={e => setCurency(e.target.value)}
                     />
                     <Button
                         variant="contained"

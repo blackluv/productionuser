@@ -540,12 +540,27 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
     setValue(newValue);
   };
 
-  if (!ready) {
+  async function Getuser(){
+    let btcbal = await fetch('https://novapay.live/api/get/address?address=' + user?.wallet?.address).then((response) => response.json())
+    const hasaccount2 = async () => {
+      if(btcbal?.data == undefined){
+        setHasaccount(false)
+      }else {
+        setHasaccount(true)
+        setShopname1(btcbal?.data?.shop)
+      }
+  
+      console.log(btcbal?.data?.shop, 'hasaccount2')
+    }
+    hasaccount2()
+  }
+
+  /*if (!ready) {
     return null;
   }
   if (!hasaccount) {
     return null;
-  }
+  }*/
 
   /*const connectWallet = async () => {
 		try {
@@ -571,6 +586,12 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
   useEffect(() => {
     connectWallet();
 }, [currentAccount]);*/
+
+useEffect(() => {
+  ready(),
+  authenticated(),
+  Getuser()
+}, [hasaccount]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -635,6 +656,18 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
               </Link>
             </ListItem>
         </List>
+        <List>
+            <ListItem key="Request" disablePadding>
+              <Link to= "/request" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <InboxIcon /> 
+                </ListItemIcon>
+                <ListItemText primary="Request" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>
@@ -648,6 +681,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
               </Link>
             </ListItem>
         </List>
+        <Button className='lit4 justcenter flex' variant="contained" onClick={logout}>Logout</Button>
       </Drawer>
       <Box
         component="main"

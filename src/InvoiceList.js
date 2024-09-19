@@ -109,7 +109,7 @@ export default function PermanentDrawerLeft() {
     data: user4,
     error4,
     isValidating4,
-  } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
+  } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
   console.log(user4?.data, 'countries4')
 
   const invoicemap = user4?.data
@@ -117,6 +117,54 @@ export default function PermanentDrawerLeft() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  async function pay(amount, token, addressto) {
+    const urlencoded = new URLSearchParams()
+    urlencoded.append("amount", amount)
+    urlencoded.append("api", user5?.data?.apikey)
+    urlencoded.append("token", token)
+    urlencoded.append("addressto", addressto)
+    console.log("api", user5?.data?.apikey)
+      return fetch('https://novapay.live/api/sendtx', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: urlencoded
+      })
+        .then(data => data.json()
+      )
+     }
+
+     async function deny() {
+      const urlencoded = new URLSearchParams()
+      urlencoded.append("api", user5?.data?.apikey)
+      console.log("api", user5?.data?.apikey)
+        return fetch('https://novapay.live/api/request/deny', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: urlencoded
+        })
+          .then(data => data.json()
+        )
+       }
+
+       async function Getuser(){
+        let btcbal = await fetch('https://novapay.live/api/get/address?address=' + user?.wallet?.address).then((response) => response.json())
+        const hasaccount2 = async () => {
+          if(btcbal?.data == undefined){
+            setHasaccount(false)
+          }else {
+            setHasaccount(true)
+            setShopname1(btcbal?.data?.shop)
+          }
+      
+          console.log(btcbal?.data?.shop, 'hasaccount2')
+        }
+        hasaccount2()
+      }
 
   /*const connectWallet = async () => {
 		try {
@@ -143,6 +191,11 @@ export default function PermanentDrawerLeft() {
   useEffect(() => {
     connectWallet();
 }, [currentAccount]);*/
+useEffect(() => {
+  ready(),
+  authenticated(),
+  Getuser()
+}, [hasaccount]);
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -231,6 +284,7 @@ export default function PermanentDrawerLeft() {
               </Link>
             </ListItem>
         </List>
+        <Button className='lit4 justcenter flex' variant="contained" onClick={logout}>Logout</Button>
       </Drawer>
       <Box
         component="main"
@@ -242,23 +296,34 @@ export default function PermanentDrawerLeft() {
         <div>
             {hasaccount ? 
           <div class="">
-            <Typography variant='h4' className='mb5'>Invoice Filter</Typography>
+            <Typography variant='h4' className='mb5'>Merchant Requests</Typography>
             {invoicemap ? invoicemap?.map((invoice) => (
                   <Card className='width'>
                     <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Id</Typography>
-                      <Typography>{invoice.transactionhash}</Typography>
+                      <Typography>User Wallet Address</Typography>
+                      <Typography>{invoice?.useraddress}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Amount</Typography>
-                      <Typography>{invoice.amount}</Typography>
+                      <Typography>{invoice?.amount}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Token</Typography>
+                      <Typography>{invoice?.token}</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
                       <Typography>Status</Typography>
-                      <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
+                      <Typography>{invoice?.isapproved == true ? "true" : "false"}</Typography>
                     </div>
-                      <Link variant="contained" to={'/invoice/' +  invoice.transactionhash}>View</Link>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Pay</Typography>
+                      <Button className='lit4 justcenter flex' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Deny</Typography>
+                      <Button className='lit4 justcenter flex' variant="contained"  onClick={() => deny()}>Deny</Button>
+                    </div>
                     </CardContent>
                   </Card>
                   )) : 

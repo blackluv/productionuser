@@ -72,6 +72,7 @@ export default function PermanentDrawerLeft() {
   const [shopname, setShopname] = useState('');
   const [shopname1, setShopname1] = useState('');
   const [email, setEmail] = useState('');
+  const [key, setKey] = useState('');
   const [bal, setBal] = useState(0);
   const [connectedaddress, setConnectedaddress] = useState();
 
@@ -198,12 +199,13 @@ export default function PermanentDrawerLeft() {
     }
     hasaccount2()
   }
-  async function registeruser(shop, email) {
+  async function registeruser(shop, email, key) {
     const urlencoded = new URLSearchParams()
     console.log(user?.wallet?.address, 'user')
     urlencoded.append("shop", shop)
     urlencoded.append("email", email)
     urlencoded.append("connectedaddress", user?.wallet?.address)
+    urlencoded.append("key", key)
       return fetch('https://novapay.live/api/create/user', {
         method: 'POST',
         headers: {
@@ -249,7 +251,14 @@ export default function PermanentDrawerLeft() {
 
      const handleSubmit = async e => {
       e.preventDefault();
-      let user = registeruser(shopname, email)
+
+      if(shopname){
+        let check = await fetch('https://novapay.live/api/get/user?shop=' + shopname).then((response) => response.json())
+        if(check?.data?.shop == shopname){
+          alert('Shop already exists')
+        }
+      }
+      let user = registeruser(shopname, email, key)
       console.log(user, 'user')
       //props.history.push("/");
     }
@@ -258,15 +267,17 @@ export default function PermanentDrawerLeft() {
     setValue(newValue);
   };
 
-  if (!ready) {
+  /*if (!ready) {
     return null;
-  }
+  }*/
 
 
-  /*const checkaccount = async () => {} 
+  //const checkaccount = async () => {} 
   useEffect(() => {
+    ready(),
+    authenticated(),
     Getuser()
-}, [hasaccount]);*/
+}, [hasaccount]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -331,6 +342,18 @@ export default function PermanentDrawerLeft() {
               </Link>
             </ListItem>
         </List>
+        <List>
+            <ListItem key="Request" disablePadding>
+              <Link to= "/request" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <InboxIcon /> 
+                </ListItemIcon>
+                <ListItemText primary="Request" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>
@@ -344,6 +367,7 @@ export default function PermanentDrawerLeft() {
               </Link>
             </ListItem>
         </List>
+        <Button className='lit4 justcenter flex' variant="contained" onClick={logout}>Logout</Button>
       </Drawer>
       <Box
         component="main"
@@ -445,6 +469,14 @@ export default function PermanentDrawerLeft() {
                             margin="normal"
                             type='email'
                             onChange={e => setEmail(e.target.value)}
+                        />
+                        <TextField
+                            label="Wallet Key"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            type='email'
+                            onChange={e => setKey(e.target.value)}
                         />
                         <Button
                             variant="contained"
