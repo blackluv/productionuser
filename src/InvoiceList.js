@@ -269,6 +269,18 @@ useEffect(() => {
               </Link>
             </ListItem>
         </List>
+        <List>
+            <ListItem key="Request" disablePadding>
+              <Link to= "/request" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <InboxIcon /> 
+                </ListItemIcon>
+                <ListItemText primary="Request" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>
