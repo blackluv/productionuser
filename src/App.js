@@ -187,7 +187,7 @@ export default function PermanentDrawerLeft() {
       data: user10,
       error10,
       isValidating10,
-    } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
+    } = useSWR('https://novapay.live/api/get/requestadmin?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
     console.log(user10?.data, 'countries4')
 
     const requestmap = user10?.data
@@ -420,7 +420,7 @@ export default function PermanentDrawerLeft() {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                   <Tab label="Invoice (Deposits)" {...a11yProps(0)} />
-                  {/*<Tab label="Withdrawals" {...a11yProps(1)} />*/}
+                  <Tab label="USDT Requests" {...a11yProps(1)} />
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
@@ -443,6 +443,30 @@ export default function PermanentDrawerLeft() {
                   </CardContent>
                 </Card>
                 )) : <Typography>No invoice</Typography>}
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={1}>
+              {requestmap ? requestmap?.map((invoice) => (
+                <Card className='width'>
+                  <CardContent className='spacebetween flex'>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Transaction Id</Typography>
+                      <Typography>{invoice.paymenttx}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Shopname</Typography>
+                      <Typography>{invoice.shopname}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Token</Typography>
+                      <Typography>{invoice.token}</Typography>
+                    </div>
+                    <div className='justcenter flex aligncenter column'>
+                      <Typography>Status</Typography>
+                      <Typography>{invoice.isapproved == true ? "true" : "false"}</Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                )) : <Typography>No Requests</Typography>}
               </CustomTabPanel>
             </Box>
           </div>
