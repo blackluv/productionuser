@@ -1233,7 +1233,7 @@ useEffect(() => {
                       <Typography>USDT-TRC20</Typography>
                     </div>
                     <div className='justcenter flex aligncenter column'>
-                      <Typography>{0}</Typography>
+                      <Typography>{used?.usdttrxbalance ? used?.usdttrxbalance : 0}</Typography>
                     </div>
                     <Button className='justcenter flex' variant="contained" onClick={handleOpen88}>Send</Button>
                     <Modal
