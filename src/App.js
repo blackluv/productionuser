@@ -396,8 +396,8 @@ export default function PermanentDrawerLeft() {
               </Card>
               <Card className='lit1 justcenter aligncenter flex'>
                 <CardContent className='flex aligncenter column'>
-                <Typography>Balance</Typography>
-                <Typography>{bal} ETH</Typography>
+                <Typography>Webhook Key</Typography>
+                <Typography>{user5?.data?.webhookkey ? user5?.data?.webhookkey : "Set webhook endpoint"}</Typography>
                 </CardContent>
               </Card>
               <Card className='mr2'>
