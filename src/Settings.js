@@ -395,11 +395,12 @@ useEffect(() => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        className='mb2'
                         onChange={e => setShopname2(e.target.value)}
                     />
 
-                    <Typography>Webhook Endpoint</Typography>
-                    <Typography>{shopname2}</Typography>
+                    <Typography className='mb2'>Webhook Endpoint</Typography>
+                    <Typography className='mb2'>{shopname2 ? shopname2 : "Would be updated on your input"}</Typography>
                     <Button
                         variant="contained"
                         color="primary"
