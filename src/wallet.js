@@ -840,7 +840,7 @@ useEffect(() => {
                   </CardContent>
                 </Card>
                 )) : <Typography></Typography>}
-              {rest1 ? rest1?.map((resp) => (
+              {/*rest1 ? rest1?.map((resp) => (
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
@@ -861,7 +861,7 @@ useEffect(() => {
                     </div>
                   </CardContent>
                 </Card>
-                )) : <Typography></Typography>}
+                )) : <Typography></Typography>*/}
               {rest2 ? rest2?.map((resp) => (
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
