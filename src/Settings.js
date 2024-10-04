@@ -400,7 +400,7 @@ useEffect(() => {
                     />
 
                     <Typography className='mb2'>Webhook Endpoint</Typography>
-                    <Typography className='mb2'>{shopname2 ? shopname2 : "Would be updated on your input"}</Typography>
+                    <Typography className='mb2'>{shopname2 ? shopname2 : user5?.data?.webhookurl}</Typography>
                     <Button
                         variant="contained"
                         color="primary"
