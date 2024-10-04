@@ -59,6 +59,10 @@
 .width{
   width: 100%;
 }
+
+.width40{
+  width: 40%;
+}
 .topping{
   top: 30%;
   left: 30%;

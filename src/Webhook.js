@@ -73,7 +73,6 @@ export default function PermanentDrawerLeft() {
   const [value, setValue] = React.useState(0);
   const [hasaccount, setHasaccount] = React.useState(false);
   const [shopname1, setShopname1] = useState('');
-  const [shopname2, setShopname2] = useState('');
   const [shopname, setShopname] = useState();
   const [email, setEmail] = useState('');
   const [BTC, setBTC] = useState('');
@@ -153,32 +152,9 @@ export default function PermanentDrawerLeft() {
         )
        }
 
-       async function editwebhook(_shopname2) {
-        const urlencoded = new URLSearchParams()
-        urlencoded.append("webhookurl", shopname2)
-        urlencoded.append("api", shopname1)
-          return fetch('https://novapay.live/api/settings/updatehook', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: urlencoded
-          })
-            .then(data => alert("Success webhook added")
-          )
-         }
-
        const handleSubmit = async e => {
         e.preventDefault();
         let user = await edituser(shopname, email, age)
-        console.log(user, 'user')
-        console.log(shopname1, 'apikey')
-        //props.history.push("/");
-      }
-
-      const handleSubmit2 = async e => {
-        e.preventDefault();
-        let user = await editwebhook(shopname2)
         console.log(user, 'user')
         console.log(shopname1, 'apikey')
         //props.history.push("/");
@@ -345,8 +321,7 @@ useEffect(() => {
             {hasaccount ? 
           <div class="">
             <Typography variant='h4' className='mb5'>Settings</Typography>
-            <div className='width flex spacebetween'>
-                <form className='width40' onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <TextField
                         label="Name"
                         variant="outlined"
@@ -388,28 +363,6 @@ useEffect(() => {
                         Submit
                     </Button>
                 </form>
-
-                <form className='width40' onSubmit={handleSubmit2}>
-                    <TextField
-                        label="Enter webhook endpoint"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        onChange={e => setShopname2(e.target.value)}
-                    />
-
-                    <Typography>Webhook Endpoint</Typography>
-                    <Typography>{shopname2}</Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        type="submit"
-                        className='width'
-                    >
-                        Submit
-                    </Button>
-                </form>
-              </div>
           </div> :
           <div class="vertical-center">
             <Typography>You do not have an account. Register to continue</Typography>
