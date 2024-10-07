@@ -821,7 +821,7 @@ useEffect(() => {
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
-              {rest ? rest?.map((resp) => (
+              {/*rest ? rest?.map((resp) => (
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
                     <div className='justcenter flex aligncenter column'>
@@ -842,7 +842,7 @@ useEffect(() => {
                     </div>
                   </CardContent>
                 </Card>
-                )) : <Typography></Typography>}
+                )) : <Typography></Typography>*/}
               {/*rest1 ? rest1?.map((resp) => (
                 <Card className='width mb2'>
                   <CardContent className='spacebetween flex'>
