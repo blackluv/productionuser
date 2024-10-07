@@ -170,8 +170,11 @@ let solhi = fetch(
   .then(response => response.text())
   .then(result => console.log(result.result, 'solhistory'))
   .catch(error => console.log('error', error));
-
+  if(solhi.success == true){
   setSolhi(solhi.result ? solhi.result : [])
+  } else{
+    setSolhi([])
+  }
 }
 
 const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
