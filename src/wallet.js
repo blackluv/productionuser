@@ -383,7 +383,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
 
   //console.log(user200, 'btc')
 
-  const rest2 = user200?.txrefs
+  const rest2 = user200?.txrefs ? user200?.txrefs : []
 
   //getorders
     const {
