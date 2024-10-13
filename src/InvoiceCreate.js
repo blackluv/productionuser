@@ -34,6 +34,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import WalletIcon from '@mui/icons-material/Wallet';
+import DescriptionIcon from '@mui/icons-material/Description';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const drawerWidth = 240;
 
@@ -87,11 +96,11 @@ export default function PermanentDrawerLeft() {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #ddd',
+    bgcolor: '#141318',
+    border: '',
     boxShadow: 24,
     p: 4,
-    borderradius: 25,
+    borderradius: '10px',
   };
 
   //const hasaccount = true;
@@ -204,16 +213,32 @@ useEffect(() => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      {/*<AppBar
+      <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Permanent drawer
+          <Typography variant="h6" noWrap component="div" className='tit'>
+            Novapay
           </Typography>
+          <TextField
+          label="Search"
+          id="outlined-start-adornment"
+          className='fi1'
+          sx={{ m: 1, width: '60%'}}
+        />
+        <div className='icon-noti'>
+          <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
+        </div>
+        <div className='profile flex'>
+          <div className='profile-icon'></div>
+          <Typography className='profile-text'>{user5?.data?.shop}</Typography>
+        </div>
+        <Link className='icon-noti' onClick={logout}>
+          <LogoutIcon sx={{ color: "#D0D0D0", fontSize: 18 }}/>
+        </Link>
         </Toolbar>
-      </AppBar>*/}
+      </AppBar>*
       <Drawer
         sx={{
           width: drawerWidth,
@@ -226,16 +251,16 @@ useEffect(() => {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
         <Divider />
         <List>
+          <div className='mb20'></div>
             <ListItem key="home" disablePadding>
               <Link to= "/" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <HomeIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
-                <ListItemText primary="home" />
+                <ListItemText primary="Home" />
               </ListItemButton>
               </Link>
             </ListItem>
@@ -245,7 +270,7 @@ useEffect(() => {
               <Link to= "/invoicecreate" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <ReceiptIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Invoice" />
               </ListItemButton>
@@ -257,9 +282,9 @@ useEffect(() => {
               <Link to= "/wallet" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <WalletIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
-                <ListItemText primary="wallet" />
+                <ListItemText primary="Wallet" />
               </ListItemButton>
               </Link>
             </ListItem>
@@ -269,27 +294,40 @@ useEffect(() => {
               <Link to= "/request" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <DescriptionIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Request" />
               </ListItemButton>
               </Link>
             </ListItem>
         </List>
+        <div className='mb5'></div>
+        <Typography className='others'>Others</Typography>
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>
               <Link to= "/settings" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <SettingsIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Settings" />
               </ListItemButton>
               </Link>
             </ListItem>
         </List>
-        <Button className='lit4 justcenter flex' variant="contained" onClick={logout}>Logout</Button>
+        <List>
+            <ListItem key="Support" disablePadding disabled="true">
+              <Link to= "" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ContactSupportIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                </ListItemIcon>
+                <ListItemText primary="Support" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
       </Drawer>
       <Box
         component="main"
@@ -301,8 +339,9 @@ useEffect(() => {
         <div>
             {hasaccount ? 
           <div class="">
-            <Typography variant='h4' className='mb5'>Create an Invoice</Typography>
-            <form onSubmit={handleSubmit}>
+            <div className='mbmain'></div>
+            {/*<Typography variant='h4' className='mb5'>Create an Invoice</Typography>*/}
+            {/*<form onSubmit={handleSubmit}>
                     <TextField
                         label="Amount"
                         variant="outlined"
@@ -337,37 +376,155 @@ useEffect(() => {
                         Submit
                     </Button>
                     <div className='mb2'>
-                    {/*alert ? <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">{alertContent}</Alert> : <Alert severity='error'>{alertContent}</Alert> */}
                     </div>
-                  </form>
-
-                  {invoicemap ? invoicemap?.map((invoice) => (
-                  <Card className='width'>
-                    <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Id</Typography>
-                      <Typography>{invoice.transactionhash}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Amount</Typography>
-                      <Typography>{invoice.amount}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Status</Typography>
-                      <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
-                    </div>
-                      <Link variant="contained" to={'/invoice/' +  invoice.transactionhash}>View</Link>
-                    </CardContent>
-                  </Card>
-                  )) : 
-                  <Card>
-                  <Typography>No invoice</Typography>
-                  </Card>
-                  }
+                  </form>*/}
+              <Card className='width inv'>
+                <div className='mb4'></div>
+                <div className='flex width spacebetween alignbase'>
+                  <Typography className='inv-header'>Invoice List</Typography>
+                  <Button
+                        variant="contained"
+                        color="primary"
+                        className='width20 mi2'
+                        onClick={handleOpen}
+                    >
+                        Create Invoice
+                    </Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                      >
+                        {/*<Box sx={style}>
+                          <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Complete registration
+                          </Typography>
+                        </Box>*/}
+                        <Box sx={style}>
+                          <div className='flex column justifycenter aligncenter'>
+                            {/*<Typography id="modal-modal-title" variant="h6" component="h2" className='mb10'>
+                              Create invoice
+                            </Typography>*/}
+                                    <form onSubmit={handleSubmit}>
+                                        <TextField
+                                            label="Amount"
+                                            variant="outlined"
+                                            fullWidth
+                                            margin="normal"
+                                            className='mi width fot mb5'
+                                            onChange={e => setInvoice(e.target.value)}
+                                        />
+                                            <Box sx={{ minWidth: 300, marginBottom: '8%' }}>
+                                              <FormControl fullWidth className='mi fot'>
+                                                <InputLabel id="demo-simple-select-label">Select Currency</InputLabel>
+                                                <Select
+                                                  labelId="demo-simple-select-label"
+                                                  id="demo-simple-select"
+                                                  value={currency}
+                                                  label="Age"
+                                                  onChange={handleChange100}
+                                                >
+                                                  <MenuItem value={'USD'}>USD</MenuItem>
+                                                  <MenuItem value={'AED'}>AED</MenuItem>
+                                                  <MenuItem value={'GBP'}>GBP</MenuItem>
+                                                  <MenuItem value={'EUR'}>EUR</MenuItem>
+                                                  <MenuItem value={'INR'}>INR</MenuItem>
+                                                </Select>
+                                              </FormControl>
+                                            </Box>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            type="submit"
+                                            className='width mi3'
+                                        >
+                                            Submit
+                                        </Button>
+                                        <div className='mb2'>
+                                        </div>
+                                    </form>
+                          </div>
+                        </Box>
+                      </Modal>
+                </div>
+                <div className='spacearound flex pip width'>
+                     <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Transaction id</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Status</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10 aligncenter'>
+                        <Typography>Tx/Hash</Typography>
+                      </div>
+              </div>
+                <div className='p20'>
+                    {invoicemap ? invoicemap?.map((invoice) => (
+                      <Card className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>12/10/2024</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width10'>
+                          <Typography>{invoice.transactionhash.slice(0,8)}...</Typography>
+                          <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice.amount}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice.paidin}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
+                        </div>
+                          <Link variant="contained" className='width10' to={'/invoice/' +  invoice.transactionhash}>View</Link>
+                        </CardContent>
+                      </Card>
+                    )) : 
+                    <Card>
+                    <Typography>No invoice</Typography>
+                    </Card>
+                    }
+                    {/*invoicemap ? invoicemap?.map((invoice) => (
+                      <Card className='width'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column'>
+                          <Typography>Transaction Id</Typography>
+                          <Typography>{invoice.transactionhash}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column'>
+                          <Typography>Amount</Typography>
+                          <Typography>{invoice.amount}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column'>
+                          <Typography>Status</Typography>
+                          <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
+                        </div>
+                          <Link variant="contained" to={'/invoice/' +  invoice.transactionhash}>View</Link>
+                        </CardContent>
+                      </Card>
+                    )) : 
+                    <Card>
+                    <Typography>No invoice</Typography>
+                    </Card>
+                    */}
+                  </div>
+              </Card>
           </div> :
           <div class="vertical-center">
             <Typography>You do not have an account. Register to continue</Typography>
-            <Button variant="contained" onClick={handleOpen}>Complete Registration</Button>
+            <Button variant="contained" >Complete Registration</Button>
             <Modal
               open={open}
               onClose={handleClose}

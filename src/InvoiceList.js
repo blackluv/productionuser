@@ -28,6 +28,15 @@ import { CardHeader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { usePrivy } from "@privy-io/react-auth";
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import WalletIcon from '@mui/icons-material/Wallet';
+import DescriptionIcon from '@mui/icons-material/Description';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const drawerWidth = 240;
 
@@ -197,16 +206,32 @@ useEffect(() => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      {/*<AppBar
+      <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Permanent drawer
+          <Typography variant="h6" noWrap component="div" className='tit'>
+            Novapay
           </Typography>
+          <TextField
+          label="Search"
+          id="outlined-start-adornment"
+          className='fi1'
+          sx={{ m: 1, width: '60%'}}
+        />
+        <div className='icon-noti'>
+          <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
+        </div>
+        <div className='profile flex'>
+          <div className='profile-icon'></div>
+          <Typography className='profile-text'>{user5?.data?.shop}</Typography>
+        </div>
+        <Link className='icon-noti' onClick={logout}>
+          <LogoutIcon sx={{ color: "#D0D0D0", fontSize: 18 }}/>
+        </Link>
         </Toolbar>
-      </AppBar>*/}
+      </AppBar>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -219,16 +244,16 @@ useEffect(() => {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
         <Divider />
         <List>
+          <div className='mb20'></div>
             <ListItem key="home" disablePadding>
               <Link to= "/" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <HomeIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
-                <ListItemText primary="home" />
+                <ListItemText primary="Home" />
               </ListItemButton>
               </Link>
             </ListItem>
@@ -238,21 +263,9 @@ useEffect(() => {
               <Link to= "/invoicecreate" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <ReceiptIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Invoice" />
-              </ListItemButton>
-              </Link>
-            </ListItem>
-        </List>
-        <List>
-            <ListItem key="Invoicelist" disablePadding>
-              <Link to= "/invoicelist" className='ti'>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon /> 
-                </ListItemIcon>
-                <ListItemText primary="InvoiceList" />
               </ListItemButton>
               </Link>
             </ListItem>
@@ -262,9 +275,9 @@ useEffect(() => {
               <Link to= "/wallet" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <WalletIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
-                <ListItemText primary="wallet" />
+                <ListItemText primary="Wallet" />
               </ListItemButton>
               </Link>
             </ListItem>
@@ -274,27 +287,40 @@ useEffect(() => {
               <Link to= "/request" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <DescriptionIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Request" />
               </ListItemButton>
               </Link>
             </ListItem>
         </List>
+        <div className='mb5'></div>
+        <Typography className='others'>Others</Typography>
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>
               <Link to= "/settings" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <SettingsIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Settings" />
               </ListItemButton>
               </Link>
             </ListItem>
         </List>
-        <Button className='lit4 justcenter flex' variant="contained" onClick={logout}>Logout</Button>
+        <List>
+            <ListItem key="Support" disablePadding disabled="true">
+              <Link to= "" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ContactSupportIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                </ListItemIcon>
+                <ListItemText primary="Support" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
       </Drawer>
       <Box
         component="main"
@@ -306,45 +332,64 @@ useEffect(() => {
         <div>
             {hasaccount ? 
           <div class="">
-            <Typography variant='h4' className='mb5'>Merchant Requests</Typography>
-            {invoicemap ? invoicemap?.map((invoice) => (
-                  <Card className='width'>
-                    <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>User Wallet Address</Typography>
-                      <Typography>{invoice?.useradress}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Amount</Typography>
-                      <Typography>{invoice?.amount}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Token</Typography>
-                      <Typography>{invoice?.token}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Paid status</Typography>
-                      <Typography>{invoice?.isapproved == true ? "true" : "false"}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Denied status</Typography>
-                      <Typography>{invoice?.isdenied == true ? "true" : "false"}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Pay</Typography>
-                      <Button className='lit4 justcenter flex' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Deny</Typography>
-                      <Button className='lit4 justcenter flex' variant="contained"  onClick={() => deny()}>Deny</Button>
-                    </div>
-                    </CardContent>
-                  </Card>
-                  )) : 
-                  <Card>
-                  <Typography>No invoice</Typography>
-                  </Card>
-                  }
+            <div className='mbmain'></div>
+            {/*<Typography variant='h4' className='mb5'>Merchant Requests</Typography>*/}
+            <Card className='width inv'>
+              <div className='mb4'></div>
+              <Typography className='inv-header'>User Withdrawal Requests</Typography>
+              <div className='spacearound flex pip width'>
+                     <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>User</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>User Address</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20 aligncenter'>
+                        <Typography>Reason</Typography>
+                      </div>
+              </div>
+              <div className='p20'>
+                {invoicemap ? invoicemap?.map((invoice) => (
+                      <Card className='width dip'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>12/10/2024</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>not available</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter row width10'>
+                          <Typography>{invoice?.useradress.slice(0,8)}....</Typography>
+                          <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice?.amount}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice?.token}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter width20'>
+                          <Button className='lit4 justcenter flex pay' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                        </div>
+                        </CardContent>
+                      </Card>
+                      )) : 
+                      <Card>
+                      <Typography>No request</Typography>
+                      </Card>
+                }
+              </div>
+            </Card>
           </div> :
           <div class="vertical-center">
             <Typography>You do not have an account. Register to continue</Typography>

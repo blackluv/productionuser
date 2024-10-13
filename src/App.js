@@ -33,6 +33,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import WalletIcon from '@mui/icons-material/Wallet';
+import DescriptionIcon from '@mui/icons-material/Description';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 
 const drawerWidth = 240;
 
@@ -289,16 +297,32 @@ export default function PermanentDrawerLeft() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      {/*<AppBar
+      <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Permanent drawer
+          <Typography variant="h6" noWrap component="div" className='tit'>
+            Novapay
           </Typography>
+          <TextField
+          label="Search"
+          id="outlined-start-adornment"
+          className='fi1'
+          sx={{ m: 1, width: '60%'}}
+        />
+        <div className='icon-noti'>
+          <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
+        </div>
+        <div className='profile flex'>
+          <div className='profile-icon'></div>
+          <Typography className='profile-text'>{user5?.data?.shop}</Typography>
+        </div>
+        <Link className='icon-noti' onClick={logout}>
+          <LogoutIcon sx={{ color: "#D0D0D0", fontSize: 18 }}/>
+        </Link>
         </Toolbar>
-      </AppBar>*/}
+      </AppBar>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -311,16 +335,16 @@ export default function PermanentDrawerLeft() {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
         <Divider />
         <List>
+          <div className='mb20'></div>
             <ListItem key="home" disablePadding>
               <Link to= "/" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <HomeIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
-                <ListItemText primary="home" />
+                <ListItemText primary="Home" />
               </ListItemButton>
               </Link>
             </ListItem>
@@ -330,7 +354,7 @@ export default function PermanentDrawerLeft() {
               <Link to= "/invoicecreate" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <ReceiptIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Invoice" />
               </ListItemButton>
@@ -342,9 +366,9 @@ export default function PermanentDrawerLeft() {
               <Link to= "/wallet" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <WalletIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
-                <ListItemText primary="wallet" />
+                <ListItemText primary="Wallet" />
               </ListItemButton>
               </Link>
             </ListItem>
@@ -354,27 +378,40 @@ export default function PermanentDrawerLeft() {
               <Link to= "/request" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <DescriptionIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Request" />
               </ListItemButton>
               </Link>
             </ListItem>
         </List>
+        <div className='mb5'></div>
+        <Typography className='others'>Others</Typography>
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>
               <Link to= "/settings" className='ti'>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon /> 
+                  <SettingsIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
                 <ListItemText primary="Settings" />
               </ListItemButton>
               </Link>
             </ListItem>
         </List>
-        <Button className='lit4 justcenter flex' variant="contained" onClick={logout}>Logout</Button>
+        <List>
+            <ListItem key="Support" disablePadding disabled="true">
+              <Link to= "" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ContactSupportIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                </ListItemIcon>
+                <ListItemText primary="Support" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
       </Drawer>
       <Box
         component="main"
@@ -387,6 +424,7 @@ export default function PermanentDrawerLeft() {
           
             {hasaccount ? 
           <div class="">
+            <div className='mbmain'></div>
             <div className='flex spacebetween width mb2'>
               <Card className='lit1 justcenter flex'>
                 <CardContent className='flex aligncenter column'>
