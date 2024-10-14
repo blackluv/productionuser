@@ -211,6 +211,13 @@ align-items: center;
   border: 1px solid #358FE5 !important;
   margin-right: 10px;
 }
+.profile1-icon{
+  width: 33px !important;
+  height: 33px !important;
+  border-radius: 28px !important;
+  border: 1px solid #358FE5 !important;
+  margin-right: 10px;
+}
 .profile-text1{
   color: #FFFFFF !important;
   font-weight: 300 !important;
