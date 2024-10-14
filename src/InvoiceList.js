@@ -37,6 +37,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import IconButton from '@mui/material/IconButton';
 
 const drawerWidth = 240;
 
@@ -78,6 +79,7 @@ export default function PermanentDrawerLeft() {
   const [value, setValue] = React.useState(0);
   const [hasaccount, setHasaccount] = React.useState(false);
   const [shopname1, setShopname1] = useState('');
+  const [copySuccess, setCopySuccess] = useState('');
 
   const { ready, authenticated, user, login, logout } = usePrivy();
   const style = {
@@ -173,6 +175,15 @@ export default function PermanentDrawerLeft() {
           console.log(btcbal?.data?.shop, 'hasaccount2')
         }
         hasaccount2()
+      }
+
+      const handleCopy = async (_textToCopy) => {
+        try {
+            await navigator.clipboard.writeText(_textToCopy);
+            setCopySuccess('Copied!');
+        } catch (err) {
+            setCopySuccess('Failed to copy!');
+        }
       }
 
   /*const connectWallet = async () => {
@@ -369,7 +380,9 @@ useEffect(() => {
                         </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.useradress.slice(0,8)}....</Typography>
-                          <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress)}>
+                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{invoice?.amount}</Typography>
@@ -384,7 +397,7 @@ useEffect(() => {
                         </CardContent>
                       </Card>
                       )) : 
-                      <Card>
+                      <Card className='inv'>
                       <Typography>No request</Typography>
                       </Card>
                 }

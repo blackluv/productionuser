@@ -43,6 +43,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import IconButton from '@mui/material/IconButton';
 
 const drawerWidth = 240;
 
@@ -89,6 +90,7 @@ export default function PermanentDrawerLeft() {
   const [alert, setAlert] = useState(false);
   const [alertContent, setAlertContent] = useState('');
   const { ready, authenticated, user, login, logout } = usePrivy();
+  const [copySuccess, setCopySuccess] = useState('');
 
   const style = {
     position: 'absolute',
@@ -144,6 +146,15 @@ export default function PermanentDrawerLeft() {
     let user = edituser(invoice, currency)
     console.log(user, 'user')
     //props.history.push("/");
+  }
+
+  const handleCopy = async (_textToCopy) => {
+    try {
+        await navigator.clipboard.writeText(_textToCopy);
+        setCopySuccess('Copied!');
+    } catch (err) {
+        setCopySuccess('Failed to copy!');
+    }
   }
 
   async function edituser(invoice, currency) {
@@ -477,7 +488,9 @@ useEffect(() => {
                          </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice.transactionhash.slice(0,8)}...</Typography>
-                          <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice.transactionhash)}>
+                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{invoice.amount}</Typography>

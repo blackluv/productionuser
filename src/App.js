@@ -50,6 +50,7 @@ import eth from './images/eth.png'
 import usdt from './images/usdt.png'
 import trx from './images/trx.png'
 import sol from './images/sol.png'
+import IconButton from '@mui/material/IconButton';
 
 const drawerWidth = 240;
 
@@ -105,6 +106,7 @@ export default function PermanentDrawerLeft() {
   const [age5, setAge5] = React.useState('');
   const [age6, setAge6] = React.useState('');
   const [age7, setAge7] = React.useState('');
+  const [copySuccess, setCopySuccess] = useState('');
 
   const { ready, authenticated, user, login, logout } = usePrivy();
 
@@ -431,6 +433,15 @@ export default function PermanentDrawerLeft() {
             .then(data => data.json()
           )
          }
+
+         const handleCopy = async (_textToCopy) => {
+          try {
+              await navigator.clipboard.writeText(_textToCopy);
+              setCopySuccess('Copied!');
+          } catch (err) {
+              setCopySuccess('Failed to copy!');
+          }
+        }
 
      async function request(hash, amount, shop) {
       const urlencoded = new URLSearchParams()
@@ -816,7 +827,9 @@ export default function PermanentDrawerLeft() {
                         </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.useradress.slice(0,8)}....</Typography>
-                          <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress)}>
+                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{invoice?.amount}</Typography>
