@@ -393,7 +393,7 @@ useEffect(() => {
                   </form>*/}
               <Card className='width inv'>
                 <div className='mb4'></div>
-                <div className='flex width spacebetween alignbase'>
+                <div className='flex width spacebetween alignbase mb2'>
                   <Typography className='inv-header'>Invoice List</Typography>
                   <Button
                         variant="contained"
