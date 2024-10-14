@@ -44,6 +44,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import IconButton from '@mui/material/IconButton';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 const drawerWidth = 240;
 
@@ -499,7 +501,7 @@ useEffect(() => {
                           <img src={`./images/${invoice.paidin}.png`} height='30px' width='30px' alt={invoice.paidin}/>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
+                          <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
                         </div>
                           <Link variant="contained" className='width10' to={'/invoice/' +  invoice.transactionhash}>View</Link>
                         </CardContent>
