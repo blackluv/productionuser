@@ -793,7 +793,9 @@ export default function PermanentDrawerLeft() {
               <div className='mb4'></div>
               <div className='flex width spacebetween alignbase'>
                   <Typography className='inv-header'>Withdrawal requests</Typography>
-                  <FilterListIcon sx={{ color: "#606060", fontSize: 25, marginRight: 5 }}/> 
+                  <IconButton aria-label="filter">
+                    <FilterListIcon sx={{ color: "#606060", fontSize: 25, marginRight: 5 }}/> 
+                  </IconButton>
               </div>
               <div className='spacearound flex pip width'>
                      <div className='justcenter flex aligncenter column width10'>
