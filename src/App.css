@@ -135,10 +135,10 @@
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper{
   height: 100% !important;
 }
-.css-22u6wc .MuiDrawer-paper {
+/*.css-22u6wc .MuiDrawer-paper {
   width: 210px !important;
   box-sizing: border-box;
-}
+}*/
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper{
   top: 18% !important;
   left: 2% !important;
@@ -324,10 +324,10 @@ input.Mui-focused{
 /*.dip{
   background: #0E0D12 !important;
 }*/
-.css-46bh2p-MuiCardContent-root:last-child{
+.css-46bh2p-MuiCardContent-root:last-child, .css-1qw96cp:last-child{
   padding-bottom: 8px !important;
 }
-.css-46bh2p-MuiCardContent-root{
+.css-46bh2p-MuiCardContent-root, .css-1qw96cp{
   padding: 8px !important;
 }
 
