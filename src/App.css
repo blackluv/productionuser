@@ -132,10 +132,10 @@
 }
 
 /*Strating new designs */
-.css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper{
   height: 100% !important;
 }
-.css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper{
   top: 18% !important;
   left: 2% !important;
   border-radius: 18px !important;
