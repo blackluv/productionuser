@@ -48,6 +48,10 @@
   width: 14%;
 }
 
+.duf{
+  font-size: 10px;
+}
+
 .flex{
   display: flex;
 }
@@ -337,6 +341,85 @@ input.Mui-focused{
   color: #BDBDBD !important;
 }
 
+.mat1{
+  width: 38%;
+  height: 255px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wal1{
+  width: 71%;
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wal2{
+  width: 27%;
+  height: 290px;
+  justify-content: space-between;
+}
+
+.pt5{
+  padding-top: 5%;
+}
+.pr5{
+  padding-right: 5%;
+}
+.pl5{
+  padding-left: 5%;
+}
+.pb2{
+  padding-bottom: 2%;
+}
+.wal3{
+  width: 100%;
+  height: 190px;
+}
+
+.wal4{
+  width: 100%;
+  height: 92px;
+}
+
+.ash1{
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 27px;
+  color: #606060;
+}
+.ash{
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 27px;
+  color: #606060;
+}
+
+.aligncenter{
+  align-items: center;
+}
+
+.mat2{
+  width: 25%;
+  height: 250px;
+}
+
+.mat3{
+  width: 34%;
+  height: 250px;
+}
+.mat3-div{
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1% !important;
+}
+
+.p5{
+  padding: 5%;
+}
+
 .css-1i9yb4d{
   border-radius: 12px !important;
 }
@@ -352,6 +435,29 @@ input.Mui-focused{
   border: 1px solid #262626 !important;
   border-radius: 8px !important;
   color: #BDBDBD !important;
+}
+
+.ash{
+  color: #D0D0D0 !important;
+  margin-left: 2% !important;
+}
+
+.cen-header{
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 31px;
+  color: #FFFFFF;
+  margin-bottom: 3% !important;
+}
+.mt5{
+  margin-top: 5%;
+}
+
+.shim{
+  font-weight: 300 !important;
+  font-size: 34px !important;
+  line-height: 35px !important;
+  color: #FFFFFF;
 }
 
 @keyframes App-logo-spin {

@@ -41,6 +41,10 @@ import WalletIcon from '@mui/icons-material/Wallet';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+//import { PieChart } from '@mui/x-charts/PieChart';
+import { ResponsiveContainer, PieChart, Pie, Legend, Tooltip } from "recharts";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 const drawerWidth = 240;
 
@@ -182,14 +186,22 @@ export default function PermanentDrawerLeft() {
       )
      }
   //getallinvoi
-    const {
+    /*const {
       data: user4,
       error4,
       isValidating4,
     } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-    console.log(user4, 'countries4')
-
+    console.log(user4, 'countries4')*/
+    const {
+      data: user4,
+      error4,
+      isValidating4,
+    } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+    console.log(user4?.data, 'countries4')
+  
     const invoicemap = user4?.data
+
+    //const invoicemap = user4?.data
     //getallwithdrawals
     const {
       data: user10,
@@ -233,6 +245,39 @@ export default function PermanentDrawerLeft() {
         .then(data => data.json()
       )
      }
+
+     async function pay(amount, token, addressto) {
+      const urlencoded = new URLSearchParams()
+      urlencoded.append("amount", amount)
+      urlencoded.append("api", user5?.data?.apikey)
+      urlencoded.append("token", token)
+      urlencoded.append("addressto", addressto)
+      console.log("api", user5?.data?.apikey)
+        return fetch('https://novapay.live/api/sendtx', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: urlencoded
+        })
+          .then(data => data.json()
+        )
+       }
+  
+       async function deny() {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        console.log("api", user5?.data?.apikey)
+          return fetch('https://novapay.live/api/request/deny', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+         }
 
      async function request(hash, amount, shop) {
       const urlencoded = new URLSearchParams()
@@ -426,87 +471,218 @@ export default function PermanentDrawerLeft() {
           <div class="">
             <div className='mbmain'></div>
             <div className='flex spacebetween width mb2'>
-              <Card className='lit1 justcenter flex'>
-                <CardContent className='flex aligncenter column'>
-                <Typography>Orders</Typography>
-                <Typography>{user2?.data}</Typography>
-                </CardContent>
-              </Card>
-              <Card className='lit1 justcenter aligncenter flex'>
-                <CardContent className='flex aligncenter column'>
-                <Typography>Webhook Key</Typography>
-                <Typography>{user5?.data?.webhookkey ? user5?.data?.webhookkey : "Set webhook endpoint"}</Typography>
-                </CardContent>
-              </Card>
-              <Card className='mr2'>
-                <CardContent className="flex width aligncenter justcenter column">
-                  <Typography>Merchant Key</Typography>
-                  <Typography>{user5?.data?.apikey}</Typography>
-                </CardContent>
-              </Card>
-              {/*<Button className='lit1 justcenter flex' variant="contained" disabled="true">Request Withdraw</Button> */}
+              <div className='mat1 inv'>
+                <div className='flex width spacebetween alignbase'>
+                  <Typography className='inv-header'>Merchant Wallet</Typography>
+                  <TextField
+                    label="Search Currency"
+                    id="outlined-start-adornment"
+                    className='fi1'
+                    sx={{ m: 1, width: '48%'}}
+                  />
+                </div>
+                <div className='p5'>
+                      <Card className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>icon</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width10'>
+                          <Typography>BTC</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>0.009</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>$100</Typography>
+                        </div>
+                        </CardContent>
+                      </Card>
+                      <Card className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>icon</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width10'>
+                          <Typography>TRX</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>0.009</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>$100</Typography>
+                        </div>
+                        </CardContent>
+                      </Card>
+                      <Card className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>icon</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width10'>
+                          <Typography>ETH</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>0.009</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>$100</Typography>
+                        </div>
+                        </CardContent>
+                      </Card>
+                      <Card className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>icon</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width10'>
+                          <Typography>SOL</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>0.009</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>$100</Typography>
+                        </div>
+                        </CardContent>
+                      </Card>
+                      <Card className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>icon</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width10'>
+                          <Typography>USDT-TRC20</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>0.009</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>$100</Typography>
+                        </div>
+                        </CardContent>
+                      </Card>
+                      <Card className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>icon</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width10'>
+                          <Typography>USDT-ERC20</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>0.009</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>$100</Typography>
+                        </div>
+                        </CardContent>
+                      </Card>
+                </div>
+              </div>
+              <div className='mat2 inv aligncenter flex column ' /*style={{ width: '100px', height: 300 }}*/>
+                <div className='flex width spacebetween aligncenter p5'>
+                    <Typography className='cen-header'>Total Wallet </Typography>
+                    <Typography className='cen-header'>$</Typography>
+                  </div>
+                <ResponsiveContainer width={180} height={180}>
+                  <PieChart /*width={1000} height={400*/>
+                    <Pie
+                      dataKey="value"
+                      data={
+                        [
+                          { name: "BTC", value: 2400 },
+                          { name: "SOL", value: 4567 },
+                          { name: "ETH", value: 1398 },
+                          { name: "TRX", value: 9800 },
+                          { name: "USDT-TRC20", value: 3908 },
+                          { name: "USDT-ERC20", value: 4800 }
+                        ]
+                      }
+                      //cx={500}
+                      //cy={200}
+                      innerRadius={40}
+                      outerRadius={80}
+                      fill="#82ca9d"
+                    />
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              <div className='mat3'>
+                <div className='mat3-div inv flex row aligncenter'>
+                  <Typography className='ash1' >Transaction Count</Typography>
+                  <Typography className='ash'>{user2?.data}</Typography>
+                </div>
+                <div className='mat3-div inv flex aligncenter'>
+                  <Typography className='ash1 mb2'>API Key</Typography>
+                  <Typography className='ash'>{user5?.data?.apikey}</Typography>
+                </div>
+                <div className='mat3-div inv flex aligncenter'>
+                  <Typography className='ash1'>Webhook Key</Typography>
+                  <Typography className='ash'>{user5?.data?.webhookkey ? user5?.data?.webhookkey : "Set webhook endpoint"}</Typography>
+                </div>
+              </div>
             </div>
-            <div className='flex width aligncenter justcenter mb2'>        
-              <Card className=''>
-                <CardContent className="flex width aligncenter justcenter column">
-                  <Typography>Wallet Address</Typography>
-                  <Typography>{user?.wallet?.address}</Typography>
-                </CardContent>
-              </Card>
-            </div>
-            <Box sx={{ width: '100%' }}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                  <Tab label="Invoice (Deposits)" {...a11yProps(0)} />
-                  <Tab label="USDT Requests" {...a11yProps(1)} />
-                </Tabs>
-              </Box>
-              <CustomTabPanel value={value} index={0}>
-              {invoicemap ? invoicemap?.map((invoice) => (
-                <Card className='width'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Id</Typography>
-                      <Typography>{invoice.transactionhash}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Amount</Typography>
-                      <Typography>{invoice.amount}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Status</Typography>
-                      <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
-                    </div>
-                    <Button className='lit4 justcenter flex' variant="contained" onClick={() => awaittx(invoice?.transactionhash)}>Check tx</Button>
-                  </CardContent>
-                </Card>
-                )) : <Typography>No invoice</Typography>}
-              </CustomTabPanel>
-              <CustomTabPanel value={value} index={1}>
-              {requestmap ? requestmap?.map((invoice) => (
-                <Card className='width'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Id</Typography>
-                      <Typography>{invoice.paymenttx}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Shopname</Typography>
-                      <Typography>{invoice.shopname}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Token</Typography>
-                      <Typography>{invoice.token}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Status</Typography>
-                      <Typography>{invoice.isapproved == true ? "true" : "false"}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                )) : <Typography>No Requests</Typography>}
-              </CustomTabPanel>
-            </Box>
+            <Card className='width inv'>
+              <div className='mb4'></div>
+              <div className='flex width spacebetween alignbase'>
+                  <Typography className='inv-header'>Withdrawal requests</Typography>
+                  <FilterListIcon sx={{ color: "#606060", fontSize: 25, marginRight: 5 }}/> 
+              </div>
+              <div className='spacearound flex pip width'>
+                     <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>User</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Wallets</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20 aligncenter'>
+                        <Typography>Action</Typography>
+                      </div>
+              </div>
+              <div className='p20'>
+                {invoicemap ? invoicemap?.map((invoice) => (
+                      <Card className='width dip'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>12/10/2024</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>not available</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter row width20'>
+                          <Typography>{invoice?.useradress.slice(0,8)}....</Typography>
+                          <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice?.amount}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice?.token}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter width20'>
+                          <Button className='lit4 justcenter flex pay' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                        </div>
+                        </CardContent>
+                      </Card>
+                      )) : 
+                      <Card>
+                      <Typography>No request</Typography>
+                      </Card>
+                }
+              </div>
+            </Card>
           </div>
            :
           <div class="vertical-center">

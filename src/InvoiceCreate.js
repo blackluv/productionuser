@@ -238,7 +238,7 @@ useEffect(() => {
           <LogoutIcon sx={{ color: "#D0D0D0", fontSize: 18 }}/>
         </Link>
         </Toolbar>
-      </AppBar>*
+      </AppBar>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -452,7 +452,7 @@ useEffect(() => {
                      <div className='justcenter flex aligncenter column width10'>
                         <Typography>Date</Typography>
                       </div>
-                      <div className='justcenter flex aligncenter column width10'>
+                      <div className='justcenter flex aligncenter column width20'>
                         <Typography>Transaction id</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
@@ -475,7 +475,7 @@ useEffect(() => {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
                          </div>
-                        <div className='justcenter flex aligncenter row width10'>
+                        <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice.transactionhash.slice(0,8)}...</Typography>
                           <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                         </div>

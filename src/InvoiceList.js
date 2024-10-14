@@ -344,8 +344,8 @@ useEffect(() => {
                       <div className='justcenter flex aligncenter column width10'>
                         <Typography>User</Typography>
                       </div>
-                      <div className='justcenter flex aligncenter column width10'>
-                        <Typography>User Address</Typography>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Wallets</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
                         <Typography>Amount</Typography>
@@ -367,7 +367,7 @@ useEffect(() => {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>not available</Typography>
                         </div>
-                        <div className='justcenter flex aligncenter row width10'>
+                        <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.useradress.slice(0,8)}....</Typography>
                           <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                         </div>
