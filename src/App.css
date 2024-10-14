@@ -135,6 +135,10 @@
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper{
   height: 100% !important;
 }
+.css-22u6wc .MuiDrawer-paper {
+  width: 200px !important;
+  box-sizing: border-box;
+}
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper{
   top: 18% !important;
   left: 2% !important;
