@@ -655,7 +655,7 @@ useEffect(() => {
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
         </div>
         <div className='profile flex'>
-          <div className='profile-icon'>i</div>
+          <div className='profile-icon'></div>
           <Typography className='profile-text'>{user5?.data?.shop}</Typography>
         </div>
         <Link className='icon-noti' onClick={logout}>

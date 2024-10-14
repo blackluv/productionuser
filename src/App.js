@@ -45,6 +45,11 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { ResponsiveContainer, PieChart, Pie, Legend, Tooltip } from "recharts";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import btc from './images/btc.png'
+import eth from './images/eth.png'
+import usdt from './images/usdt.png'
+import trx from './images/trx.png'
+import sol from './images/sol.png'
 
 const drawerWidth = 240;
 
@@ -92,6 +97,14 @@ export default function PermanentDrawerLeft() {
   const [bal, setBal] = useState(0);
   const [connectedaddress, setConnectedaddress] = useState();
   const [age, setAge] = React.useState('');
+  const [currency1, setCurrency1] = React.useState('');
+  const [age1, setAge1] = React.useState('');
+  const [age2, setAge2] = React.useState('');
+  const [age3, setAge3] = React.useState('');
+  const [age4, setAge4] = React.useState('');
+  const [age5, setAge5] = React.useState('');
+  const [age6, setAge6] = React.useState('');
+  const [age7, setAge7] = React.useState('');
 
   const { ready, authenticated, user, login, logout } = usePrivy();
 
@@ -144,6 +157,146 @@ export default function PermanentDrawerLeft() {
   }
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
+
+  const cur = async () => {
+    if(user5?.data?.currency == undefined){
+      setCurrency1('USD ')
+    } else{
+      setCurrency1(user5?.data?.currency)
+    }
+  }
+
+  const cur2 = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge1(used?.balanceinusd ? used?.balanceinusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge1(used?.balanceineur ? used?.balanceineur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge1(used?.balanceinaed ? used?.balanceinaed : 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge1(used?.balanceinusd ? used?.balanceinusd : 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge1(used?.balanceingbp ? used?.balanceingbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge1(used?.balanceininr ? used?.balanceininr : 0)
+    }
+  }
+
+  const btcval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge2(used?.btcbalusd ? used?.btcbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge2(used?.btcbaleur ? used?.btcbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge2(used?.btcbalaed ? used?.btcbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge2(used?.btcbalusd ? used?.btcbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge(used?.btcbalgbp ? used?.btcbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge2(used?.btcbalinr ? used?.btcbalinr : 0)
+    }
+  }
+
+  const ethval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge3(used?.ethbalusd ? used?.ethbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge3(used?.ethbaleur ? used?.ethbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge3(used?.ethbalaed ? used?.ethbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge3(used?.ethbalusd ? used?.ethbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge3(used?.ethbalgbp ? used?.ethbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge3(used?.ethbalinr ? used?.ethbalinr : 0)
+    }
+  }
+
+  const solval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge4(used?.solbalusd ? used?.solbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge4(used?.solbaleur ? used?.solbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge4(used?.solbalaed ? used?.solbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge4(used?.solbalusd ? used?.solbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge4(used?.solbalgbp ? used?.solbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge4(used?.solbalinr ? used?.solbalinr : 0)
+    }
+  }
+
+  const trxval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge5(used?.trxbalusd ? used?.trxbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge5(used?.trxbaleur ? used?.trxbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge5(used?.trxbalaed ? used?.trxbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge5(used?.trxbalusd ? used?.trxbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge5(used?.trxbalgbp ? used?.trxbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge5(used?.trxbalinr ? used?.trxbalinr : 0)
+    }
+  }
+
+  const usdtval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge6(used?.usdtbalusd ? used?.usdtbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge6(used?.usdtbaleur ? used?.usdtbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge6(used?.usdtbalaed ? used?.usdtbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge6(used?.usdtbalusd ? used?.usdtbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge6(used?.usdtbalgbp ? used?.usdtbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge6(used?.usdtbalinr ? used?.usdtbalinr : 0)
+    }
+  }
+
+  const usdttrxval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge7(used?.usdttrxbalusd ? used?.usdttrxbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge7(used?.usdttrxbaleur ? used?.usdttrxbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge7(used?.usdttrxbalaed ? used?.usdttrxbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge7(used?.usdttrxbalusd ? used?.usdttrxbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge7(used?.usdttrxbalgbp ? used?.usdttrxbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge7(used?.usdttrxbalinr ? used?.usdttrxbalinr : 0)
+    }
+  }
+
+
+
+
+  const {
+    data: user24,
+    error24,
+    isValidating24,
+  } = useSWR('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+  //console.log(user22, 'countries22')
+  const used = user24?.data
+
+  const { data26, error26 } = useSWR('curr', cur, { refreshInterval: 36000 })
+  const { data27, error27 } = useSWR('cur2', cur2, { refreshInterval: 36000 })
+  const { data28, error28 } = useSWR('btcval', btcval, { refreshInterval: 36000 })
+  const { data29, error29 } = useSWR('solval', solval, { refreshInterval: 36000 })
+  const { data30, error30 } = useSWR('trxval', trxval, { refreshInterval: 36000 })
+  const { data31, error31 } = useSWR('ethval', ethval, { refreshInterval: 36000 })
+  const { data32, error32 } = useSWR('usdtval', usdtval, { refreshInterval: 36000 })
+  const { data34, error34 } = useSWR('usdtrxval', usdttrxval, { refreshInterval: 36000 })
 
   const handleChange300 = (event) => {
     setAge(event.target.value);
@@ -360,7 +513,7 @@ export default function PermanentDrawerLeft() {
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
         </div>
         <div className='profile flex'>
-          <div className='profile-icon'>i</div>
+          <div className='profile-icon'></div>
           <Typography className='profile-text'>{user5?.data?.shop}</Typography>
         </div>
         <Link className='icon-noti' onClick={logout}>
@@ -485,96 +638,96 @@ export default function PermanentDrawerLeft() {
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>icon</Typography>
+                          <img src={btc} height='30px' width='30px' alt='btc'/>
                          </div>
                         <div className='justcenter flex aligncenter row width10'>
                           <Typography>BTC</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>0.009</Typography>
+                          <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>$100</Typography>
+                          <Typography>{age2}</Typography>
                         </div>
                         </CardContent>
                       </Card>
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>icon</Typography>
+                          <img src={trx} height='30px' width='30px' alt='trx'/>
                          </div>
                         <div className='justcenter flex aligncenter row width10'>
                           <Typography>TRX</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>0.009</Typography>
+                          <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>$100</Typography>
+                          <Typography>{age5}</Typography>
                         </div>
                         </CardContent>
                       </Card>
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>icon</Typography>
+                        <img src={eth} height='30px' width='30px' alt='eth'/>
                          </div>
                         <div className='justcenter flex aligncenter row width10'>
                           <Typography>ETH</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>0.009</Typography>
+                          <Typography>{used?.ethbalance ? used?.ethbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>$100</Typography>
+                          <Typography>{age3}</Typography>
                         </div>
                         </CardContent>
                       </Card>
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>icon</Typography>
+                        <img src={sol} height='30px' width='30px' alt='sol'/>
                          </div>
                         <div className='justcenter flex aligncenter row width10'>
                           <Typography>SOL</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>0.009</Typography>
+                          <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>$100</Typography>
+                          <Typography>{age4}</Typography>
                         </div>
                         </CardContent>
                       </Card>
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>icon</Typography>
+                        <img src={usdt} height='30px' width='30px' alt='usdt'/>
                          </div>
                         <div className='justcenter flex aligncenter row width10'>
                           <Typography>USDT-TRC20</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>0.009</Typography>
+                          <Typography>{used?.usdttrxbalance ? used?.usdttrxbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>$100</Typography>
+                          <Typography>{age7}</Typography>
                         </div>
                         </CardContent>
                       </Card>
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>icon</Typography>
+                        <img src={usdt} height='30px' width='30px' alt='usdt'/>
                          </div>
                         <div className='justcenter flex aligncenter row width10'>
                           <Typography>USDT-ERC20</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>0.009</Typography>
+                          <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>$100</Typography>
+                          <Typography>{age6}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -583,7 +736,7 @@ export default function PermanentDrawerLeft() {
               <div className='mat2 inv aligncenter flex column ' /*style={{ width: '100px', height: 300 }}*/>
                 <div className='flex width spacebetween aligncenter p5'>
                     <Typography className='cen-header'>Total Wallet </Typography>
-                    <Typography className='cen-header'>$</Typography>
+                    <Typography className='cen-header'>{age1 ? age1 : 0} {currency1}</Typography>
                   </div>
                 <ResponsiveContainer width={180} height={180}>
                   <PieChart /*width={1000} height={400*/>
@@ -591,12 +744,12 @@ export default function PermanentDrawerLeft() {
                       dataKey="value"
                       data={
                         [
-                          { name: "BTC", value: 2400 },
-                          { name: "SOL", value: 4567 },
-                          { name: "ETH", value: 1398 },
-                          { name: "TRX", value: 9800 },
-                          { name: "USDT-TRC20", value: 3908 },
-                          { name: "USDT-ERC20", value: 4800 }
+                          { name: "BTC Value", value: age2 ? age2 : 1 },
+                          { name: "SOL Value", value: age4 ? age4 : 1},
+                          { name: "ETH Value", value: age3 ? age3 : 1},
+                          { name: "TRX Value", value: age5 ? age5 : 1},
+                          { name: "USDT-TRC20 Value", value: age7 ? age7 : 1 },
+                          { name: "USDT-ERC20 Value", value: age6 ? age6 : 1}
                         ]
                       }
                       //cx={500}
