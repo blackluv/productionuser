@@ -46,6 +46,14 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { ResponsiveContainer, PieChart, Pie, Legend, Tooltip } from "recharts";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import btc from './images/btc.png'
+import eth from './images/eth.png'
+import usdt from './images/usdt.png'
+import trx from './images/trx.png'
+import sol from './images/sol.png'
+import IconButton from '@mui/material/IconButton';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 const drawerWidth = 240;
 
@@ -142,6 +150,13 @@ export default function PermanentDrawerLeft() {
   const [age, setAge] = React.useState('');
   const [age1, setAge1] = React.useState('');
   const [currency1, setCurrency1] = React.useState('');
+  const [age2, setAge2] = React.useState('');
+  const [age3, setAge3] = React.useState('');
+  const [age4, setAge4] = React.useState('');
+  const [age5, setAge5] = React.useState('');
+  const [age6, setAge6] = React.useState('');
+  const [age7, setAge7] = React.useState('');
+  const [copySuccess, setCopySuccess] = useState('');
 
   const handleChange22 = (event) => {
     setAge(event.target.value);
@@ -419,6 +434,49 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
         .then(data => data.json()
       )
      }
+
+     const {
+      data: user14,
+      error14,
+      isValidating14,
+    } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+    console.log(user14?.data, 'countries4')
+  
+    const invoicemap1 = user14?.data
+
+    async function pay(amount, token, addressto) {
+      const urlencoded = new URLSearchParams()
+      urlencoded.append("amount", amount)
+      urlencoded.append("api", user5?.data?.apikey)
+      urlencoded.append("token", token)
+      urlencoded.append("addressto", addressto)
+      console.log("api", user5?.data?.apikey)
+        return fetch('https://novapay.live/api/sendtx', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: urlencoded
+        })
+          .then(data => data.json()
+        )
+       }
+  
+       async function deny() {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        console.log("api", user5?.data?.apikey)
+          return fetch('https://novapay.live/api/request/deny', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+         }
+  
   //getallinvoi
     const {
       data: user4,
@@ -596,6 +654,120 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       console.log(btcbal?.data?.shop, 'hasaccount2')
     }
     hasaccount2()
+  }
+
+  const btcval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge2(used?.btcbalusd ? used?.btcbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge2(used?.btcbaleur ? used?.btcbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge2(used?.btcbalaed ? used?.btcbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge2(used?.btcbalusd ? used?.btcbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge(used?.btcbalgbp ? used?.btcbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge2(used?.btcbalinr ? used?.btcbalinr : 0)
+    }
+  }
+
+  const ethval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge3(used?.ethbalusd ? used?.ethbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge3(used?.ethbaleur ? used?.ethbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge3(used?.ethbalaed ? used?.ethbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge3(used?.ethbalusd ? used?.ethbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge3(used?.ethbalgbp ? used?.ethbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge3(used?.ethbalinr ? used?.ethbalinr : 0)
+    }
+  }
+
+  const solval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge4(used?.solbalusd ? used?.solbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge4(used?.solbaleur ? used?.solbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge4(used?.solbalaed ? used?.solbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge4(used?.solbalusd ? used?.solbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge4(used?.solbalgbp ? used?.solbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge4(used?.solbalinr ? used?.solbalinr : 0)
+    }
+  }
+
+  const trxval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge5(used?.trxbalusd ? used?.trxbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge5(used?.trxbaleur ? used?.trxbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge5(used?.trxbalaed ? used?.trxbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge5(used?.trxbalusd ? used?.trxbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge5(used?.trxbalgbp ? used?.trxbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge5(used?.trxbalinr ? used?.trxbalinr : 0)
+    }
+  }
+
+  const usdtval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge6(used?.usdtbalusd ? used?.usdtbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge6(used?.usdtbaleur ? used?.usdtbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge6(used?.usdtbalaed ? used?.usdtbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge6(used?.usdtbalusd ? used?.usdtbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge6(used?.usdtbalgbp ? used?.usdtbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge6(used?.usdtbalinr ? used?.usdtbalinr : 0)
+    }
+  }
+
+  const usdttrxval = async () => {
+    if(user5?.data?.currency == undefined){
+      setAge7(used?.usdttrxbalusd ? used?.usdttrxbalusd : 0)
+    } else if(user5?.data?.currency == "EUR"){
+      setAge7(used?.usdttrxbaleur ? used?.usdttrxbaleur : 0)
+    } else if(user5?.data?.currency == "AED"){
+      setAge7(used?.usdttrxbalaed ? used?.usdttrxbalaed: 0)
+    } else if(user5?.data?.currency == "USD"){
+      setAge7(used?.usdttrxbalusd ? used?.usdttrxbalusd: 0)
+    } else if(user5?.data?.currency == "GBP"){
+      setAge7(used?.usdttrxbalgbp ? used?.usdttrxbalgbp : 0)
+    } else if(user5?.data?.currency == "INR"){
+      setAge7(used?.usdttrxbalinr ? used?.usdttrxbalinr : 0)
+    }
+  }
+
+
+
+  const { data28, error28 } = useSWR('btcval', btcval, { refreshInterval: 36000 })
+  const { data29, error29 } = useSWR('solval', solval, { refreshInterval: 36000 })
+  const { data30, error30 } = useSWR('trxval', trxval, { refreshInterval: 36000 })
+  const { data31, error31 } = useSWR('ethval', ethval, { refreshInterval: 36000 })
+  const { data32, error32 } = useSWR('usdtval', usdtval, { refreshInterval: 36000 })
+  const { data34, error34 } = useSWR('usdtrxval', usdttrxval, { refreshInterval: 36000 })
+
+  const handleCopy = async (_textToCopy) => {
+    try {
+        await navigator.clipboard.writeText(_textToCopy);
+        setCopySuccess('Copied!');
+    } catch (err) {
+        setCopySuccess('Failed to copy!');
+    }
   }
 
   /*if (!ready) {
@@ -779,7 +951,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>icon</Typography>
+                            <img src={btc} height='30px' width='30px' alt='btc'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>BTC</Typography>
@@ -788,7 +960,7 @@ useEffect(() => {
                             <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>$100</Typography>
+                            <Typography>{age2} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen66}>Send</Button>
                           <Modal
@@ -857,7 +1029,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>icon</Typography>
+                            <img src={trx} height='30px' width='30px' alt='trx'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>TRX</Typography>
@@ -866,7 +1038,7 @@ useEffect(() => {
                             <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>$100</Typography>
+                            <Typography>{age5} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen55}>Send</Button>
                           <Modal
@@ -941,7 +1113,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>icon</Typography>
+                            <img src={eth} height='30px' width='30px' alt='eth'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>ETH</Typography>
@@ -950,7 +1122,7 @@ useEffect(() => {
                             <Typography>{used?.ethbalance ? used?.ethbalance : 0}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>$100</Typography>
+                            <Typography>{age3} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen2}>Send</Button>
                           <Modal
@@ -1028,7 +1200,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>icon</Typography>
+                            <img src={sol} height='30px' width='30px' alt='sol'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>SOL</Typography>
@@ -1037,7 +1209,7 @@ useEffect(() => {
                             <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>$100</Typography>
+                            <Typography>{age4} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen44}>Send</Button>
                           <Modal
@@ -1111,7 +1283,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>icon</Typography>
+                            <img src={usdt} height='30px' width='30px' alt='usdt'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>USDT-TRC20</Typography>
@@ -1120,7 +1292,7 @@ useEffect(() => {
                             <Typography>{used?.usdttrxbalance ? used?.usdttrxbalance : 0}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>$100</Typography>
+                            <Typography>{age7} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen88}>Send</Button>
                           <Modal
@@ -1194,7 +1366,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>icon</Typography>
+                            <img src={usdt} height='30px' width='30px' alt='usdt'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>USDT-ERC20</Typography>
@@ -1203,7 +1375,7 @@ useEffect(() => {
                             <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>$100</Typography>
+                            <Typography>{age6} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen77}>Send</Button>
                           <Modal
@@ -1264,12 +1436,12 @@ useEffect(() => {
                           dataKey="value"
                           data={
                             [
-                              { name: "BTC", value: 2400 },
-                              { name: "SOL", value: 4567 },
-                              { name: "ETH", value: 1398 },
-                              { name: "TRX", value: 9800 },
-                              { name: "USDT-TRC20", value: 3908 },
-                              { name: "USDT-ERC20", value: 4800 }
+                              { name: "BTC Value", value: age2 ? age2 : 1 },
+                              { name: "SOL Value", value: age4 ? age4 : 1},
+                              { name: "ETH Value", value: age3 ? age3 : 1},
+                              { name: "TRX Value", value: age5 ? age5 : 1},
+                              { name: "USDT-TRC20 Value", value: age7 ? age7 : 1 },
+                              { name: "USDT-ERC20 Value", value: age6 ? age6 : 1}
                             ]
                           }
                           //cx={500}
@@ -1368,502 +1540,126 @@ useEffect(() => {
               </Box>
             </Modal>
             </div>*/}
-            <div className='flex width aligncenter justcenter mb2'>        
-            </div>
-            <Box sx={{ width: '100%' }}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                  <Tab label="Transactions" {...a11yProps(0)} />
-                  <Tab label="All Wallets Balance" {...a11yProps(1)} />
-                </Tabs>
+            <Card className="inv tb1 p20">
+              <Box sx={{ width: '100%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" className='flex justcenter width' centered>
+                    <Tab label="Deposits" {...a11yProps(0)} className='tb3'/>
+                    <Tab label="Withdrawals" {...a11yProps(1)} className='tb3'/>
+                  </Tabs>
+                </Box>
+                <CustomTabPanel value={value} index={0}>
+                <div className='mbmain'></div>
+                <div className='spacearound flex pip width'>
+                     <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Transaction id</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Status</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10 aligncenter'>
+                        <Typography>Tx/Hash</Typography>
+                      </div>
+              </div>
+              <div className='p20'>
+                    {invoicemap ? invoicemap?.map((invoice) => (
+                      <Card className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>12/10/2024</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width20'>
+                          <Typography>{invoice.transactionhash.slice(0,8)}...</Typography>
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice.transactionhash)}>
+                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          </IconButton>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice.amount}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <img src={`./images/${invoice.paidin}.png`} height='30px' width='30px' alt={invoice.paidin}/>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
+                        </div>
+                          <Link variant="contained" className='width10' to={'/invoice/' +  invoice.transactionhash}>View</Link>
+                        </CardContent>
+                      </Card>
+                    )) : 
+                    <Card className='inv'>
+                    <Typography>No invoice</Typography>
+                    </Card>
+                    }
+                  </div>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={1}>
+                <div className='spacearound flex pip width'>
+                     <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>User</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Wallets</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20 aligncenter'>
+                        <Typography>Reason</Typography>
+                      </div>
+              </div>
+              <div className='p20'>
+                {invoicemap1 ? invoicemap1?.map((invoice) => (
+                      <Card className='width dip'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>12/10/2024</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>not available</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter row width20'>
+                          <Typography>{invoice?.useradress.slice(0,8)}....</Typography>
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress)}>
+                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          </IconButton>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice?.amount}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <img src={`./images/${invoice?.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
+                        </div>
+                        <div className='justcenter flex aligncenter width20'>
+                          <Button className='lit4 justcenter flex pay' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                        </div>
+                        </CardContent>
+                      </Card>
+                      )) : 
+                      <Card className='inv'>
+                      <Typography>No request</Typography>
+                      </Card>
+                }
+              </div>
+                </CustomTabPanel>
               </Box>
-              <CustomTabPanel value={value} index={0}>
-              {/*rest ? rest?.map((resp) => (
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Hash</Typography>
-                      <Typography> {resp?.hash.slice(0, 6)}...{resp?.hash.slice(-4)}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Confirmation</Typography>
-                      <Typography>{resp?.confirmations}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Amount</Typography>
-                      <Typography>{Math.round(ethers.utils.formatEther(resp?.value) * 1e2) / 1e2}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>To Address</Typography>
-                      <Typography>{resp?.to.slice(0, 6)}...{resp?.to.slice(-4)}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                )) : <Typography></Typography>*/}
-              {/*rest1 ? rest1?.map((resp) => (
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Hash</Typography>
-                      <Typography> {resp?.txID.slice(0, 6)}...{resp?.txID.slice(-4)}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Confirmation</Typography>
-                      <Typography>{resp?.ret[0].contractret}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Amount</Typography>
-                      <Typography>{resp?.raw_data.contract[0].parameter.value.amount / 1000000}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>To Address</Typography>
-                      <Typography>{resp?.raw_data.contract[0].parameter.value.to_address.slice(0, 6)}...{resp?.raw_data.contract[0].parameter.value.to_address.slice(-4)}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                )) : <Typography></Typography>*/}
-              {rest2 ? rest2?.map((resp) => (
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Transaction Hash</Typography>
-                      <Typography> {resp?.tx_hash.slice(0, 6)}...{resp?.tx_hash.slice(-4)}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Confirmation</Typography>
-                      <Typography>{resp?.confirmations}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Amount</Typography>
-                      <Typography>{resp?.value / 100000000}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                )) : <Typography></Typography>}
-                {solhi ? solhi?.map((resp) => (
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Sender</Typography>
-                      <Typography> {resp?.info.sender.slice(0, 6)}...{resp?.info.sender.slice(-4)}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Amount</Typography>
-                      <Typography>{resp?.info.amount}</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Type</Typography>
-                      <Typography>Solana</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Reciever</Typography>
-                      <Typography>{resp?.info.reciever.slice(0, 6)}...{resp?.info.reciever.slice(-4)}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                )) : <Typography></Typography>}
-              </CustomTabPanel>
-              <CustomTabPanel value={value} index={1}>
-              <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Ethereum</Typography>
-                    </div>
-                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export</Button>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.ethbalance ? used?.ethbalance / 1000000000000000000 : 0}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Solana</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.solbalance ? used?.solbalance / 1000000000 : 0}</Typography>
-                    </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen44}>Send</Button>
-                    <Modal
-              open={open44}
-              onClose={handleClose44}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box className='flex aligncenter justcenter topping'
-              >
-                {success1 == true ? 
-                <Card className='width p20'>
-                  <Typography>Transfer of {shopname44} {token1} is successful</Typography>
-                  <CheckCircleIcon />
-                </Card>
-                :<Card className='halfwidth'>
-                  <CardContent>
-                  <Typography variant='h4'>Transfer Solana</Typography>
-                    <form onSubmit={handleSubmit44}>
-                        <TextField
-                            label="amount"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='text'
-                            onChange={e => setShopname44(e.target.value)}
-                        />
-                        <TextField
-                            label="enter address to"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='text'
-                            onChange={e => setEmail44(e.target.value)}
-                        />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            className='width'
-                        >
-                            Submit
-                        </Button>
-                    </form>
-                  </CardContent>
-                  </Card>}
-              </Box>
-            </Modal>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen100}>Export</Button>
-                    <Modal
-                      open={open100}
-                      onClose={handleClose100}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      {/*<Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                          Complete registration
-                        </Typography>
-                      </Box>*/}
-                      <Box className='flex aligncenter justcenter topping'
-                      >
-                        <Card className='width p20'>
-                          <Typography variant='h4 mb2'>Solana Privatekey</Typography>
-                          <Typography>{used?.solpriv ? used?.solpriv : 'none'}</Typography>
-                          </Card>
-                      </Box>
-                    </Modal>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.soladdress ? used?.soladdress : 'none'}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Tron</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.trxbalance ? used?.trxbalance / 1000000 : 0}</Typography>
-                    </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen55}>Send</Button>
-                    <Modal
-              open={open55}
-              onClose={handleClose55}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              {/*<Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Complete registration
-                </Typography>
-              </Box>*/}
-              <Box className='flex aligncenter justcenter topping'
-              >
-              {success1 == true ? 
-                <Card className='width p20'>
-                  <Typography>Transfer of {shopname55} {token1} is successful</Typography>
-                  <CheckCircleIcon />
-                </Card>
-                :
-                <Card className='halfwidth'>
-                  <CardContent>
-                  <Typography variant='h4'>Transfer Tron</Typography>
-                    <form onSubmit={handleSubmit55}>
-                        <TextField
-                            label="amount"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='text'
-                            onChange={e => setShopname55(e.target.value)}
-                        />
-                        <TextField
-                            label="enter address to"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='text'
-                            onChange={e => setEmail55(e.target.value)}
-                        />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            className='width'
-                        >
-                            Submit
-                        </Button>
-                    </form>
-                  </CardContent>
-                  </Card>}
-              </Box>
-            </Modal> 
-            <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export</Button>
-                    <Modal
-                      open={open200}
-                      onClose={handleClose200}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      <Box className='flex aligncenter justcenter topping'
-                      >
-                        <Card className='width p20'>
-                          <Typography variant='h4 mb2'>Tron Privatekey</Typography>
-                          <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
-                          </Card>
-                      </Box>
-                    </Modal>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.trxaddress ? used?.trxaddress : 'none'}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>Bitcoin</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.btcbalance ? used?.btcbalance / 100000000 : 0}</Typography>
-                    </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen66}>Send</Button>
-                    <Modal
-              open={open66}
-              onClose={handleClose66}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              {/*<Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Complete registration
-                </Typography>
-              </Box>*/}
-              <Box className='flex aligncenter justcenter topping'
-              >
-              {success1 == true ? 
-                <Card className='width p20'>
-                  <Typography>Transfer of {shopname66} {token1} is successful</Typography>
-                  <CheckCircleIcon />
-                </Card> :
-                <Card className='halfwidth'>
-                  <CardContent>
-                  <Typography variant='h4'>Transfer Bitcoin</Typography>
-                    <form onSubmit={handleSubmit66}>
-                        <TextField
-                            label="amount"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='text'
-                            onChange={e => setShopname66(e.target.value)}
-                        />
-                        <TextField
-                            label="enter address to"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='text'
-                            onChange={e => setEmail66(e.target.value)}
-                        />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            className='width'
-                        >
-                            Submit
-                        </Button>
-                    </form>
-                  </CardContent>
-                  </Card>}
-              </Box>
-            </Modal>
-            <Button className='justcenter flex' variant="contained" onClick={handleOpen300}>Export</Button>
-                    <Modal
-                      open={open300}
-                      onClose={handleClose300}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      {/*<Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                          Complete registration
-                        </Typography>
-                      </Box>*/}
-                      <Box className='flex aligncenter justcenter topping'
-                      >
-                        <Card className='width p20'>
-                          <Typography variant='h4 mb2'>Bitcoin Privatekey</Typography>
-                          <Typography>{used?.btcpriv ? used?.btcpriv : 'none'}</Typography>
-                          </Card>
-                      </Box>
-                    </Modal>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.btcaddress ? used?.btcaddress  : 'none'}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>USDT-ERC20</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
-                    </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen77}>Send</Button>
-                      <Modal
-                      open={open77}
-                      onClose={handleClose77}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      {/*<Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                          Complete registration
-                        </Typography>
-                      </Box>*/}
-                      <Box className='flex aligncenter justcenter topping'
-                      >
-                        <Card className='halfwidth'>
-                          <CardContent>
-                          <Typography variant='h4'>Transfer USDT-ERC20</Typography>
-                            <form onSubmit={handleSubmit77}>
-                                <TextField
-                                    label="amount"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    type='text'
-                                    onChange={e => setShopname77(e.target.value)}
-                                />
-                                <TextField
-                                    label="enter address to"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    type='text'
-                                    onChange={e => setEmail77(e.target.value)}
-                                />
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    type="submit"
-                                    className='width'
-                                >
-                                    Submit
-                                </Button>
-                            </form>
-                          </CardContent>
-                          </Card>
-                      </Box>
-                    </Modal>
-                    <Button className='justcenter flex' variant="contained" onClick={exportWallet}>Export</Button>
-                    <div className='justcenter flex aligncenter column'>
-                    <Typography>{user?.wallet?.address ? user?.wallet?.address : 'none'}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className='width mb2'>
-                  <CardContent className='spacebetween flex'>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>USDT-TRC20</Typography>
-                    </div>
-                    <div className='justcenter flex aligncenter column'>
-                      <Typography>{used?.usdttrxbalance ? used?.usdttrxbalance : 0}</Typography>
-                    </div>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen88}>Send</Button>
-                    <Modal
-                      open={open88}
-                      onClose={handleClose88}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      {/*<Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                          Complete registration
-                        </Typography>
-                      </Box>*/}
-                      <Box className='flex aligncenter justcenter topping'
-                      >
-                      {success1 == true ? 
-                        <Card className='width p20'>
-                          <Typography>Transfer of {shopname88} {token1} is successful</Typography>
-                          <CheckCircleIcon />
-                        </Card> :
-                        <Card className='halfwidth'>
-                          <CardContent>
-                          <Typography variant='h4'>Transfer USDT-TRC20</Typography>
-                            <form onSubmit={handleSubmit88}>
-                                <TextField
-                                    label="amount"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    type='text'
-                                    onChange={e => setShopname88(e.target.value)}
-                                />
-                                <TextField
-                                    label="enter address to"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    type='text'
-                                    onChange={e => setEmail88(e.target.value)}
-                                />
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    type="submit"
-                                    className='width'
-                                >
-                                    Submit
-                                </Button>
-                            </form>
-                          </CardContent>
-                          </Card>}
-                      </Box>
-                    </Modal>
-                    <Button className='justcenter flex' variant="contained" onClick={handleOpen200}>Export</Button>
-                    <Modal
-                      open={open200}
-                      onClose={handleClose200}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      <Box className='flex aligncenter justcenter topping'
-                      >
-                        <Card className='width p20'>
-                          <Typography variant='h4 mb2'>USDT-TRC20 Privatekey</Typography>
-                          <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
-                          </Card>
-                      </Box>
-                    </Modal>
-                    <div className='justcenter flex aligncenter column'>
-                    <Typography>{used?.trxaddress ? used?.trxaddress : 'none'}</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-              </CustomTabPanel>
-            </Box>
+            </Card>
           </div> :
           <div class="vertical-center">
             <Typography>You do not have an account. Register to continue</Typography>

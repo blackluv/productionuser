@@ -507,7 +507,7 @@ useEffect(() => {
                         </CardContent>
                       </Card>
                     )) : 
-                    <Card>
+                    <Card className='inv'>
                     <Typography>No invoice</Typography>
                     </Card>
                     }

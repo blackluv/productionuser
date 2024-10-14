@@ -463,8 +463,8 @@ input.Mui-focused{
 
 .shim{
   font-weight: 300 !important;
-  font-size: 34px !important;
-  line-height: 35px !important;
+  font-size: 28px !important;
+  line-height: 29px !important;
   color: #FFFFFF;
 }
 
@@ -476,6 +476,38 @@ input.Mui-focused{
   right: 23px !important;
   border-radius: 18px !important;
   background-color: #141318 !important;
+}
+
+.tb3{
+  height: 54px !important;
+  border-radius: 12px !important;
+  background-color: #0E0D12 !important;
+  width: 50% !important;
+  max-width: 50% !important;
+  color: #FFFFFF !important;
+}
+
+.tb1{
+  width: 100%;
+}
+
+.p10{
+  padding: 10%;
+}
+
+.css-heg063-MuiTabs-flexContainer, .MuiTabs-flexContainer{
+  display: flex !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.css-1aquho2-MuiTabs-indicator, .MuiTabs-indicator{
+  background-color: transparent !important;
+}
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected, .MuiTab-root.Mui-selected{
+  color: #FFFFFF !important;
+  background-color: #8E4FF7 !important;
 }
 
 @keyframes App-logo-spin {

@@ -657,8 +657,8 @@ export default function PermanentDrawerLeft() {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
                         </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age2}</Typography>
+                        <div className='justcenter flex aligncenter column width20'>
+                          <Typography>{age2} {currency1}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -673,8 +673,8 @@ export default function PermanentDrawerLeft() {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
                         </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age5}</Typography>
+                        <div className='justcenter flex aligncenter column width20'>
+                          <Typography>{age5} {currency1}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -689,8 +689,8 @@ export default function PermanentDrawerLeft() {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{used?.ethbalance ? used?.ethbalance : 0}</Typography>
                         </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age3}</Typography>
+                        <div className='justcenter flex aligncenter column width20'>
+                          <Typography>{age3} {currency1}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -705,8 +705,8 @@ export default function PermanentDrawerLeft() {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
                         </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age4}</Typography>
+                        <div className='justcenter flex aligncenter column width20'>
+                          <Typography>{age4} {currency1}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -721,8 +721,8 @@ export default function PermanentDrawerLeft() {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{used?.usdttrxbalance ? used?.usdttrxbalance : 0}</Typography>
                         </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age7}</Typography>
+                        <div className='justcenter flex aligncenter column width20'>
+                          <Typography>{age7} {currency1}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -737,8 +737,8 @@ export default function PermanentDrawerLeft() {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                         </div>
-                        <div className='justcenter flex  aligncenter column width10'>
-                          <Typography>{age6}</Typography>
+                        <div className='justcenter flex  aligncenter column width20'>
+                          <Typography>{age6} {currency1}</Typography>
                           {/*<Typography>{currency1}</Typography>*/}
                         </div>
                         </CardContent>
