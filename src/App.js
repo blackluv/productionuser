@@ -647,7 +647,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age2}{currency1}</Typography>
+                          <Typography>{age2}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -663,7 +663,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age5}{currency1}</Typography>
+                          <Typography>{age5}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -679,7 +679,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>{used?.ethbalance ? used?.ethbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age3}{currency1}</Typography>
+                          <Typography>{age3}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -695,7 +695,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age4}{currency1}</Typography>
+                          <Typography>{age4}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -711,7 +711,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>{used?.usdttrxbalance ? used?.usdttrxbalance : 0}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age7}{currency1}</Typography>
+                          <Typography>{age7}</Typography>
                         </div>
                         </CardContent>
                       </Card>
@@ -726,8 +726,9 @@ export default function PermanentDrawerLeft() {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
                         </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{age6}{currency1}</Typography>
+                        <div className='justcenter flex  aligncenter column width10'>
+                          <Typography>{age6}</Typography>
+                          {/*<Typography>{currency1}</Typography>*/}
                         </div>
                         </CardContent>
                       </Card>
@@ -821,7 +822,6 @@ export default function PermanentDrawerLeft() {
                           <Typography>{invoice?.amount}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{invoice?.token}</Typography>
                           <img src={`./images/${invoice.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
                         </div>
                         <div className='justcenter flex aligncenter width20'>

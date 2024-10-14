@@ -483,7 +483,7 @@ useEffect(() => {
                           <Typography>{invoice.amount}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{invoice.paidin}</Typography>
+                          <img src={`./images/${invoice.paidin}.png`} height='30px' width='30px' alt={invoice.paidin}/>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{invoice.isconfirmed == true ? "true" : "false"}</Typography>
