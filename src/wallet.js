@@ -989,7 +989,7 @@ useEffect(() => {
                           <div className='justcenter flex aligncenter column width10'>
                             <Typography>{Number(used?.btcbalance ? used?.btcbalance : 0).toFixed(2)}</Typography>
                           </div>
-                          <div className='justcenter flex aligncenter column width10'>
+                          <div className='justcenter flex aligncenter column width20'>
                             <Typography>{Number(age2).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen66}>Send</Button>
@@ -1067,7 +1067,7 @@ useEffect(() => {
                           <div className='justcenter flex aligncenter column width10'>
                             <Typography>{Number(used?.trxbalance ? used?.trxbalance : 0).toFixed(2)}</Typography>
                           </div>
-                          <div className='justcenter flex aligncenter column width10'>
+                          <div className='justcenter flex aligncenter column width20'>
                             <Typography>{Number(age5).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen55}>Send</Button>
@@ -1151,7 +1151,7 @@ useEffect(() => {
                           <div className='justcenter flex aligncenter column width10'>
                             <Typography>{Number(used?.ethbalance ? used?.ethbalance : 0).toFixed(2)}</Typography>
                           </div>
-                          <div className='justcenter flex aligncenter column width10'>
+                          <div className='justcenter flex aligncenter column width20'>
                             <Typography>{Number(age3).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen2}>Send</Button>
@@ -1238,7 +1238,7 @@ useEffect(() => {
                           <div className='justcenter flex aligncenter column width10'>
                             <Typography>{Number(used?.solbalance ? used?.solbalance : 0).toFixed(2)}</Typography>
                           </div>
-                          <div className='justcenter flex aligncenter column width10'>
+                          <div className='justcenter flex aligncenter column width20'>
                             <Typography>{Number(age4).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen44}>Send</Button>
@@ -1321,7 +1321,7 @@ useEffect(() => {
                           <div className='justcenter flex aligncenter column width10'>
                             <Typography>{used?.usdttrxbalance ? used?.usdttrxbalance : 0}</Typography>
                           </div>
-                          <div className='justcenter flex aligncenter column width10'>
+                          <div className='justcenter flex aligncenter column width20'>
                             <Typography>{age7} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen88}>Send</Button>
@@ -1404,7 +1404,7 @@ useEffect(() => {
                           <div className='justcenter flex aligncenter column width10'>
                             <Typography>{Number(used?.usdtbalance ? used?.usdtbalance : 0).toFixed(2)}</Typography>
                           </div>
-                          <div className='justcenter flex aligncenter column width10'>
+                          <div className='justcenter flex aligncenter column width20'>
                             <Typography>{Number(age6).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen77}>Send</Button>
