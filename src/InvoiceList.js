@@ -379,7 +379,7 @@ useEffect(() => {
                           <Typography>not available</Typography>
                         </div>
                         <div className='justcenter flex aligncenter row width20'>
-                          <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) : 'not available'}....</Typography>
+                          <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) :'not available'}....</Typography>
                           <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress)}>
                             <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                           </IconButton>
