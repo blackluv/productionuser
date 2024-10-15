@@ -90,7 +90,7 @@ export default function PermanentDrawerLeft() {
   const [shopname1, setShopname1] = useState();
   const [invoice, setInvoice] = useState('');
   const [currency, setCurency] = useState('');
-  const [alert, setAlert] = useState(false);
+  //const [alert, setAlert] = useState(false);
   const [alertContent, setAlertContent] = useState('');
   const { ready, authenticated, user, login, logout } = usePrivy();
   const [copySuccess, setCopySuccess] = useState('');
@@ -176,16 +176,14 @@ export default function PermanentDrawerLeft() {
         body: urlencoded
       })
         .then(data => /*data.json()*/{
-          if(data.data.success === true)
+          if(data)
             {
               console.log(data,'data33')
-              setAlertContent("invoice created");
-              setAlert(true);
+              alert("invoice created");
             }
           else
             {
-              setAlertContent("failed");
-              setAlert(false);
+              alert("failed");
             }
   })
 	};

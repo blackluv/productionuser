@@ -460,7 +460,17 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
           },
           body: urlencoded
         })
-          .then(data => data.json()
+          .then(data => {
+            if(data)
+              {
+                console.log(data,'data33')
+                alert("Payment Sent");
+              }
+            else
+              {
+                alert("failed");
+              }
+          }
         )
        }
   
@@ -475,7 +485,17 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
             },
             body: urlencoded
           })
-            .then(data => data.json()
+            .then(data => {
+              if(data)
+                {
+                  console.log(data,'data33')
+                  alert("Payment denied");
+                }
+              else
+                {
+                  alert("failed");
+                }
+            }
           )
          }
   

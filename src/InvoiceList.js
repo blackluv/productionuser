@@ -144,7 +144,17 @@ export default function PermanentDrawerLeft() {
         },
         body: urlencoded
       })
-        .then(data => data.json()
+        .then(data => {
+          if(data)
+            {
+              console.log(data,'data33')
+              alert("Payment Sent");
+            }
+          else
+            {
+              alert("failed");
+            }
+        }
       )
      }
 
@@ -159,7 +169,17 @@ export default function PermanentDrawerLeft() {
           },
           body: urlencoded
         })
-          .then(data => data.json()
+          .then(data => {
+            if(data)
+              {
+                console.log(data,'data33')
+                alert("Payment denied");
+              }
+            else
+              {
+                alert("failed");
+              }
+          }
         )
        }
 

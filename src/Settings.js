@@ -150,7 +150,17 @@ export default function PermanentDrawerLeft() {
         },
         body: urlencoded
       })
-        .then(data => data.json()
+        .then(data => {
+          if(data)
+            {
+              console.log(data,'data33')
+              alert("Settings Updated");
+            }
+          else
+            {
+              alert("failed");
+            }
+        }
       )
      }
 
@@ -167,7 +177,17 @@ export default function PermanentDrawerLeft() {
           },
           body: urlencoded
         })
-          .then(data => data.json()
+          .then(data => {
+            if(data)
+              {
+                console.log(data,'data33')
+                alert("invoice created");
+              }
+            else
+              {
+                alert("failed");
+              }
+          }
         )
        }
 
@@ -182,7 +202,17 @@ export default function PermanentDrawerLeft() {
             },
             body: urlencoded
           })
-            .then(data => alert("Success webhook added")
+            .then(data => {
+              if(data)
+                {
+                  console.log(data,'data33')
+                  alert("Webhook added");
+                }
+              else
+                {
+                  alert("failed");
+                }
+              }
           )
          }
 
