@@ -48,6 +48,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import btc from './images/btc.png'
 import eth from './images/eth.png'
 import usdt from './images/usdt.png'
+import usdttrx from './images/usdttrx.png'
 import trx from './images/trx.png'
 import sol from './images/sol.png'
 import IconButton from '@mui/material/IconButton';
@@ -713,7 +714,7 @@ export default function PermanentDrawerLeft() {
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
-                        <img src={usdt} height='30px' width='30px' alt='usdt'/>
+                        <img src={usdttrx} height='30px' width='30px' alt='usdt'/>
                          </div>
                         <div className='justcenter flex aligncenter row width10'>
                           <Typography>USDT-TRC20</Typography>
