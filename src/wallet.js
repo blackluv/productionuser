@@ -772,6 +772,13 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
     }
   }
 
+  const eth = 'https://etherscan.io/tx/'
+  const trx = 'https://tronscan.org/#/transaction/'
+  const btc = 'https://mempool.space/tx/'
+  const usdt = 'https://etherscan.io/tx/'
+  const usdttrx = 'https://tronscan.org/#/transaction/'
+  const sol = 'https://solscan.io/tx/'
+
   /*if (!ready) {
     return null;
   }
@@ -1573,14 +1580,30 @@ useEffect(() => {
                       </div>
               </div>
               <div className='p20'>
-                    {invoicemap ? invoicemap?.map((invoice) => (
+                    {invoicemap ? invoicemap?.map((invoice) => { 
+                    let url;
+                    if (invoice.paidin === 'eth') {
+                        url = eth; // Replace with your actual ETH link
+                    } else if (invoice.paidin === 'btc') {
+                      url = btc; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'sol') {
+                      url = sol; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'trx') {
+                      url = trx; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'usdt') {
+                      url = eth; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'usdttrx') {
+                      url = trx; // Replace with your actual BTC link
+                    } 
+
+                      return(
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
                          </div>
                         <div className='justcenter flex aligncenter row width20'>
-                          <Typography>{invoice.transactionhash ? invoice.transactionhash.slice(0,8) : 'not available'}...</Typography>
+                          <Typography>{invoice?.transactionhash? invoice.transactionhash.slice(0,8) : "not available"}...</Typography>
                           <IconButton aria-label="copy" onClick={() => handleCopy(invoice.transactionhash)}>
                             <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                           </IconButton>
@@ -1594,10 +1617,10 @@ useEffect(() => {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
                         </div>
-                          <Link variant="contained" className='width10' to={'/invoice/' +  invoice.transactionhash}>View</Link>
+                          <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
                         </CardContent>
                       </Card>
-                    )) : 
+                    )}) : 
                     <Card className='inv'>
                     <Typography>No invoice</Typography>
                     </Card>
@@ -1627,7 +1650,7 @@ useEffect(() => {
               </div>
               <div className='p20'>
                 {invoicemap1 ? invoicemap1?.map((invoice) => (
-                      <Card className='width dip'>
+                      <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
