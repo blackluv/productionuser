@@ -512,6 +512,15 @@ path{stroke: transparent};
   background-color: #8E4FF7 !important;
 }
 
+@media only screen and (max-width: 1300px) {
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 14% !important;
+}
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
