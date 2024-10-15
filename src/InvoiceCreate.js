@@ -209,6 +209,13 @@ export default function PermanentDrawerLeft() {
     setCurency(event.target.value);
   };
 
+  const eth = 'https://etherscan.io/tx/'
+  const trx = 'https://tronscan.org/#/transaction/'
+  const btc = 'https://mempool.space/tx/'
+  const usdt = 'https://etherscan.io/tx/'
+  const usdttrx = 'https://tronscan.org/#/transaction/'
+  const sol = 'https://solscan.io/tx/'
+
     /*if (!ready) {
     return null;
   }
@@ -483,7 +490,23 @@ useEffect(() => {
                       </div>
               </div>
                 <div className='p20'>
-                    {invoicemap ? invoicemap?.map((invoice) => (
+                    {invoicemap ? invoicemap?.map((invoice) => { 
+                    let url;
+                    if (invoice.paidin === 'eth') {
+                        url = eth; // Replace with your actual ETH link
+                    } else if (invoice.paidin === 'btc') {
+                      url = btc; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'sol') {
+                      url = sol; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'trx') {
+                      url = trx; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'usdt') {
+                      url = eth; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'usdttrx') {
+                      url = trx; // Replace with your actual BTC link
+                    } 
+
+                      return(
                       <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
@@ -504,10 +527,10 @@ useEffect(() => {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
                         </div>
-                          <Link variant="contained" className='width10' to={'/invoice/' +  invoice.transactionhash}>View</Link>
+                          <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
                         </CardContent>
                       </Card>
-                    )) : 
+                    )}) : 
                     <Card className='inv'>
                     <Typography>No invoice</Typography>
                     </Card>
