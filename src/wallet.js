@@ -957,10 +957,10 @@ useEffect(() => {
                             <Typography>BTC</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
+                            <Typography>{(used?.btcbalance ? used?.btcbalance : 0).toFixed(2)}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{age2} {currency1}</Typography>
+                            <Typography>{(age2).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen66}>Send</Button>
                           <Modal
@@ -1035,10 +1035,10 @@ useEffect(() => {
                             <Typography>TRX</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
+                            <Typography>{(used?.trxbalance ? used?.trxbalance : 0).toFixed(2)}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{age5} {currency1}</Typography>
+                            <Typography>{(age5).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen55}>Send</Button>
                           <Modal
@@ -1119,10 +1119,10 @@ useEffect(() => {
                             <Typography>ETH</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{used?.ethbalance ? used?.ethbalance : 0}</Typography>
+                            <Typography>{(used?.ethbalance ? used?.ethbalance : 0).toFixed(2)}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{age3} {currency1}</Typography>
+                            <Typography>{(age3).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen2}>Send</Button>
                           <Modal
@@ -1206,10 +1206,10 @@ useEffect(() => {
                             <Typography>SOL</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
+                            <Typography>{(used?.solbalance ? used?.solbalance : 0).toFixed(2)}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{age4} {currency1}</Typography>
+                            <Typography>{(age4).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen44}>Send</Button>
                           <Modal
@@ -1372,10 +1372,10 @@ useEffect(() => {
                             <Typography>USDT-ERC20</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
+                            <Typography>{(used?.usdtbalance ? used?.usdtbalance : 0).toFixed(2)}</Typography>
                           </div>
                           <div className='justcenter flex aligncenter column width10'>
-                            <Typography>{age6} {currency1}</Typography>
+                            <Typography>{(age6).toFixed(2)} {currency1}</Typography>
                           </div>
                           <Button className='lit4 justcenter flex pay' variant="contained" onClick={handleOpen77}>Send</Button>
                           <Modal
@@ -1428,7 +1428,7 @@ useEffect(() => {
                   <div className='wal3 aligncenter inv flex column space-around'>
                   <div className='flex width just-center spacebetween aligncenter pt5 pb2 pr5 pl5'>
                     <Typography className='cen-header'>Total Wallet </Typography>
-                    <Typography className='cen-header'>{age1 ? age1 : 0} {currency1}</Typography>
+                    <Typography className='cen-header'>{(age1 ? age1 : 0).toFixed(2)} {currency1}</Typography>
                   </div>
                     <ResponsiveContainer width={120} height={120}>
                       <PieChart /*width={1000} height={400*/>
@@ -1457,7 +1457,7 @@ useEffect(() => {
                   <div className='wal4 inv flex column pt5'>
                     <Typography className='inv-header'>Wallet balance {currency1}</Typography>
                     <div className='flex column justcenter aligncenter'>
-                      <Typography className='shim'>{age1 ? age1 : 0} {currency1}</Typography>
+                      <Typography className='shim'>{(age1 ? age1 : 0).toFixed(2)} {currency1}</Typography>
                     </div>
                   </div>
                 </div>

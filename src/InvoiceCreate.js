@@ -495,7 +495,7 @@ useEffect(() => {
                           </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{invoice.amount}</Typography>
+                          <Typography>{(invoice.amount).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <img src={`./images/${invoice.paidin}.png`} height='30px' width='30px' alt={invoice.paidin}/>
