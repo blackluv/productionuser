@@ -655,7 +655,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>BTC</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{used?.btcbalance ? used?.btcbalance : 0}</Typography>
+                          <Typography>{(used?.btcbalance ? used?.btcbalance : 0).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width20'>
                           <Typography>{age2} {currency1}</Typography>
@@ -671,7 +671,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>TRX</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{used?.trxbalance ? used?.trxbalance : 0}</Typography>
+                          <Typography>{(used?.trxbalance ? used?.trxbalance : 0).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width20'>
                           <Typography>{age5} {currency1}</Typography>
@@ -687,7 +687,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>ETH</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{used?.ethbalance ? used?.ethbalance : 0}</Typography>
+                          <Typography>{(used?.ethbalance ? used?.ethbalance : 0).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width20'>
                           <Typography>{age3} {currency1}</Typography>
@@ -703,7 +703,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>SOL</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{used?.solbalance ? used?.solbalance : 0}</Typography>
+                          <Typography>{(used?.solbalance ? used?.solbalance : 0).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width20'>
                           <Typography>{age4} {currency1}</Typography>
@@ -719,7 +719,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>USDT-TRC20</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{used?.usdttrxbalance ? used?.usdttrxbalance : 0}</Typography>
+                          <Typography>{(used?.usdttrxbalance ? used?.usdttrxbalance : 0).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width20'>
                           <Typography>{age7} {currency1}</Typography>
@@ -735,7 +735,7 @@ export default function PermanentDrawerLeft() {
                           <Typography>USDT-ERC20</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{used?.usdtbalance ? used?.usdtbalance : 0}</Typography>
+                          <Typography>{(used?.usdtbalance ? used?.usdtbalance : 0).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex  aligncenter column width20'>
                           <Typography>{age6} {currency1}</Typography>
@@ -748,7 +748,7 @@ export default function PermanentDrawerLeft() {
               <div className='mat2 inv aligncenter flex column ' /*style={{ width: '100px', height: 300 }}*/>
                 <div className='flex width spacebetween aligncenter p5'>
                     <Typography className='cen-header'>Total Wallet </Typography>
-                    <Typography className='cen-header'>{age1 ? age1 : 0} {currency1}</Typography>
+                    <Typography className='cen-header'>{(age1 ? age1 : 0).toFixed(2)} {currency1}</Typography>
                   </div>
                 <ResponsiveContainer width={180} height={180}>
                   <PieChart /*width={1000} height={400*/>
@@ -834,7 +834,7 @@ export default function PermanentDrawerLeft() {
                           </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{invoice?.amount}</Typography>
+                          <Typography>{(invoice?.amount).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <img src={`./images/${invoice.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
