@@ -567,7 +567,7 @@ input:focus, .input-field:focus{
   color: #606060 !important;
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1290px) {
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
     background: #141318 !important;
     border-radius: 18px !important;
