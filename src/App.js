@@ -109,6 +109,7 @@ export default function PermanentDrawerLeft() {
   const [age6, setAge6] = React.useState('');
   const [age7, setAge7] = React.useState('');
   const [copySuccess, setCopySuccess] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const { ready, authenticated, user, login, logout } = usePrivy();
 
@@ -496,6 +497,11 @@ export default function PermanentDrawerLeft() {
     setValue(newValue);
   };
 
+  const handleListItemClick = (index) => {
+    setSelectedIndex(index);
+    // Add navigation logic here if necessary
+  };
+
   /*if (!ready) {
     return null;
   }*/
@@ -556,9 +562,10 @@ export default function PermanentDrawerLeft() {
         <Divider />
         <List>
           <div className='mb20'></div>
-            <ListItem key="home" disablePadding>
+            <ListItem key="home" 
+            disablePadding>
               <Link to= "/" className='ti'>
-              <ListItemButton>
+              <ListItemButton >
                 <ListItemIcon>
                   <HomeIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
