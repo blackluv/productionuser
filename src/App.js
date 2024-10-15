@@ -440,6 +440,7 @@ export default function PermanentDrawerLeft() {
           try {
               await navigator.clipboard.writeText(_textToCopy);
               setCopySuccess('Copied!');
+              alert('Copied!')
           } catch (err) {
               setCopySuccess('Failed to copy!');
           }
@@ -644,7 +645,7 @@ export default function PermanentDrawerLeft() {
             <div className='mbmain'></div>
             <div className='flex spacebetween width mb2'>
               <div className='mat1 inv'>
-                <div className='flex width spacebetween alignbase pt10'>
+                <div className='flex width spacebetween alignbase pt10 ni'>
                   <Typography className='inv-header'>Merchant Wallet</Typography>
                   <div class="input-icons1">
                     <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>

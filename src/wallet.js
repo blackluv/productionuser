@@ -46,12 +46,12 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { ResponsiveContainer, PieChart, Pie, Legend, Tooltip } from "recharts";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import btc from './images/btc.png'
-import eth from './images/eth.png'
-import usdt from './images/usdt.png'
-import trx from './images/trx.png'
-import sol from './images/sol.png'
-import usdttrx from './images/usdttrx.png'
+import btc1 from './images/btc.png'
+import eth1 from './images/eth.png'
+import usdt1 from './images/usdt.png'
+import trx1 from './images/trx.png'
+import sol1 from './images/sol.png'
+import usdttrx1 from './images/usdttrx.png'
 import IconButton from '@mui/material/IconButton';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -787,6 +787,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
     try {
         await navigator.clipboard.writeText(_textToCopy);
         setCopySuccess('Copied!');
+        alert('Copied!')
     } catch (err) {
         setCopySuccess('Failed to copy!');
     }
@@ -967,7 +968,7 @@ useEffect(() => {
             <div className='mbmain'></div>
             <div className='flex spacebetween width mb2'>
               <div className='wal1 inv'>
-                  <div className='flex width spacebetween alignbase pt10'>
+                  <div className='flex width spacebetween alignbase pt10 ni'>
                     <Typography className='inv-header'>Merchant Wallet</Typography>
                     <div class="input-icons1">
                       <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
@@ -980,7 +981,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={btc} height='30px' width='30px' alt='btc'/>
+                            <img src={btc1} height='30px' width='30px' alt='btc'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>BTC</Typography>
@@ -1058,7 +1059,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={trx} height='30px' width='30px' alt='trx'/>
+                            <img src={trx1} height='30px' width='30px' alt='trx'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>TRX</Typography>
@@ -1142,7 +1143,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={eth} height='30px' width='30px' alt='eth'/>
+                            <img src={eth1} height='30px' width='30px' alt='eth'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>ETH</Typography>
@@ -1229,7 +1230,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={sol} height='30px' width='30px' alt='sol'/>
+                            <img src={sol1} height='30px' width='30px' alt='sol'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>SOL</Typography>
@@ -1312,7 +1313,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={usdttrx} height='30px' width='30px' alt='usdt'/>
+                            <img src={usdttrx1} height='30px' width='30px' alt='usdt'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>USDT-TRC20</Typography>
@@ -1395,7 +1396,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={usdt} height='30px' width='30px' alt='usdt'/>
+                            <img src={usdt1} height='30px' width='30px' alt='usdt'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>USDT-ERC20</Typography>

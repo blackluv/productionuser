@@ -155,6 +155,7 @@ export default function PermanentDrawerLeft() {
     try {
         await navigator.clipboard.writeText(_textToCopy);
         setCopySuccess('Copied!');
+        alert('Copied!')
     } catch (err) {
         setCopySuccess('Failed to copy!');
     }
