@@ -370,7 +370,7 @@ useEffect(() => {
               </div>
               <div className='p20'>
                 {invoicemap ? invoicemap?.map((invoice) => (
-                      <Card className='width dip'>
+                      <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
