@@ -47,6 +47,7 @@ import WalletIcon from '@mui/icons-material/Wallet';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+//import SearchIcon from '@mui/icons-material/Search';
 //import FormControl from '@mui/material/FormControl';
 //import TextField from '@mui/material/TextField';
 
@@ -272,12 +273,12 @@ useEffect(() => {
           <Typography variant="h6" noWrap component="div" className='tit'>
             Novapay
           </Typography>
-          <TextField
-          label="Search"
-          id="outlined-start-adornment"
-          className='fi1'
-          sx={{ m: 1, width: '60%'}}
-        />
+          <div class="input-icons">
+          <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
+            <input class="input-field" 
+                   type="text" 
+                   placeholder="Search" />
+        </div>
         <div className='icon-noti'>
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
         </div>
