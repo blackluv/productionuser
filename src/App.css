@@ -519,7 +519,7 @@ path{stroke: transparent};
 }
 
 .input-icons1 {
-  width: 50%;
+  width: 45%;
   margin-bottom: 4px;
   margin-right: 20px;
 }
@@ -572,7 +572,7 @@ input:focus, .input-field:focus{
     background: #141318 !important;
     border-radius: 18px !important;
     left: 2% !important;
-    top: 14% !important;
+    top: 19% !important;
 }
 }
 
