@@ -491,6 +491,8 @@ input.Mui-focused{
   width: 100%;
 }
 
+path{stroke: transparent};
+
 .p10{
   padding: 10%;
 }

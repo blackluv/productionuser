@@ -756,12 +756,12 @@ export default function PermanentDrawerLeft() {
                       dataKey="value"
                       data={
                         [
-                          { name: "BTC Value", value: age2 ? age2 : 1 },
-                          { name: "SOL Value", value: age4 ? age4 : 1},
-                          { name: "ETH Value", value: age3 ? age3 : 1},
-                          { name: "TRX Value", value: age5 ? age5 : 1},
-                          { name: "USDT-TRC20 Value", value: age7 ? age7 : 1 },
-                          { name: "USDT-ERC20 Value", value: age6 ? age6 : 1}
+                          { name: "BTC Value", value: age2 ? age2 : 1 , fill: '#f8931a'},
+                          { name: "SOL Value", value: age4 ? age4 : 1, fill: '#8556f0'},
+                          { name: "ETH Value", value: age3 ? age3 : 1, fill: '#627eea'},
+                          { name: "TRX Value", value: age5 ? age5 : 1, fill: '#ec0928'},
+                          { name: "USDT-TRC20 Value", value: age7 ? age7 : 1, fill: '#27a17b'},
+                          { name: "USDT-ERC20 Value", value: age6 ? age6 : 1, fill: '#27a17b'}
                         ]
                       }
                       //cx={500}
@@ -819,7 +819,7 @@ export default function PermanentDrawerLeft() {
               </div>
               <div className='p20'>
                 {invoicemap ? invoicemap?.map((invoice) => (
-                      <Card className='width dip'>
+                      <Card className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
