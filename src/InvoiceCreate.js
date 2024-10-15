@@ -489,7 +489,7 @@ useEffect(() => {
                           <Typography>12/10/2024</Typography>
                          </div>
                         <div className='justcenter flex aligncenter row width20'>
-                          <Typography>{invoice.transactionhash.slice(0,8)}...</Typography>
+                          <Typography>{invoice?.transactionhash? invoice.transactionhash.slice(0,8) : "not available"}...</Typography>
                           <IconButton aria-label="copy" onClick={() => handleCopy(invoice.transactionhash)}>
                             <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                           </IconButton>
