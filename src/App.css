@@ -576,6 +576,7 @@ input:focus, .input-field:focus{
 .ni{
   position: sticky !important;
   top: 0;
+  z-index: 10;
 }
 
 .tick{
@@ -683,6 +684,30 @@ input:focus, .input-field:focus{
 }
 .input-icons1{
   width: 35%;
+}
+.met .width20{
+  width: 30% !important;
+}
+.recharts-responsive-container{
+  height: 150px !important;
+  width: 150px !important;
+}
+.recharts-wrapper{
+  max-width: 150px !important;
+  max-height: 150px !important;
+}
+.fop1{
+  height: 130px !important;
+  width: 130px !important;
+}
+.fop {
+  padding-bottom: 10px !important;
+}
+.mat2{
+  height: 220px !important;
+}
+.mat3-div{
+  flex-wrap: wrap;
 }
 }
 

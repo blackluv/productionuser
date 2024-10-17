@@ -656,7 +656,7 @@ export default function PermanentDrawerLeft() {
           <div class="">
             <div className='mbmain'></div>
             <div className='flex spacebetween width mb2'>
-              <div className='mat1 inv'>
+              <div className='mat1 inv '>
                 <div className='flex width spacebetween alignbase pt10 ni inv'>
                   <Typography className='inv-header'>Merchant Wallet</Typography>
                   <div class="input-icons1">
@@ -666,8 +666,8 @@ export default function PermanentDrawerLeft() {
                             placeholder="Search Currency" />
                   </div>
                 </div>
-                <div className='p5'>
-                      <Card className='width dip mb2'>
+                <div className='p5 met'>
+                      <Card className='width dip mb2 '>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <img src={btc} height='30px' width='30px' alt='btc'/>
