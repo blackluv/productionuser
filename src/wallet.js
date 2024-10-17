@@ -1670,7 +1670,7 @@ useEffect(() => {
                           <Typography>{Number(invoice.amount).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <img src={`./images/${invoice.paidin}.png`} height='30px' width='30px' alt={invoice.paidin}/>
+                          <img src={`./images/${invoice.paidin ? invoice.paidin : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
