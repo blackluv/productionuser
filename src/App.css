@@ -807,13 +807,49 @@ input:focus, .input-field:focus{
   .mat1{
     width: 100%;
     margin-bottom: 3%;
+    height: 455px;
   }
   .mat2{
-    width: 100%;
+    width: 100% !important;
     margin-bottom: 3%;
+    height: 347px !important;
+    justify-content: center;
   }
   .mat3{
     width: 100%;
+  }
+  .fop{
+    display: none !important;
+  }
+  .recharts-responsive-container{
+    height: 290px !important;
+    width: 290px !important;
+  }
+  .recharts-wrapper{
+    max-width: 290px !important;
+    max-height: 290px !important;
+  }
+  .css-49ifcl-MuiPaper-root-MuiAppBar-root, .MuiAppBar-root{
+    width: 91% !important;
+  }
+  .mat3-div{
+    height: 64px !important;
+  }
+  .ash1, .ash{
+    font-weight: 400 !important;
+    line-height: 19px !important;
+    font-size: 22px !important;
+  }
+  .input-icons1{
+    display: none;
+  }
+  .met{
+    padding: 5% !important;
+  }
+  .inv-header{
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    line-height: 19px !important;
   }
 }
 
