@@ -1002,13 +1002,13 @@ useEffect(() => {
                             <Box className='flex aligncenter justcenter topping'
                             >
                             {success1 == true ? 
-                              <Card className='width p20'>
+                              <Card className='width p20 inv'>
                                 <Typography>Transfer of {shopname66} {token1} is successful</Typography>
                                 <CheckCircleIcon />
                               </Card> :
-                              <Card className='halfwidth'>
+                              <Card className='halfwidth inv p20'>
                                 <CardContent>
-                                <Typography variant='h4'>Transfer Bitcoin</Typography>
+                                <Typography variant='h4 tick'>Transfer Bitcoin</Typography>
                                   <form onSubmit={handleSubmit66}>
                                       <TextField
                                           label="amount"
@@ -1016,6 +1016,7 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot'
                                           onChange={e => setShopname66(e.target.value)}
                                       />
                                       <TextField
@@ -1024,13 +1025,14 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot mb5 mtnone'
                                           onChange={e => setEmail66(e.target.value)}
                                       />
                                       <Button
                                           variant="contained"
                                           color="primary"
                                           type="submit"
-                                          className='width'
+                                          className='width mi3'
                                       >
                                           Submit
                                       </Button>
@@ -1048,9 +1050,14 @@ useEffect(() => {
                           >
                             <Box className='flex aligncenter justcenter topping'
                             >
-                              <Card className='width p20'>
-                                <Typography variant='h4 mb2'>Bitcoin Privatekey</Typography>
-                                <Typography>{used?.btcpriv ? used?.btcpriv : 'none'}</Typography>
+                              <Card className='width p20 inv flex column aligncenter'>
+                                <Typography variant='h4 mb5 tick'>Bitcoin Privatekey</Typography>
+                                <div className='flex pr aligncenter p10 tick2'>
+                                  <Typography>{used?.btcpriv ? used?.btcpriv.slice(0,26) : 'none'}</Typography>
+                                  <IconButton aria-label="copy" onClick={() => handleCopy(used?.btcpriv)}>
+                                    <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                                  </IconButton>
+                                </div>
                                 </Card>
                             </Box>
                           </Modal>
@@ -1085,14 +1092,14 @@ useEffect(() => {
                             <Box className='flex aligncenter justcenter topping'
                             >
                             {success1 == true ? 
-                              <Card className='width p20'>
+                              <Card className='width p20 inv'>
                                 <Typography>Transfer of {shopname55} {token1} is successful</Typography>
                                 <CheckCircleIcon />
                               </Card>
                               :
-                              <Card className='halfwidth'>
+                              <Card className='halfwidth inv p20'>
                                 <CardContent>
-                                <Typography variant='h4'>Transfer Tron</Typography>
+                                <Typography variant='h4 tick'>Transfer Tron</Typography>
                                   <form onSubmit={handleSubmit55}>
                                       <TextField
                                           label="amount"
@@ -1100,6 +1107,7 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot'
                                           onChange={e => setShopname55(e.target.value)}
                                       />
                                       <TextField
@@ -1108,13 +1116,14 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className="mi width fot mb5 mtnone"
                                           onChange={e => setEmail55(e.target.value)}
                                       />
                                       <Button
                                           variant="contained"
                                           color="primary"
                                           type="submit"
-                                          className='width'
+                                          className='width mi3'
                                       >
                                           Submit
                                       </Button>
@@ -1132,9 +1141,14 @@ useEffect(() => {
                           >
                             <Box className='flex aligncenter justcenter topping'
                             >
-                              <Card className='width p20'>
-                                <Typography variant='h4 mb2'>Tron Privatekey</Typography>
-                                <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
+                              <Card className='widthp20 inv flex column aligncenter'>
+                                <Typography variant='h4 mb2 tick'>Tron Privatekey</Typography>
+                                <div className='flex pr aligncenter p10 tick2'>
+                                <Typography>{used?.trxpriv ? used?.trxpriv.slice(0,26) : 'none'}</Typography>
+                                <IconButton aria-label="copy" onClick={() => handleCopy(used?.trxpriv)}>
+                                    <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                                  </IconButton>
+                                </div>
                                 </Card>
                             </Box>
                           </Modal>
@@ -1164,9 +1178,9 @@ useEffect(() => {
                               <Box className='flex aligncenter justcenter topping'
                               >
                                 <Typography>Test2</Typography>
-                                <Card className='halfwidth'>
+                                <Card className='halfwidth inv p20'>
                                   <CardContent>
-                                  <Typography variant='h4'>Transfer Ether</Typography>
+                                  <Typography variant='h4 tick'>Transfer Ether</Typography>
                                     <form onSubmit={handleSubmit2}>
                                         <TextField
                                             label="amount"
@@ -1174,6 +1188,7 @@ useEffect(() => {
                                             fullWidth
                                             margin="normal"
                                             type='text'
+                                            className='mi width fot'
                                             onChange={e => setShopname2(e.target.value)}
                                         />
                                         <TextField
@@ -1182,13 +1197,14 @@ useEffect(() => {
                                             fullWidth
                                             margin="normal"
                                             type='text'
+                                            className='mi width fot mb5 mtnone'
                                             onChange={e => setEmail2(e.target.value)}
                                         />
                                         <Button
                                             variant="contained"
                                             color="primary"
                                             type="submit"
-                                            className='width'
+                                            className='width mi3'
                                         >
                                             Submit
                                         </Button>
@@ -1251,13 +1267,13 @@ useEffect(() => {
                             <Box className='flex aligncenter justcenter topping'
                             >
                               {success1 == true ? 
-                              <Card className='width p20'>
+                              <Card className='width p20 inv'>
                                 <Typography>Transfer of {shopname44} {token1} is successful</Typography>
                                 <CheckCircleIcon />
                               </Card>
-                              :<Card className='halfwidth'>
+                              :<Card className='halfwidth inv p20'>
                                 <CardContent>
-                                <Typography variant='h4'>Transfer Solana</Typography>
+                                <Typography variant='h4 tick'>Transfer Solana</Typography>
                                   <form onSubmit={handleSubmit44}>
                                       <TextField
                                           label="amount"
@@ -1265,6 +1281,7 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot'
                                           onChange={e => setShopname44(e.target.value)}
                                       />
                                       <TextField
@@ -1273,13 +1290,14 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot mb5 mtnone'
                                           onChange={e => setEmail44(e.target.value)}
                                       />
                                       <Button
                                           variant="contained"
                                           color="primary"
                                           type="submit"
-                                          className='width'
+                                          className='width mi3'
                                       >
                                           Submit
                                       </Button>
@@ -1302,9 +1320,14 @@ useEffect(() => {
                             </Box>*/}
                             <Box className='flex aligncenter justcenter topping'
                             >
-                              <Card className='width p20'>
-                                <Typography variant='h4 mb2'>Solana Privatekey</Typography>
-                                <Typography>{used?.solpriv ? used?.solpriv : 'none'}</Typography>
+                              <Card className='width p20 inv flex column aligncenter'>
+                                <Typography variant='h4 mb5 tick'>Solana Privatekey</Typography>
+                                <div className='flex pr aligncenter p10 tick2'>
+                                <Typography>{used?.solpriv ? used?.solpriv.slice(0,26) : 'none'}</Typography>
+                                  <IconButton aria-label="copy" onClick={() => handleCopy(used?.solpriv)}>
+                                    <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                                  </IconButton>
+                                </div>
                                 </Card>
                             </Box>
                           </Modal>
@@ -1339,13 +1362,13 @@ useEffect(() => {
                             <Box className='flex aligncenter justcenter topping'
                             >
                             {success1 == true ? 
-                              <Card className='width p20'>
+                              <Card className='width p20 inv'>
                                 <Typography>Transfer of {shopname88} {token1} is successful</Typography>
                                 <CheckCircleIcon />
                               </Card> :
-                              <Card className='halfwidth'>
+                              <Card className='halfwidth inv p20'>
                                 <CardContent>
-                                <Typography variant='h4'>Transfer USDT-TRC20</Typography>
+                                <Typography variant='h4 tick'>Transfer USDT-TRC20</Typography>
                                   <form onSubmit={handleSubmit88}>
                                       <TextField
                                           label="amount"
@@ -1353,6 +1376,7 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot'
                                           onChange={e => setShopname88(e.target.value)}
                                       />
                                       <TextField
@@ -1361,13 +1385,14 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot mb5 mtnone'
                                           onChange={e => setEmail88(e.target.value)}
                                       />
                                       <Button
                                           variant="contained"
                                           color="primary"
                                           type="submit"
-                                          className='width'
+                                          className='width mi3'
                                       >
                                           Submit
                                       </Button>
@@ -1385,9 +1410,14 @@ useEffect(() => {
                           >
                             <Box className='flex aligncenter justcenter topping'
                             >
-                              <Card className='width p20'>
-                                <Typography variant='h4 mb2'>USDT-TRC20 Privatekey</Typography>
-                                <Typography>{used?.trxpriv ? used?.trxpriv : 'none'}</Typography>
+                              <Card className='width p20 inv flex column aligncenter'>
+                                <Typography variant='h4 mb5 tick'>USDT-TRC20 Privatekey</Typography>
+                                <div className='flex pr aligncenter p10 tick2'>
+                                  <Typography>{used?.trxpriv ? used?.trxpriv.slice(0,26) : 'none'}</Typography>
+                                  <IconButton aria-label="copy" onClick={() => handleCopy(used?.trxpriv)}>
+                                      <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                                    </IconButton>
+                                </div>
                                 </Card>
                             </Box>
                           </Modal>
@@ -1416,9 +1446,9 @@ useEffect(() => {
                           >
                             <Box className='flex aligncenter justcenter topping'
                             >
-                              <Card className='halfwidth'>
+                              <Card className='halfwidth inv p20'>
                                 <CardContent>
-                                <Typography variant='h4'>Transfer USDT-ERC20</Typography>
+                                <Typography variant='h4 tick'>Transfer USDT-ERC20</Typography>
                                   <form onSubmit={handleSubmit77}>
                                       <TextField
                                           label="amount"
@@ -1426,6 +1456,7 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot'
                                           onChange={e => setShopname77(e.target.value)}
                                       />
                                       <TextField
@@ -1434,13 +1465,14 @@ useEffect(() => {
                                           fullWidth
                                           margin="normal"
                                           type='text'
+                                          className='mi width fot mb5 mtnone'
                                           onChange={e => setEmail77(e.target.value)}
                                       />
                                       <Button
                                           variant="contained"
                                           color="primary"
                                           type="submit"
-                                          className='width'
+                                          className='width mi3'
                                       >
                                           Submit
                                       </Button>

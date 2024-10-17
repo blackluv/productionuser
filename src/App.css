@@ -572,6 +572,38 @@ input:focus, .input-field:focus{
   top: 0;
 }
 
+.tick{
+  font-size: 24px !important;
+  font-weight: 500 !important;
+  line-height: 36px !important;
+  color: #FFFFFF !important;
+}
+
+.tick2{
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 27px !important;
+  color: #8A8989 !important;
+}
+
+.pr{
+  border-radius: 8px;
+  border: 1px solid #333237 !important;
+  height: 43px !important;
+}
+
+.mb5{
+  margin-bottom: 5%;
+}
+
+.mb2{
+  margin-bottom: 2%;
+}
+
+.mtnone{
+  margin-top: 0 !important;
+}
+
 @media only screen and (max-width: 1290px) {
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
     background: #141318 !important;

@@ -195,6 +195,7 @@ export default function PermanentDrawerLeft() {
         const urlencoded = new URLSearchParams()
         urlencoded.append("webhookurl", shopname2)
         urlencoded.append("api", shopname1)
+        console.log('CALLING')
           return fetch('https://novapay.live/api/settings/updatehook', {
             method: 'POST',
             headers: {
