@@ -39,6 +39,7 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import btc1 from './images/btc.png'
 
 const drawerWidth = 240;
 
@@ -257,8 +258,12 @@ useEffect(() => {
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
         </div>
         <div className='profile1 flex'>
-          <div className='profile-icon1'></div>
-          <Typography className='profile-text1'>{user5?.data?.shop}</Typography>
+        <div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}>
+            <img src={btc1} width="100%" height="100%"  alt='profile image'></img>
+          </div>
+          {/*<div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}></div>*/}
+          {/*<Typography className='profile-text1' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>*/}
+          <Typography className='' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>
         </div>
         <Link className='icon-noti' onClick={logout}>
           <LogoutIcon sx={{ color: "#D0D0D0", fontSize: 18 }}/>
