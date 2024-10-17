@@ -577,6 +577,7 @@ input:focus, .input-field:focus{
   position: sticky !important;
   top: 0;
   z-index: 10;
+  
 }
 
 .tick{
