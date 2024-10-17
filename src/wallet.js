@@ -971,7 +971,7 @@ useEffect(() => {
             {hasaccount ? 
           <div class="">
             <div className='mbmain'></div>
-            <div className='flex spacebetween width mb2'>
+            <div className='flex spacebetween width mb2 pot'>
               <div className='wal1 inv'>
                   <div className='flex width spacebetween alignbase pt10 ni inv'>
                     <Typography className='inv-header'>Merchant Wallet</Typography>

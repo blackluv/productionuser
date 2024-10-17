@@ -577,7 +577,7 @@ input:focus, .input-field:focus{
   position: sticky !important;
   top: 0;
   z-index: 10;
-  
+
 }
 
 .tick{
@@ -618,6 +618,9 @@ input:focus, .input-field:focus{
   background: #0E0D12;
   height: 80px;
 }
+.none{
+  display: none;
+}
 
 @media screen and (max-width: 1800px){
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
@@ -648,7 +651,25 @@ input:focus, .input-field:focus{
     background: #141318 !important;
     border-radius: 18px !important;
     left: 2% !important;
-    top: 18.5% !important;
+    top: 11.5% !important;
+}
+}
+
+@media screen and (max-width: 1430px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 11.5% !important;
+}
+}
+
+@media screen and (max-width: 1330px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 13.5% !important;
 }
 }
 
@@ -666,7 +687,7 @@ input:focus, .input-field:focus{
     background: #141318 !important;
     border-radius: 18px !important;
     left: 2% !important;
-    top: 15.5% !important;
+    top: 17% !important;
 }
 .tit{
   margin-right: 75px !important;
@@ -710,6 +731,35 @@ input:focus, .input-field:focus{
 .mat3-div{
   flex-wrap: wrap;
 }
+}
+
+@media screen and (max-width: 900px){
+  .input-icons{
+    display: none;
+  }
+  .css-1f2xuhi-MuiDrawer-docked{
+    display: none;
+  }
+  .icon-noti{
+    display: none;
+  }
+  .profile1{
+    display: none;
+  }
+  .pot{
+    flex-wrap: wrap;
+  }
+  .mat1{
+    width: 100%;
+    margin-bottom: 3%;
+  }
+  .mat2{
+    width: 100%;
+    margin-bottom: 3%;
+  }
+  .mat3{
+    width: 100%;
+  }
 }
 
 @keyframes App-logo-spin {
