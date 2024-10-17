@@ -1493,11 +1493,11 @@ useEffect(() => {
                 </div>
                 <div className='wal2 flex column'>
                   <div className='wal3 aligncenter inv flex column space-around'>
-                  <div className='flex width just-center spacebetween aligncenter pt5 pb2 pr5 pl5'>
+                  <div className='flex width just-center spacebetween aligncenter pt5 pb2 pr5 pl5 fop'>
                     <Typography className='cen-header'>Total Wallet </Typography>
                     <Typography className='cen-header'>{Number(age1 ? age1 : 0).toFixed(2)} {currency1}</Typography>
                   </div>
-                    <ResponsiveContainer width={120} height={120}>
+                    <ResponsiveContainer width={120} height={120} className='fop1'>
                       <PieChart /*width={1000} height={400*/>
                         <Pie
                           dataKey="value"

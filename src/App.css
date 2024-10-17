@@ -321,10 +321,10 @@ input.Mui-focused{
   background: #141318 !important;
 }
 .inv-header{
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 31px;
-  color: #FFFFFF;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+  color: #FFFFFF !important;
   margin-left: 33px !important;
   margin-bottom: 3% !important;
 }
@@ -617,12 +617,72 @@ input:focus, .input-field:focus{
   height: 80px;
 }
 
-@media only screen and (max-width: 1290px) {
+@media screen and (max-width: 1800px){
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
     background: #141318 !important;
     border-radius: 18px !important;
     left: 2% !important;
-    top: 19% !important;
+    top: 11.5% !important;
+}
+.recharts-responsive-container{
+  height: 190px !important;
+  width: 190px !important;
+}
+.recharts-wrapper{
+  max-width: 190px !important;
+  max-height: 190px !important;
+}
+.fop{
+  padding-bottom: 0 !important;
+}
+.fop1{
+  height: 130px !important;
+  width: 130px !important;
+}
+}
+
+@media screen and (max-width: 1530px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 18.5% !important;
+}
+}
+
+@media screen and (max-width: 1200px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 13.5% !important;
+}
+}
+
+@media screen and (max-width: 1024px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 15.5% !important;
+}
+.tit{
+  margin-right: 75px !important;
+  margin-left: 30px !important;
+}
+.input-icons{
+  width: 50% !important;
+}
+.inv-header {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+  color: #FFFFFF !important;
+  margin-left: 33px !important;
+  margin-bottom: 3% !important;
+}
+.input-icons1{
+  width: 35%shh;
 }
 }
 

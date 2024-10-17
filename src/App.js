@@ -767,7 +767,7 @@ export default function PermanentDrawerLeft() {
                 </div>
               </div>
               <div className='mat2 inv aligncenter flex column ' /*style={{ width: '100px', height: 300 }}*/>
-                <div className='flex width spacebetween aligncenter p5'>
+                <div className='flex width spacebetween aligncenter p5 fop'>
                     <Typography className='cen-header'>Total Wallet </Typography>
                     <Typography className='cen-header'>{Number(age1 ? age1 : 0).toFixed(2)} {currency1}</Typography>
                   </div>
