@@ -622,12 +622,58 @@ input:focus, .input-field:focus{
   display: none;
 }
 
+@media screen and (max-width: 2450px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 8.3% !important;
+}
+}
+
+@media screen and (max-width: 2150px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 9.5% !important;
+}
+}
+
+@media screen and (max-width: 1950px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 9.5% !important;
+}
+}
+
+@media screen and (max-width: 1850px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 10.5% !important;
+}
+}
+
+@media screen and (max-width: 1850px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 10.5% !important;
+}
+}
+
+
 @media screen and (max-width: 1800px){
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
     background: #141318 !important;
     border-radius: 18px !important;
     left: 2% !important;
-    top: 11.5% !important;
+    top: 10.5% !important;
 }
 .recharts-responsive-container{
   height: 190px !important;
@@ -643,6 +689,15 @@ input:focus, .input-field:focus{
 .fop1{
   height: 130px !important;
   width: 130px !important;
+}
+}
+
+@media screen and (max-width: 1630px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
+    top: 11.5% !important;
 }
 }
 
