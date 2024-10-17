@@ -707,7 +707,7 @@ input:focus, .input-field:focus{
     border-radius: 18px !important;
     left: 2% !important;
     top: 10.5% !important;
-    
+
 }
 }
 
@@ -818,6 +818,9 @@ input:focus, .input-field:focus{
 
 @media screen and (max-width: 900px){
   .input-icons{
+    display: none;
+  }
+  .css-22u6wc{
     display: none;
   }
   .css-1f2xuhi-MuiDrawer-docked{
