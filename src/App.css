@@ -223,6 +223,12 @@ align-items: center;
   font-weight: 300 !important;
   font-size: 16px !important;
 }
+
+.profile1 p{
+  color: #FFFFFF !important;
+  font-weight: 300 !important;
+  font-size: 16px !important;
+}
 .css-1f2xuhi-MuiDrawer-docked .MuiDrawer-paper{
   background: #141318 !important;
   width: 220px !important;
