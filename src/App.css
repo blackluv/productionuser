@@ -604,6 +604,13 @@ input:focus, .input-field:focus{
   margin-top: 0 !important;
 }
 
+.fip{
+  position: fixed;
+  width: 100%;
+  background: #0E0D12;
+  height: 80px;
+}
+
 @media only screen and (max-width: 1290px) {
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
     background: #141318 !important;
