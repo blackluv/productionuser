@@ -419,7 +419,7 @@ useEffect(() => {
                           <img src={`./images/${invoice?.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
                         </div>
                         <div className='justcenter flex aligncenter width20'>
-                          <Button className='lit4 justcenter flex pay' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
                           <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
                         </div>
                         </CardContent>

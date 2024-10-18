@@ -539,14 +539,18 @@ export default function PermanentDrawerLeft() {
         <div className='icon-noti'>
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
         </div>
-        <div className='profile1 flex'>
+        <div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}>
+            <img src={btc} width="100%" height="100%"  alt='profile image'></img>
+          </div>
+          <Typography className='' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>
+        {/*<div className='profile1 flex'>
         <div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}>
             <img src={btc} width="100%" height="100%"  alt='profile image'></img>
           </div>
           {/*<div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}></div>*/}
-          {/*<Typography className='profile-text1' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>*/}
+          {/*<Typography className='profile-text1' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>*
           <Typography className='' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>
-        </div>
+        </div>*/}
         <Link className='icon-noti' onClick={logout}>
           <LogoutIcon sx={{ color: "#D0D0D0", fontSize: 18 }}/>
         </Link>
@@ -861,7 +865,7 @@ export default function PermanentDrawerLeft() {
                           <img src={`./images/${invoice.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
                         </div>
                         <div className='justcenter flex aligncenter width20'>
-                          <Button className='lit4 justcenter flex pay' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
                           <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
                         </div>
                         </CardContent>

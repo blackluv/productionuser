@@ -320,9 +320,15 @@ input.Mui-focused{
   border-radius: 18px !important;
   background: #141318 !important;
 }
+.smol{
+  margin-right: 3px !important;
+}
+.mr5{
+  margin-right: 5% !important;
+}
 .inv-header{
   font-size: 18px !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   line-height: 21px !important;
   color: #FFFFFF !important;
   margin-left: 33px !important;
@@ -859,6 +865,8 @@ input:focus, .input-field:focus{
   .recharts-wrapper{
     max-width: 290px !important;
     max-height: 290px !important;
+    height: 290px !important;
+    width: 290px !important;
   }
   .css-49ifcl-MuiPaper-root-MuiAppBar-root, .MuiAppBar-root{
     width: 91% !important;
