@@ -628,6 +628,11 @@ input:focus, .input-field:focus{
   display: none;
 }
 
+.inv1 {
+  border-radius: 10px !important;
+  background: #141318 !important;
+}
+
 @media screen and (max-width: 2450px){
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
     background: #141318 !important;
@@ -776,18 +781,27 @@ input:focus, .input-field:focus{
     background: #141318 !important;
     border-radius: 18px !important;
     left: 2% !important;
+    top: 13.5% !important;
+}
+}
+
+@media screen and (max-width: 1280px){
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
+    background: #141318 !important;
+    border-radius: 18px !important;
+    left: 2% !important;
     top: 18.5% !important;
 }
 }
 
-/*@media screen and (max-width: 1280px){
+@media screen and (max-width: 1270px){
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
     background: #141318 !important;
     border-radius: 18px !important;
     left: 2% !important;
     top: 13.5% !important;
 }
-}*/
+}
 
 @media screen and (max-width: 1200px){
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
