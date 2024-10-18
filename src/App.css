@@ -145,6 +145,9 @@
   border-radius: 18px !important;
   background: #141318 !important;
 }
+.mt2{
+  margin-top: 2% !important;
+}
 .css-49ifcl-MuiPaper-root-MuiAppBar-root, .MuiAppBar-root{
   width: 96.5% !important;
   top: 20px !important;
