@@ -57,6 +57,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import profile5 from './images/circle-user.png'
+import logo from './images/logo.png'
 
 const drawerWidth = 240;
 

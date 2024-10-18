@@ -49,7 +49,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import btc1 from './images/btc.png'
 import profile5 from './images/circle-user.png'
-import { DateRangeOutlined, DateRangeRounded } from '@mui/icons-material';
+import logo from './images/logo.png'
 
 const drawerWidth = 240;
 

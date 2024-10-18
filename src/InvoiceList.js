@@ -42,6 +42,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import btc1 from './images/btc.png'
 import CheckIcon from '@mui/icons-material/Check';
 import profile5 from './images/circle-user.png'
+import logo from './images/logo.png'
 
 const drawerWidth = 240;
 
