@@ -783,11 +783,27 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
   const { data32, error32 } = useSWR('usdtval', usdtval, { refreshInterval: 36000 })
   const { data34, error34 } = useSWR('usdtrxval', usdttrxval, { refreshInterval: 36000 })
 
-  const handleCopy = async (_textToCopy) => {
+  const handleCopy1 = async (_textToCopy) => {
     try {
         await navigator.clipboard.writeText(_textToCopy);
-        setCopySuccess('Copied!');
-        alert('Copied!')
+        setCopySuccess(true);
+        //alert('Copied!')
+    } catch (err) {
+        setCopySuccess('Failed to copy!');
+    }
+  }
+
+  const handleCopy = async (_textToCopy, index) => {
+    try {
+        //await navigator.clipboard.writeText(_textToCopy);
+        navigator.clipboard.writeText(_textToCopy).then(() => {
+          setCopySuccess((prev) => ({ ...prev, [index]: true }));
+          setTimeout(() => {
+            setCopySuccess((prev) => ({ ...prev, [index]: false }));
+          }, 2000);
+        });
+        //setCopySuccess(true);
+        //alert('Copied!')
     } catch (err) {
         setCopySuccess('Failed to copy!');
     }
@@ -1055,7 +1071,7 @@ useEffect(() => {
                                 <Typography variant='h4 mb5 tick'>Bitcoin Privatekey</Typography>
                                 <div className='flex pr aligncenter p10 tick2'>
                                   <Typography>{used?.btcpriv ? used?.btcpriv.slice(0,26) : 'none'}</Typography>
-                                  <IconButton aria-label="copy" onClick={() => handleCopy(used?.btcpriv)}>
+                                  <IconButton aria-label="copy" onClick={() => handleCopy1(used?.btcpriv)}>
                                     <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                                   </IconButton>
                                 </div>
@@ -1146,7 +1162,7 @@ useEffect(() => {
                                 <Typography variant='h4 mb2 tick'>Tron Privatekey</Typography>
                                 <div className='flex pr aligncenter p10 tick2'>
                                 <Typography>{used?.trxpriv ? used?.trxpriv.slice(0,26) : 'none'}</Typography>
-                                <IconButton aria-label="copy" onClick={() => handleCopy(used?.trxpriv)}>
+                                <IconButton aria-label="copy" onClick={() => handleCopy1(used?.trxpriv)}>
                                     <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                                   </IconButton>
                                 </div>
@@ -1325,7 +1341,7 @@ useEffect(() => {
                                 <Typography variant='h4 mb5 tick'>Solana Privatekey</Typography>
                                 <div className='flex pr aligncenter p10 tick2'>
                                 <Typography>{used?.solpriv ? used?.solpriv.slice(0,26) : 'none'}</Typography>
-                                  <IconButton aria-label="copy" onClick={() => handleCopy(used?.solpriv)}>
+                                  <IconButton aria-label="copy" onClick={() => handleCopy1(used?.solpriv)}>
                                     <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                                   </IconButton>
                                 </div>
@@ -1415,7 +1431,7 @@ useEffect(() => {
                                 <Typography variant='h4 mb5 tick'>USDT-TRC20 Privatekey</Typography>
                                 <div className='flex pr aligncenter p10 tick2'>
                                   <Typography>{used?.trxpriv ? used?.trxpriv.slice(0,26) : 'none'}</Typography>
-                                  <IconButton aria-label="copy" onClick={() => handleCopy(used?.trxpriv)}>
+                                  <IconButton aria-label="copy" onClick={() => handleCopy1(used?.trxpriv)}>
                                       <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                                     </IconButton>
                                 </div>
@@ -1634,7 +1650,7 @@ useEffect(() => {
                       </div>
               </div>
               <div className='p20'>
-                    {invoicemap ? invoicemap?.map((invoice) => { 
+                    {invoicemap ? invoicemap?.map((invoice, index) => { 
                     let url;
                     if (invoice.paidin === 'eth') {
                         url = eth; // Replace with your actual ETH link
@@ -1651,15 +1667,19 @@ useEffect(() => {
                     } 
 
                       return(
-                      <Card className='width dip mb2'>
+                      <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
                          </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.transactionhash? invoice.transactionhash.slice(0,8) : "not available"}...</Typography>
-                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice.transactionhash)}>
-                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.transactionhash, index)}>
+                            {copySuccess[index] ? (
+                              <CheckIcon sx={{ color: "rgb(39, 161, 123);", fontSize: 20 }} />
+                            ) : (
+                              <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }} />
+                            )}
                           </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
@@ -1703,8 +1723,8 @@ useEffect(() => {
                       </div>
               </div>
               <div className='p20'>
-                {invoicemap1 ? invoicemap1?.map((invoice) => (
-                      <Card className='width dip mb2'>
+                {invoicemap1 ? invoicemap1?.map((invoice, index) => (
+                      <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
@@ -1714,8 +1734,12 @@ useEffect(() => {
                         </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) : 'not available'}....</Typography>
-                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress)}>
-                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress, index)}>
+                            {copySuccess[index] ? (
+                              <CheckIcon sx={{ color: "rgb(39, 161, 123);", fontSize: 20 }} />
+                            ) : (
+                              <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }} />
+                            )}
                           </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>

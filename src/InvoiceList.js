@@ -199,11 +199,17 @@ export default function PermanentDrawerLeft() {
         hasaccount2()
       }
 
-      const handleCopy = async (_textToCopy) => {
+      const handleCopy = async (_textToCopy, index) => {
         try {
-            await navigator.clipboard.writeText(_textToCopy);
-            setCopySuccess('Copied!');
-            alert('Copied!')
+            //await navigator.clipboard.writeText(_textToCopy);
+            navigator.clipboard.writeText(_textToCopy).then(() => {
+              setCopySuccess((prev) => ({ ...prev, [index]: true }));
+              setTimeout(() => {
+                setCopySuccess((prev) => ({ ...prev, [index]: false }));
+              }, 2000);
+            });
+            //setCopySuccess(true);
+            //alert('Copied!')
         } catch (err) {
             setCopySuccess('Failed to copy!');
         }
@@ -393,8 +399,8 @@ useEffect(() => {
                       </div>
               </div>
               <div className='p20'>
-                {invoicemap ? invoicemap?.map((invoice) => (
-                      <Card className='width dip mb2'>
+                {invoicemap ? invoicemap?.map((invoice, index) => (
+                      <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
@@ -404,8 +410,12 @@ useEffect(() => {
                         </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) :'not available'}....</Typography>
-                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress)}>
-                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress, index)}>
+                            {copySuccess[index] ? (
+                              <CheckIcon sx={{ color: "rgb(39, 161, 123);", fontSize: 20 }} />
+                            ) : (
+                              <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }} />
+                            )}
                           </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>

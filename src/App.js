@@ -53,6 +53,8 @@ import trx from './images/trx.png'
 import sol from './images/sol.png'
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import CheckIcon from '@mui/icons-material/Check';
+import Alert from '@mui/material/Alert';
 
 const drawerWidth = 240;
 
@@ -108,7 +110,7 @@ export default function PermanentDrawerLeft() {
   const [age5, setAge5] = React.useState('');
   const [age6, setAge6] = React.useState('');
   const [age7, setAge7] = React.useState('');
-  const [copySuccess, setCopySuccess] = useState('');
+  const [copySuccess, setCopySuccess] = useState({});
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const { ready, authenticated, user, login, logout } = usePrivy();
@@ -437,11 +439,17 @@ export default function PermanentDrawerLeft() {
           )
          }
 
-         const handleCopy = async (_textToCopy) => {
+         const handleCopy = async (_textToCopy, index) => {
           try {
-              await navigator.clipboard.writeText(_textToCopy);
-              setCopySuccess('Copied!');
-              alert('Copied!')
+              //await navigator.clipboard.writeText(_textToCopy);
+              navigator.clipboard.writeText(_textToCopy).then(() => {
+                setCopySuccess((prev) => ({ ...prev, [index]: true }));
+                setTimeout(() => {
+                  setCopySuccess((prev) => ({ ...prev, [index]: false }));
+                }, 2000);
+              });
+              //setCopySuccess(true);
+              //alert('Copied!')
           } catch (err) {
               setCopySuccess('Failed to copy!');
           }
@@ -843,8 +851,8 @@ export default function PermanentDrawerLeft() {
                       </div>
               </div>
               <div className='p20'>
-                {invoicemap ? invoicemap?.map((invoice) => (
-                      <Card className='width dip mb2'>
+                {invoicemap ? invoicemap?.map((invoice, index) => (
+                      <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>12/10/2024</Typography>
@@ -854,8 +862,12 @@ export default function PermanentDrawerLeft() {
                         </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) : 'not available'}....</Typography>
-                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress)}>
-                            <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress, index)}>
+                            {copySuccess[index] ? (
+                              <CheckIcon sx={{ color: "rgb(39, 161, 123);", fontSize: 20 }} />
+                            ) : (
+                              <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }} />
+                            )}
                           </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
