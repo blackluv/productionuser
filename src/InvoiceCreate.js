@@ -49,6 +49,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import btc1 from './images/btc.png'
 import profile5 from './images/circle-user.png'
+import { DateRangeOutlined, DateRangeRounded } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -514,11 +515,33 @@ useEffect(() => {
                       url = trx; // Replace with your actual BTC link
                     } 
 
+                    var date = new Date(invoice.date ? invoice.date : 0 * 1000);
+                    console.log(date, 'date')
+                    const options = {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: false, // Use 24-hour format
+                      timeZone: 'GMT' // Set timezone to GMT
+                  };
+                    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+                    const [datePart, timePart] = formattedDate.split(', ');
+                    const [month, day, year] = datePart.split('/');
+                    console.log('month', month, day, year)
+
+                  // Will display time in 10:30:23 format
+                  const formatted = `${day}/${month}/${year}, ${timePart}`;
+
+                  console.log(formatted);
+
                       return(
                       <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>12/10/2024</Typography>
+                          <Typography>{formatted}</Typography>
                          </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.transactionhash? invoice.transactionhash.slice(0,8) : "not available"}...</Typography>
