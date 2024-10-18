@@ -331,8 +331,8 @@ useEffect(() => {
               </Link>
             </ListItem>
         </List>
-        <div className='mb5'></div>
-        <Typography className='others'>Others</Typography>
+        {/*<div className='mb5'></div>
+        <Typography className='others'>Others</Typography>*/}
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>

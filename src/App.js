@@ -56,6 +56,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import CheckIcon from '@mui/icons-material/Check';
 import Alert from '@mui/material/Alert';
+import logo from './images/logo.png'
 
 const drawerWidth = 240;
 
@@ -527,12 +528,13 @@ export default function PermanentDrawerLeft() {
       <div className='fip'></div>
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }} 
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" className='tit'>
+          {/*<Typography variant="h6" noWrap component="div" className='tit'>
             Novapay
-          </Typography>
+          </Typography>*/}
+          <img src={logo} width="160px" height="40px"  alt='profile image' className='tit'></img>
           {/*<TextField
           label="Search"
           id="outlined-start-adornment"
@@ -628,8 +630,8 @@ export default function PermanentDrawerLeft() {
               </Link>
             </ListItem>
         </List>
-        <div className='mb5'></div>
-        <Typography className='others'>Others</Typography>
+        {/*<div className='mb5'></div>
+        <Typography className='others'>Others</Typography>*/}
         <Divider />
         <List>
             <ListItem key="Settings" disablePadding>
