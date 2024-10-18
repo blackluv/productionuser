@@ -97,6 +97,7 @@ export default function PermanentDrawerLeft() {
   const [alertContent, setAlertContent] = useState('');
   const { ready, authenticated, user, login, logout } = usePrivy();
   const [copySuccess, setCopySuccess] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const style = {
     position: 'absolute',
@@ -223,6 +224,30 @@ export default function PermanentDrawerLeft() {
   const usdt = 'https://etherscan.io/tx/'
   const usdttrx = 'https://tronscan.org/#/transaction/'
   const sol = 'https://solscan.io/tx/'
+
+  const pageSize = 1;
+
+  const totalPages = Math.ceil(invoicemap?.length / pageSize);
+
+  const paginateInvoices = (invoicemap, pageSize, currentPage) => {
+    const startIndex = (currentPage - 1) * pageSize;
+    console.log(invoicemap, 'invoice')
+    return invoicemap?.slice(startIndex, startIndex + pageSize);
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
+
+  const paginatedInvoices = paginateInvoices(invoicemap, pageSize, currentPage);
 
     /*if (!ready) {
     return null;
@@ -500,7 +525,9 @@ useEffect(() => {
                       </div>
               </div>
                 <div className='p20'>
-                    {invoicemap ? invoicemap?.map((invoice, index) => { 
+                    {/*invoicemap ? invoicemap?.map((invoice, index) => { */}
+                    {/*paginatedInvoices ? paginatedInvoices?.map((invoice, index) =>{ */}
+                      {paginatedInvoices?.map((invoice, index) => {
                     let url;
                     if (invoice.paidin === 'eth') {
                         url = eth; // Replace with your actual ETH link
@@ -565,11 +592,20 @@ useEffect(() => {
                         </div>
                           <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
                         </CardContent>
+                        <div>
+                          <button onClick={handlePrevious} disabled={currentPage === 1}>
+                            Previous
+                          </button>
+                          <span> Page {currentPage} of {totalPages} </span>
+                          <button onClick={handleNext} disabled={currentPage === totalPages}>
+                            Next
+                          </button>
+                        </div>
                       </Card>
-                    )}) : 
+                    )}) /*: 
                     <Card className='inv'>
                     <Typography>No invoice</Typography>
-                    </Card>
+                    </Card>*/
                     }
                     {/*invoicemap ? invoicemap?.map((invoice) => (
                       <Card className='width'>
