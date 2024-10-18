@@ -862,9 +862,10 @@ useEffect(() => {
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" className='tit'>
+          {/*<Typography variant="h6" noWrap component="div" className='tit'>
             Novapay
-          </Typography>
+          </Typography>*/}
+          <img src={logo} width="160px" height="40px"  alt='profile image' className='tit'></img>
           <div class="input-icons mr2">
           <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
             <input class="input-field" 
