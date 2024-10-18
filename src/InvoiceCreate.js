@@ -48,6 +48,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import btc1 from './images/btc.png'
+import profile5 from './images/circle-user.png'
 
 const drawerWidth = 240;
 
@@ -259,7 +260,7 @@ useEffect(() => {
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
         </div>
         <div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}>
-            <img src={btc1} width="100%" height="100%"  alt='profile image'></img>
+            <img src={profile5} width="100%" height="100%"  alt='profile image'></img>
           </div>
           <Typography className='mr2 profile-text1' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>
         <Link className='icon-noti' onClick={logout}>

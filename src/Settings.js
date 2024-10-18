@@ -48,6 +48,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import btc1 from './images/btc.png'
+import profile5 from './images/circle-user.png'
 //import SearchIcon from '@mui/icons-material/Search';
 //import FormControl from '@mui/material/FormControl';
 //import TextField from '@mui/material/TextField';
@@ -316,7 +317,7 @@ useEffect(() => {
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
         </div>
         <div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}>
-            <img src={btc1} width="100%" height="100%"  alt='profile image'></img>
+            <img src={profile5} width="100%" height="100%"  alt='profile image'></img>
           </div>
           <Typography className='mr2 profile-text1' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>
         <Link className='icon-noti' onClick={logout}>
