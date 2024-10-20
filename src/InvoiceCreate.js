@@ -593,11 +593,11 @@ useEffect(() => {
                           <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
                         </CardContent>
                         <div className='width flex aligncenter justcenter mt2 mb2'>
-                          <button className='lit4 justcenter flex pay smol' onClick={handlePrevious} disabled={currentPage === 1}>
+                          <button className=' justcenter flex pay smol' onClick={handlePrevious} disabled={currentPage === 1}>
                             Previous
                           </button>
                           <span> Page {currentPage} of {totalPages} </span>
-                          <button className='lit4 justcenter flex pay smol' onClick={handleNext} disabled={currentPage === totalPages}>
+                          <button className=' justcenter flex pay smol' onClick={handleNext} disabled={currentPage === totalPages}>
                             Next
                           </button>
                         </div>

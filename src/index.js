@@ -10,6 +10,7 @@ import InvoiceCreate from './InvoiceCreate'
 import Router from './Router'
 import { BrowserRouter } from 'react-router-dom';
 import {PrivyProvider} from '@privy-io/react-auth';
+import logo from './images/logo.png'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,7 +25,7 @@ root.render(
         appearance: {
           theme: 'dark',
           accentColor: '#676FFF',
-          logo: 'https://your-logo-url',
+          logo: 'https://productionuser.vercel.app/static/media/logo.358cc2c14a7270d3e88c.png',
         },
         // Create embedded wallets for users who don't have a wallet
         embeddedWallets: {

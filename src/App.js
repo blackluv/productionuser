@@ -114,10 +114,54 @@ export default function PermanentDrawerLeft() {
   const [age7, setAge7] = React.useState('');
   const [copySuccess, setCopySuccess] = useState({});
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [inputValue, setInputValue] = useState('');
+  const [recentSearches, setRecentSearches] = useState(['apple', 'banana', 'cherry']); //update
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [results, setResults] = useState({ transactions: [], users: [] });
 
   const { ready, authenticated, user, login, logout } = usePrivy();
 
   const {wallets, ready: walletsReady} = useWallets();
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    setShowSuggestions(false); // Hide suggestions when typing
+  };
+
+  const handleInputClick = () => {
+    setShowSuggestions(true); // Show suggestions on click
+  };
+
+  const handleSearch = async (search) => {
+    setInputValue(search);
+    console.log(search , 'search')
+    setShowSuggestions(false);
+    if (!recentSearches.includes(search)) {
+      setRecentSearches((prev) => [search, ...prev]);
+    }
+
+    //if (!search.trim()) return;
+
+    try {
+
+      console.log('searching')
+      const response = await fetch(`https://novapay.live/api/search?query=${encodeURIComponent(search)}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data, 'data')
+      setResults(data);
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const getbalance = async () => {
     const wallet = wallets[0];
@@ -128,7 +172,7 @@ export default function PermanentDrawerLeft() {
     //const balance1 = await provider.getBalance(wallet)
     const res = Math.round(ethers.utils.formatEther(balance) * 1e2) / 1e2;
     setBal(res)
-    console.log('bal', ethers.utils.formatEther(res))
+    //console.log('bal', ethers.utils.formatEther(res))
   }
 
   const { data5, error5 } = useSWR('getbalance', getbalance, { refreshInterval: 36000 })
@@ -153,7 +197,7 @@ export default function PermanentDrawerLeft() {
     error,
     isValidating,
   } = useSWR('https://novapay.live/api/get/address?address=' + user?.wallet?.address, fetcher, { refreshInterval: 100 });
-  console.log(user5?.data, 'countries')
+  //console.log(user5?.data, 'countries')
   const hasaccount1 = async () => {
     if(user5?.data == undefined){
       setHasaccount(false)
@@ -162,7 +206,7 @@ export default function PermanentDrawerLeft() {
       setShopname1(user5?.data?.shop)
     }
 
-    console.log(user5?.data?.shop, 'hasaccount')
+    //console.log(user5?.data?.shop, 'hasaccount')
   }
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
@@ -316,21 +360,21 @@ export default function PermanentDrawerLeft() {
     error1,
     isValidating1,
   } = useSWR('https://novapay.live/api/get/balance?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-  console.log(user1?.data, 'countries1')
+  //console.log(user1?.data, 'countries1')
   //getorders
     const {
       data: user2,
       error2,
       isValidating2,
     } = useSWR('https://novapay.live/api/get/orders?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-    console.log(user2?.data, 'countries2')
+    //console.log(user2?.data, 'countries2')
     //getbalance
     const {
       data: user22,
       error22,
       isValidating22,
     } = useSWR('https://novapay.live/api/wallets' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-    console.log(user22?.data, 'countries2')
+    //console.log(user22?.data, 'countries2')
     //requestwithdrawal
   async function requestwithdrawal(shop, amount) {
     const urlencoded = new URLSearchParams()
@@ -359,7 +403,7 @@ export default function PermanentDrawerLeft() {
       error4,
       isValidating4,
     } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-    console.log(user4?.data, 'countries4')
+    //console.log(user4?.data, 'countries4')
   
     const invoicemap = user4?.data
 
@@ -370,7 +414,7 @@ export default function PermanentDrawerLeft() {
       error10,
       isValidating10,
     } = useSWR('https://novapay.live/api/get/requestadmin?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-    console.log(user10?.data, 'countries4')
+    //console.log(user10?.data, 'countries4')
 
     const requestmap = user10?.data
   //registeruser
@@ -385,7 +429,7 @@ export default function PermanentDrawerLeft() {
         setShopname1(btcbal?.data?.shop)
       }
   
-      console.log(btcbal?.data?.shop, 'hasaccount2')
+      //console.log(btcbal?.data?.shop, 'hasaccount2')
     }
     hasaccount2()
   }
@@ -499,7 +543,7 @@ export default function PermanentDrawerLeft() {
         }
       }
       let user = registeruser(shopname, email, key)
-      console.log(user, 'user')
+      //console.log(user, 'user')
       //props.history.push("/");
     }
 
@@ -542,10 +586,56 @@ export default function PermanentDrawerLeft() {
           sx={{ m: 1, width: '40%'}}
         />*/}
         <div class="input-icons mr2">
+        <IconButton aria-label="search" onClick={() => handleSearch(inputValue)}>
           <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
-            <input class="input-field" 
+        </IconButton>
+            <input className="input-field" 
                    type="text" 
-                   placeholder="Search" />
+                   placeholder="Search Transaction ID or Username..."
+                   value={inputValue}
+                   onChange={handleInputChange}
+                   onClick={handleInputClick}
+                   onKeyDown={handleKeyDown}
+                    />
+              {showSuggestions && recentSearches.length > 0 && (
+                <div className="suggestions-card">
+                  <ul>
+                    {recentSearches.map((search, index) => (
+                      <li key={index} onClick={() => handleSearch(search)} className="suggestion-item">
+                        {search}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+          {results.transactions.length > 0 && (
+          <div className="suggestions-card">
+            <h3>Transactions</h3>
+            <ul>
+              {results.transactions.map((transaction) => (
+                <li key={transaction.transactionId} className=" flex column">
+                     amount {Number(transaction.amount).toFixed(2)}
+                     hash {transaction.transactionhash}
+                     token paidin {transaction.paidin}
+                     status confirmed {transaction.isconfirmed === true ? 'success' : 'not confimed'}
+                     date{transaction.date}
+              </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {results.users.length > 0 && (
+          <div className="">
+            <h3>Users</h3>
+            <ul>
+              {results.users.map((user) => (
+                <li key={user.username}>
+                  {user.username} - {user.email}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         </div>
         <div className='icon-noti mr2'>
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
