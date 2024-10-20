@@ -117,6 +117,7 @@ export default function PermanentDrawerLeft() {
   const [inputValue, setInputValue] = useState('');
   const [recentSearches, setRecentSearches] = useState(['apple', 'banana', 'cherry']); //update
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showresult, setShowResult] = useState(false);
   const [results, setResults] = useState({ transactions: [], users: [] });
 
   const { ready, authenticated, user, login, logout } = usePrivy();
@@ -126,6 +127,7 @@ export default function PermanentDrawerLeft() {
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     setShowSuggestions(false); // Hide suggestions when typing
+    setShowResult(false)
   };
 
   const handleInputClick = () => {
@@ -155,8 +157,9 @@ export default function PermanentDrawerLeft() {
     } catch (error) {
       console.error('Fetch error:', error);
     }
-  };
 
+    setShowResult(true)
+  };
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleSearch();
@@ -608,11 +611,11 @@ export default function PermanentDrawerLeft() {
                   </ul>
                 </div>
               )}
-          {results.transactions.length > 0 && (
+          {showresult && results.transactions.length > 0 && (
           <div className="suggestions-card">
             <h3>Transactions</h3>
             <ul>
-              {results.transactions.map((transaction) => (
+            {results.transactions.map((transaction) => (
                 <li key={transaction.transactionId} className=" flex column">
                      amount {Number(transaction.amount).toFixed(2)}
                      hash {transaction.transactionhash}
@@ -620,11 +623,11 @@ export default function PermanentDrawerLeft() {
                      status confirmed {transaction.isconfirmed === true ? 'success' : 'not confimed'}
                      date{transaction.date}
               </li>
-              ))}
+            ))}
             </ul>
           </div>
         )}
-        {results.users.length > 0 && (
+        {showresult && results.users.length > 0 && (
           <div className="">
             <h3>Users</h3>
             <ul>
