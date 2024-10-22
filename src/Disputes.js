@@ -552,9 +552,9 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
           body: urlencoded
         })
           .then(data => {
-            if(data)
+            if(data.success === true)
               {
-                console.log(data,'data33')
+                console.log(data, 'data33')
                 alert("Payment Sent with hash", data.chainhash);
               }
             else
