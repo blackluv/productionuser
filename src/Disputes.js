@@ -536,7 +536,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
   
     const invoicemap1 = user14?.data
 
-    async function pay1(amount, token, addressto, tx) {
+    /*async function pay1(amount, token, addressto, tx) {
       const urlencoded = new URLSearchParams()
       //urlencoded.append("amount", amount)
       urlencoded.append("api", user5?.data?.apikey)
@@ -563,7 +563,42 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
               }
           }
         )
-       }
+       }*/
+
+        async function pay1(amount, token, addressto, tx) {
+          const urlencoded = new URLSearchParams();
+          urlencoded.append("api", user5?.data?.apikey);
+          urlencoded.append("tx", tx);
+          
+          console.log("API Key:", user5?.data?.apikey);
+          
+          try {
+              const response = await fetch('https://novapay.live/api/dispute/pay', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                  },
+                  body: urlencoded
+              });
+      
+              // Check if the response is ok
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+      
+              const data = await response.json(); // Parse the JSON response
+      
+              if (data.success === true) {
+                  console.log(data, 'Payment successful');
+                  alert(`Payment Sent with hash: ${data.chainhash}`);
+              } else {
+                  alert("Payment failed");
+              }
+          } catch (error) {
+              console.error("Error during payment:", error);
+              alert("An error occurred while processing the payment.");
+          }
+      }
   
        async function deny1(tx) {
         const urlencoded = new URLSearchParams()
