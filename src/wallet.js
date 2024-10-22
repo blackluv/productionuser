@@ -46,12 +46,12 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import { ResponsiveContainer, PieChart, Pie, Legend, Tooltip } from "recharts";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import btc1 from './images/btc.png'
-import eth1 from './images/eth.png'
-import usdt1 from './images/usdt.png'
-import trx1 from './images/trx.png'
-import sol1 from './images/sol.png'
-import usdttrx1 from './images/usdttrx.png'
+import btc2 from './images/btc.png'
+import eth2 from './images/eth.png'
+import usdt2 from './images/usdt.png'
+import trx2 from './images/trx.png'
+import sol2 from './images/sol.png'
+import usdttrx2 from './images/usdttrx.png'
 import IconButton from '@mui/material/IconButton';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -161,12 +161,99 @@ export default function PermanentDrawerLeft() {
   const [age6, setAge6] = React.useState('');
   const [age7, setAge7] = React.useState('');
   const [copySuccess, setCopySuccess] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [recentSearches, setRecentSearches] = useState([]); //update
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showresult, setShowResult] = useState(false);
+  const [results, setResults] = useState({ transactions: [], users: [] });
 
   const handleChange22 = (event) => {
     setAge(event.target.value);
   };
 
   const { ready, authenticated, user, login, logout , exportWallet } = usePrivy();
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    setShowSuggestions(false); // Hide suggestions when typing
+    setShowResult(false)
+  };
+
+  const handleInputClick = () => {
+    setShowSuggestions(true); // Show suggestions on click
+  };
+
+  const handleSearch = async (search) => {
+    setInputValue(search);
+    console.log(search , 'search')
+    setShowSuggestions(false);
+    if (!recentSearches.includes(search)) {
+      setRecentSearches((prev) => [search, ...prev]);
+    }
+
+    //if (!search.trim()) return;
+
+    try {
+
+      console.log('searching')
+      const response = await fetch(`https://novapay.live/api/search?query=${encodeURIComponent(search)}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data, 'data')
+      setResults(data);
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+
+    setShowResult(true)
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  async function pay(amount, token, addressto) {
+    const urlencoded = new URLSearchParams()
+    urlencoded.append("amount", amount)
+    urlencoded.append("api", user5?.data?.apikey)
+    urlencoded.append("token", token)
+    urlencoded.append("addressto", addressto)
+    console.log("api", user5?.data?.apikey)
+      return fetch('https://novapay.live/api/sendtx', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: urlencoded
+      })
+        .then(data => data.json()
+      )
+     }
+
+     async function deny() {
+      const urlencoded = new URLSearchParams()
+      urlencoded.append("api", user5?.data?.apikey)
+      console.log("api", user5?.data?.apikey)
+        return fetch('https://novapay.live/api/request/deny', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: urlencoded
+        })
+          .then(data => data.json()
+        )
+       }
+
+       const eth1 = 'https://etherscan.io/tx/'
+       const trx1 = 'https://tronscan.org/#/transaction/'
+       const btc1 = 'https://mempool.space/tx/'
+       const usdt1 = 'https://etherscan.io/tx/'
+       const usdttrx1 = 'https://tronscan.org/#/transaction/'
+       const sol1 = 'https://solscan.io/tx/'
 
   //const {wallets} = useWallets();
   const {wallets, ready: walletsReady} = useWallets();
@@ -868,10 +955,201 @@ useEffect(() => {
           </Typography>*/}
           <img src={logo} width="160px" height="40px"  alt='profile image' className='tit'></img>
           <div class="input-icons mr2">
+          <IconButton aria-label="search" onClick={() => handleSearch(inputValue)}>
           <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
-            <input class="input-field" 
+        </IconButton>
+          <input className="input-field" 
                    type="text" 
-                   placeholder="Search" />
+                   placeholder="Search Transaction ID or Username..."
+                   value={inputValue}
+                   onChange={handleInputChange}
+                   onClick={handleInputClick}
+                   onKeyDown={handleKeyDown}
+                    />
+              {showSuggestions && recentSearches.length > 0 && (
+                <div className="suggestions-card">
+                  <div className='p20'>
+                  <div className='suggestions-header'>
+                    RECENT HISTORY
+                  </div>
+                  <ul>
+                    {recentSearches.map((search, index) => (
+                      <li key={index} onClick={() => handleSearch(search)} className="suggestion-item">
+                        {search}
+                      </li>
+                    ))}
+                  </ul>
+                  </div>
+                </div>
+              )}
+          {showresult && results.transactions.length > 0 && (
+          <div className="suggestions-card1">
+            <h3 className='suggestions-header1'>Search Result</h3>
+            <Card className='inv p20 lu'>
+            <div className='spacearound flex pip width mb2'>
+                     <div className='justcenter flex aligncenter column width15'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Transaction id</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Status</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10 aligncenter'>
+                        <Typography>Tx/Hash</Typography>
+                      </div>
+              </div>
+              {results.transactions.map((invoice, index) => {
+                                    let url;
+                                    if (invoice.paidin === 'eth') {
+                                        url = eth; // Replace with your actual ETH link
+                                    } else if (invoice.paidin === 'btc') {
+                                      url = btc; // Replace with your actual BTC link
+                                    } else if (invoice.paidin === 'sol') {
+                                      url = sol; // Replace with your actual BTC link
+                                    } else if (invoice.paidin === 'trx') {
+                                      url = trx; // Replace with your actual BTC link
+                                    } else if (invoice.paidin === 'usdt') {
+                                      url = eth; // Replace with your actual BTC link
+                                    } else if (invoice.paidin === 'usdttrx') {
+                                      url = trx; // Replace with your actual BTC link
+                                    } 
+                
+                                    var date = new Date(invoice.date ? invoice.date : 0 * 1000);
+                                    console.log(date, 'date')
+                                    const options = {
+                                      year: 'numeric',
+                                      month: '2-digit',
+                                      day: '2-digit',
+                                      hour: '2-digit',
+                                      minute: '2-digit',
+                                      hour12: false, // Use 24-hour format
+                                      timeZone: 'GMT' // Set timezone to GMT
+                                  };
+                                    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+                
+                                    const [datePart, timePart] = formattedDate.split(', ');
+                                    const [month, day, year] = datePart.split('/');
+                                    console.log('month', month, day, year)
+                
+                                  // Will display time in 10:30:23 format
+                                  const formatted = `${day}/${month}/${year}, ${timePart}`;
+                
+                                  console.log(formatted);
+              return(
+              <Card key={index} className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width15'>
+                          <Typography>{formatted}</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width20'>
+                          <Typography>{invoice?.transactionhash? invoice.transactionhash.slice(0,8) : "not available"}...</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{Number(invoice.amount).toFixed(2)}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <img src={`./images/${invoice.paidin ? invoice.paidin : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
+                        </div>
+                          <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
+                        </CardContent>
+                      </Card>
+              )})}
+            </Card>
+          </div>
+        )}
+        {showresult && results.users.length > 0 && (
+          <div className="suggestions-card1">
+            <h3 className='suggestions-header1'>Search Result</h3>
+            <Card className='inv p20 lu'>
+            <div className='spacearound flex pip width mb2'>
+            <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>User</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Wallets</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20 aligncenter'>
+                        <Typography>Reason</Typography>
+                      </div>
+              </div>
+              {results.users.map((invoice, index) => {
+                
+                                    var date = new Date(invoice.date ? invoice.date : 0 * 1000);
+                                    console.log(date, 'date')
+                                    const options = {
+                                      year: 'numeric',
+                                      month: '2-digit',
+                                      day: '2-digit',
+                                      hour: '2-digit',
+                                      minute: '2-digit',
+                                      hour12: false, // Use 24-hour format
+                                      timeZone: 'GMT' // Set timezone to GMT
+                                  };
+                                    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+                
+                                    const [datePart, timePart] = formattedDate.split(', ');
+                                    const [month, day, year] = datePart.split('/');
+                                    console.log('month', month, day, year)
+                
+                                  // Will display time in 10:30:23 format
+                                  const formatted = `${day}/${month}/${year}, ${timePart}`;
+                
+                                  console.log(formatted);
+              return(
+                <Card key={index} className='width dip mb2'>
+                <CardContent className='spacebetween flex'>
+                <div className='justcenter flex aligncenter column width10'>
+                  <Typography>12/10/2024</Typography>
+                </div>
+                <div className='justcenter flex aligncenter column width10'>
+                  <Typography>{invoice?.username ? invoice?.username : 'none'}</Typography>
+                </div>
+                <div className='justcenter flex aligncenter row width20'>
+                  <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) :'not available'}....</Typography>
+                  <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress, index)}>
+                    {copySuccess[index] ? (
+                      <CheckIcon sx={{ color: "rgb(39, 161, 123);", fontSize: 20 }} />
+                    ) : (
+                      <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }} />
+                    )}
+                  </IconButton>
+                </div>
+                <div className='justcenter flex aligncenter column width10'>
+                  <Typography>{Number(invoice?.amount).toFixed(2)}</Typography>
+                </div>
+                <div className='justcenter flex aligncenter column width10'>
+                  <img src={`./images/${invoice?.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
+                </div>
+                <div className='justcenter flex aligncenter width20'>
+                  <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                  <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                </div>
+                </CardContent>
+              </Card>
+              )})}
+            </Card>
+          </div>
+        )}
         </div>
         <div className='icon-noti mr2'>
           <NotificationsNoneOutlinedIcon sx={{ color: "#606060", fontSize: 20 }}/>
@@ -1001,7 +1279,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={btc1} height='30px' width='30px' alt='btc'/>
+                            <img src={btc2} height='30px' width='30px' alt='btc'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>BTC</Typography>
@@ -1086,7 +1364,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={trx1} height='30px' width='30px' alt='trx'/>
+                            <img src={trx2} height='30px' width='30px' alt='trx'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>TRX</Typography>
@@ -1177,7 +1455,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={eth1} height='30px' width='30px' alt='eth'/>
+                            <img src={eth2} height='30px' width='30px' alt='eth'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>ETH</Typography>
@@ -1266,7 +1544,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={sol1} height='30px' width='30px' alt='sol'/>
+                            <img src={sol2} height='30px' width='30px' alt='sol'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>SOL</Typography>
@@ -1356,7 +1634,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={usdttrx1} height='30px' width='30px' alt='usdt'/>
+                            <img src={usdttrx2} height='30px' width='30px' alt='usdt'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>USDT-TRC20</Typography>
@@ -1446,7 +1724,7 @@ useEffect(() => {
                         <Card className='width dip mb2'>
                           <CardContent className='spacebetween flex'>
                           <div className='justcenter flex aligncenter column width10'>
-                            <img src={usdt1} height='30px' width='30px' alt='usdt'/>
+                            <img src={usdt2} height='30px' width='30px' alt='usdt'/>
                           </div>
                           <div className='justcenter flex aligncenter row width10'>
                             <Typography>USDT-ERC20</Typography>

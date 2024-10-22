@@ -116,7 +116,7 @@ export default function PermanentDrawerLeft() {
   const [copySuccess, setCopySuccess] = useState({});
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [inputValue, setInputValue] = useState('');
-  const [recentSearches, setRecentSearches] = useState(['apple', 'banana', 'cherry']); //update
+  const [recentSearches, setRecentSearches] = useState([]); //update
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showresult, setShowResult] = useState(false);
   const [results, setResults] = useState({ transactions: [], users: [] });
@@ -166,6 +166,13 @@ export default function PermanentDrawerLeft() {
       handleSearch();
     }
   };
+
+  const eth1 = 'https://etherscan.io/tx/'
+  const trx1 = 'https://tronscan.org/#/transaction/'
+  const btc1 = 'https://mempool.space/tx/'
+  const usdt1 = 'https://etherscan.io/tx/'
+  const usdttrx1 = 'https://tronscan.org/#/transaction/'
+  const sol1 = 'https://solscan.io/tx/'
 
   const getbalance = async () => {
     const wallet = wallets[0];
@@ -644,17 +651,17 @@ export default function PermanentDrawerLeft() {
               {results.transactions.map((invoice, index) => {
                                     let url;
                                     if (invoice.paidin === 'eth') {
-                                        url = eth; // Replace with your actual ETH link
+                                        url = eth1; // Replace with your actual ETH link
                                     } else if (invoice.paidin === 'btc') {
-                                      url = btc; // Replace with your actual BTC link
+                                      url = btc1; // Replace with your actual BTC link
                                     } else if (invoice.paidin === 'sol') {
-                                      url = sol; // Replace with your actual BTC link
+                                      url = sol1; // Replace with your actual BTC link
                                     } else if (invoice.paidin === 'trx') {
-                                      url = trx; // Replace with your actual BTC link
+                                      url = trx1; // Replace with your actual BTC link
                                     } else if (invoice.paidin === 'usdt') {
-                                      url = eth; // Replace with your actual BTC link
+                                      url = eth1; // Replace with your actual BTC link
                                     } else if (invoice.paidin === 'usdttrx') {
-                                      url = trx; // Replace with your actual BTC link
+                                      url = trx1; // Replace with your actual BTC link
                                     } 
                 
                                     var date = new Date(invoice.date ? invoice.date : 0 * 1000);
@@ -701,19 +708,6 @@ export default function PermanentDrawerLeft() {
                       </Card>
               )})}
             </Card>
-          </div>
-        )}
-        {showresult && results.users.length > 0 && (
-
-          <div className="suggestions-card">
-            <h3>Search Result</h3>
-            <ul>
-              {results.users.map((user) => (
-                <li key={user.username}>
-                  {user.username}
-                </li>
-              ))}
-            </ul>
           </div>
         )}
         {showresult && results.users.length > 0 && (
