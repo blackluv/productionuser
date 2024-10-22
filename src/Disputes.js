@@ -538,10 +538,10 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
 
     async function pay1(amount, token, addressto, tx) {
       const urlencoded = new URLSearchParams()
-      urlencoded.append("amount", amount)
+      //urlencoded.append("amount", amount)
       urlencoded.append("api", user5?.data?.apikey)
-      urlencoded.append("token", token)
-      urlencoded.append("addressto", addressto)
+      //urlencoded.append("token", token)
+      //urlencoded.append("addressto", addressto)
       urlencoded.append("tx", tx)
       console.log("api", user5?.data?.apikey)
         return fetch('https://novapay.live/api/dispute/pay', {
