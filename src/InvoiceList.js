@@ -410,7 +410,7 @@ useEffect(() => {
                           <Typography>12/10/2024</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>not available</Typography>
+                          <Typography>{invoice?.username ? invoice?.username : 'none'}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter row width20'>
                           <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) :'not available'}....</Typography>

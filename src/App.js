@@ -57,6 +57,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CheckIcon from '@mui/icons-material/Check';
 import Alert from '@mui/material/Alert';
 import logo from './images/logo.png'
+import CloseIcon from '@mui/icons-material/Close';
 
 const drawerWidth = 240;
 
@@ -602,6 +603,10 @@ export default function PermanentDrawerLeft() {
                     />
               {showSuggestions && recentSearches.length > 0 && (
                 <div className="suggestions-card">
+                  <div className='p20'>
+                  <div className='suggestions-header'>
+                    RECENT HISTORY
+                  </div>
                   <ul>
                     {recentSearches.map((search, index) => (
                       <li key={index} onClick={() => handleSearch(search)} className="suggestion-item">
@@ -609,34 +614,188 @@ export default function PermanentDrawerLeft() {
                       </li>
                     ))}
                   </ul>
+                  </div>
                 </div>
               )}
           {showresult && results.transactions.length > 0 && (
+          <div className="suggestions-card1">
+            <h3 className='suggestions-header1'>Search Result</h3>
+            <Card className='inv p20 lu'>
+            <div className='spacearound flex pip width mb2'>
+                     <div className='justcenter flex aligncenter column width15'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Transaction id</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Status</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10 aligncenter'>
+                        <Typography>Tx/Hash</Typography>
+                      </div>
+              </div>
+              {results.transactions.map((invoice, index) => {
+                                    let url;
+                                    if (invoice.paidin === 'eth') {
+                                        url = eth; // Replace with your actual ETH link
+                                    } else if (invoice.paidin === 'btc') {
+                                      url = btc; // Replace with your actual BTC link
+                                    } else if (invoice.paidin === 'sol') {
+                                      url = sol; // Replace with your actual BTC link
+                                    } else if (invoice.paidin === 'trx') {
+                                      url = trx; // Replace with your actual BTC link
+                                    } else if (invoice.paidin === 'usdt') {
+                                      url = eth; // Replace with your actual BTC link
+                                    } else if (invoice.paidin === 'usdttrx') {
+                                      url = trx; // Replace with your actual BTC link
+                                    } 
+                
+                                    var date = new Date(invoice.date ? invoice.date : 0 * 1000);
+                                    console.log(date, 'date')
+                                    const options = {
+                                      year: 'numeric',
+                                      month: '2-digit',
+                                      day: '2-digit',
+                                      hour: '2-digit',
+                                      minute: '2-digit',
+                                      hour12: false, // Use 24-hour format
+                                      timeZone: 'GMT' // Set timezone to GMT
+                                  };
+                                    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+                
+                                    const [datePart, timePart] = formattedDate.split(', ');
+                                    const [month, day, year] = datePart.split('/');
+                                    console.log('month', month, day, year)
+                
+                                  // Will display time in 10:30:23 format
+                                  const formatted = `${day}/${month}/${year}, ${timePart}`;
+                
+                                  console.log(formatted);
+              return(
+              <Card key={index} className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width15'>
+                          <Typography>{formatted}</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width20'>
+                          <Typography>{invoice?.transactionhash? invoice.transactionhash.slice(0,8) : "not available"}...</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{Number(invoice.amount).toFixed(2)}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <img src={`./images/${invoice.paidin ? invoice.paidin : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
+                        </div>
+                          <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
+                        </CardContent>
+                      </Card>
+              )})}
+            </Card>
+          </div>
+        )}
+        {showresult && results.users.length > 0 && (
+
           <div className="suggestions-card">
-            <h3>Transactions</h3>
+            <h3>Search Result</h3>
             <ul>
-            {results.transactions.map((transaction) => (
-                <li key={transaction.transactionId} className=" flex column">
-                     amount {Number(transaction.amount).toFixed(2)}
-                     hash {transaction.transactionhash}
-                     token paidin {transaction.paidin}
-                     status confirmed {transaction.isconfirmed === true ? 'success' : 'not confimed'}
-                     date{transaction.date}
-              </li>
-            ))}
+              {results.users.map((user) => (
+                <li key={user.username}>
+                  {user.username}
+                </li>
+              ))}
             </ul>
           </div>
         )}
         {showresult && results.users.length > 0 && (
-          <div className="">
-            <h3>Users</h3>
-            <ul>
-              {results.users.map((user) => (
-                <li key={user.username}>
-                  {user.username} - {user.email}
-                </li>
-              ))}
-            </ul>
+          <div className="suggestions-card1">
+            <h3 className='suggestions-header1'>Search Result</h3>
+            <Card className='inv p20 lu'>
+            <div className='spacearound flex pip width mb2'>
+            <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>User</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Wallets</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20 aligncenter'>
+                        <Typography>Reason</Typography>
+                      </div>
+              </div>
+              {results.users.map((invoice, index) => {
+                
+                                    var date = new Date(invoice.date ? invoice.date : 0 * 1000);
+                                    console.log(date, 'date')
+                                    const options = {
+                                      year: 'numeric',
+                                      month: '2-digit',
+                                      day: '2-digit',
+                                      hour: '2-digit',
+                                      minute: '2-digit',
+                                      hour12: false, // Use 24-hour format
+                                      timeZone: 'GMT' // Set timezone to GMT
+                                  };
+                                    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+                
+                                    const [datePart, timePart] = formattedDate.split(', ');
+                                    const [month, day, year] = datePart.split('/');
+                                    console.log('month', month, day, year)
+                
+                                  // Will display time in 10:30:23 format
+                                  const formatted = `${day}/${month}/${year}, ${timePart}`;
+                
+                                  console.log(formatted);
+              return(
+                <Card key={index} className='width dip mb2'>
+                <CardContent className='spacebetween flex'>
+                <div className='justcenter flex aligncenter column width10'>
+                  <Typography>12/10/2024</Typography>
+                </div>
+                <div className='justcenter flex aligncenter column width10'>
+                  <Typography>{invoice?.username ? invoice?.username : 'none'}</Typography>
+                </div>
+                <div className='justcenter flex aligncenter row width20'>
+                  <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) :'not available'}....</Typography>
+                  <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress, index)}>
+                    {copySuccess[index] ? (
+                      <CheckIcon sx={{ color: "rgb(39, 161, 123);", fontSize: 20 }} />
+                    ) : (
+                      <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }} />
+                    )}
+                  </IconButton>
+                </div>
+                <div className='justcenter flex aligncenter column width10'>
+                  <Typography>{Number(invoice?.amount).toFixed(2)}</Typography>
+                </div>
+                <div className='justcenter flex aligncenter column width10'>
+                  <img src={`./images/${invoice?.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
+                </div>
+                <div className='justcenter flex aligncenter width20'>
+                  <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                  <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                </div>
+                </CardContent>
+              </Card>
+              )})}
+            </Card>
           </div>
         )}
         </div>

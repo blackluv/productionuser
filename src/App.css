@@ -160,6 +160,9 @@
 body, .css-1jmjcem{
   background-color: #0E0D12 !important;
 }
+body {
+  font-family: 'Poppins', sans-serif !important;
+}
 .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root, .MuiInputLabel-root{
   color:#606060 !important;
 }
@@ -538,15 +541,53 @@ path{stroke: transparent};
   top: 100%;
   left: 22%;
   right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: #0E0D12;
+  border-radius: 28px;
   z-index: 1000;
-  max-height: 200px;
+  max-height: 476px;
   overflow-y: auto;
   width: 60%;
-  color: #000;
+  color: #505050;
+}
+
+.suggestions-card1 {
+  position: absolute;
+  top: 100%;
+  left: 19%;
+  right: 0;
+  background: #0E0D12 !important;
+  border-radius: 28px;
+  z-index: 1000;
+  max-height: 476px;
+  overflow-y: auto;
+  width: 80%;
+  color: #505050;
+}
+
+.width15{
+  width: 15% !important;
+}
+
+.suggestions-header{
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 19.2px;
+  color: #505050;
+  margin-left: 0;
+  margin-bottom: 1%;
+}
+
+.suggestions-header1{
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 19.2px;
+  color: #FFFFFF;
+  margin-left: 2%;
+  margin-bottom: 1%;
+}
+
+.lu{
+  height: 300px !important;
 }
 
 .suggestions-card ul {
@@ -555,9 +596,17 @@ path{stroke: transparent};
   padding: 0;
 }
 
+h1, h2, h3, p, .MuiTypography-root {
+  font-family: 'Poppins', sans-serif !important;
+}
+
 .suggestion-item {
-  padding: 10px;
+  padding-top: 2%;
   cursor: pointer;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 19.2px;
+  color: #C8C6C6;
 }
 
 .suggestion-item:hover {
