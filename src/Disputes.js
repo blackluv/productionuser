@@ -202,10 +202,10 @@ export default function PermanentDrawerLeft() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log(data, 'data')
+      //console.log(data, 'data')
       setResults(data);
     } catch (error) {
-      console.error('Fetch error:', error);
+      //console.error('Fetch error:', error);
     }
 
     setShowResult(true)
@@ -423,7 +423,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       setShopname1(user5?.data?.shop)
     }
 
-    console.log(user5?.data?.shop, 'hasaccount')
+    //console.log(user5?.data?.shop, 'hasaccount')
   }
 
   const cur = async () => {
@@ -532,7 +532,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       error14,
       isValidating14,
     } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-    console.log(user14?.data, 'countries4')
+    //console.log(user14?.data, 'countries4')
   
     const invoicemap1 = user14?.data
 
@@ -569,7 +569,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
         const urlencoded = new URLSearchParams()
         urlencoded.append("api", user5?.data?.apikey)
         urlencoded.append("tx", tx)
-        console.log("api", user5?.data?.apikey)
+        console.log("tx", tx)
           return fetch('https://novapay.live/api/dispute/deny', {
             method: 'POST',
             headers: {
@@ -581,7 +581,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
               if(data)
                 {
                   console.log(data,'data33')
-                  alert("Payment denied");
+                  alert("dispute denied");
                 }
               else
                 {
@@ -600,18 +600,18 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
     //console.log(user4?.data, 'countries4')
 
     const invoicemap = user4?.data
-    console.log(invoicemap, 'disputes')
+    //console.log(invoicemap, 'disputes')
 
       //getallinvoi
       const {
         data: user44,
         error44,
         isValidating44,
-      } = useSWR('https://novapay.live/api/get/get/alldisputehistory?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+      } = useSWR('https://novapay.live/api/get/alldisputehistory?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
       //console.log(user4?.data, 'countries4')
   
       const invoicemap4 = user44?.data
-      console.log(invoicemap4, 'disputes')
+      //console.log(invoicemap4, 'disputes')
     //getallwithdrawals
   //registeruser
   async function registeruser(shop, email) {
@@ -634,21 +634,21 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
      const handleSubmit = async e => {
       e.preventDefault();
       let user = registeruser(shopname, email)
-      console.log(user, 'user')
+      //console.log(user, 'user')
       //props.history.push("/");
     }
 
     const handleSubmit2 = async e => {
         e.preventDefault();
         let user = sendeth(shopname2, email2)
-        console.log(user, 'user')
+        //console.log(user, 'user')
         //props.history.push("/");
       } 
       //sol,trx,btc
       const handleSubmit77 = async e => {
         e.preventDefault();
         let user = sendusdt(shopname77, email77)
-        console.log(user, 'user')
+        //console.log(user, 'user')
         //props.history.push("/");
       } 
 
@@ -730,7 +730,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       const handleSubmit44 = async e => {
         e.preventDefault();
         let user = await send44(shopname44, email44)
-        console.log(user, 'user')
+        //console.log(user, 'user')
         setSuccess1(user.data)
         setToken1("sol")
         //props.history.push("/");
@@ -739,7 +739,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       const handleSubmit55 = async e => {
         e.preventDefault();
         let user = await send55(shopname55, email55)
-        console.log(user, 'user')
+        //console.log(user, 'user')
         setSuccess1(user.data)
         setToken1("trx")
         //props.history.push("/");
@@ -748,7 +748,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       const handleSubmit66 = async e => {
         e.preventDefault();
         let user = await send66(shopname66, email66)
-        console.log(user, 'user')
+        //console.log(user, 'user')
         setSuccess1(user.data)
         setToken1("btc")
         //props.history.push("/");
@@ -757,7 +757,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       const handleSubmit88 = async e => {
         e.preventDefault();
         let user = await send88(shopname88, email88)
-        console.log(user, 'user')
+        //console.log(user, 'user')
         setSuccess1(user.data)
         setToken1("usdt-trc20")
         //props.history.push("/");
@@ -777,7 +777,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
         setShopname1(btcbal?.data?.shop)
       }
   
-      console.log(btcbal?.data?.shop, 'hasaccount2')
+      //console.log(btcbal?.data?.shop, 'hasaccount2')
     }
     hasaccount2()
   }
@@ -1339,7 +1339,7 @@ useEffect(() => {
                     } 
 
                     var date = new Date(invoice.date ? invoice.date : 0 * 1000);
-                    console.log(date, 'date')
+                    //console.log(date, 'date')
                     const options = {
                       year: 'numeric',
                       month: '2-digit',
@@ -1353,12 +1353,12 @@ useEffect(() => {
 
                     const [datePart, timePart] = formattedDate.split(', ');
                     const [month, day, year] = datePart.split('/');
-                    console.log('month', month, day, year)
+                    //console.log('month', month, day, year)
 
                   // Will display time in 10:30:23 format
                   const formatted = `${day}/${month}/${year}, ${timePart}`;
 
-                  console.log(formatted);
+                  //console.log(formatted);
                   let reason
 
                   if(invoice?.underpaid === true){
@@ -1444,7 +1444,7 @@ useEffect(() => {
                     } 
 
                     var date = new Date(invoice.date ? invoice.date : 0 * 1000);
-                    console.log(date, 'date')
+                    //console.log(date, 'date')
                     const options = {
                       year: 'numeric',
                       month: '2-digit',
@@ -1458,12 +1458,12 @@ useEffect(() => {
 
                     const [datePart, timePart] = formattedDate.split(', ');
                     const [month, day, year] = datePart.split('/');
-                    console.log('month', month, day, year)
+                    //console.log('month', month, day, year)
 
                   // Will display time in 10:30:23 format
                   const formatted = `${day}/${month}/${year}, ${timePart}`;
 
-                  console.log(formatted);
+                  //console.log(formatted);
                   let reason
 
                   if(invoice?.isdenied === true){
