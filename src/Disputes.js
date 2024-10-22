@@ -216,7 +216,7 @@ export default function PermanentDrawerLeft() {
     }
   };
 
-  /*async function pay(amount, token, addressto) {
+  async function pay(amount, token, addressto) {
     const urlencoded = new URLSearchParams()
     urlencoded.append("amount", amount)
     urlencoded.append("api", user5?.data?.apikey)
@@ -247,7 +247,7 @@ export default function PermanentDrawerLeft() {
         })
           .then(data => data.json()
         )
-       }*/
+       }
 
        const eth1 = 'https://etherscan.io/tx/'
        const trx1 = 'https://tronscan.org/#/transaction/'
