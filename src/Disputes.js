@@ -1291,7 +1291,7 @@ useEffect(() => {
                         <Typography>Date</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width20'>
-                        <Typography>Transaction id</Typography>
+                        <Typography>Users</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
                         <Typography>Amount</Typography>
@@ -1300,10 +1300,10 @@ useEffect(() => {
                         <Typography>Token</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
-                        <Typography>Status</Typography>
+                        <Typography>Reason</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10 aligncenter'>
-                        <Typography>Tx/Hash</Typography>
+                        <Typography>action</Typography>
                       </div>
               </div>
               <div className='p20'>
@@ -1386,19 +1386,19 @@ useEffect(() => {
                         <Typography>Date</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
-                        <Typography>User</Typography>
+                        <Typography>Users</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width20'>
-                        <Typography>Wallets</Typography>
-                      </div>
-                      <div className='justcenter flex aligncenter column width10'>
                         <Typography>Amount</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
                         <Typography>Token</Typography>
                       </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Status</Typography>
+                      </div>
                       <div className='justcenter flex aligncenter column width20 aligncenter'>
-                        <Typography>Reason</Typography>
+                        <Typography>Tx/Hash</Typography>
                       </div>
               </div>
               <div className='p20'>
