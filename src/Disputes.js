@@ -1291,7 +1291,7 @@ useEffect(() => {
                         <Typography>Date</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width20'>
-                        <Typography>Users</Typography>
+                        <Typography>Transaction Id</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
                         <Typography>Amount</Typography>
@@ -1302,7 +1302,7 @@ useEffect(() => {
                       <div className='justcenter flex aligncenter column width10'>
                         <Typography>Reason</Typography>
                       </div>
-                      <div className='justcenter flex aligncenter column width10 aligncenter'>
+                      <div className='justcenter flex aligncenter column width20 aligncenter'>
                         <Typography>action</Typography>
                       </div>
               </div>
@@ -1344,6 +1344,13 @@ useEffect(() => {
                   const formatted = `${day}/${month}/${year}, ${timePart}`;
 
                   console.log(formatted);
+                  let reason
+
+                  if(invoice?.underpaid === true){
+                    reason = "underpaid"
+                  } else if(invoice?.overpaid === true){
+                    reason = "overpaid"
+                  }
 
                       return(
                       <Card key={index} className='width dip mb2'>
@@ -1368,27 +1375,30 @@ useEffect(() => {
                           <img src={`./images/${invoice.paidin ? invoice.paidin : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
+                          <Typography>{reason }</Typography>
                         </div>
-                          <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
+                          <div className='justcenter flex aligncenter width20'>
+                          <Button className='lit4 justcenter flex pay' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                        </div>
                         </CardContent>
                       </Card>
                     )}) : 
                     <Card className='inv'>
-                    <Typography>No invoice</Typography>
+                    <Typography>No Dispute</Typography>
                     </Card>
                     }
                   </div>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
                 <div className='spacearound flex pip width'>
-                     <div className='justcenter flex aligncenter column width10'>
+                     <div className='justcenter flex aligncenter column width15'>
                         <Typography>Date</Typography>
                       </div>
-                      <div className='justcenter flex aligncenter column width10'>
-                        <Typography>Users</Typography>
-                      </div>
                       <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Transaction Id</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
                         <Typography>Amount</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
@@ -1397,23 +1407,65 @@ useEffect(() => {
                       <div className='justcenter flex aligncenter column width10'>
                         <Typography>Status</Typography>
                       </div>
-                      <div className='justcenter flex aligncenter column width20 aligncenter'>
+                      <div className='justcenter flex aligncenter column width10 aligncenter'>
                         <Typography>Tx/Hash</Typography>
                       </div>
               </div>
               <div className='p20'>
-                {invoicemap1 ? invoicemap1?.map((invoice, index) => (
+                    {invoicemap ? invoicemap?.map((invoice, index) => { 
+                    let url;
+                    if (invoice.paidin === 'eth') {
+                        url = eth; // Replace with your actual ETH link
+                    } else if (invoice.paidin === 'btc') {
+                      url = btc; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'sol') {
+                      url = sol; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'trx') {
+                      url = trx; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'usdt') {
+                      url = eth; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'usdttrx') {
+                      url = trx; // Replace with your actual BTC link
+                    } 
+
+                    var date = new Date(invoice.date ? invoice.date : 0 * 1000);
+                    console.log(date, 'date')
+                    const options = {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: false, // Use 24-hour format
+                      timeZone: 'GMT' // Set timezone to GMT
+                  };
+                    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+                    const [datePart, timePart] = formattedDate.split(', ');
+                    const [month, day, year] = datePart.split('/');
+                    console.log('month', month, day, year)
+
+                  // Will display time in 10:30:23 format
+                  const formatted = `${day}/${month}/${year}, ${timePart}`;
+
+                  console.log(formatted);
+                  let reason
+
+                  if(invoice?.underpaid === true){
+                    reason = "underpaid"
+                  } else if(invoice?.overpaid === true){
+                    reason = "overpaid"
+                  }
+
+                      return(
                       <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>12/10/2024</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>not available</Typography>
-                        </div>
+                        <div className='justcenter flex aligncenter column width15'>
+                          <Typography>{formatted}</Typography>
+                         </div>
                         <div className='justcenter flex aligncenter row width20'>
-                          <Typography>{invoice?.useradress ? invoice?.useradress.slice(0,8) : 'not available'}....</Typography>
-                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.useradress, index)}>
+                          <Typography>{invoice?.transactionhash? invoice.transactionhash.slice(0,8) : "not available"}...</Typography>
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.transactionhash, index)}>
                             {copySuccess[index] ? (
                               <CheckIcon sx={{ color: "rgb(39, 161, 123);", fontSize: 20 }} />
                             ) : (
@@ -1422,23 +1474,28 @@ useEffect(() => {
                           </IconButton>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{Number(invoice?.amount).toFixed(2)}</Typography>
+                          <Typography>{Number(invoice.amount).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <img src={`./images/${invoice?.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
+                          <img src={`./images/${invoice.paidin ? invoice.paidin : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
                         </div>
-                        <div className='justcenter flex aligncenter width20'>
-                          <Button className='lit4 justcenter flex pay' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
-                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{reason }</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>status</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Link to='/'> Tx Hash</Link>
                         </div>
                         </CardContent>
                       </Card>
-                      )) : 
-                      <Card className='inv'>
-                      <Typography>No request</Typography>
-                      </Card>
-                }
-              </div>
+                    )}) : 
+                    <Card className='inv'>
+                    <Typography>No Dispute History</Typography>
+                    </Card>
+                    }
+                  </div>
                 </CustomTabPanel>
               </Box>
             </Card>

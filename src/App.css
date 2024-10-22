@@ -596,7 +596,7 @@ path{stroke: transparent};
   padding: 0;
 }
 
-h1, h2, h3, p, .MuiTypography-root {
+h1, h2, h3, p, .MuiTypography-root, button {
   font-family: 'Poppins', sans-serif !important;
 }
 
