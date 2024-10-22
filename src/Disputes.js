@@ -1,5 +1,5 @@
 //import * as React from 'react';
-import React, { useEffect, useState , lazy, Suspense} from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,10 +29,12 @@ import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { ethers } from "ethers";
+import QRCode from "react-qr-code";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
@@ -41,23 +43,21 @@ import WalletIcon from '@mui/icons-material/Wallet';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
-//import { PieChart } from '@mui/x-charts/PieChart';
 import { ResponsiveContainer, PieChart, Pie, Legend, Tooltip } from "recharts";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import btc from './images/btc.png'
-import eth from './images/eth.png'
-import usdt from './images/usdt.png'
-import usdttrx from './images/usdttrx.png'
-import trx from './images/trx.png'
-import sol from './images/sol.png'
-import profile5 from './images/circle-user.png'
+import btc2 from './images/btc.png'
+import eth2 from './images/eth.png'
+import usdt2 from './images/usdt.png'
+import trx2 from './images/trx.png'
+import sol2 from './images/sol.png'
+import usdttrx2 from './images/usdttrx.png'
 import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import CheckIcon from '@mui/icons-material/Check';
-import Alert from '@mui/material/Alert';
-import logo from './images/logo.png'
 import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
+import profile5 from './images/circle-user.png'
+import logo from './images/logo.png'
 
 const drawerWidth = 240;
 
@@ -94,36 +94,84 @@ function a11yProps(index) {
 export default function PermanentDrawerLeft() {
   const [currentAccount, setCurrentAccount] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
+  const [open44, setOpen44] = React.useState(false);
+  const [open55, setOpen55] = React.useState(false);
+  const [open66, setOpen66] = React.useState(false);
+  const [open77, setOpen77] = React.useState(false);
+  const [open88, setOpen88] = React.useState(false);
+  const [open100, setOpen100] = React.useState(false);
+  const [open200, setOpen200] = React.useState(false);
+  const [open300, setOpen300] = React.useState(false);
   const [hasaccount, setHasaccount] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleOpen2 = () => setOpen2(true);
+  const handleClose2 = () => setOpen2(false);
+  const handleOpen3 = () => setOpen3(true);
+  const handleClose3 = () => setOpen3(false);
+  const handleOpen44 = () => setOpen44(true);
+  const handleClose44 = () => setOpen44(false);
+  const handleOpen55 = () => setOpen55(true);
+  const handleClose55 = () => setOpen55(false);
+  const handleOpen66 = () => setOpen66(true);
+  const handleClose66 = () => setOpen66(false);
+  const handleOpen77 = () => setOpen77(true);
+  const handleClose77 = () => setOpen77(false);
+  const handleOpen88 = () => setOpen88(true);
+  const handleClose88 = () => setOpen88(false);
+  const handleOpen100 = () => setOpen100(true);
+  const handleClose100 = () => setOpen100(false);
+  const handleOpen200 = () => setOpen200(true);
+  const handleClose200 = () => setOpen200(false);
+  const handleOpen300 = () => setOpen300(true);
+  const handleClose300 = () => setOpen300(false);
   const [value, setValue] = React.useState(0);
   const [shopname, setShopname] = useState('');
+  const [shopname2, setShopname2] = useState('');
   const [shopname1, setShopname1] = useState('');
+  const [shopname44, setShopname44] = useState('');
+  const [shopname55, setShopname55] = useState('');
+  const [shopname66, setShopname66] = useState('');
+  const [shopname77, setShopname77] = useState('');
+  const [shopname88, setShopname88] = useState('');
   const [email, setEmail] = useState('');
-  const [key, setKey] = useState('');
+  const [success1, setSuccess1] = useState(false);
+  const [token1, setToken1] = useState('');
+  const [email2, setEmail2] = useState('');
+  const [email44, setEmail44] = useState('');
+  const [email55, setEmail55] = useState('');
+  const [email66, setEmail66] = useState('');
+  const [email77, setEmail77] = useState('');
+  const [email88, setEmail88] = useState('');
+  const [gone, setGone] = useState('');
+  const [solhi, setSolhi] = useState();
   const [bal, setBal] = useState(0);
+  const [resp, setResp] = useState(null);
+  const [resp1, setResp1] = useState([]);
   const [connectedaddress, setConnectedaddress] = useState();
   const [age, setAge] = React.useState('');
-  const [currency1, setCurrency1] = React.useState('');
   const [age1, setAge1] = React.useState('');
+  const [currency1, setCurrency1] = React.useState('');
   const [age2, setAge2] = React.useState('');
   const [age3, setAge3] = React.useState('');
   const [age4, setAge4] = React.useState('');
   const [age5, setAge5] = React.useState('');
   const [age6, setAge6] = React.useState('');
   const [age7, setAge7] = React.useState('');
-  const [copySuccess, setCopySuccess] = useState({});
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [copySuccess, setCopySuccess] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [recentSearches, setRecentSearches] = useState([]); //update
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showresult, setShowResult] = useState(false);
   const [results, setResults] = useState({ transactions: [], users: [] });
 
-  const { ready, authenticated, user, login, logout } = usePrivy();
+  const handleChange22 = (event) => {
+    setAge(event.target.value);
+  };
 
-  const {wallets, ready: walletsReady} = useWallets();
+  const { ready, authenticated, user, login, logout , exportWallet } = usePrivy();
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -167,12 +215,48 @@ export default function PermanentDrawerLeft() {
     }
   };
 
-  const eth1 = 'https://etherscan.io/tx/'
-  const trx1 = 'https://tronscan.org/#/transaction/'
-  const btc1 = 'https://mempool.space/tx/'
-  const usdt1 = 'https://etherscan.io/tx/'
-  const usdttrx1 = 'https://tronscan.org/#/transaction/'
-  const sol1 = 'https://solscan.io/tx/'
+  async function pay(amount, token, addressto) {
+    const urlencoded = new URLSearchParams()
+    urlencoded.append("amount", amount)
+    urlencoded.append("api", user5?.data?.apikey)
+    urlencoded.append("token", token)
+    urlencoded.append("addressto", addressto)
+    console.log("api", user5?.data?.apikey)
+      return fetch('https://novapay.live/api/sendtx', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: urlencoded
+      })
+        .then(data => data.json()
+      )
+     }
+
+     async function deny() {
+      const urlencoded = new URLSearchParams()
+      urlencoded.append("api", user5?.data?.apikey)
+      console.log("api", user5?.data?.apikey)
+        return fetch('https://novapay.live/api/request/deny', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: urlencoded
+        })
+          .then(data => data.json()
+        )
+       }
+
+       const eth1 = 'https://etherscan.io/tx/'
+       const trx1 = 'https://tronscan.org/#/transaction/'
+       const btc1 = 'https://mempool.space/tx/'
+       const usdt1 = 'https://etherscan.io/tx/'
+       const usdttrx1 = 'https://tronscan.org/#/transaction/'
+       const sol1 = 'https://solscan.io/tx/'
+
+  //const {wallets} = useWallets();
+  const {wallets, ready: walletsReady} = useWallets();
 
   const getbalance = async () => {
     const wallet = wallets[0];
@@ -186,7 +270,128 @@ export default function PermanentDrawerLeft() {
     //console.log('bal', ethers.utils.formatEther(res))
   }
 
+  const getsol = async () => {
+  var myHeaders = new Headers();
+myHeaders.append("x-api-key", "vXLwVmfF1Ipdu4aR");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+let solhi = fetch(
+  'https://api.shyft.to/sol/v1/transaction/history?network=mainnet-beta&tx_num=2&account='+ used?.soladdress +'&enable_raw=true',
+  requestOptions
+)
+  .then(response => response.text())
+  .then(result => console.log(result.result, 'solhistory'))
+  .catch(error => console.log('error', error));
+  if(solhi.success == true){
+  setSolhi(solhi.result ? solhi.result : [])
+  } else{
+    setSolhi([])
+  }
+}
+
+const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
+
   const { data5, error5 } = useSWR('getbalance', getbalance, { refreshInterval: 36000 })
+  const sendeth = async (_amout, _address) => {
+    const wallet = wallets[0];
+    await wallet.switchChain(1);
+    const provider = await wallet.getEthersProvider();
+    const signer = provider.getSigner();
+    const tx = await signer.sendTransaction({
+        to: _address,
+        value: ethers.utils.parseUnits(_amout, 'ether'),
+      });
+      tx.wait(3)
+  }
+
+  const sendusdt = async (_amout, _address) => {
+    const wallet = wallets[0];
+    await wallet.switchChain(1);
+    const provider = await wallet.getEthersProvider();
+    const usdtaddress = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    const usdtabi = [
+      {
+        name: "transfer",
+        type: "function",
+        inputs: [
+          {
+            name: "_to",
+            type: "address",
+          },
+          {
+            type: "uint256",
+            name: "_tokens",
+          },
+        ],
+        constant: false,
+        outputs: [],
+        payable: false,
+      },
+    ];
+    const signer = provider.getSigner();
+    const USDT2 = new ethers.Contract(usdtaddress, usdtabi,signer);
+    const tx = await USDT2.transfer(
+        _address,
+        _amout
+        //ethers.utils.parseUnits(_amout, 6),
+  );
+      tx.wait(3)
+  }
+  const send = async (_shopname22, _api, _age, _shopname33) => {
+    const urlencoded = new URLSearchParams()
+    urlencoded.append("api", _api)
+    urlencoded.append("token", _age)
+    urlencoded.append("amount", _shopname22)
+    urlencoded.append("addressto", _shopname33)
+    //urlencoded.append("connectedaddress", connectedaddress)
+      return fetch('https://novapay.live/api/sendtx', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: urlencoded
+      })
+        .then(data => data.json()
+      )
+  }
+ /* const gettransactions = async () => {
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          'X-API-Key': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImRjMWU5Y2E1LWMwMWMtNDAzNC1hMGExLTBmNmJmZmJmNWJiYiIsIm9yZ0lkIjoiNDA1NjAzIiwidXNlcklkIjoiNDE2NzgyIiwidHlwZUlkIjoiYTJiYzc5OGItMTYzNi00YzVkLTkzZjAtMWRlMDI1ZDYwYTU2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MjQzNjAzMTksImV4cCI6NDg4MDEyMDMxOX0.2HuzWCFdG2ZTa780lQCcnzDKEYwsrFfY4PWESmnrLTQ'
+        },
+       };
+
+       fetch(
+        'https://deep-index.moralis.io/api/v2.2/wallets/'+ user?.wallet?.address + '/history?chain=eth&order=DESC',
+        options
+       )
+       .then(response => response.json())
+       .then(data => {
+         setResp1(data.result);
+      });
+        /*.then((response) => response.json())
+        .then((response) => console.log('rel',response?.result))
+        .then((response) => setResp(response))
+        .catch((err) => console.error(err));*/
+        //console.log('resp', resp1)
+
+  //}
+
+  /*const { data6, error6 } = useSWR('gettransactions', gettransactions, {
+    revalidateOnFocus: false,
+    revalidateOnMount:false,
+    revalidateOnReconnect: false,
+    refreshWhenOffline: false,
+    refreshWhenHidden: false,
+    refreshInterval: 0
+  })*/
 
   const style = {
     position: 'absolute',
@@ -217,10 +422,8 @@ export default function PermanentDrawerLeft() {
       setShopname1(user5?.data?.shop)
     }
 
-    //console.log(user5?.data?.shop, 'hasaccount')
+    console.log(user5?.data?.shop, 'hasaccount')
   }
-
-  const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
 
   const cur = async () => {
     if(user5?.data?.currency == undefined){
@@ -244,6 +447,324 @@ export default function PermanentDrawerLeft() {
     } else if(user5?.data?.currency == "INR"){
       setAge1(used?.balanceininr ? used?.balanceininr : 0)
     }
+  }
+
+  const { data24, error24 } = useSWR('curr', cur, { refreshInterval: 36000 })
+  const { data25, error25 } = useSWR('cur2', cur2, { refreshInterval: 36000 })
+
+  const {
+    data: user7,
+    error7,
+    isValidating7,
+  } = useSWR('https://api.etherscan.io/api?module=account&action=txlist&address=' + user?.wallet?.address + '&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=5MB1DN839Y3E8YUQGE5WAB7R522FKYUD7Y', fetcher, { refreshInterval: 3600000 });
+  //console.log(user5?.data, 'countries')
+
+  //console.log(user7?.result, 'usertx')
+
+  const rest = user7?.result
+
+  const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
+
+
+  //getbalance
+  const {
+    data: user1,
+    error1,
+    isValidating1,
+  } = useSWR('https://novapay.live/api/get/balance?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
+  //console.log(user1?.data, 'countries1')
+  const {
+    data: user22,
+    error22,
+    isValidating22,
+  } = useSWR('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+  //console.log(user22, 'countries22')
+  const used = user22?.data
+  //console.log('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, 'theme')
+
+  const {
+    data: user100,
+    error100,
+    isValidating100,
+  } = useSWR('https://api.trongrid.io/v1/accounts/' + used?.trxaddress + '/transactions', fetcher, { refreshInterval: 3600000 });
+
+  //console.log(user100, 'trx')
+
+  const rest1 = user100?.data
+
+  const {
+    data: user200,
+    error200,
+    isValidating200,
+  } = useSWR('https://api.blockcypher.com/v1/btc/main/addrs/' + used?.btcaddress, fetcher, { refreshInterval: 3600000 });
+
+  //console.log(user200, 'btc')
+
+  const rest2 = user200?.txrefs ? user200?.txrefs : []
+
+  //getorders
+    const {
+      data: user2,
+      error2,
+      isValidating2,
+    } = useSWR('https://novapay.live/api/get/orders?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
+    //console.log(user2?.data, 'countries2')
+    //requestwithdrawal
+  async function requestwithdrawal(shop, amount) {
+    const urlencoded = new URLSearchParams()
+    urlencoded.append("shop", shop)
+    urlencoded.append("amount", amount)
+    //urlencoded.append("connectedaddress", connectedaddress)
+      return fetch('https://novapay.live/api/withdrawal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: urlencoded
+      })
+        .then(data => data.json()
+      )
+     }
+
+     const {
+      data: user14,
+      error14,
+      isValidating14,
+    } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+    console.log(user14?.data, 'countries4')
+  
+    const invoicemap1 = user14?.data
+
+    async function pay(amount, token, addressto) {
+      const urlencoded = new URLSearchParams()
+      urlencoded.append("amount", amount)
+      urlencoded.append("api", user5?.data?.apikey)
+      urlencoded.append("token", token)
+      urlencoded.append("addressto", addressto)
+      console.log("api", user5?.data?.apikey)
+        return fetch('https://novapay.live/api/sendtx', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: urlencoded
+        })
+          .then(data => {
+            if(data)
+              {
+                console.log(data,'data33')
+                alert("Payment Sent");
+              }
+            else
+              {
+                alert("failed");
+              }
+          }
+        )
+       }
+  
+       async function deny() {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        console.log("api", user5?.data?.apikey)
+          return fetch('https://novapay.live/api/request/deny', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => {
+              if(data)
+                {
+                  console.log(data,'data33')
+                  alert("Payment denied");
+                }
+              else
+                {
+                  alert("failed");
+                }
+            }
+          )
+         }
+  
+  //getallinvoi
+    const {
+      data: user4,
+      error4,
+      isValidating4,
+    } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
+    //console.log(user4?.data, 'countries4')
+
+    const invoicemap = user4?.data
+    //getallwithdrawals
+  //registeruser
+  async function registeruser(shop, email) {
+    const urlencoded = new URLSearchParams()
+    console.log(user?.wallet?.address, 'user')
+    urlencoded.append("shop", shop)
+    urlencoded.append("email", email)
+    urlencoded.append("connectedaddress", user?.wallet?.address)
+      return fetch('https://novapay.live/api/create/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: urlencoded
+      })
+        .then(data => data.json()
+      )
+     }
+
+     const handleSubmit = async e => {
+      e.preventDefault();
+      let user = registeruser(shopname, email)
+      console.log(user, 'user')
+      //props.history.push("/");
+    }
+
+    const handleSubmit2 = async e => {
+        e.preventDefault();
+        let user = sendeth(shopname2, email2)
+        console.log(user, 'user')
+        //props.history.push("/");
+      } 
+      //sol,trx,btc
+      const handleSubmit77 = async e => {
+        e.preventDefault();
+        let user = sendusdt(shopname77, email77)
+        console.log(user, 'user')
+        //props.history.push("/");
+      } 
+
+      const send88 = async (_shopname88, _email88) => {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("token", 'usdt-trc20')
+        urlencoded.append("amount", _shopname88)
+        urlencoded.append("addressto", _email88)
+        //urlencoded.append("connectedaddress", connectedaddress)
+          return fetch('https://novapay.live/api/sendtx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+
+      }
+
+      let con 
+
+      const send66 = async (_shopname66, _email66) => {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("token", 'btc')
+        urlencoded.append("amount", _shopname66)
+        urlencoded.append("addressto", _email66)
+        //urlencoded.append("connectedaddress", connectedaddress)
+          return fetch('https://novapay.live/api/sendtx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+
+      }
+
+      const send55 = async (_shopname55, _email55) => {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("token", 'trx')
+        urlencoded.append("amount", _shopname55)
+        urlencoded.append("addressto", _email55)
+        //urlencoded.append("connectedaddress", connectedaddress)
+          return fetch('https://novapay.live/api/sendtx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+            .then(data => data.json()
+          )
+      }
+
+      const send44 = async (_shopname44, _email44) => {
+        const urlencoded = new URLSearchParams()
+        urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("token", 'sol')
+        urlencoded.append("amount", _shopname44)
+        urlencoded.append("addressto", _email44)
+          return fetch('https://novapay.live/api/sendtx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+          })
+          .then(data => data.json())
+      }
+
+
+      const handleSubmit44 = async e => {
+        e.preventDefault();
+        let user = await send44(shopname44, email44)
+        console.log(user, 'user')
+        setSuccess1(user.data)
+        setToken1("sol")
+        //props.history.push("/");
+      }
+
+      const handleSubmit55 = async e => {
+        e.preventDefault();
+        let user = await send55(shopname55, email55)
+        console.log(user, 'user')
+        setSuccess1(user.data)
+        setToken1("trx")
+        //props.history.push("/");
+      }
+
+      const handleSubmit66 = async e => {
+        e.preventDefault();
+        let user = await send66(shopname66, email66)
+        console.log(user, 'user')
+        setSuccess1(user.data)
+        setToken1("btc")
+        //props.history.push("/");
+      }
+
+      const handleSubmit88 = async e => {
+        e.preventDefault();
+        let user = await send88(shopname88, email88)
+        console.log(user, 'user')
+        setSuccess1(user.data)
+        setToken1("usdt-trc20")
+        //props.history.push("/");
+      }
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  async function Getuser(){
+    let btcbal = await fetch('https://novapay.live/api/get/address?address=' + user?.wallet?.address).then((response) => response.json())
+    const hasaccount2 = async () => {
+      if(btcbal?.data == undefined){
+        setHasaccount(false)
+      }else {
+        setHasaccount(true)
+        setShopname1(btcbal?.data?.shop)
+      }
+  
+      console.log(btcbal?.data?.shop, 'hasaccount2')
+    }
+    hasaccount2()
   }
 
   const btcval = async () => {
@@ -344,17 +865,6 @@ export default function PermanentDrawerLeft() {
 
 
 
-
-  const {
-    data: user24,
-    error24,
-    isValidating24,
-  } = useSWR('https://novapay.live/api/wallets?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-  //console.log(user22, 'countries22')
-  const used = user24?.data
-
-  const { data26, error26 } = useSWR('curr', cur, { refreshInterval: 36000 })
-  const { data27, error27 } = useSWR('cur2', cur2, { refreshInterval: 36000 })
   const { data28, error28 } = useSWR('btcval', btcval, { refreshInterval: 36000 })
   const { data29, error29 } = useSWR('solval', solval, { refreshInterval: 36000 })
   const { data30, error30 } = useSWR('trxval', trxval, { refreshInterval: 36000 })
@@ -362,219 +872,73 @@ export default function PermanentDrawerLeft() {
   const { data32, error32 } = useSWR('usdtval', usdtval, { refreshInterval: 36000 })
   const { data34, error34 } = useSWR('usdtrxval', usdttrxval, { refreshInterval: 36000 })
 
-  const handleChange300 = (event) => {
-    setAge(event.target.value);
-  };
-  //getbalance
-  const {
-    data: user1,
-    error1,
-    isValidating1,
-  } = useSWR('https://novapay.live/api/get/balance?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-  //console.log(user1?.data, 'countries1')
-  //getorders
-    const {
-      data: user2,
-      error2,
-      isValidating2,
-    } = useSWR('https://novapay.live/api/get/orders?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-    //console.log(user2?.data, 'countries2')
-    //getbalance
-    const {
-      data: user22,
-      error22,
-      isValidating22,
-    } = useSWR('https://novapay.live/api/wallets' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-    //console.log(user22?.data, 'countries2')
-    //requestwithdrawal
-  async function requestwithdrawal(shop, amount) {
-    const urlencoded = new URLSearchParams()
-    urlencoded.append("shop", shop)
-    urlencoded.append("amount", amount)
-    //urlencoded.append("connectedaddress", connectedaddress)
-      return fetch('https://novapay.live/api/withdrawal', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: urlencoded
-      })
-        .then(data => data.json()
-      )
-     }
-  //getallinvoi
-    /*const {
-      data: user4,
-      error4,
-      isValidating4,
-    } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-    console.log(user4, 'countries4')*/
-    const {
-      data: user4,
-      error4,
-      isValidating4,
-    } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-    //console.log(user4?.data, 'countries4')
-  
-    const invoicemap = user4?.data
-
-    //const invoicemap = user4?.data
-    //getallwithdrawals
-    const {
-      data: user10,
-      error10,
-      isValidating10,
-    } = useSWR('https://novapay.live/api/get/requestadmin?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
-    //console.log(user10?.data, 'countries4')
-
-    const requestmap = user10?.data
-  //registeruser
-
-  async function Getuser(){
-    let btcbal = await fetch('https://novapay.live/api/get/address?address=' + user?.wallet?.address).then((response) => response.json())
-    const hasaccount2 = async () => {
-      if(btcbal?.data == undefined){
-        setHasaccount(false)
-      }else {
-        setHasaccount(true)
-        setShopname1(btcbal?.data?.shop)
-      }
-  
-      //console.log(btcbal?.data?.shop, 'hasaccount2')
+  const handleCopy1 = async (_textToCopy) => {
+    try {
+        await navigator.clipboard.writeText(_textToCopy);
+        setCopySuccess(true);
+        //alert('Copied!')
+    } catch (err) {
+        setCopySuccess('Failed to copy!');
     }
-    hasaccount2()
   }
-  async function registeruser(shop, email, key) {
-    const urlencoded = new URLSearchParams()
-    console.log(user?.wallet?.address, 'user')
-    urlencoded.append("shop", shop)
-    urlencoded.append("email", email)
-    urlencoded.append("connectedaddress", user?.wallet?.address)
-    urlencoded.append("key", key)
-    urlencoded.append("currency", age)
-      return fetch('https://novapay.live/api/create/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: urlencoded
-      })
-        .then(data => data.json()
-      )
-     }
 
-     async function pay(amount, token, addressto) {
-      const urlencoded = new URLSearchParams()
-      urlencoded.append("amount", amount)
-      urlencoded.append("api", user5?.data?.apikey)
-      urlencoded.append("token", token)
-      urlencoded.append("addressto", addressto)
-      console.log("api", user5?.data?.apikey)
-        return fetch('https://novapay.live/api/sendtx', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: urlencoded
-        })
-          .then(data => data.json()
-        )
-       }
-  
-       async function deny() {
-        const urlencoded = new URLSearchParams()
-        urlencoded.append("api", user5?.data?.apikey)
-        console.log("api", user5?.data?.apikey)
-          return fetch('https://novapay.live/api/request/deny', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: urlencoded
-          })
-            .then(data => data.json()
-          )
-         }
-
-         const handleCopy = async (_textToCopy, index) => {
-          try {
-              //await navigator.clipboard.writeText(_textToCopy);
-              navigator.clipboard.writeText(_textToCopy).then(() => {
-                setCopySuccess((prev) => ({ ...prev, [index]: true }));
-                setTimeout(() => {
-                  setCopySuccess((prev) => ({ ...prev, [index]: false }));
-                }, 2000);
-              });
-              //setCopySuccess(true);
-              //alert('Copied!')
-          } catch (err) {
-              setCopySuccess('Failed to copy!');
-          }
-        }
-
-     async function request(hash, amount, shop) {
-      const urlencoded = new URLSearchParams()
-      urlencoded.append("invoice", hash)
-      urlencoded.append("amount", amount)
-      urlencoded.append("shop", shop)
-        return fetch('https://novapay.live/api/createwithdrawal', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: urlencoded
-        })
-          .then(data => data.json()
-        )
-       }
-
-       async function awaittx(hash) {
-        const urlencoded = new URLSearchParams()
-        urlencoded.append("payment", hash)
-        urlencoded.append("api", user5?.data?.apikey)
-        console.log("api", user5?.data?.apikey)
-          return fetch('https://novapay.live/api/awaittx', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: urlencoded
-          })
-            .then(data => data.json()
-          )
-         }
-
-     const handleSubmit = async e => {
-      e.preventDefault();
-
-      if(shopname){
-        let check = await fetch('https://novapay.live/api/get/user?shop=' + shopname).then((response) => response.json())
-        if(check?.data?.shop == shopname){
-          alert('Shop already exists')
-        }
-      }
-      let user = registeruser(shopname, email, key)
-      //console.log(user, 'user')
-      //props.history.push("/");
+  const handleCopy = async (_textToCopy, index) => {
+    try {
+        //await navigator.clipboard.writeText(_textToCopy);
+        navigator.clipboard.writeText(_textToCopy).then(() => {
+          setCopySuccess((prev) => ({ ...prev, [index]: true }));
+          setTimeout(() => {
+            setCopySuccess((prev) => ({ ...prev, [index]: false }));
+          }, 2000);
+        });
+        //setCopySuccess(true);
+        //alert('Copied!')
+    } catch (err) {
+        setCopySuccess('Failed to copy!');
     }
+  }
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleListItemClick = (index) => {
-    setSelectedIndex(index);
-    // Add navigation logic here if necessary
-  };
+  const eth = 'https://etherscan.io/tx/'
+  const trx = 'https://tronscan.org/#/transaction/'
+  const btc = 'https://mempool.space/tx/'
+  const usdt = 'https://etherscan.io/tx/'
+  const usdttrx = 'https://tronscan.org/#/transaction/'
+  const sol = 'https://solscan.io/tx/'
 
   /*if (!ready) {
     return null;
+  }
+  if (!hasaccount) {
+    return null;
   }*/
 
+  /*const connectWallet = async () => {
+		try {
+			const { ethereum } = window;
 
-  //const checkaccount = async () => {} 
+			if (!ethereum) {
+				alert("Get MetaMask -> https://metamask.io/");
+				return;
+			}
+
+			// Fancy method to request access to account.
+			const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+		
+			// Boom! This should print out public address once we authorize Metamask.
+			//console.log("Connected", accounts[0]);
+			setCurrentAccount(accounts[0]);
+		} catch (error) {
+			console.log(error)
+		}
+	};
+
+  const checkaccount = async () => {} 
   useEffect(() => {
-    Getuser()
+    connectWallet();
+}, [currentAccount]);*/
+
+useEffect(() => {
+  Getuser()
 }, [hasaccount, ready, authenticated]);
 
   return (
@@ -583,24 +947,18 @@ export default function PermanentDrawerLeft() {
       <div className='fip'></div>
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }} 
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
           {/*<Typography variant="h6" noWrap component="div" className='tit'>
             Novapay
           </Typography>*/}
           <img src={logo} width="160px" height="40px"  alt='profile image' className='tit'></img>
-          {/*<TextField
-          label="Search"
-          id="outlined-start-adornment"
-          className='fi1'
-          sx={{ m: 1, width: '40%'}}
-        />*/}
-        <div class="input-icons mr2">
-        <IconButton aria-label="search" onClick={() => handleSearch(inputValue)}>
+          <div class="input-icons mr2">
+          <IconButton aria-label="search" onClick={() => handleSearch(inputValue)}>
           <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
         </IconButton>
-            <input className="input-field" 
+          <input className="input-field" 
                    type="text" 
                    placeholder="Search Transaction ID or Username..."
                    value={inputValue}
@@ -651,17 +1009,17 @@ export default function PermanentDrawerLeft() {
               {results.transactions.map((invoice, index) => {
                                     let url;
                                     if (invoice.paidin === 'eth') {
-                                        url = eth1; // Replace with your actual ETH link
+                                        url = eth; // Replace with your actual ETH link
                                     } else if (invoice.paidin === 'btc') {
-                                      url = btc1; // Replace with your actual BTC link
+                                      url = btc; // Replace with your actual BTC link
                                     } else if (invoice.paidin === 'sol') {
-                                      url = sol1; // Replace with your actual BTC link
+                                      url = sol; // Replace with your actual BTC link
                                     } else if (invoice.paidin === 'trx') {
-                                      url = trx1; // Replace with your actual BTC link
+                                      url = trx; // Replace with your actual BTC link
                                     } else if (invoice.paidin === 'usdt') {
-                                      url = eth1; // Replace with your actual BTC link
+                                      url = eth; // Replace with your actual BTC link
                                     } else if (invoice.paidin === 'usdttrx') {
-                                      url = trx1; // Replace with your actual BTC link
+                                      url = trx; // Replace with your actual BTC link
                                     } 
                 
                                     var date = new Date(invoice.date ? invoice.date : 0 * 1000);
@@ -800,14 +1158,6 @@ export default function PermanentDrawerLeft() {
             <img src={profile5} width="100%" height="100%"  alt='profile image'></img>
           </div>
           <Typography className='mr2 profile-text1' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>
-        {/*<div className='profile1 flex'>
-        <div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}>
-            <img src={btc} width="100%" height="100%"  alt='profile image'></img>
-          </div>
-          {/*<div className='profile-icon1' sx={{ width: '33px', height: '33px', borderradius: '28px', marginright: '10px', border: '1px solid #358FE5' }}></div>*/}
-          {/*<Typography className='profile-text1' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>*
-          <Typography className='' sx={{ color: "#FFFFFF", fontSize: '16px', fontWeight: '300' }}>{user5?.data?.shop}</Typography>
-        </div>*/}
         <Link className='icon-noti' onClick={logout}>
           <LogoutIcon sx={{ color: "#D0D0D0", fontSize: 18 }}/>
         </Link>
@@ -828,10 +1178,9 @@ export default function PermanentDrawerLeft() {
         <Divider />
         <List>
           <div className='mb20'></div>
-            <ListItem key="home" 
-            disablePadding>
+            <ListItem key="home" disablePadding>
               <Link to= "/" className='ti'>
-              <ListItemButton >
+              <ListItemButton>
                 <ListItemIcon>
                   <HomeIcon sx={{ color: "#606060", fontSize: 20 }}/> 
                 </ListItemIcon>
@@ -924,174 +1273,115 @@ export default function PermanentDrawerLeft() {
         {ready && authenticated ? 
         /* Check if hasaccount load wallet or if not load register*/
         <div>
-          
             {hasaccount ? 
           <div class="">
             <div className='mbmain'></div>
-            <div className='flex spacebetween width mb2 pot'>
-              <div className='mat1 inv '>
-                <div className='flex width spacebetween alignbase pt10 ni inv'>
-                  <Typography className='inv-header'>Merchant Wallet</Typography>
-                  <div class="input-icons1">
-                    <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
-                      <input class="input-field" 
-                            type="text" 
-                            placeholder="Search Currency" />
+            <Card className="inv tb1 p20">
+              <Box sx={{ width: '100%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" className='flex justcenter width' centered>
+                    <Tab label="Active Disputes" {...a11yProps(0)} className='tb3'/>
+                    <Tab label="Dsputes History" {...a11yProps(1)} className='tb3'/>
+                  </Tabs>
+                </Box>
+                <CustomTabPanel value={value} index={0}>
+                <div className='mbmain'></div>
+                <div className='spacearound flex pip width'>
+                     <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Date</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width20'>
+                        <Typography>Transaction id</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Token</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Status</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10 aligncenter'>
+                        <Typography>Tx/Hash</Typography>
+                      </div>
+              </div>
+              <div className='p20'>
+                    {invoicemap ? invoicemap?.map((invoice, index) => { 
+                    let url;
+                    if (invoice.paidin === 'eth') {
+                        url = eth; // Replace with your actual ETH link
+                    } else if (invoice.paidin === 'btc') {
+                      url = btc; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'sol') {
+                      url = sol; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'trx') {
+                      url = trx; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'usdt') {
+                      url = eth; // Replace with your actual BTC link
+                    } else if (invoice.paidin === 'usdttrx') {
+                      url = trx; // Replace with your actual BTC link
+                    } 
+
+                    var date = new Date(invoice.date ? invoice.date : 0 * 1000);
+                    console.log(date, 'date')
+                    const options = {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: false, // Use 24-hour format
+                      timeZone: 'GMT' // Set timezone to GMT
+                  };
+                    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+                    const [datePart, timePart] = formattedDate.split(', ');
+                    const [month, day, year] = datePart.split('/');
+                    console.log('month', month, day, year)
+
+                  // Will display time in 10:30:23 format
+                  const formatted = `${day}/${month}/${year}, ${timePart}`;
+
+                  console.log(formatted);
+
+                      return(
+                      <Card key={index} className='width dip mb2'>
+                        <CardContent className='spacebetween flex'>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{formatted}</Typography>
+                         </div>
+                        <div className='justcenter flex aligncenter row width20'>
+                          <Typography>{invoice?.transactionhash? invoice.transactionhash.slice(0,8) : "not available"}...</Typography>
+                          <IconButton aria-label="copy" onClick={() => handleCopy(invoice?.transactionhash, index)}>
+                            {copySuccess[index] ? (
+                              <CheckIcon sx={{ color: "rgb(39, 161, 123);", fontSize: 20 }} />
+                            ) : (
+                              <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }} />
+                            )}
+                          </IconButton>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{Number(invoice.amount).toFixed(2)}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <img src={`./images/${invoice.paidin ? invoice.paidin : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
+                        </div>
+                          <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
+                        </CardContent>
+                      </Card>
+                    )}) : 
+                    <Card className='inv'>
+                    <Typography>No invoice</Typography>
+                    </Card>
+                    }
                   </div>
-                </div>
-                <div className='p5 met'>
-                      <Card className='width dip mb2 '>
-                        <CardContent className='spacebetween flex'>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <img src={btc} height='30px' width='30px' alt='btc'/>
-                         </div>
-                        <div className='justcenter flex aligncenter row width10'>
-                          <Typography>BTC</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{Number(used?.btcbalance ? used?.btcbalance : 0).toFixed(2)}</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width20'>
-                          <Typography>{Number(age2).toFixed(2)} {currency1}</Typography>
-                        </div>
-                        </CardContent>
-                      </Card>
-                      <Card className='width dip mb2'>
-                        <CardContent className='spacebetween flex'>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <img src={trx} height='30px' width='30px' alt='trx'/>
-                         </div>
-                        <div className='justcenter flex aligncenter row width10'>
-                          <Typography>TRX</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{Number(used?.trxbalance ? used?.trxbalance : 0).toFixed(2)}</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width20'>
-                          <Typography>{Number(age5).toFixed(2)} {currency1}</Typography>
-                        </div>
-                        </CardContent>
-                      </Card>
-                      <Card className='width dip mb2'>
-                        <CardContent className='spacebetween flex'>
-                        <div className='justcenter flex aligncenter column width10'>
-                        <img src={eth} height='30px' width='30px' alt='eth'/>
-                         </div>
-                        <div className='justcenter flex aligncenter row width10'>
-                          <Typography>ETH</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{Number(used?.ethbalance ? used?.ethbalance : 0).toFixed(2)}</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width20'>
-                          <Typography>{Number(age3).toFixed(2)} {currency1}</Typography>
-                        </div>
-                        </CardContent>
-                      </Card>
-                      <Card className='width dip mb2'>
-                        <CardContent className='spacebetween flex'>
-                        <div className='justcenter flex aligncenter column width10'>
-                        <img src={sol} height='30px' width='30px' alt='sol'/>
-                         </div>
-                        <div className='justcenter flex aligncenter row width10'>
-                          <Typography>SOL</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{Number(used?.solbalance ? used?.solbalance : 0).toFixed(2)}</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width20'>
-                          <Typography>{Number(age4).toFixed(2)} {currency1}</Typography>
-                        </div>
-                        </CardContent>
-                      </Card>
-                      <Card className='width dip mb2'>
-                        <CardContent className='spacebetween flex'>
-                        <div className='justcenter flex aligncenter column width10'>
-                        <img src={usdttrx} height='30px' width='30px' alt='usdt'/>
-                         </div>
-                        <div className='justcenter flex aligncenter row width10'>
-                          <Typography>USDT-TRC20</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{Number(used?.usdttrxbalance ? used?.usdttrxbalance : 0).toFixed(2)}</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width20'>
-                          <Typography>{Number(age7).toFixed(2)} {currency1}</Typography>
-                        </div>
-                        </CardContent>
-                      </Card>
-                      <Card className='width dip mb2'>
-                        <CardContent className='spacebetween flex'>
-                        <div className='justcenter flex aligncenter column width10'>
-                        <img src={usdt} height='30px' width='30px' alt='usdt'/>
-                         </div>
-                        <div className='justcenter flex aligncenter row width10'>
-                          <Typography>USDT-ERC20</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>{Number(used?.usdtbalance ? used?.usdtbalance : 0).toFixed(2)}</Typography>
-                        </div>
-                        <div className='justcenter flex  aligncenter column width20'>
-                          <Typography>{Number(age6).toFixed(2)} {currency1}</Typography>
-                          {/*<Typography>{currency1}</Typography>*/}
-                        </div>
-                        </CardContent>
-                      </Card>
-                </div>
-              </div>
-              <div className='mat2 inv aligncenter flex column ' /*style={{ width: '100px', height: 300 }}*/>
-                <div className='flex width spacebetween aligncenter p5 fop'>
-                    <Typography className='cen-header'>Total Wallet </Typography>
-                    <Typography className='cen-header'>{Number(age1 ? age1 : 0).toFixed(2)} {currency1}</Typography>
-                  </div>
-                <ResponsiveContainer width={180} height={180}>
-                  <PieChart /*width={1000} height={400*/>
-                    <Pie
-                      dataKey="value"
-                      data={
-                        [
-                          { name: "BTC Value", value: age2 ? age2 : 1 , fill: '#f8931a'},
-                          { name: "SOL Value", value: age4 ? age4 : 1, fill: '#8556f0'},
-                          { name: "ETH Value", value: age3 ? age3 : 1, fill: '#627eea'},
-                          { name: "TRX Value", value: age5 ? age5 : 1, fill: '#ec0928'},
-                          { name: "USDT-TRC20 Value", value: age7 ? age7 : 1, fill: '#27a17b'},
-                          { name: "USDT-ERC20 Value", value: age6 ? age6 : 1, fill: '#27a17b'}
-                        ]
-                      }
-                      //cx={500}
-                      //cy={200}
-                      innerRadius={40}
-                      outerRadius={80}
-                      fill="#82ca9d"
-                    />
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              <div className='mat3'>
-                <div className='mat3-div inv1 flex row aligncenter'>
-                  <Typography className='ash1' >Transaction Count</Typography>
-                  <Typography className='ash'>{user2?.data}</Typography>
-                </div>
-                <div className='mat3-div inv1 flex aligncenter'>
-                  <Typography className='ash1 mb2'>API Key</Typography>
-                  <Typography className='ash'>{user5?.data?.apikey}</Typography>
-                </div>
-                <div className='mat3-div inv1 flex aligncenter'>
-                  <Typography className='ash1'>Webhook Key</Typography>
-                  <Typography className='ash'>{user5?.data?.webhookkey ? user5?.data?.webhookkey : "Set webhook endpoint"}</Typography>
-                </div>
-              </div>
-            </div>
-            <Card className='width inv'>
-              <div className='mb4'></div>
-              <div className='flex width spacebetween alignbase'>
-                  <Typography className='inv-header'>Withdrawal requests</Typography>
-                  <IconButton aria-label="filter">
-                    <FilterListIcon sx={{ color: "#606060", fontSize: 25, marginRight: 5 }}/> 
-                  </IconButton>
-              </div>
-              <div className='spacearound flex pip width'>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={1}>
+                <div className='spacearound flex pip width'>
                      <div className='justcenter flex aligncenter column width10'>
                         <Typography>Date</Typography>
                       </div>
@@ -1108,11 +1398,11 @@ export default function PermanentDrawerLeft() {
                         <Typography>Token</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width20 aligncenter'>
-                        <Typography>Action</Typography>
+                        <Typography>Reason</Typography>
                       </div>
               </div>
               <div className='p20'>
-                {invoicemap ? invoicemap?.map((invoice, index) => (
+                {invoicemap1 ? invoicemap1?.map((invoice, index) => (
                       <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
@@ -1135,10 +1425,10 @@ export default function PermanentDrawerLeft() {
                           <Typography>{Number(invoice?.amount).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <img src={`./images/${invoice.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
+                          <img src={`./images/${invoice?.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
                         </div>
                         <div className='justcenter flex aligncenter width20'>
-                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
                           <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
                         </div>
                         </CardContent>
@@ -1149,25 +1439,31 @@ export default function PermanentDrawerLeft() {
                       </Card>
                 }
               </div>
+                </CustomTabPanel>
+              </Box>
             </Card>
-          </div>
-           :
+          </div> :
           <div class="vertical-center">
-            <Typography>Create your shop to continue</Typography>
-            <Button variant="contained" onClick={handleOpen}>Create Shop</Button>
+            <Typography>You do not have an account. Register to continue</Typography>
+            <Button variant="contained" onClick={handleOpen}>Complete Registration</Button>
             <Modal
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
+              {/*<Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Complete registration
+                </Typography>
+              </Box>*/}
               <Box className='flex aligncenter justcenter topping'
               >
                 <Card className='halfwidth'>
                   <CardContent>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            label="shopname"
+                            label="username"
                             variant="outlined"
                             fullWidth
                             margin="normal"
@@ -1182,32 +1478,6 @@ export default function PermanentDrawerLeft() {
                             type='email'
                             onChange={e => setEmail(e.target.value)}
                         />
-                        <TextField
-                            label="Wallet Key"
-                            variant="outlined"
-                            fullWidth
-                            margin="normal"
-                            type='email'
-                            onChange={e => setKey(e.target.value)}
-                        />
-                            <Box sx={{ minWidth: 120 }}>
-                              <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Select Currency</InputLabel>
-                                <Select
-                                  labelId="demo-simple-select-label"
-                                  id="demo-simple-select"
-                                  value={age}
-                                  label="Age"
-                                  onChange={handleChange300}
-                                >
-                              <MenuItem value={'USD'}>USD</MenuItem>
-                              <MenuItem value={'AED'}>AED</MenuItem>
-                              <MenuItem value={'GBP'}>GBP</MenuItem>
-                              <MenuItem value={'EUR'}>EUR</MenuItem>
-                              <MenuItem value={'INR'}>INR</MenuItem>
-                                </Select>
-                              </FormControl>
-                            </Box>
                         <Button
                             variant="contained"
                             color="primary"

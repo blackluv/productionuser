@@ -665,6 +665,18 @@ useEffect(() => {
               </Link>
             </ListItem>
         </List>
+        <List>
+            <ListItem key="Disputes" disablePadding>
+              <Link to= "/disputes" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DescriptionIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                </ListItemIcon>
+                <ListItemText primary="Disputes" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
         {/*<div className='mb5'></div>
         <Typography className='others'>Others</Typography>*/}
         <Divider />
