@@ -58,6 +58,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import profile5 from './images/circle-user.png'
 import logo from './images/logo.png'
+import NotInterestedIcon from '@mui/icons-material/NotInterested';
 
 const drawerWidth = 240;
 
@@ -535,14 +536,15 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
   
     const invoicemap1 = user14?.data
 
-    async function pay(amount, token, addressto) {
+    async function pay(amount, token, addressto, tx) {
       const urlencoded = new URLSearchParams()
       urlencoded.append("amount", amount)
       urlencoded.append("api", user5?.data?.apikey)
       urlencoded.append("token", token)
       urlencoded.append("addressto", addressto)
+      urlencoded.append("tx", tx)
       console.log("api", user5?.data?.apikey)
-        return fetch('https://novapay.live/api/sendtx', {
+        return fetch('https://novapay.live/api/dispute/pay', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -553,7 +555,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
             if(data)
               {
                 console.log(data,'data33')
-                alert("Payment Sent");
+                alert("Payment Sent with hash", data.chainhash);
               }
             else
               {
@@ -563,11 +565,12 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
         )
        }
   
-       async function deny() {
+       async function deny(tx) {
         const urlencoded = new URLSearchParams()
         urlencoded.append("api", user5?.data?.apikey)
+        urlencoded.append("tx", tx)
         console.log("api", user5?.data?.apikey)
-          return fetch('https://novapay.live/api/request/deny', {
+          return fetch('https://novapay.live/api/dispute/deny', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -593,10 +596,22 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       data: user4,
       error4,
       isValidating4,
-    } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
+    } = useSWR('https://novapay.live/api/get/alldisputes?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
     //console.log(user4?.data, 'countries4')
 
     const invoicemap = user4?.data
+    console.log(invoicemap, 'disputes')
+
+      //getallinvoi
+      const {
+        data: user44,
+        error44,
+        isValidating44,
+      } = useSWR('https://novapay.live/api/get/get/alldisputehistory?api=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+      //console.log(user4?.data, 'countries4')
+  
+      const invoicemap4 = user44?.data
+      console.log(invoicemap4, 'disputes')
     //getallwithdrawals
   //registeruser
   async function registeruser(shop, email) {
@@ -1119,7 +1134,7 @@ useEffect(() => {
                 <Card key={index} className='width dip mb2'>
                 <CardContent className='spacebetween flex'>
                 <div className='justcenter flex aligncenter column width10'>
-                  <Typography>12/10/2024</Typography>
+                  <Typography>{formatted}</Typography>
                 </div>
                 <div className='justcenter flex aligncenter column width10'>
                   <Typography>{invoice?.username ? invoice?.username : 'none'}</Typography>
@@ -1306,7 +1321,7 @@ useEffect(() => {
                         <Typography>action</Typography>
                       </div>
               </div>
-              <div className='p20'>
+              <div className='p10'>
                     {invoicemap ? invoicemap?.map((invoice, index) => { 
                     let url;
                     if (invoice.paidin === 'eth') {
@@ -1378,8 +1393,8 @@ useEffect(() => {
                           <Typography>{reason }</Typography>
                         </div>
                           <div className='justcenter flex aligncenter width20'>
-                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress )}>Pay</Button>
-                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress, invoice?.transactionhash )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny(invoice?.transactionhash)}>Deny</Button>
                         </div>
                         </CardContent>
                       </Card>
@@ -1411,20 +1426,20 @@ useEffect(() => {
                         <Typography>Tx/Hash</Typography>
                       </div>
               </div>
-              <div className='p20'>
-                    {invoicemap ? invoicemap?.map((invoice, index) => { 
+              <div className='p10'>
+                    {invoicemap4 ? invoicemap4?.map((invoice, index) => { 
                     let url;
-                    if (invoice.paidin === 'eth') {
+                    if (invoice.token === 'eth') {
                         url = eth; // Replace with your actual ETH link
-                    } else if (invoice.paidin === 'btc') {
+                    } else if (invoice.token === 'btc') {
                       url = btc; // Replace with your actual BTC link
-                    } else if (invoice.paidin === 'sol') {
+                    } else if (invoice.token === 'sol') {
                       url = sol; // Replace with your actual BTC link
-                    } else if (invoice.paidin === 'trx') {
+                    } else if (invoice.token === 'trx') {
                       url = trx; // Replace with your actual BTC link
-                    } else if (invoice.paidin === 'usdt') {
+                    } else if (invoice.token === 'usdt') {
                       url = eth; // Replace with your actual BTC link
-                    } else if (invoice.paidin === 'usdttrx') {
+                    } else if (invoice.token === 'usdttrx') {
                       url = trx; // Replace with your actual BTC link
                     } 
 
@@ -1451,10 +1466,10 @@ useEffect(() => {
                   console.log(formatted);
                   let reason
 
-                  if(invoice?.underpaid === true){
-                    reason = "underpaid"
-                  } else if(invoice?.overpaid === true){
-                    reason = "overpaid"
+                  if(invoice?.isdenied === true){
+                    reason = "denied"
+                  } else if(invoice?.ispaid === true){
+                    reason = "paid"
                   }
 
                       return(
@@ -1477,17 +1492,12 @@ useEffect(() => {
                           <Typography>{Number(invoice.amount).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
-                          <img src={`./images/${invoice.paidin ? invoice.paidin : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
+                          <img src={`./images/${invoice.token ? invoice.token : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{reason }</Typography>
                         </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Typography>status</Typography>
-                        </div>
-                        <div className='justcenter flex aligncenter column width10'>
-                          <Link to='/'> Tx Hash</Link>
-                        </div>
+                        <Link variant="contained" className='width10' to={invoice.chainhash ? url + invoice.chainhash : <NotInterestedIcon sx={{ color: "#606060", fontSize: 20 }} />} >View</Link>
                         </CardContent>
                       </Card>
                     )}) : 
