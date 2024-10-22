@@ -609,6 +609,10 @@ h1, h2, h3, p, .MuiTypography-root, button, label, input {
   color: #C8C6C6;
 }
 
+.white{
+  color: #FFFFFF !important;
+}
+
 .suggestion-item:hover {
   background-color: #f0f0f0; /* Highlight on hover */
 }

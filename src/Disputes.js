@@ -1296,7 +1296,7 @@ useEffect(() => {
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                   <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" className='flex justcenter width' centered>
                     <Tab label="Active Disputes" {...a11yProps(0)} className='tb3'/>
-                    <Tab label="Dsputes History" {...a11yProps(1)} className='tb3'/>
+                    <Tab label="Disputes History" {...a11yProps(1)} className='tb3'/>
                   </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>
@@ -1400,7 +1400,7 @@ useEffect(() => {
                       </Card>
                     )}) : 
                     <Card className='inv'>
-                    <Typography>No Dispute</Typography>
+                    <Typography className='white'>No Dispute</Typography>
                     </Card>
                     }
                   </div>
@@ -1501,8 +1501,8 @@ useEffect(() => {
                         </CardContent>
                       </Card>
                     )}) : 
-                    <Card className='inv'>
-                    <Typography>No Dispute History</Typography>
+                    <Card className='inv mt2'>
+                    <Typography className='white'>No Dispute History</Typography>
                     </Card>
                     }
                   </div>
