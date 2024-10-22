@@ -536,7 +536,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
   
     const invoicemap1 = user14?.data
 
-    async function pay(amount, token, addressto, tx) {
+    async function pay1(amount, token, addressto, tx) {
       const urlencoded = new URLSearchParams()
       urlencoded.append("amount", amount)
       urlencoded.append("api", user5?.data?.apikey)
@@ -565,7 +565,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
         )
        }
   
-       async function deny(tx) {
+       async function deny1(tx) {
         const urlencoded = new URLSearchParams()
         urlencoded.append("api", user5?.data?.apikey)
         urlencoded.append("tx", tx)
@@ -1393,8 +1393,8 @@ useEffect(() => {
                           <Typography>{reason }</Typography>
                         </div>
                           <div className='justcenter flex aligncenter width20'>
-                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useraddress, invoice?.transactionhash )}>Pay</Button>
-                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny(invoice?.transactionhash)}>Deny</Button>
+                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay1(invoice?.amount, invoice?.token, invoice?.useraddress, invoice?.transactionhash )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny1(invoice?.transactionhash)}>Deny</Button>
                         </div>
                         </CardContent>
                       </Card>
