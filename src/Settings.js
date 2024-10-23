@@ -362,6 +362,7 @@ export default function PermanentDrawerLeft() {
 
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('api', user5?.data?.apikey);
 
     try {
       const response = await fetch('https://novapay.live/api/upload', {
