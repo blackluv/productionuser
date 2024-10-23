@@ -59,6 +59,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import profile5 from './images/circle-user.png'
 import logo from './images/logo.png'
 import NotInterestedIcon from '@mui/icons-material/NotInterested';
+import FastForwardIcon from '@mui/icons-material/FastForward';
+import FastRewindIcon from '@mui/icons-material/FastRewind';
 
 const drawerWidth = 240;
 
@@ -167,6 +169,8 @@ export default function PermanentDrawerLeft() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showresult, setShowResult] = useState(false);
   const [results, setResults] = useState({ transactions: [], users: [] });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage1, setCurrentPage1] = useState(1);
 
   const handleChange22 = (event) => {
     setAge(event.target.value);
@@ -212,7 +216,7 @@ export default function PermanentDrawerLeft() {
   };
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      handleSearch(inputValue);
     }
   };
 
@@ -955,6 +959,52 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
   const usdttrx = 'https://tronscan.org/#/transaction/'
   const sol = 'https://solscan.io/tx/'
 
+  const pageSize = 1;
+
+  const totalPages = Math.ceil(invoicemap?.length / pageSize);
+
+  const paginateInvoices = (invoicemap, pageSize, currentPage) => {
+    const startIndex = (currentPage - 1) * pageSize;
+    console.log(invoicemap, 'invoice')
+    return invoicemap?.slice(startIndex, startIndex + pageSize);
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
+
+  const paginatedInvoices = paginateInvoices(invoicemap, pageSize, currentPage);
+
+  const totalPages1 = Math.ceil(invoicemap4?.length / pageSize);
+
+  const paginateInvoices1 = (invoicemap, pageSize, currentPage) => {
+    const startIndex = (currentPage - 1) * pageSize;
+    console.log(invoicemap, 'invoice')
+    return invoicemap?.slice(startIndex, startIndex + pageSize);
+  };
+
+  const handleNext1 = () => {
+    if (currentPage1 < totalPages1) {
+      setCurrentPage1(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePrevious1 = () => {
+    if (currentPage1 > 1) {
+      setCurrentPage1(prevPage => prevPage - 1);
+    }
+  };
+
+  const paginatedInvoices1 = paginateInvoices(invoicemap4, pageSize, currentPage1);
+
   /*if (!ready) {
     return null;
   }
@@ -1357,7 +1407,8 @@ useEffect(() => {
                       </div>
               </div>
               <div className='p10'>
-                    {invoicemap ? invoicemap?.map((invoice, index) => { 
+                    {/*invoicemap ? invoicemap?.map((invoice, index) => { */}
+                    {paginatedInvoices?.map((invoice, index) => {
                     let url;
                     if (invoice.paidin === 'eth') {
                         url = eth; // Replace with your actual ETH link
@@ -1432,11 +1483,17 @@ useEffect(() => {
                           <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny1(invoice?.transactionhash)}>Deny</Button>
                         </div>
                         </CardContent>
+                        <div className='width flex aligncenter justend'>
+                          <IconButton aria-label="fastforward" className=' justcenter flex smol' onClick={handlePrevious} disabled={currentPage === 1}>
+                          <FastForwardIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
+                          </IconButton>
+                          <span>{currentPage} of {totalPages} </span>
+                          <IconButton aria-label="fastrewind" className=' justcenter flex smol' onClick={handleNext} disabled={currentPage === totalPages}>
+                          <FastRewindIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
+                          </IconButton>
+                        </div>
                       </Card>
-                    )}) : 
-                    <Card className='inv'>
-                    <Typography className='white'>No Dispute</Typography>
-                    </Card>
+                    )})
                     }
                   </div>
                 </CustomTabPanel>
@@ -1462,7 +1519,8 @@ useEffect(() => {
                       </div>
               </div>
               <div className='p10'>
-                    {invoicemap4 ? invoicemap4?.map((invoice, index) => { 
+                    {/*invoicemap4 ? invoicemap4?.map((invoice, index) => { */}
+                    {paginatedInvoices1?.map((invoice, index) => {
                     let url;
                     if (invoice.token === 'eth') {
                         url = eth; // Replace with your actual ETH link
@@ -1534,11 +1592,17 @@ useEffect(() => {
                         </div>
                         <Link variant="contained" className='width10' to={invoice.chainhash ? url + invoice.chainhash : <NotInterestedIcon sx={{ color: "#606060", fontSize: 20 }} />} >View</Link>
                         </CardContent>
+                        <div className='width flex aligncenter justend'>
+                          <IconButton aria-label="fastforward" className=' justcenter flex smol' onClick={handlePrevious1} disabled={currentPage1 === 1}>
+                          <FastForwardIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
+                          </IconButton>
+                          <span>{currentPage1} of {totalPages1} </span>
+                          <IconButton aria-label="fastrewind" className=' justcenter flex smol' onClick={handleNext1} disabled={currentPage1 === totalPages1}>
+                          <FastRewindIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
+                          </IconButton>
+                        </div>
                       </Card>
-                    )}) : 
-                    <Card className='inv mt2'>
-                    <Typography className='white'>No Dispute History</Typography>
-                    </Card>
+                    )})
                     }
                   </div>
                 </CustomTabPanel>

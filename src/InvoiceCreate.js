@@ -50,6 +50,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import btc1 from './images/btc.png'
 import profile5 from './images/circle-user.png'
 import logo from './images/logo.png'
+import FastForwardIcon from '@mui/icons-material/FastForward';
+import FastRewindIcon from '@mui/icons-material/FastRewind';
 
 const drawerWidth = 240;
 
@@ -144,7 +146,7 @@ export default function PermanentDrawerLeft() {
   };
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      handleSearch(inputValue);
     }
   };
 
@@ -852,7 +854,7 @@ useEffect(() => {
 
                       return(
                       <Card key={index} className='width dip mb2'>
-                        <CardContent className='spacebetween flex'>
+                        <CardContent className='spacebetween flex aligncenter'>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{formatted}</Typography>
                          </div>
@@ -877,14 +879,14 @@ useEffect(() => {
                         </div>
                           <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
                         </CardContent>
-                        <div className='width flex aligncenter justcenter mt2 mb2'>
-                          <button className=' justcenter flex pay smol' onClick={handlePrevious} disabled={currentPage === 1}>
-                            Previous
-                          </button>
-                          <span> Page {currentPage} of {totalPages} </span>
-                          <button className=' justcenter flex pay smol' onClick={handleNext} disabled={currentPage === totalPages}>
-                            Next
-                          </button>
+                        <div className='width flex aligncenter justend'>
+                          <IconButton aria-label="fastforward" className=' justcenter flex smol' onClick={handlePrevious} disabled={currentPage === 1}>
+                          <FastForwardIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
+                          </IconButton>
+                          <span>{currentPage} of {totalPages} </span>
+                          <IconButton aria-label="fastrewind" className=' justcenter flex smol' onClick={handleNext} disabled={currentPage === totalPages}>
+                          <FastRewindIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
+                          </IconButton>
                         </div>
                       </Card>
                     )}) /*: 

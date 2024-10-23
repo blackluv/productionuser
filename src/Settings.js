@@ -151,7 +151,7 @@ export default function PermanentDrawerLeft() {
   };
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      handleSearch(inputValue);
     }
   };
 

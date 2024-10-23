@@ -44,6 +44,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import profile5 from './images/circle-user.png'
 import logo from './images/logo.png'
 import CloseIcon from '@mui/icons-material/Close';
+import FastForwardIcon from '@mui/icons-material/FastForward';
+import FastRewindIcon from '@mui/icons-material/FastRewind';
 
 const drawerWidth = 240;
 
@@ -91,6 +93,7 @@ export default function PermanentDrawerLeft() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showresult, setShowResult] = useState(false);
   const [results, setResults] = useState({ transactions: [], users: [] });
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { ready, authenticated, user, login, logout } = usePrivy();
 
@@ -133,7 +136,7 @@ export default function PermanentDrawerLeft() {
   };
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      handleSearch(inputValue);
     }
   };
 
@@ -274,6 +277,30 @@ export default function PermanentDrawerLeft() {
             setCopySuccess('Failed to copy!');
         }
       }
+
+      const pageSize = 1;
+
+      const totalPages = Math.ceil(invoicemap?.length / pageSize);
+    
+      const paginateInvoices = (invoicemap, pageSize, currentPage) => {
+        const startIndex = (currentPage - 1) * pageSize;
+        console.log(invoicemap, 'invoice')
+        return invoicemap?.slice(startIndex, startIndex + pageSize);
+      };
+    
+      const handleNext = () => {
+        if (currentPage < totalPages) {
+          setCurrentPage(prevPage => prevPage + 1);
+        }
+      };
+    
+      const handlePrevious = () => {
+        if (currentPage > 1) {
+          setCurrentPage(prevPage => prevPage - 1);
+        }
+      };
+    
+      const paginatedInvoices = paginateInvoices(invoicemap, pageSize, currentPage);
 
   /*const connectWallet = async () => {
 		try {
@@ -663,7 +690,9 @@ useEffect(() => {
                       </div>
               </div>
               <div className='p20'>
-                {invoicemap ? invoicemap?.map((invoice, index) => (
+                {/*invoicemap ? invoicemap?.map((invoice, index) => (*/}
+                {paginatedInvoices?.map((invoice, index) => {
+                return(
                       <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
                         <div className='justcenter flex aligncenter column width10'>
@@ -693,11 +722,17 @@ useEffect(() => {
                           <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
                         </div>
                         </CardContent>
+                        <div className='width flex aligncenter justend'>
+                          <IconButton aria-label="fastforward" className=' justcenter flex smol' onClick={handlePrevious} disabled={currentPage === 1}>
+                          <FastForwardIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
+                          </IconButton>
+                          <span>{currentPage} of {totalPages} </span>
+                          <IconButton aria-label="fastrewind" className=' justcenter flex smol' onClick={handleNext} disabled={currentPage === totalPages}>
+                          <FastRewindIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
+                          </IconButton>
+                        </div>
                       </Card>
-                      )) : 
-                      <Card className='inv'>
-                      <Typography>No request</Typography>
-                      </Card>
+                      )})
                 }
               </div>
             </Card>
