@@ -309,7 +309,7 @@ export default function PermanentDrawerLeft() {
   const usdttrx = 'https://tronscan.org/#/transaction/'
   const sol = 'https://solscan.io/tx/'
 
-  const pageSize = 25;
+  const pageSize = 10;
 
   const totalPages = Math.ceil(invoicemap?.length / pageSize);
 

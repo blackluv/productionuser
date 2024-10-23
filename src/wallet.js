@@ -910,7 +910,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
   const sol = 'https://solscan.io/tx/'
 
 
-  const pageSize = 1;
+  const pageSize = 10;
 
   const totalPages = Math.ceil(invoicemap?.length / pageSize);
 
@@ -2060,6 +2060,9 @@ useEffect(() => {
                         </div>
                           <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
                         </CardContent>
+                      </Card>
+                    )})
+                    }
                         <div className='width flex aligncenter justend'>
                           <IconButton aria-label="fastforward" className=' justcenter flex smol' onClick={handlePrevious} disabled={currentPage === 1}>
                           <FastForwardIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
@@ -2069,9 +2072,6 @@ useEffect(() => {
                           <FastRewindIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
                           </IconButton>
                         </div>
-                      </Card>
-                    )})
-                    }
                   </div>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
@@ -2128,6 +2128,9 @@ useEffect(() => {
                           <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
                         </div>
                         </CardContent>
+                      </Card>
+                      )})
+                }
                         <div className='width flex aligncenter justend'>
                           <IconButton aria-label="fastforward" className=' justcenter flex smol' onClick={handlePrevious1} disabled={currentPage1 === 1}>
                           <FastForwardIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
@@ -2137,9 +2140,6 @@ useEffect(() => {
                           <FastRewindIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
                           </IconButton>
                         </div>
-                      </Card>
-                      )})
-                }
               </div>
                 </CustomTabPanel>
               </Box>
