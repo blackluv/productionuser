@@ -589,7 +589,7 @@ export default function PermanentDrawerLeft() {
           {/*<Typography variant="h6" noWrap component="div" className='tit'>
             Novapay
           </Typography>*/}
-          <img src={logo} width="160px" height="40px"  alt='profile image' className='tit'></img>
+          <img src={logo} width="100px" height="40px"  alt='profile image' className='tit'></img>
           {/*<TextField
           label="Search"
           id="outlined-start-adornment"

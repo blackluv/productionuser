@@ -953,7 +953,7 @@ useEffect(() => {
           {/*<Typography variant="h6" noWrap component="div" className='tit'>
             Novapay
           </Typography>*/}
-          <img src={logo} width="160px" height="40px"  alt='profile image' className='tit'></img>
+          <img src={logo} width="100px" height="40px"  alt='profile image' className='tit'></img>
           <div class="input-icons mr2">
           <IconButton aria-label="search" onClick={() => handleSearch(inputValue)}>
           <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
