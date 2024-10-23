@@ -111,6 +111,8 @@ export default function PermanentDrawerLeft() {
   const [showresult, setShowResult] = useState(false);
   const [results, setResults] = useState({ transactions: [], users: [] });
   const { ready, authenticated, user, login, logout } = usePrivy();
+  const [file, setFile] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState('');
 
 
   const handleInputChange = (e) => {
@@ -350,6 +352,38 @@ export default function PermanentDrawerLeft() {
     }
     hasaccount2()
   }
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('https://novapay.live/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('File upload failed.');
+      }
+
+      const data = await response.json();
+      setUploadStatus(
+        <>
+        File uploaded successfully: <a href={`https://novapay.live/api/${data.filePath}`} target="_blank" rel="noopener noreferrer">{data.filePath.split('/').pop()}</a>
+      </>
+      );
+    } catch (error) {
+      setUploadStatus('File upload failed.');
+      console.error(error);
+    }
+  };
 
   /*if (!ready) {
     return null;
@@ -718,7 +752,8 @@ useEffect(() => {
             {/*<Typography variant='h4' className='mb5'>Settings</Typography>*/}
             <div className='mbmain'></div>
             <div className='width flex spacearound'>
-                <form className='width40' onSubmit={handleSubmit}>
+              <div className='flex column'>
+                <form className='width' onSubmit={handleSubmit}>
                     <TextField
                         label="Name"
                         variant="outlined"
@@ -762,6 +797,14 @@ useEffect(() => {
                         Save
                     </Button>
                 </form>
+
+                <div className='mt5'>
+                  <input className='white' type="file" onChange={handleFileChange} />
+                  <button onClick={handleUpload}>Upload Logo</button>
+                  <p className='white'>{uploadStatus}</p>
+                </div>
+
+                </div>
 
                 <form className='width40' onSubmit={handleSubmit2}>
                     <TextField

@@ -52,6 +52,7 @@ import profile5 from './images/circle-user.png'
 import logo from './images/logo.png'
 import FastForwardIcon from '@mui/icons-material/FastForward';
 import FastRewindIcon from '@mui/icons-material/FastRewind';
+import TuneIcon from '@mui/icons-material/Tune';
 
 const drawerWidth = 240;
 
@@ -105,6 +106,9 @@ export default function PermanentDrawerLeft() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showresult, setShowResult] = useState(false);
   const [results, setResults] = useState({ transactions: [], users: [] });
+  const [open30, setOpen30] = React.useState(false);
+  const handleOpen30 = () => setOpen30(true);
+  const handleClose30 = () => setOpen30(false);
 
 
   const handleInputChange = (e) => {
@@ -725,10 +729,12 @@ useEffect(() => {
                 <div className='mb4'></div>
                 <div className='flex width spacebetween alignbase mb2'>
                   <Typography className='inv-header'>Invoice List</Typography>
+
+                  <div className='flex aligncenter'>
                   <Button
                         variant="contained"
                         color="primary"
-                        className='width20 mi2'
+                        className='width20 mi2 mr2'
                         onClick={handleOpen}
                     >
                         Create Invoice
@@ -790,6 +796,11 @@ useEffect(() => {
                           </div>
                         </Box>
                       </Modal>
+
+                      <IconButton aria-label='filter' className='mr5'>
+                        <TuneIcon sx={{ color: "#5F5F5FCC", fontSize: 30 }} />
+                      </IconButton>
+                    </div>
                 </div>
                 <div className='spacearound flex pip width'>
                      <div className='justcenter flex aligncenter column width10'>

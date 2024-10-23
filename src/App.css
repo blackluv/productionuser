@@ -612,6 +612,9 @@ h1, h2, h3, p, .MuiTypography-root, button, label, input {
 .white{
   color: #FFFFFF !important;
 }
+.mr5{
+  margin-right: 5% !important;
+}
 
 .justend{
   justify-content: end !important;
