@@ -1053,7 +1053,7 @@ useEffect(() => {
           {/*<Typography variant="h6" noWrap component="div" className='tit'>
             Novapay
           </Typography>*/}
-          <img src={user5?.data?.logo ? 'https://novapay.live/api/' + user5?.data?.logo : logo} width="160px" height="40px"  alt='profile image' className='tit'></img>
+          <img src={user5?.data?.whitelabel === true ? 'https://novapay.live/api/' + user5?.data?.logo : logo} width="160px" height="40px"  alt='profile image' className='tit'></img>
           <div class="input-icons mr2">
           <IconButton aria-label="search" onClick={() => handleSearch(inputValue)}>
           <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
