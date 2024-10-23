@@ -799,11 +799,14 @@ useEffect(() => {
                     </Button>
                 </form>
 
+                {user5?.data?.whitelabel === true ?
                 <div className='mt5'>
                   <input className='white' type="file" onChange={handleFileChange} />
                   <button onClick={handleUpload}>Upload Logo</button>
                   <p className='white'>{uploadStatus}</p>
-                </div>
+                </div> 
+                :
+                <Typography></Typography>}
 
                 </div>
 

@@ -797,9 +797,24 @@ useEffect(() => {
                         </Box>
                       </Modal>
 
-                      <IconButton aria-label='filter' className='mr5'>
+                      <IconButton aria-label='filter' onClick={handleOpen30} className='mr5'>
                         <TuneIcon sx={{ color: "#5F5F5FCC", fontSize: 30 }} />
                       </IconButton>
+                      <Modal
+                        open={open30}
+                        onClose={handleClose30}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                      >
+                        <Box sx={style}>
+                          <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Text in a modal
+                          </Typography>
+                          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                          </Typography>
+                        </Box>
+                      </Modal>
                     </div>
                 </div>
                 <div className='spacearound flex pip width'>
