@@ -968,7 +968,7 @@ export default function PermanentDrawerLeft() {
                 </div>
                 <div className='p5 met'>
                       <Card className='width dip mb2 '>
-                        <CardContent className='spacebetween flex'>
+                        <CardContent className='spacebetween flex aligncenter'>
                         <div className='justcenter flex aligncenter column width10'>
                           <img src={btc} height='30px' width='30px' alt='btc'/>
                          </div>

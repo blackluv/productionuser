@@ -309,7 +309,7 @@ export default function PermanentDrawerLeft() {
   const usdttrx = 'https://tronscan.org/#/transaction/'
   const sol = 'https://solscan.io/tx/'
 
-  const pageSize = 1;
+  const pageSize = 25;
 
   const totalPages = Math.ceil(invoicemap?.length / pageSize);
 
@@ -879,6 +879,13 @@ useEffect(() => {
                         </div>
                           <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
                         </CardContent>
+                      </Card>
+                    )
+                  }) /*: 
+                    <Card className='inv'>
+                    <Typography>No invoice</Typography>
+                    </Card>*/
+                    }
                         <div className='width flex aligncenter justend'>
                           <IconButton aria-label="fastforward" className=' justcenter flex smol' onClick={handlePrevious} disabled={currentPage === 1}>
                           <FastForwardIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
@@ -888,12 +895,6 @@ useEffect(() => {
                           <FastRewindIcon sx={{ color: "#5F5F5FCC", fontSize: 20 }} />
                           </IconButton>
                         </div>
-                      </Card>
-                    )}) /*: 
-                    <Card className='inv'>
-                    <Typography>No invoice</Typography>
-                    </Card>*/
-                    }
                     {/*invoicemap ? invoicemap?.map((invoice) => (
                       <Card className='width'>
                         <CardContent className='spacebetween flex'>
