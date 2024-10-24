@@ -53,6 +53,10 @@ import logo from './images/logo.png'
 import FastForwardIcon from '@mui/icons-material/FastForward';
 import FastRewindIcon from '@mui/icons-material/FastRewind';
 import TuneIcon from '@mui/icons-material/Tune';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const drawerWidth = 240;
 
@@ -109,7 +113,46 @@ export default function PermanentDrawerLeft() {
   const [open30, setOpen30] = React.useState(false);
   const handleOpen30 = () => setOpen30(true);
   const handleClose30 = () => setOpen30(false);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [age, setAge] = React.useState('');
+  const [age1, setAge1] = React.useState('');
+  const [inputValue2, setInputValue2] = useState('');
+  const [transactions, setTransactions] = useState();
 
+
+  const handleReset = () => {
+    setInputValue2('');
+    setStartDate(null);
+    setEndDate(null);
+    setAge('');
+    setAge1('');
+    setTransactions();
+  };
+  const handleDateChange = (date) => {
+    setStartDate(date);
+    //console.log(`Selected date: ${date}`);
+  };
+  const handleendDateChange = (date) => {
+    setEndDate(date);
+    //console.log(`Selected date: ${date}`);
+  };
+
+  const handleChange1001 = (event) => {
+    setAge(event.target.value);
+    //console.log(event.target.value, 'test select')
+  };
+
+  const handleChange1002 = (event) => {
+    setAge1(event.target.value);
+  };
+
+  const handleInputChange2 = (e) => {
+    setInputValue2(e.target.value);
+    console.log('text', e.target.value)
+    //setShowSuggestions(false); // Hide suggestions when typing
+    //setShowResult(false)
+  };
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -197,8 +240,9 @@ export default function PermanentDrawerLeft() {
     border: '',
     boxShadow: 24,
     p: 4,
-    borderradius: '10px',
-  };
+    borderradius: '18px',
+    width: '669px',
+  }
 
   //const hasaccount = true;
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -207,7 +251,7 @@ export default function PermanentDrawerLeft() {
     error,
     isValidating,
   } = useSWR('https://novapay.live/api/get/address?address=' + user?.wallet?.address, fetcher, { refreshInterval: 100 });
-  console.log(user5?.data, 'countries')
+  //console.log(user5?.data, 'countries')
   const hasaccount1 = async () => {
     if(user5?.data == undefined){
       setHasaccount(false)
@@ -216,17 +260,56 @@ export default function PermanentDrawerLeft() {
       setShopname1(user5?.data?.apikey)
     }
 
-    console.log(user5?.data?.shop, 'hasaccount')
+    //console.log(user5?.data?.shop, 'hasaccount')
   }
 
   const { data3, error3 } = useSWR('hasaccount1', hasaccount1, { refreshInterval: 3600 })
+
+
+  const filter = async (e) => {
+    e.preventDefault();
+
+    const query = inputValue2
+    const transactionType = age
+    const status = age1
+    const shop = user5?.data?.shop
+
+    try {
+      const response = await fetch('https://novapay.live/api/filterinvoice?' + new URLSearchParams({
+        query,
+        startDate,
+        endDate,
+        transactionType,
+        status,
+        shop
+      }));
+
+      console.log('https://novapay.live/api/filterinvoice?' + new URLSearchParams({
+        query,
+        startDate,
+        endDate,
+        transactionType,
+        status
+      }))
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log(data, 'data')
+      setTransactions(data.transactions);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const {
     data: user4,
     error4,
     isValidating4,
   } = useSWR('https://novapay.live/api/get/allinvoice?shop=' + user5?.data?.shop, fetcher, { refreshInterval: 36000000 });
-  console.log(user4?.data, 'countries4')
+  //console.log(user4?.data, 'countries4')
 
   const invoicemap = user4?.data
 
@@ -297,7 +380,7 @@ export default function PermanentDrawerLeft() {
         setShopname1(btcbal?.data?.shop)
       }
   
-      console.log(btcbal?.data?.shop, 'hasaccount2')
+      //console.log(btcbal?.data?.shop, 'hasaccount2')
     }
     hasaccount2()
   }
@@ -319,7 +402,7 @@ export default function PermanentDrawerLeft() {
 
   const paginateInvoices = (invoicemap, pageSize, currentPage) => {
     const startIndex = (currentPage - 1) * pageSize;
-    console.log(invoicemap, 'invoice')
+    //console.log(invoicemap, 'invoice')
     return invoicemap?.slice(startIndex, startIndex + pageSize);
   };
 
@@ -335,7 +418,7 @@ export default function PermanentDrawerLeft() {
     }
   };
 
-  const paginatedInvoices = paginateInvoices(invoicemap, pageSize, currentPage);
+  const paginatedInvoices = paginateInvoices(transactions ? transactions : invoicemap, pageSize, currentPage);
 
     /*if (!ready) {
     return null;
@@ -448,12 +531,12 @@ useEffect(() => {
                 
                                     const [datePart, timePart] = formattedDate.split(', ');
                                     const [month, day, year] = datePart.split('/');
-                                    console.log('month', month, day, year)
+                                    //console.log('month', month, day, year)
                 
                                   // Will display time in 10:30:23 format
                                   const formatted = `${day}/${month}/${year}, ${timePart}`;
                 
-                                  console.log(formatted);
+                                  //console.log(formatted);
               return(
               <Card key={index} className='width dip mb2'>
                         <CardContent className='spacebetween flex'>
@@ -806,13 +889,99 @@ useEffect(() => {
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                       >
-                        <Box sx={style}>
-                          <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Text in a modal
-                          </Typography>
-                          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                          </Typography>
+                        <Box sx={style} className="mett log">
+                          <div className='fil-head p20 aligncenter flex spacebetween'>
+                            <Typography className=''>Filter</Typography>
+                            <CloseIcon sx={{ color: "color: #FFFFFF", fontSize: 20 }}/>
+                          </div>
+                          <div className='flex width justcenter mt3'>
+                          <div class="input-icons2">
+                            <SearchIcon sx={{ color: "#606060", fontSize: 20 }}/>
+                              <input class="input-field2" 
+                                    type="text" 
+                                    placeholder="Search By Txn Hash/Username" 
+                                    value={inputValue2}
+                                    onChange={handleInputChange2}
+                              />
+                          </div>
+                          </div>
+                          <div className='p20'>
+                          <div className='flex fil-text mb2'>
+                            <Typography>Select Date:</Typography>
+                          </div>
+                          <div className='flex mb2 spacebetween'>
+                            <div className='flex column'>
+                              <Typography className='fil-text'>From:</Typography>
+                              <DatePicker
+                                selected={startDate}
+                                onChange={handleDateChange}
+                                dateFormat="dd-MM-yyyy"
+                                placeholderText="Select a date"
+                                className='wi3'
+                              />
+                            </div>
+                            <div className='flex column'>
+                              <Typography className='fil-text'>To:</Typography>
+                              <DatePicker
+                                selected={endDate}
+                                onChange={handleendDateChange}
+                                dateFormat="dd-MM-yyyy"
+                                placeholderText="Select a date"
+                                className='wi3'
+                              />
+                            </div>
+                          </div>
+                          <div className='flex fil-text mb2'>
+                            <Typography>Transaction Type</Typography>
+                          </div>
+                          <Box sx={{ minWidth: 120, marginBottom: '3%' }}>
+                            <FormControl fullWidth className='mi'>
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={age}
+                                label="Age"
+                                onChange={handleChange1001}
+                              >
+                              </Select>
+                            </FormControl>
+                          </Box>
+                          <div className='flex fil-text mb2'>
+                            <Typography>Status</Typography>
+                          </div>
+                          <Box sx={{ minWidth: 120, marginBottom: '3%' }}>
+                            <FormControl fullWidth className='mi'>
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={age1}
+                                label="Age"
+                                onChange={handleChange1002}
+                              >
+                              <MenuItem value={'success'}>Success</MenuItem>
+                              <MenuItem value={'expired'}>Expired</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Box>
+                          <div className='flex spacebetween'>
+                          <Button
+                              variant=""
+                              color="primary"
+                              className='wi'
+                              onClick={handleReset}
+                          >
+                              Reset
+                          </Button>
+                          <Button
+                              variant="contained"
+                              color="primary"
+                              className='wi1'
+                              onClick={filter}
+                          >
+                              Apply Now
+                          </Button>
+                          </div>
+                          </div>
                         </Box>
                       </Modal>
                     </div>
@@ -857,7 +1026,7 @@ useEffect(() => {
                     } 
 
                     var date = new Date(invoice.date ? invoice.date : 0 * 1000);
-                    console.log(date, 'date')
+                    //console.log(date, 'date')
                     const options = {
                       year: 'numeric',
                       month: '2-digit',
@@ -871,12 +1040,12 @@ useEffect(() => {
 
                     const [datePart, timePart] = formattedDate.split(', ');
                     const [month, day, year] = datePart.split('/');
-                    console.log('month', month, day, year)
+                    //console.log('month', month, day, year)
 
                   // Will display time in 10:30:23 format
                   const formatted = `${day}/${month}/${year}, ${timePart}`;
 
-                  console.log(formatted);
+                  //console.log(formatted);
 
                       return(
                       <Card key={index} className='width dip mb2'>

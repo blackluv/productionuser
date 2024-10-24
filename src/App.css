@@ -616,6 +616,29 @@ h1, h2, h3, p, .MuiTypography-root, button, label, input {
   margin-right: 5% !important;
 }
 
+.mett{
+  padding: 0 !important;
+}
+.fil-head{
+  background: #000000;
+}
+.fil-head p{
+  margin: 0;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 19.2px;
+  color: #FFFFFF ;
+}
+
+.fil-text{
+  color: #A09C9C;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 19.2px;
+}
+.p2{
+  padding: 2%;
+}
 .justend{
   justify-content: end !important;
 }
@@ -674,6 +697,17 @@ input:focus, .input-field:focus{
   border: 0;
 }
 
+.input-field2 {
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  padding-left: 40px;
+  border-radius: 28px !important;
+  background: #0E0D12 !important;
+  border: 0 !important;
+  color: #606060 !important;
+}
+
 .input-field {
   width: 100%;
   padding: 10px;
@@ -683,6 +717,63 @@ input:focus, .input-field:focus{
   background: #0E0D12 !important;
   border: 0 !important;
   color: #606060 !important;
+}
+
+.mt3{
+  margin-top: 3%;
+}
+
+.input-icons2 {
+  width: 90%;
+  margin-bottom: 4px;
+}
+
+.input-icons2 svg {
+  position: absolute;
+  margin-top: 1.8%;
+  margin-left: 2%;
+}
+.input-icons2 button {
+  position: absolute;
+}
+
+.wi{
+  border: 1px solid #313030 !important;
+  border-radius: 8px !important;
+  padding: 12px 14px !important;
+  height: 44px !important;
+  width: 83px !important;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 19.2px;
+  color: #A09C9C !important;
+}
+
+.wi1{
+  border: 1px solid #313030 !important;
+  border-radius: 8px !important;
+  padding: 12px 14px !important;
+  height: 44px !important;
+  width: 134px !important;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 19.2px;
+  background: #9A86E8 !important;
+}
+
+.wi3{
+  border: 1px solid #313030 !important;
+  width: 285px !important;
+  height: 44px !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  background: #141318;
+  color: #A09C9C;
+}
+
+.log{
+  border-radius: 18px !important;
+  background: #141318;
 }
 
 .ni{
