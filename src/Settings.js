@@ -895,7 +895,7 @@ useEffect(() => {
           <Typography>
             Create a wallet to get started
           </Typography>
-           <Button variant="contained" onClick={login}>Signin with metamask</Button> 
+           <Button variant="contained" onClick={login}>Signin to Novapay</Button> 
         </div> }
         </Box>
     </Box>
