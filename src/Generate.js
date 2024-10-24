@@ -1399,13 +1399,13 @@ useEffect(() => {
                                     //onChange={handleInputChange2}
                               />
                           </div>
-                          <Box sx={{ minWidth: 120, marginBottom: '3%' }}>
+                          <Box sx={{ minWidth: 120, marginBottom: '3%', textAlign: 'center' }}>
                             <FormControl fullWidth className='gen2'>
                               <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 //value={age1}
-                                label="Age"
+                                label="AED"
                                 //onChange={handleChange1002}
                               >
                               <MenuItem value={'USD'}>USD</MenuItem>
