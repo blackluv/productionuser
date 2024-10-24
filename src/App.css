@@ -708,6 +708,64 @@ input:focus, .input-field:focus{
   color: #606060 !important;
 }
 
+
+.input-field3 {
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  padding-left: 20px;
+  border-radius: 15px !important;
+  background: #0E0D12 !important;
+  border: 0 !important;
+  color: #FFFFFF !important;
+  height: 100% !important;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+.gen4{
+  font-size: 20px !important;
+  line-height: 30px !important;
+  font-weight: 400 !important;
+  color: #787878 !important;
+}
+
+.gen1{
+  height: 58px;
+  background: #0E0D12;
+  border-radius: 15px;
+}
+
+.gen5{
+  height: 58px;
+  background: #0E0D12;
+}
+
+.gen4 .MuiSelect-select{
+  font-size: 20px;
+}
+.gen2 .MuiSelect-root{
+  background: #000000;
+  border: 0 !important;
+  line-height: 16px !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  color: #FFFFFF !important;
+  text-align: center;
+}
+
+.gen6{
+  height: 53px;
+  border-radius: 18px;
+  background: #8E4FF7;
+  width: 100%;
+  font-size: 22.5px !important;
+  line-height: 24px !important;
+  color: #FFFFFF !important;
+  padding: 1%;
+}
+
 .input-field {
   width: 100%;
   padding: 10px;
@@ -719,12 +777,25 @@ input:focus, .input-field:focus{
   color: #606060 !important;
 }
 
+.gen{
+  left: 60%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    height: 346px;
+    width: 432px;
+}
+
 .mt3{
   margin-top: 3%;
 }
 
 .input-icons2 {
   width: 90%;
+  margin-bottom: 4px;
+}
+.input-icons3 {
+  width: 80%;
   margin-bottom: 4px;
 }
 

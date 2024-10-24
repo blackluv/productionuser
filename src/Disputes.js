@@ -1337,6 +1337,18 @@ useEffect(() => {
               </Link>
             </ListItem>
         </List>
+        <List>
+            <ListItem key="Generate" disablePadding>
+              <Link to= "/generate" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DescriptionIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                </ListItemIcon>
+                <ListItemText primary="Generate Link" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
         {/*<div className='mb5'></div>
         <Typography className='others'>Others</Typography>*/}
         <Divider />

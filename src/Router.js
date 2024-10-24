@@ -13,6 +13,7 @@ import App from './App';
 import Wallet from './wallet';
 import Typography from '@mui/material/Typography';
 import Disputes from './Disputes'
+import Generate from './Generate'
 
 
 function Router() {
@@ -29,6 +30,7 @@ function Router() {
             <Route path='/invoice/:id' element={<Suspense fallback={<></>}><Demo /></Suspense>} />
             <Route path='/request' element={<Suspense fallback={<></>}><InvoiceList /></Suspense>} />
             <Route path='/disputes' element={<Suspense fallback={<></>}><Disputes /></Suspense>} />
+            <Route path='/generate' element={<Suspense fallback={<></>}><Generate /></Suspense>} />
         </Routes>
     </div>
   );

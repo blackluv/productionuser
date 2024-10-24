@@ -61,6 +61,7 @@ import logo from './images/logo.png'
 import NotInterestedIcon from '@mui/icons-material/NotInterested';
 import FastForwardIcon from '@mui/icons-material/FastForward';
 import FastRewindIcon from '@mui/icons-material/FastRewind';
+import TimelapseSharpIcon from '@mui/icons-material/TimelapseSharp';
 
 const drawerWidth = 240;
 
@@ -1337,6 +1338,18 @@ useEffect(() => {
               </Link>
             </ListItem>
         </List>
+        <List>
+            <ListItem key="Generate" disablePadding>
+              <Link to= "/generate" className='ti'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DescriptionIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                </ListItemIcon>
+                <ListItemText primary="Generate Link" />
+              </ListItemButton>
+              </Link>
+            </ListItem>
+        </List>
         {/*<div className='mb5'></div>
         <Typography className='others'>Others</Typography>*/}
         <Divider />
@@ -1375,6 +1388,64 @@ useEffect(() => {
         <div>
             {hasaccount ? 
           <div class="">
+            <div className='inv gen'>
+              <div className='p20'>
+                <div className='flex gen1 mb5'>
+                          <div class="input-icons3">
+                              <input class="input-field3" 
+                                    type="text" 
+                                    placeholder="Enter Amount" 
+                                    //value={inputValue2}
+                                    //onChange={handleInputChange2}
+                              />
+                          </div>
+                          <Box sx={{ minWidth: 120, marginBottom: '3%' }}>
+                            <FormControl fullWidth className='gen2'>
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                //value={age1}
+                                label="Age"
+                                //onChange={handleChange1002}
+                              >
+                              <MenuItem value={'USD'}>USD</MenuItem>
+                              <MenuItem value={'AED'}>AED</MenuItem>
+                              <MenuItem value={'GBP'}>GBP</MenuItem>
+                              <MenuItem value={'EUR'}>EUR</MenuItem>
+                              <MenuItem value={'INR'}>INR</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Box>
+                </div>
+                <Box sx={{ minWidth: 120, marginBottom: '5%' }}>
+                            <FormControl fullWidth className='gen4'>
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={'tim'}
+                                label="Age"
+                                //onChange={handleChange1002}
+                              >
+                              <MenuItem className='gen4' value={'tim'}>Set Token</MenuItem>
+                              <MenuItem value={'USDT'}>USDT</MenuItem>
+                              <MenuItem value={'ETH'}>ETH</MenuItem>
+                              <MenuItem value={'BTC'}>BTC</MenuItem>
+                              <MenuItem value={'SOL'}>SOL</MenuItem>
+                              <MenuItem value={'TRX'}>TRX</MenuItem>
+                              <MenuItem value={'USDTTRX'}>USDT-TRC20</MenuItem>
+                              </Select>
+                            </FormControl>
+                </Box>
+                <div className='flex spacebetween gen5 aligncenter p10 mb5'>
+                  <Typography className='gen4'>Expiration Time</Typography>
+                  <div className='flex gen4 aligncenter'>
+                  <TimelapseSharpIcon sx={{ color: "#9A86E8", fontSize: 30, marginRight: "10px" }}/>
+                    <Typography className='gen4'>00:20:00</Typography>
+                  </div>
+                </div>
+                <button className='gen6'>Create Link</button>
+              </div>
+            </div>
           </div> :
           <div class="vertical-center">
             <Typography>You do not have an account. Register to continue</Typography>
