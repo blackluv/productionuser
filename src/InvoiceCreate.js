@@ -892,7 +892,7 @@ useEffect(() => {
                         <Box sx={style} className="mett log">
                           <div className='fil-head p20 aligncenter flex spacebetween'>
                             <Typography className=''>Filter</Typography>
-                            <CloseIcon sx={{ color: "color: #FFFFFF", fontSize: 20 }}/>
+                            <CloseIcon sx={{ color: "#FFFFFF", fontSize: 20 }}/>
                           </div>
                           <div className='flex width justcenter mt3'>
                           <div class="input-icons2">
