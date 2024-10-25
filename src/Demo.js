@@ -17,11 +17,15 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TimelapseSharpIcon from '@mui/icons-material/TimelapseSharp';
+import usdttrx2 from './images/usdttrx.png'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import IconButton from '@mui/material/IconButton';
 
 
 export default function SimplePaper() {
 
     const [data1, setData1] = useState();
+    const [copySuccess, setCopySuccess] = useState('');
     const { id } = useParams();
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
     const paymentaddress = "0x1917938340F919F12D84046E7c78dd9C1057A15E"
@@ -31,6 +35,17 @@ export default function SimplePaper() {
     const handleChange = (event) => {
       setAge(event.target.value);
     };
+
+    const handleCopy1 = async (_textToCopy) => {
+      try {
+          await navigator.clipboard.writeText(_textToCopy);
+          setCopySuccess(true);
+          //alert('Copied!')
+      } catch (err) {
+          setCopySuccess('Failed to copy!');
+      }
+    }
+
     /*const {
         data: user1,
         error,
@@ -53,10 +68,22 @@ export default function SimplePaper() {
       data: user4,
       error4,
       isValidating4,
-    } = useSWR('https://novapay.live/api/get/oneinvoice?paymenthash=' + id, fetcher, { refreshInterval: 36000000 });
-    console.log(user4?.data, 'countries4')
+    } = useSWR('https://novapay.live/api/get/payview?paymenthash=' + id, fetcher, { refreshInterval: 36000000 });
+    console.log(user4, 'countries4')
   
     const invoicemap = user4?.data
+
+    function getMaxDecimalPlaces(num1, num2) {
+      const decimalPlaces1 = (num1.toString().split('.')[1] || '').length;
+      const decimalPlaces2 = (num2.toString().split('.')[1] || '').length;
+      return Math.max(decimalPlaces1, decimalPlaces2);
+  }
+
+  const fee = Number(user4?.data?.fee);
+const amount = Number(user4?.data?.amount);
+const sum = fee + amount;
+const maxDecimalPlaces = getMaxDecimalPlaces(fee, amount);
+const formattedSum = sum.toFixed(maxDecimalPlaces);
 
     //const { data3, error3 } = useSWR('check', check, { refreshInterval: 3600000 })
 
@@ -94,19 +121,57 @@ export default function SimplePaper() {
   return (
     <Box className='flex'>
     <div className='vertical-center1'>
-            <Card className='transparent-bg'>
-                <div className='flex spacebetween inv gen5 aligncenter p10 mb5'>
+            <Card className='transparent-bg paid'>
+              <CardContent>
+                <div className='flex spacebetween inv gen5 aligncenter p10 mb2'>
                   <Typography className='gen4'>Expiration Time</Typography>
                   <div className='flex gen4 aligncenter'>
                   <TimelapseSharpIcon sx={{ color: "#9A86E8", fontSize: 30, marginRight: "10px" }}/>
                     <Typography className='gen4'>00:20:00</Typography>
                   </div>
                 </div>
-                <div className='inv p10'>
-                  <Typography>Amount</Typography>
-                  <div className='pay1 flex'>33.39 USDT</div>
+                <div className='inv mb2 pay3'>
+                  <Typography className='rt mb2'>Amount</Typography>
+                  <div className='pay1 flex spacebetween aligncenter'>
+                    <div className='flex alignbase'>
+                    <Typography>{user4?.data?.amount}</Typography><span>{user4?.data?.token}</span>
+                    </div>
+                    <img src={`./images/${user4?.data?.token ? user4?.data?.token : 'none'}.png`} height='30px' width='30px' alt={user4?.data?.token}/>
+                  </div>
                 </div>
-                <CardContent>
+                <div className='inv pay6'>
+                  <div className='flex spacebetween'>
+                        <Typography className=''>Fee</Typography>
+                        <Typography className=''>{user4?.data?.fee}</Typography>
+                    </div>
+                    <div className='flex spacebetween mb2'>
+                        <Typography className=''>Total</Typography>
+                        <Typography className=''>{formattedSum}</Typography>
+                    </div>
+                    <div className='tick mb2'></div>
+                <div className='flex spacebetween mb5 tick2 aligncenter'>
+                        <Typography className='tick2'>Amount to pay</Typography>
+                        <Typography className=''>{formattedSum}</Typography>
+                        <Typography className='tick2'></Typography>
+                    </div>
+                    <div>
+                        {<QRCode 
+                        value={user4?.data?.address ? user4?.data?.address : paymentaddress}
+                        className='mb2 trip'
+                         />}
+                    </div>
+                    <div className='mb5'>
+                      <Typography className='tick3'>Address</Typography>
+                      <di className='pay8 flex spacebetween aligncenter'>
+                      <Typography>{user4?.data?.address}</Typography>
+                      <IconButton aria-label="copy" onClick={() => handleCopy1(user4?.data?.address)}>
+                          <ContentCopyIcon sx={{ color: "#606060", fontSize: 20 }}/> 
+                      </IconButton>
+                      </di>
+                    </div>
+                  </div>
+                  </CardContent>
+               {/* <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Logo Text
                     </Typography>
@@ -162,7 +227,7 @@ export default function SimplePaper() {
                         <Typography className=''>Payment Confirmed</Typography>
                         <Typography className=''>{user4?.data?.isconfirmed == true ? "true" : "false"}</Typography>
                     </div>
-                </CardContent>
+                </CardContent>*/}
                 {/*<CardActions>
                     <Button size="small">Learn More</Button>
                 </CardActions>*/}

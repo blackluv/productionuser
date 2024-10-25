@@ -905,6 +905,92 @@ input:focus, .input-field:focus{
   background: #141318 !important;
 }
 
+.pay3{
+  height: 90px;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.pay3 .rt{
+  font-weight: 400;
+  line-height: 30px;
+  font-size: 20px;
+  color: #787878;
+  text-align: left;
+  margin-bottom: 1.5%;
+}
+.pay1{
+  background: #0E0D12;
+  border-radius: 15px;
+  height: 21px;
+  padding: 20px;
+}
+.pay1 p{
+  font-weight: 500;
+  line-height: 36px;
+  font-size: 22px;
+  color: #FFFFFF;
+  margin: 0;
+}
+.pay1 span{
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 15px;
+  color: #FFFFFF;
+  align-items: end !important;
+  text-transform: uppercase;
+}
+.alignbase{
+  align-items: baseline;
+}
+.pay6{
+  height: 350px;
+  border-radius: 17px;
+  padding: 15px 20px;
+  width: 350px;
+}
+.pay6 p{
+  font-weight: 300;
+  color: #787878;
+  line-height: 22px;
+  font-size: 18px;
+  margin-bottom: 1%;
+}
+.paid{
+  height: 100%;
+  overflow: auto;
+}
+.tick{
+  border-bottom: 1.87px solid #3B3B3B ;
+}
+.tick2{
+  font-weight: 300 !important;
+  color: #FFFFFF !important;
+  line-height: 34px !important;
+  font-size: 20px !important;
+}
+.tick3{
+  font-weight: 400 !important;
+  color: #FFFFFF !important;
+  line-height: 23px !important;
+  font-size: 17px !important;
+  text-align: center;
+}
+.pay8{
+  border: 1px solid #9C9C9C;
+  border-radius: 8px;
+  padding: 3px;
+}
+.pay8 p{
+  font-weight: 300 !important;
+  color: #787878;
+  line-height: 15px !important;
+  font-size: 12px !important;
+}
+.trip{
+  height: 150px;
+  width: 150px;
+}
 /*@media screen and (max-width: 2450px){
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper, .css-22u6wc .MuiDrawer-paper {
     background: #141318 !important;

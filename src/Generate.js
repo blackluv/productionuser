@@ -1492,12 +1492,12 @@ useEffect(() => {
                                 onChange={handleChange1003}
                               >
                               <MenuItem className='gen4' value={'tim'}>Set Token</MenuItem>
-                              <MenuItem value={'USDT'}>USDT</MenuItem>
-                              <MenuItem value={'ETH'}>ETH</MenuItem>
-                              <MenuItem value={'BTC'}>BTC</MenuItem>
-                              <MenuItem value={'SOL'}>SOL</MenuItem>
-                              <MenuItem value={'TRX'}>TRX</MenuItem>
-                              <MenuItem value={'USDTTRX'}>USDT-TRC20</MenuItem>
+                              <MenuItem value={'usdt'}>USDT</MenuItem>
+                              <MenuItem value={'eth'}>ETH</MenuItem>
+                              <MenuItem value={'btc'}>BTC</MenuItem>
+                              <MenuItem value={'sol'}>SOL</MenuItem>
+                              <MenuItem value={'trx'}>TRX</MenuItem>
+                              <MenuItem value={'usdttrx'}>USDT-TRC20</MenuItem>
                               </Select>
                             </FormControl>
                 </Box>
