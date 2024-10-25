@@ -1511,7 +1511,11 @@ useEffect(() => {
                 <button className='gen6' onClick={Create}>Create Link</button>
               </div>
 
-              <Link className='white' to={`/pay/${paymentHash}`}>view link</Link>
+              <div className='inv p20 flex column aligncenter justcenter'>
+                <Typography className='white'>Payment Link</Typography>
+                <Link className='white' to={`/pay/${paymentHash}`}>view link</Link>
+              </div>
+
             </div>
           </div> :
           <div class="vertical-center">
