@@ -456,7 +456,7 @@ input.Mui-focused{
   color: #49484B !important;
 }
 
-.fot input, .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+.fot input, .css-fvipm8,.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
   background: #0D0C11 !important;
   border: 1px solid #262626 !important;
   border-radius: 8px !important;
