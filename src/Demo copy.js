@@ -16,7 +16,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import TimelapseSharpIcon from '@mui/icons-material/TimelapseSharp';
 
 
 export default function SimplePaper() {
@@ -94,18 +93,7 @@ export default function SimplePaper() {
   return (
     <Box className='flex'>
     <div className='vertical-center1'>
-            <Card className='transparent-bg'>
-                <div className='flex spacebetween inv gen5 aligncenter p10 mb5'>
-                  <Typography className='gen4'>Expiration Time</Typography>
-                  <div className='flex gen4 aligncenter'>
-                  <TimelapseSharpIcon sx={{ color: "#9A86E8", fontSize: 30, marginRight: "10px" }}/>
-                    <Typography className='gen4'>00:20:00</Typography>
-                  </div>
-                </div>
-                <div className='inv p10'>
-                  <Typography>Amount</Typography>
-                  <div className='pay1 flex'>33.39 USDT</div>
-                </div>
+            <Card >
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Logo Text

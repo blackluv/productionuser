@@ -173,6 +173,11 @@ export default function PermanentDrawerLeft() {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPage1, setCurrentPage1] = useState(1);
 
+  const [age100, setAge100] = React.useState('AED');
+  const [age200, setAge200] = React.useState('tim');
+  const [inputValue2, setInputValue2] = useState('');
+  const [paymentHash, setPaymentHash] = useState('');
+
   const handleChange22 = (event) => {
     setAge(event.target.value);
   };
@@ -966,7 +971,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
 
   const paginateInvoices = (invoicemap, pageSize, currentPage) => {
     const startIndex = (currentPage - 1) * pageSize;
-    console.log(invoicemap, 'invoice')
+    //console.log(invoicemap, 'invoice')
     return invoicemap?.slice(startIndex, startIndex + pageSize);
   };
 
@@ -1005,6 +1010,66 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
   };
 
   const paginatedInvoices1 = paginateInvoices(invoicemap4, pageSize, currentPage1);
+
+  const handleInputChange2 = (e) => {
+    setInputValue2(e.target.value);
+    console.log('text', e.target.value)
+    //setShowSuggestions(false); // Hide suggestions when typing
+    //setShowResult(false)
+  };
+
+  const handleChange1002 = (event) => {
+    setAge100(event.target.value);
+    console.log('select1', event.target.value)
+  };
+
+  const handleChange1003 = (event) => {
+    setAge200(event.target.value);
+    console.log('select2', event.target.value)
+  };
+
+  let tx
+
+  async function Create() {
+    const urlencoded = new URLSearchParams();
+    console.log(user5?.data?.apikey, 'invoice');
+    const di = shopname1;
+
+    urlencoded.append("amount", inputValue2);
+    urlencoded.append("api", user5?.data?.apikey);
+    urlencoded.append("token", age200); 
+    urlencoded.append("currency", age100);
+
+    try {
+        const response = await fetch('https://novapay.live/api/createpay', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlencoded
+        });
+
+        // Check if the response is ok (status in the range 200-299)
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log(data, 'data33');
+        
+        if (data && data?.data?.paymenthash) {
+            alert("Pay link created");
+            setPaymentHash(data?.data?.paymenthash);
+            console.log(paymentHash)
+        } else {
+            alert("Failed");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert("An error occurred: " + error.message);
+    }
+}
+
 
   /*if (!ready) {
     return null;
@@ -1395,8 +1460,8 @@ useEffect(() => {
                               <input class="input-field3" 
                                     type="text" 
                                     placeholder="Enter Amount" 
-                                    //value={inputValue2}
-                                    //onChange={handleInputChange2}
+                                    value={inputValue2}
+                                    onChange={handleInputChange2}
                               />
                           </div>
                           <Box sx={{ minWidth: 120, marginBottom: '3%', textAlign: 'center' }}>
@@ -1404,9 +1469,9 @@ useEffect(() => {
                               <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                //value={age1}
+                                value={age100}
                                 label="AED"
-                                //onChange={handleChange1002}
+                                onChange={handleChange1002}
                               >
                               <MenuItem value={'USD'}>USD</MenuItem>
                               <MenuItem value={'AED'}>AED</MenuItem>
@@ -1422,9 +1487,9 @@ useEffect(() => {
                               <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={'tim'}
+                                value={age200}
                                 label="Age"
-                                //onChange={handleChange1002}
+                                onChange={handleChange1003}
                               >
                               <MenuItem className='gen4' value={'tim'}>Set Token</MenuItem>
                               <MenuItem value={'USDT'}>USDT</MenuItem>
@@ -1443,8 +1508,10 @@ useEffect(() => {
                     <Typography className='gen4'>00:20:00</Typography>
                   </div>
                 </div>
-                <button className='gen6'>Create Link</button>
+                <button className='gen6' onClick={Create}>Create Link</button>
               </div>
+
+              <Link className='white' to={`/pay/${paymentHash}`}>view link</Link>
             </div>
           </div> :
           <div class="vertical-center">

@@ -27,7 +27,7 @@ function Router() {
             <Route path="/settings" element={ <Suspense fallback={<></>}><Settings /></Suspense>} />
             <Route path="/wallet" element={ <Suspense fallback={<></>}><Wallet /></Suspense>} />
             <Route path="/invoicecreate" element={ <Suspense fallback={<></>}><InvoiceCreate /></Suspense>} />
-            <Route path='/invoice/:id' element={<Suspense fallback={<></>}><Demo /></Suspense>} />
+            <Route path='/pay/:id' element={<Suspense fallback={<></>}><Demo /></Suspense>} />
             <Route path='/request' element={<Suspense fallback={<></>}><InvoiceList /></Suspense>} />
             <Route path='/disputes' element={<Suspense fallback={<></>}><Disputes /></Suspense>} />
             <Route path='/generate' element={<Suspense fallback={<></>}><Generate /></Suspense>} />
