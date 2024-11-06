@@ -1409,6 +1409,9 @@ useEffect(() => {
                         <Typography>Amount</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
+                        <Typography>Amount Paid</Typography>
+                      </div>
+                      <div className='justcenter flex aligncenter column width10'>
                         <Typography>Token</Typography>
                       </div>
                       <div className='justcenter flex aligncenter column width10'>
@@ -1483,6 +1486,9 @@ useEffect(() => {
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{Number(invoice.amount).toFixed(2)}</Typography>
+                        </div>
+                        <div className='justcenter flex aligncenter column width10'>
+                          <Typography>{Number(invoice.walletamount).toFixed(2)}</Typography>
                         </div>
                         <div className='justcenter flex aligncenter column width10'>
                           <img src={`./images/${invoice.paidin ? invoice.paidin : 'none'}.png`} height='30px' width='30px' alt={invoice.paidin}/>
