@@ -1033,7 +1033,7 @@ useEffect(() => {
                       url = trx; // Replace with your actual BTC link
                     } else if (invoice.paidin === 'usdt') {
                       url = eth; // Replace with your actual BTC link
-                    } else if (invoice.paidin === 'usdttrx') {
+                    } else if (invoice.paidin === 'usdt-trc20') {
                       url = trx; // Replace with your actual BTC link
                     } 
 
@@ -1084,7 +1084,7 @@ useEffect(() => {
                         <div className='justcenter flex aligncenter column width10'>
                           <Typography>{invoice.isconfirmed == true ? <CheckIcon sx={{ color: "#006B0B", fontSize: 20 }}/>  : <CloseIcon sx={{ color: "#B60101", fontSize: 20 }}/> }</Typography>
                         </div>
-                          <Link variant="contained" className='width10' to={url + invoice.chainhash} >View</Link>
+                          <Link variant="contained" className='width10' to={url + invoice.chainhash} target="_blank"  rel="noopener noreferrer">View</Link>
                         </CardContent>
                       </Card>
                     )
