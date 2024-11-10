@@ -201,6 +201,7 @@ export default function PermanentDrawerLeft() {
     urlencoded.append("token", token)
     urlencoded.append("addressto", addressto)
     console.log("api", user5?.data?.apikey)
+    console.log(addressto, 'addressto')
       return fetch('https://novapay.live/api/payusertx', {
         method: 'POST',
         headers: {
@@ -508,7 +509,7 @@ useEffect(() => {
                 <Card key={index} className='width dip mb2'>
                 <CardContent className='spacebetween flex'>
                 <div className='justcenter flex aligncenter column width10'>
-                  <Typography>12/10/2024</Typography>
+                  <Typography>{formatted}</Typography>
                 </div>
                 <div className='justcenter flex aligncenter column width10'>
                   <Typography>{invoice?.username ? invoice?.username : 'none'}</Typography>
