@@ -592,7 +592,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       
               const data = await response.json(); // Parse the JSON response
       
-              if (data.success === true) {
+              if (data) {
                   console.log(data, 'Payment successful');
                   alert(`Payment Sent with hash: ${data.chainhash}`);
               } else {
