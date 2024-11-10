@@ -201,7 +201,7 @@ export default function PermanentDrawerLeft() {
     urlencoded.append("token", token)
     urlencoded.append("addressto", addressto)
     console.log("api", user5?.data?.apikey)
-      return fetch('https://novapay.live/api/sendtx', {
+      return fetch('https://novapay.live/api/payusertx', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
