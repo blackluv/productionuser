@@ -2019,7 +2019,7 @@ useEffect(() => {
                       url = trx; // Replace with your actual BTC link
                     } else if (invoice.paidin === 'usdt') {
                       url = eth; // Replace with your actual BTC link
-                    } else if (invoice.paidin === 'usdttrx') {
+                    } else if (invoice.paidin === 'usdt-trc20') {
                       url = trx; // Replace with your actual BTC link
                     } 
 
