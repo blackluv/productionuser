@@ -903,6 +903,7 @@ export default function PermanentDrawerLeft() {
               </Link>
             </ListItem>
         </List>
+        {user5?.data?.whitelabel === true ?
         <List>
             <ListItem key="Disputes" disablePadding>
               <Link to= "/disputes" className='ti'>
@@ -914,7 +915,7 @@ export default function PermanentDrawerLeft() {
               </ListItemButton>
               </Link>
             </ListItem>
-        </List>
+        </List> : <Typography></Typography>}
         <List>
             <ListItem key="Generate" disablePadding>
               <Link to= "/generate" className='ti'>

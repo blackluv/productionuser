@@ -719,6 +719,7 @@ useEffect(() => {
               </Link>
             </ListItem>
         </List>
+        {user5?.data?.whitelabel === true ?
         <List>
             <ListItem key="Disputes" disablePadding>
               <Link to= "/disputes" className='ti'>
@@ -730,7 +731,7 @@ useEffect(() => {
               </ListItemButton>
               </Link>
             </ListItem>
-        </List>
+        </List> : <Typography></Typography>}
         <List>
             <ListItem key="Generate" disablePadding>
               <Link to= "/generate" className='ti'>
