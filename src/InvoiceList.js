@@ -615,7 +615,7 @@ useEffect(() => {
               </Link>
             </ListItem>
         </List>
-        {user5?.data?.whitelabel === true ?
+        {user5?.data?.whitelabel === false ?
         <List>
             <ListItem key="Disputes" disablePadding>
               <Link to= "/disputes" className='ti'>
