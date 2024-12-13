@@ -194,12 +194,13 @@ export default function PermanentDrawerLeft() {
     setValue(newValue);
   };
 
-  async function pay(amount, token, addressto) {
+  async function pay(amount, token, addressto, id) {
     const urlencoded = new URLSearchParams()
     urlencoded.append("amount", amount)
     urlencoded.append("api", user5?.data?.apikey)
     urlencoded.append("token", token)
     urlencoded.append("addressto", addressto)
+    urlencoded.append("id", id)
     console.log("api", user5?.data?.apikey)
     console.log(addressto, 'addressto')
       return fetch('https://novapay.live/api/payusertx', {
@@ -223,9 +224,10 @@ export default function PermanentDrawerLeft() {
       )
      }
 
-     async function deny() {
+     async function deny(id) {
       const urlencoded = new URLSearchParams()
       urlencoded.append("api", user5?.data?.apikey)
+      urlencoded.append("id", id)
       console.log("api", user5?.data?.apikey)
         return fetch('https://novapay.live/api/request/deny', {
           method: 'POST',
@@ -732,8 +734,8 @@ useEffect(() => {
                           <img src={`./images/${invoice?.token}.png`} height='30px' width='30px' alt={invoice?.token}/>
                         </div>
                         <div className='justcenter flex aligncenter width20'>
-                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useradress )}>Pay</Button>
-                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny()}>Deny</Button>
+                          <Button className='lit4 justcenter flex pay smol' variant="contained" onClick={() => pay(invoice?.amount, invoice?.token, invoice?.useradress, invoice?.withdrawid ? invoice?.withdrawid : 'none' )}>Pay</Button>
+                          <Button className='lit4 justcenter flex pay' variant="contained"  onClick={() => deny(invoice?.withdrawid ? invoice?.withdrawid : 'none')}>Deny</Button>
                         </div>
                         </CardContent>
                       </Card>

@@ -534,7 +534,7 @@ const { data15, error15 } = useSWR('getsol', getsol, { refreshInterval: 36000 })
       data: user14,
       error14,
       isValidating14,
-    } = useSWR('https://novapay.live/api/get/allrequest?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
+    } = useSWR('https://novapay.live/api/get/withdrawals?shop=' + user5?.data?.apikey, fetcher, { refreshInterval: 36000000 });
     console.log(user14?.data, 'countries4')
   
     const invoicemap1 = user14?.data
